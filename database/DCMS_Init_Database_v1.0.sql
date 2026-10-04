@@ -153,13 +153,13 @@ INSERT INTO dbo.Roles (RoleName, Description) VALUES
 GO
 
 -- Insert Default Users (Password: 123456 -> BCrypt hashed)
--- BCrypt hash for "123456" is '$2a$10$wE9mH60x6G5iZzP3lK9n5uP9R4J4qYx1EwJ3J9q4wYx1EwJ3J9q4w'
+-- BCrypt hash for "123456" is '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK'
 INSERT INTO dbo.Users (Username, PasswordHash, FullName, Email, Phone, RoleId, IsActive) VALUES
-('admin', '$2a$10$Ynd/XlMv0Jc5yF.kF1Q6e.w2M7E9M8vPq1k5L1zG.e1XzY.w2M7E9', N'Quản trị viên', 'admin@dcms.vn', '0901000001', 1, 1),
-('letan01', '$2a$10$Ynd/XlMv0Jc5yF.kF1Q6e.w2M7E9M8vPq1k5L1zG.e1XzY.w2M7E9', N'Nguyễn Thị Thu (Lễ tân)', 'letan@dcms.vn', '0901000002', 2, 1),
-('bacsi_hung', '$2a$10$Ynd/XlMv0Jc5yF.kF1Q6e.w2M7E9M8vPq1k5L1zG.e1XzY.w2M7E9', N'BS. Trần Mạnh Hùng', 'hungtm@dcms.vn', '0901000003', 3, 1),
-('bacsi_lan', '$2a$10$Ynd/XlMv0Jc5yF.kF1Q6e.w2M7E9M8vPq1k5L1zG.e1XzY.w2M7E9', N'BS. Lê Mai Lan', 'lanlm@dcms.vn', '0901000004', 3, 1),
-('thungan01', '$2a$10$Ynd/XlMv0Jc5yF.kF1Q6e.w2M7E9M8vPq1k5L1zG.e1XzY.w2M7E9', N'Phạm Thu Ngân', 'thungan@dcms.vn', '0901000005', 5, 1);
+('admin', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Quản trị viên', 'admin@dcms.vn', '0901000001', 1, 1),
+('letan01', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Nguyễn Thị Thu (Lễ tân)', 'letan@dcms.vn', '0901000002', 2, 1),
+('bacsi_hung', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'BS. Trần Mạnh Hùng', 'hungtm@dcms.vn', '0901000003', 3, 1),
+('bacsi_lan', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'BS. Lê Mai Lan', 'lanlm@dcms.vn', '0901000004', 3, 1),
+('thungan01', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Phạm Thu Ngân', 'thungan@dcms.vn', '0901000005', 5, 1);
 GO
 
 -- Insert Dentist Details
