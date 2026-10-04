@@ -1,129 +1,199 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="activeMenu" value="queue" scope="request" />
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hàng Đợi Khám Bệnh Nhân — Bác Sĩ Nha Khoa</title>
-    <style>
-        :root {
-            --primary: #0284c7;
-            --primary-hover: #0369a1;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); min-height: 100vh; }
-        
-        .navbar { background: #ffffff; border-bottom: 1px solid var(--border); padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { font-size: 18px; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; margin-left: 20px; font-weight: 500; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
-
-        .container { max-width: 1100px; width: 100%; margin: 30px auto; padding: 0 20px; }
-        
-        .header-section { margin-bottom: 24px; }
-        .header-section h1 { font-size: 22px; font-weight: 700; }
-        .header-section p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
-
-        .queue-grid { display: flex; flex-direction: column; gap: 16px; }
-        
-        .patient-card {
-            background: white; border-radius: 14px; border: 1px solid var(--border); padding: 22px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.2s ease;
-        }
-        .patient-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08); }
-
-        .card-info { display: flex; gap: 20px; align-items: center; }
-        .order-badge { width: 44px; height: 44px; border-radius: 12px; background: #e0f2fe; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; }
-        
-        .patient-details h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-        .patient-meta { font-size: 13px; color: var(--text-muted); display: flex; gap: 14px; align-items: center; margin-bottom: 8px; }
-
-        .alert-banner { display: flex; gap: 8px; align-items: center; }
-        .alert-item { background: #fee2e2; border: 1px solid #fecaca; color: #b91c1c; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 6px; }
-
-        .btn-start {
-            background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px;
-            font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s;
-        }
-        .btn-start:hover { background: #059669; }
-
-        .alert-success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
-    </style>
+    <title>Hàng Đợi Khám Bệnh Nhân — Bác Sĩ Nha Khoa — DCMS</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
 </head>
 <body>
 
-<nav class="navbar">
-    <a href="${pageContext.request.contextPath}/" class="nav-brand">🦷 DCMS Clinic — Bác Sĩ Nha Khoa</a>
-    <div class="nav-links">
-        <a href="${pageContext.request.contextPath}/dentist/queue" class="active">Hàng Đợi Khám</a>
-        <a href="${pageContext.request.contextPath}/logout">Đăng Xuất (${sessionScope.currentUser.fullName})</a>
-    </div>
-</nav>
+<div class="app-shell">
+    <!-- Reusable Sidebar -->
+    <jsp:include page="/WEB-INF/views/layout/sidebar.jsp" />
 
-<div class="container">
-    <div class="header-section">
-        <h1>Danh Sách Bệnh Nhân Chờ Khám Tại Ghế</h1>
-        <p>Bác sĩ: <strong>${sessionScope.currentUser.fullName}</strong> | Danh sách bệnh nhân đã Check-in tại quầy tiếp đón</p>
-    </div>
+    <div class="app-main">
+        <!-- Reusable Header -->
+        <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
-    <c:if test="${param.success eq 'started'}">
-        <div class="alert-success">✅ Đã bắt đầu lượt khám lâm sàng! Trạng thái chuyển sang 'InProgress'.</div>
-    </c:if>
+        <main class="page-content">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumb-trail">
+                <a href="${pageContext.request.contextPath}/">Trang chủ</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Khu Khám Lâm Sàng</span>
+                <span class="breadcrumb-separator">/</span>
+                <span>Hàng Đợi Ghế Khám</span>
+            </div>
 
-    <div class="queue-grid">
-        <c:choose>
-            <c:when test="${empty waitingQueue}">
-                <div style="background: white; padding: 48px; border-radius: 12px; border: 1px solid var(--border); text-align: center; color: var(--text-muted);">
-                    ☕ Hiện tại không có bệnh nhân nào đang chờ tại ghế của bạn.
+            <!-- Page Header Row -->
+            <div class="page-header-row">
+                <div class="page-title">
+                    <h1>Hàng Đợi Khám Bệnh Nhân Tại Ghế</h1>
+                    <p>Bác sĩ phụ trách: <strong>${sessionScope.currentUser != null ? sessionScope.currentUser.fullName : sessionScope.fullName}</strong> &bull; Danh sách bệnh nhân đã Check-in tại quầy tiếp đón</p>
                 </div>
-            </c:when>
-            <c:otherwise>
-                <c:forEach var="v" items="${waitingQueue}" varStatus="loop">
-                    <div class="patient-card">
-                        <div class="card-info">
-                            <div class="order-badge">#${loop.index + 1}</div>
-                            <div class="patient-details">
-                                <h3>${v.patientName}</h3>
-                                <div class="patient-meta">
-                                    <span>📞 ${v.patientPhone}</span>
-                                    <span>⏱️ Đến lúc: ${v.checkInTime.toLocalTime().toString().substring(0, 5)}</span>
-                                    <span>🏷️ ${v.visitType eq 'Scheduled' ? 'Có lịch hẹn trước' : (v.visitType eq 'WalkIn' ? 'Khách vãng lai' : 'Cấp cứu')}</span>
-                                </div>
-                                <div style="font-size: 13px; color: var(--text-main); margin-bottom: 6px;">
-                                    📝 <strong>Triệu chứng / Yêu cầu:</strong> ${v.notes}
-                                </div>
-                                <div class="alert-banner">
-                                    <c:if test="${not empty v.medicalAlerts}">
-                                        <span class="alert-item">⚠️ Bệnh nền: ${v.medicalAlerts}</span>
-                                    </c:if>
-                                    <c:if test="${not empty v.allergies}">
-                                        <span class="alert-item">⚡ Dị ứng: ${v.allergies}</span>
-                                    </c:if>
-                                </div>
-                            </div>
-                        </div>
+                <div>
+                    <a href="${pageContext.request.contextPath}/dentist/queue" class="btn btn-secondary">
+                        <span>🔄</span> Làm Mới Hàng Đợi
+                    </a>
+                </div>
+            </div>
 
-                        <div>
-                            <form action="${pageContext.request.contextPath}/dentist/start-exam" method="POST">
-                                <input type="hidden" name="visitId" value="${v.visitId}" />
-                                <button type="submit" class="btn-start">🩺 Bắt Đầu Khám</button>
-                            </form>
-                        </div>
+            <!-- Toast / Success Messages -->
+            <c:if test="${param.success eq 'started'}">
+                <div class="alert-banner alert-banner-success">
+                    <span class="alert-banner-icon">🩺</span>
+                    <div>
+                        <strong>Đã bắt đầu khám:</strong> Lượt khám đã được kích hoạt thành công, chuyển sang trạng thái <strong>InProgress</strong> để ghi chép chẩn đoán và chỉ định thủ thuật.
                     </div>
+                </div>
+            </c:if>
+
+            <!-- KPI Summary Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon-box kpi-icon-blue">💺</div>
+                    <div class="kpi-meta">
+                        <h3>${empty waitingQueue ? 0 : waitingQueue.size()}</h3>
+                        <span>Bệnh nhân chờ tại ghế</span>
+                    </div>
+                </div>
+
+                <c:set var="alertCount" value="0" />
+                <c:set var="emergencyCount" value="0" />
+                <c:forEach var="v" items="${waitingQueue}">
+                    <c:if test="${not empty v.medicalAlerts || not empty v.allergies}">
+                        <c:set var="alertCount" value="${alertCount + 1}" />
+                    </c:if>
+                    <c:if test="${v.visitType eq 'Emergency'}">
+                        <c:set var="emergencyCount" value="${emergencyCount + 1}" />
+                    </c:if>
                 </c:forEach>
-            </c:otherwise>
-        </c:choose>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon-box kpi-icon-amber">⚠️</div>
+                    <div class="kpi-meta">
+                        <h3>${alertCount}</h3>
+                        <span>Ca có cảnh báo bệnh lý / dị ứng</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon-box kpi-icon-purple">🚨</div>
+                    <div class="kpi-meta">
+                        <h3>${emergencyCount}</h3>
+                        <span>Ca cấp cứu ưu tiên</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon-box kpi-icon-green">⚡</div>
+                    <div class="kpi-meta">
+                        <h3>Sẵn Sàng</h3>
+                        <span>Trạng thái ghế nha khoa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Queue Patient Cards -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>📋</span>
+                        <span>Danh Sách Chờ Khám Theo Thứ Tự Đến</span>
+                    </div>
+                    <span class="badge-pill badge-Arrived">
+                        ● ${empty waitingQueue ? 0 : waitingQueue.size()} người trong hàng
+                    </span>
+                </div>
+
+                <div class="card-body" style="padding: 24px;">
+                    <c:choose>
+                        <c:when test="${empty waitingQueue}">
+                            <div class="empty-state">
+                                <span class="empty-state-icon">☕</span>
+                                <h4>Hiện tại không có bệnh nhân nào trong hàng đợi của bạn</h4>
+                                <p>Khi quầy lễ tân Check-in bệnh nhân hoặc tiếp nhận vãng lai, bệnh nhân sẽ lập tức xuất hiện tại đây.</p>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="queue-card-list">
+                                <c:forEach var="v" items="${waitingQueue}" varStatus="loop">
+                                    <div class="queue-card">
+                                        <div class="queue-card-left">
+                                            <div class="queue-order-badge ${v.visitType eq 'Emergency' ? 'priority' : ''}">
+                                                #${loop.index + 1}
+                                            </div>
+
+                                            <div>
+                                                <div class="queue-patient-title">
+                                                    <h3>${v.patientName}</h3>
+                                                    <c:choose>
+                                                        <c:when test="${v.visitType eq 'Scheduled'}">
+                                                            <span class="badge-pill badge-Confirmed">📅 Có hẹn</span>
+                                                        </c:when>
+                                                        <c:when test="${v.visitType eq 'Emergency'}">
+                                                            <span class="badge-pill badge-Cancelled">🚨 Cấp cứu ưu tiên</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge-pill badge-Pending">🚶 Vãng lai</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+
+                                                <div class="queue-patient-meta">
+                                                    <span class="queue-meta-item">
+                                                        <span>📞</span>
+                                                        <code>${v.patientPhone}</code>
+                                                    </span>
+                                                    <span class="queue-meta-item">
+                                                        <span>⏱️</span>
+                                                        <span>Check-in lúc: <strong>${v.checkInTime.toLocalTime().toString().substring(0, 5)}</strong></span>
+                                                    </span>
+                                                    <span class="queue-meta-item">
+                                                        <span>🆔</span>
+                                                        <span style="color:var(--text-muted);">Mã lượt: #${v.visitId}</span>
+                                                    </span>
+                                                </div>
+
+                                                <c:if test="${not empty v.notes}">
+                                                    <div class="queue-patient-notes">
+                                                        📝 <strong>Lý do / Triệu chứng:</strong> ${v.notes}
+                                                    </div>
+                                                </c:if>
+
+                                                <div class="queue-alert-container">
+                                                    <c:if test="${not empty v.medicalAlerts}">
+                                                        <span class="alert-tag">⚠️ Bệnh nền: ${v.medicalAlerts}</span>
+                                                    </c:if>
+                                                    <c:if test="${not empty v.allergies}">
+                                                        <span class="alert-tag" style="background:#fef3c7; color:#b45309; border-color:#fde68a;">
+                                                            ⚡ Dị ứng: ${v.allergies}
+                                                        </span>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div style="flex-shrink: 0; margin-left: 20px;">
+                                            <form action="${pageContext.request.contextPath}/dentist/start-exam" method="POST" style="margin: 0;">
+                                                <input type="hidden" name="visitId" value="${v.visitId}" />
+                                                <button type="submit" class="btn btn-success" style="padding: 12px 24px; font-size: 14px;">
+                                                    <span>🩺</span> Mời Khám Ngay
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </div>
+        </main>
     </div>
 </div>
 

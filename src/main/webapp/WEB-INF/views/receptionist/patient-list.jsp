@@ -1,163 +1,183 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="activeMenu" value="patients" scope="request" />
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Hồ Sơ Bệnh Nhân — DCMS</title>
-    <style>
-        :root {
-            --primary: #0284c7;
-            --primary-hover: #0369a1;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --alert-red: #ef4444;
-            --alert-bg: #fee2e2;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
-        
-        .navbar { background: #ffffff; border-bottom: 1px solid var(--border); padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { font-size: 18px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; margin-left: 20px; font-weight: 500; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
-
-        .container { max-width: 1200px; width: 100%; margin: 30px auto; padding: 0 20px; }
-        
-        .header-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-        .header-title h1 { font-size: 22px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
-        .header-title p { font-size: 13px; color: var(--text-muted); }
-
-        .btn { padding: 10px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary-hover); }
-
-        .search-card { background: white; padding: 18px 24px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; display: flex; gap: 12px; }
-        .search-input { flex: 1; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
-
-        .table-card { background: white; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
-        th { background: #f8fafc; padding: 14px 18px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); font-size: 13px; }
-        td { padding: 14px 18px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-        tr:hover { background-color: #f1f5f9; }
-
-        .badge-alert { background: var(--alert-bg); color: #b91c1c; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; }
-        .badge-gender { font-size: 12px; color: var(--text-muted); }
-
-        .pagination { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; font-size: 13px; color: var(--text-muted); background: white; border-top: 1px solid var(--border); }
-        .page-links a { padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; text-decoration: none; color: var(--text-main); margin-left: 4px; }
-        .page-links a.active { background: var(--primary); color: white; border-color: var(--primary); }
-    </style>
+    <title>Hồ Sơ Bệnh Nhân — DCMS Dental Clinic</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
 </head>
 <body>
 
-<nav class="navbar">
-    <a href="${pageContext.request.contextPath}/" class="nav-brand">🦷 DCMS Clinic</a>
-    <div class="nav-links">
-        <a href="${pageContext.request.contextPath}/reception/appointments">Lịch Hẹn</a>
-        <a href="${pageContext.request.contextPath}/reception/patients" class="active">Hồ Sơ Bệnh Nhân</a>
-        <a href="${pageContext.request.contextPath}/reception/checkin">Tiếp Đón / Check-in</a>
-        <a href="${pageContext.request.contextPath}/logout">Đăng Xuất (${sessionScope.currentUser.fullName})</a>
-    </div>
-</nav>
+<div class="app-shell">
+    <jsp:include page="/WEB-INF/views/layout/sidebar.jsp" />
 
-<div class="container">
-    <div class="header-section">
-        <div class="header-title">
-            <h1>Hồ Sơ Bệnh Nhân</h1>
-            <p>Quản lý danh sách, tra cứu tiền sử bệnh lý và cảnh báo y tế</p>
-        </div>
-        <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary">
-            <span>➕</span> Thêm Bệnh Nhân Mới
-        </a>
-    </div>
+    <div class="app-main">
+        <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
-    <form action="${pageContext.request.contextPath}/reception/patients" method="GET" class="search-card">
-        <input type="text" name="keyword" class="search-input" value="${keyword}" placeholder="🔍 Nhập số điện thoại, CCCD hoặc họ tên bệnh nhân để tìm kiếm nhanh..." />
-        <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
-        <c:if test="${not empty keyword}">
-            <a href="${pageContext.request.contextPath}/reception/patients" class="btn" style="background:#e2e8f0;color:#0f172a;">Xóa Bộ Lọc</a>
-        </c:if>
-    </form>
-
-    <div class="table-card">
-        <table>
-            <thead>
-                <tr>
-                    <th>Mã BN</th>
-                    <th>Họ & Tên</th>
-                    <th>Số Điện Thoại</th>
-                    <th>Giới Tính / Ngày Sinh</th>
-                    <th>Cảnh Báo Bệnh Lý / Dị Ứng</th>
-                    <th>Địa Chỉ</th>
-                    <th>Thao Tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:choose>
-                    <c:when test="${empty patientList}">
-                        <tr>
-                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-muted);">
-                                📭 Không tìm thấy hồ sơ bệnh nhân nào phù hợp.
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach var="p" items="${patientList}">
-                            <tr>
-                                <td><strong>#${p.patientId}</strong></td>
-                                <td>
-                                    <strong>${p.fullName}</strong>
-                                    <c:if test="${not empty p.citizenId}">
-                                        <div style="font-size: 11px; color: var(--text-muted);">CCCD: ${p.citizenId}</div>
-                                    </c:if>
-                                </td>
-                                <td><code>${p.phone}</code></td>
-                                <td>
-                                    <span class="badge-gender">${p.gender}</span>
-                                    <c:if test="${not empty p.dob}">
-                                        <div style="font-size: 12px; color: var(--text-muted);">${p.dob}</div>
-                                    </c:if>
-                                </td>
-                                <td>
-                                    <c:if test="${not empty p.medicalAlerts}">
-                                        <span class="badge-alert">⚠️ Bệnh nền: ${p.medicalAlerts}</span>
-                                    </c:if>
-                                    <c:if test="${not empty p.allergies}">
-                                        <span class="badge-alert">⚡ Dị ứng: ${p.allergies}</span>
-                                    </c:if>
-                                    <c:if test="${empty p.medicalAlerts && empty p.allergies}">
-                                        <span style="color: var(--text-muted); font-size: 12px;">Bình thường</span>
-                                    </c:if>
-                                </td>
-                                <td style="max-width: 200px; font-size: 13px;">${p.address}</td>
-                                <td>
-                                    <a href="${pageContext.request.contextPath}/reception/patients/edit?id=${p.patientId}" style="color: var(--primary); text-decoration: none; font-weight: 600;">Sửa</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
-            </tbody>
-        </table>
-
-        <c:if test="${totalPages > 1}">
-            <div class="pagination">
-                <div>Hiển thị ${patientList.size()} / ${totalCount} bệnh nhân</div>
-                <div class="page-links">
-                    <c:forEach begin="1" end="${totalPages}" var="pageIndex">
-                        <a href="${pageContext.request.contextPath}/reception/patients?keyword=${keyword}&page=${pageIndex}" 
-                           class="${pageIndex == currentPage ? 'active' : ''}">${pageIndex}</a>
-                    </c:forEach>
+        <main class="page-content">
+            <div class="page-header-row">
+                <div class="page-title">
+                    <h1>Hồ Sơ Bệnh Nhân</h1>
+                    <p>Tra cứu tiền sử bệnh lý, dị ứng thuốc và quản lý thông tin liên hệ bệnh nhân</p>
+                </div>
+                <div>
+                    <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary">
+                        <span>➕</span> Đăng Ký Bệnh Nhân Mới
+                    </a>
                 </div>
             </div>
-        </c:if>
+
+            <!-- Search Card -->
+            <div class="card" style="margin-bottom: 20px;">
+                <form action="${pageContext.request.contextPath}/reception/patients" method="GET" style="display:flex; gap:12px; padding:16px 20px;">
+                    <input type="text" 
+                           name="keyword" 
+                           class="form-control" 
+                           style="flex:1;" 
+                           value="${keyword}" 
+                           placeholder="🔍 Nhập số điện thoại, số CCCD hoặc họ tên bệnh nhân để tìm kiếm nhanh..." />
+                    <button type="submit" class="btn btn-primary">
+                        Tìm Kiếm
+                    </button>
+                    <c:if test="${not empty keyword}">
+                        <a href="${pageContext.request.contextPath}/reception/patients" class="btn btn-secondary">
+                            Xóa Tìm Kiếm
+                        </a>
+                    </c:if>
+                </form>
+            </div>
+
+            <!-- Patients Table -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>👥</span> Danh Sách Bệnh Nhân
+                        <c:if test="${not empty keyword}">
+                            <span style="font-size:13px; font-weight:normal; color:var(--text-muted); margin-left:8px;">
+                                (Kết quả tìm kiếm cho: "<strong>${keyword}</strong>")
+                            </span>
+                        </c:if>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Mã BN</th>
+                                <th>Họ & Tên</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Giới Tính / Ngày Sinh</th>
+                                <th>Cảnh Báo Bệnh Lý & Dị Ứng</th>
+                                <th>Địa Chỉ</th>
+                                <th style="text-align: right;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:choose>
+                                <c:when test="${empty patientList}">
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="empty-state">
+                                                <span class="empty-state-icon">👤</span>
+                                                <h4>Không tìm thấy bệnh nhân nào</h4>
+                                                <p>Thử tìm kiếm với số điện thoại khác hoặc thêm mới hồ sơ bệnh nhân.</p>
+                                                <div style="margin-top:16px;">
+                                                    <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary btn-sm">
+                                                        <span>➕</span> Đăng ký hồ sơ mới
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="p" items="${patientList}">
+                                        <tr>
+                                            <td>
+                                                <strong style="color:var(--text-muted); font-size:13px;">#${p.patientId}</strong>
+                                            </td>
+                                            <td>
+                                                <div class="patient-cell">
+                                                    <div class="patient-avatar-sm">
+                                                        ${p.fullName.substring(0, 1).toUpperCase()}
+                                                    </div>
+                                                    <div>
+                                                        <div style="font-weight:700;">${p.fullName}</div>
+                                                        <c:if test="${not empty p.citizenId}">
+                                                            <div style="font-size:11px; color:var(--text-muted);">CCCD: ${p.citizenId}</div>
+                                                        </c:if>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span style="font-family:monospace; font-weight:600; background:#f1f5f9; padding:4px 8px; border-radius:6px;">
+                                                    ${p.phone}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div style="font-weight:600;">${p.gender}</div>
+                                                <c:if test="${not empty p.dob}">
+                                                    <div style="font-size:11.5px; color:var(--text-muted);">${p.dob}</div>
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${not empty p.medicalAlerts or not empty p.allergies}">
+                                                        <c:if test="${not empty p.medicalAlerts}">
+                                                            <div class="alert-tag">⚠️ Bệnh nền: ${p.medicalAlerts}</div>
+                                                        </c:if>
+                                                        <c:if test="${not empty p.allergies}">
+                                                            <div class="alert-tag" style="background:#fff1f2; color:#be123c;">⚡ Dị ứng: ${p.allergies}</div>
+                                                        </c:if>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span style="color:var(--text-muted); font-size:12.5px;">✓ Bình thường</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <div style="max-width:200px; font-size:12.5px; color:var(--text-secondary);">
+                                                    ${not empty p.address ? p.address : 'Chưa cập nhật'}
+                                                </div>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <div style="display:inline-flex; gap:6px;">
+                                                    <a href="${pageContext.request.contextPath}/reception/patients/edit?id=${p.patientId}" class="btn btn-secondary btn-sm">
+                                                        ✏️ Sửa
+                                                    </a>
+                                                    <a href="${pageContext.request.contextPath}/reception/appointments/create?patientId=${p.patientId}" class="btn btn-primary btn-sm" title="Đặt lịch hẹn ngay cho bệnh nhân này">
+                                                        📅 Đặt Lịch
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <c:if test="${totalPages > 1}">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-top:1px solid var(--border-light); font-size:13px; color:var(--text-muted);">
+                        <div>Hiển thị trang <strong>${currentPage}</strong> / <strong>${totalPages}</strong> (Tổng số: ${totalRecords} bệnh nhân)</div>
+                        <div style="display:flex; gap:4px;">
+                            <c:forEach begin="1" end="${totalPages}" var="pageIndex">
+                                <a href="${pageContext.request.contextPath}/reception/patients?page=${pageIndex}&keyword=${keyword}" 
+                                   class="btn btn-sm ${pageIndex == currentPage ? 'btn-primary' : 'btn-secondary'}">
+                                    ${pageIndex}
+                                </a>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:if>
+            </div>
+        </main>
     </div>
 </div>
 
