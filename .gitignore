@@ -1,0 +1,50 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven build directory
+target/
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Eclipse specific
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA specific
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+[Dd]esktop.ini
+
+# Project documentation and workflow files (kept locally only)
+AGENTS.md
+PROJECT_STATE.md
+DCMS_Business_Baseline_Standardized.md
+DCMS_Iteration_Workflow_Plan.md
+docs/
+
