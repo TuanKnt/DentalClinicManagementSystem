@@ -42,11 +42,6 @@ DentalClinicManagementSystem/
 ├── pom.xml                                      # Cấu hình Maven chuẩn (NetBeans Webapp)
 ├── database/
 │   └── DCMS_Init_Database_v1.0.sql             # Script SQL Server Baseline v1.0
-├── docs/                                        # BỘ TÀI LIỆU KỸ THUẬT ĐỒ ÁN SWP
-│   ├── 01_SRS_Requirements_Specification_v1.0.md
-│   ├── 02_SDS_Architecture_and_Design_v1.0.md
-│   ├── 03_Database_Design_and_Data_Dictionary_v1.0.md
-│   └── 04_Requirements_Traceability_Matrix_RTM.md
 ├── src/main/java/com/dcms/
 │   ├── controller/                             # Servlets (Login, Logout, Patient, Appointment, CheckIn)
 │   ├── service/                                # Business Logic & Rules (Auth, Patient, Appointment, Visit)
