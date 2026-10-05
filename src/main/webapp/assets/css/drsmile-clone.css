@@ -1,0 +1,1812 @@
+/* ==========================================================================
+   DR.SMILE CLINIC — AUTHENTIC CLONED DESIGN SYSTEM (https://drsmile.vn/)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@400;600;700;800&display=swap');
+
+:root {
+    --drsmile-navy: #003366;
+    --drsmile-dark-navy: #223064;
+    --drsmile-primary-blue: #0349a6;
+    --drsmile-cyan: #37aad8;
+    --drsmile-cyan-alt: #30abda;
+    --drsmile-teal: #65c6c2;
+    --drsmile-gold: #d4af37;
+    --drsmile-gold-dark: #b45309;
+    --drsmile-light-bg: #f0f7fd;
+    --drsmile-surface: #ffffff;
+    --drsmile-border: #e2e8f0;
+    --drsmile-text-main: #223064;
+    --drsmile-text-muted: #536b78;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Inter', sans-serif;
+    --font-cursive: 'Charm', cursive;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--drsmile-text-main);
+    background-color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   1. TOP CONTACT BAR
+   ========================================================================== */
+.dr-topbar {
+    background: var(--drsmile-navy);
+    color: #e2e8f0;
+    font-size: 13px;
+    padding: 8px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dr-topbar-left, .dr-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.dr-topbar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dr-topbar-item i {
+    color: var(--drsmile-cyan);
+}
+
+.dr-topbar-item a {
+    color: #7dd3fc;
+    font-weight: 700;
+}
+
+.dr-topbar-item a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. MAIN HEADER & LOGO & ACTIONS
+   ========================================================================== */
+.dr-header-main {
+    background: #ffffff;
+    height: 78px;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f1f5f9;
+    position: relative;
+    z-index: 100;
+}
+
+.dr-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+}
+
+.dr-logo-wrap img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+}
+
+.dr-search-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 320px;
+    margin-left: 28px;
+}
+
+.dr-search-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 42px 0 16px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 25px;
+    font-size: 13.5px;
+    color: #334155;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.dr-search-input:focus {
+    border-color: var(--drsmile-cyan);
+    box-shadow: 0 0 0 3px rgba(55, 170, 216, 0.18);
+}
+
+.dr-search-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: var(--drsmile-cyan);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dr-search-btn:hover {
+    background: var(--drsmile-primary-blue);
+}
+
+.ds-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.ds-header-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 185px;
+    height: 50px;
+    padding: 5px 16px 5px 8px;
+    border: 2px solid #159dcc;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(20, 161, 205, 0.14);
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.ds-header-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20, 161, 205, 0.24);
+}
+
+.ds-header-link__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #32add2;
+    border-radius: 50%;
+    background: #eafaff;
+}
+
+.ds-header-link__icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.ds-header-link__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.15;
+}
+
+.ds-header-link__content strong {
+    display: block;
+    color: #075ca8;
+    font-size: 13.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+.ds-header-link__content small {
+    display: block;
+    margin-top: 3px;
+    color: #248ebd;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ds-header-link--consult {
+    border-color: #057fb9;
+    background: linear-gradient(135deg, #16b9df, #0787c7);
+    box-shadow: 0 6px 18px rgba(0, 145, 200, 0.28);
+}
+
+.ds-header-link--consult .ds-header-link__icon-wrap {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.ds-header-link--consult .ds-header-link__content strong {
+    color: #ffffff;
+}
+
+.ds-header-link--consult .ds-header-link__content small {
+    color: #f0fdfa;
+}
+
+.ds-header-link--staff {
+    border-color: var(--drsmile-navy);
+    background: linear-gradient(135deg, #003366, #002244);
+    min-width: 155px;
+}
+
+.ds-header-link--staff .ds-header-link__icon-wrap {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+.ds-header-link--staff .ds-header-link__content strong {
+    color: #ffffff;
+    font-size: 12.5px;
+}
+
+.ds-header-link--staff .ds-header-link__content small {
+    color: #93c5fd;
+    font-size: 9px;
+}
+
+/* ==========================================================================
+   3. MEGA NAVIGATION BAR (STICKY)
+   ========================================================================== */
+.dr-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.06);
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 48px;
+}
+
+.dr-nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 32px;
+}
+
+.dr-nav-item {
+    position: relative;
+}
+
+.dr-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--drsmile-primary-blue);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 16px 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.dr-nav-link:hover, .dr-nav-link.active {
+    color: var(--drsmile-teal);
+}
+
+.dr-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--drsmile-teal);
+    transition: width 0.25s ease;
+}
+
+.dr-nav-link:hover::after, .dr-nav-link.active::after {
+    width: 100%;
+}
+
+/* Dropdown Mega Menu */
+.dr-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(0, 51, 102, 0.15);
+    border-radius: 0 0 12px 12px;
+    border-top: 3px solid var(--drsmile-teal);
+    padding: 12px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    z-index: 1000;
+}
+
+.dr-nav-item:hover .dr-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dr-dropdown-mega {
+    left: -200px;
+    width: 820px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px;
+}
+
+.dr-mega-col h4 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--drsmile-navy);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--drsmile-cyan);
+}
+
+.dr-mega-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dr-mega-list a {
+    color: #475569;
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+    padding: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.dr-mega-list a:hover {
+    color: var(--drsmile-cyan);
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   4. HERO SLIDER BANNER (4 BANNERS)
+   ========================================================================== */
+.dr-hero-slider-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #0a2540;
+}
+
+.dr-hero-slides {
+    display: flex;
+    width: 400%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.dr-hero-slide {
+    width: 25%;
+    position: relative;
+}
+
+.dr-hero-slide img {
+    width: 100%;
+    height: auto;
+    min-height: 380px;
+    max-height: 580px;
+    object-fit: cover;
+    display: block;
+}
+
+.dr-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--drsmile-navy);
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.dr-slider-btn:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.dr-slider-btn.prev {
+    left: 24px;
+}
+
+.dr-slider-btn.next {
+    right: 24px;
+}
+
+.dr-slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dr-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.dr-dot.active {
+    background: #ffffff;
+    width: 32px;
+    border-radius: 6px;
+}
+
+/* ==========================================================================
+   5. STATS COUNTER BANNER (.dq-stats-banner)
+   ========================================================================== */
+.dq-stats-banner {
+    --dq-primary: #37aad8;
+    --dq-secondary: #65c6c2;
+    --dq-bg-top: #d7eef7;
+    --dq-bg-bottom: #e0f4f3;
+    --dq-number-color: rgb(55, 170, 216);
+    --dq-label-color: #223064;
+    --dq-divider: rgba(55, 170, 216, 0.25);
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: 0;
+    background: linear-gradient(180deg, var(--dq-bg-top) 0%, var(--dq-bg-bottom) 100%);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.dq-stats-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--dq-primary) 0%, var(--dq-secondary) 100%);
+}
+
+.dq-stats-banner .dq-stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 24px 20px 20px;
+    position: relative;
+}
+
+.dq-stats-banner .dq-stat-item + .dq-stat-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 1px;
+    background: var(--dq-divider);
+}
+
+.dq-stats-banner .dq-stat-number {
+    font-size: clamp(32px, 4.2vw, 44px);
+    font-weight: 800;
+    color: var(--dq-number-color);
+    line-height: 1;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.dq-stats-banner .dq-stat-label {
+    margin-top: 8px;
+    color: var(--dq-label-color);
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   6. SECTION: VỀ NHA KHOA DR.SMILE (sec_gioithieu)
+   ========================================================================== */
+.sec_gioithieu {
+    position: relative;
+    padding: 55px 48px;
+    background-image: url('../images/BACKGROUND-GIOI-THIEU.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Consultation Box */
+.dr-consult-box {
+    max-width: 1080px;
+    margin: 0 auto 50px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1);
+    display: flex;
+    overflow: hidden;
+    border: 2px solid #e0f2fe;
+}
+
+.dr-consult-title {
+    background: linear-gradient(135deg, #0787c7, #16b9df);
+    color: #ffffff;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 180px;
+}
+
+.dr-consult-title span {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.dr-consult-title strong {
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dr-consult-content {
+    flex: 1;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dr-consult-row {
+    display: flex;
+    gap: 16px;
+}
+
+.dr-field {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dr-field-icon {
+    position: absolute;
+    left: 14px;
+    display: flex;
+    align-items: center;
+    color: #0787c7;
+}
+
+.dr-field-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.dr-field input, .dr-field select {
+    width: 100%;
+    height: 44px;
+    padding-left: 44px;
+    padding-right: 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.dr-field input:focus, .dr-field select:focus {
+    border-color: var(--drsmile-cyan);
+}
+
+.dr-submit-wrap .dr-submit, .dr-gradient-btn {
+    background: linear-gradient(135deg, #16b9df, #0787c7);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 0 32px;
+    height: 44px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(7, 135, 199, 0.3);
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+}
+
+.dr-submit:hover, .dr-gradient-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(7, 135, 199, 0.4);
+}
+
+.sec_gioithieu-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.dr-video-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0, 51, 102, 0.15);
+    background: #000000;
+}
+
+.dr-video-wrap iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    display: block;
+}
+
+.kksr-legend {
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #075ca8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.kksr-legend span.stars {
+    color: #f59e0b;
+}
+
+.sec_gioithieu-text h2 {
+    font-size: 26px;
+    color: #223064;
+    font-weight: 800;
+}
+
+.sec_gioithieu-text h1 {
+    font-size: 42px;
+    color: #30abda;
+    font-weight: 900;
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+}
+
+.sec_gioithieu-text p {
+    font-size: 16.5px;
+    color: #223064;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+/* Gallery Scatter 5 columns */
+.dr-gallery-scatter {
+    max-width: 1240px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.dr-gallery-item {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 4 / 3;
+}
+
+.dr-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.dr-gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   7. SECTION: 6 DỊCH VỤ MŨI NHỌN (sec_dichvu)
+   ========================================================================== */
+.sec_dichvu {
+    padding: 60px 48px;
+    background-image: url('../images/BACKGROUND-DICH-VU.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dr-section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dr-section-title h2 {
+    font-size: 32px;
+    font-weight: 900;
+    color: rgb(55, 170, 216);
+}
+
+.dr-section-title h2 span {
+    color: #223064;
+}
+
+.dr-services-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.dr-service-card {
+    background: #ffffff;
+    border: 2px solid rgb(55, 170, 216);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 51, 102, 0.06);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.dr-service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(55, 170, 216, 0.22);
+}
+
+.dr-service-img {
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.dr-service-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.dr-service-card:hover .dr-service-img img {
+    transform: scale(1.06);
+}
+
+.dr-service-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.dr-service-body h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0349a6;
+    margin-bottom: 12px;
+}
+
+.dr-service-body p {
+    font-size: 14.5px;
+    color: #223064;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.dr-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--drsmile-primary-blue);
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.dr-link-btn:hover {
+    color: var(--drsmile-cyan);
+    gap: 12px;
+}
+
+/* ==========================================================================
+   8. SECTION: 4 TRỤ CỘT CAM KẾT (sec_camket)
+   ========================================================================== */
+.sec_camket {
+    padding: 60px 48px;
+    background-image: url('../images/BACKGROUND-CAM-KET-1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dr-commitments-grid {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.dr-commit-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+}
+
+.dr-commit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 51, 102, 0.12);
+}
+
+.dr-commit-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 16px;
+    object-fit: contain;
+}
+
+.dr-commit-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0349a6;
+    margin-bottom: 8px;
+}
+
+.dr-commit-card p {
+    font-size: 14px;
+    color: #223064;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   9. SECTION: BÁC SĨ CKI LÝ THỊ THỦY (sec_bacsi)
+   ========================================================================== */
+.sec_bacsi {
+    padding: 60px 48px;
+    background-image: url('../images/BACKGROUND-CAM-KET-1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dr-doctor-card {
+    max-width: 1240px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 5px solid rgb(55, 170, 216);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 12px 35px rgba(0, 51, 102, 0.1);
+}
+
+.dr-doctor-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.dr-doctor-img-wrap {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: url('../images/bs-background-483x600.png') no-repeat center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    min-height: 480px;
+}
+
+.dr-doctor-img-wrap img {
+    max-height: 460px;
+    width: auto;
+    object-fit: contain;
+}
+
+.dr-doctor-info h4 {
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(55, 170, 216);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.dr-doctor-info h1 {
+    font-size: 42px;
+    font-weight: 900;
+    color: #223064;
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.dr-doctor-divider {
+    width: 120px;
+    height: 3px;
+    background: rgb(55, 170, 216);
+    margin-bottom: 16px;
+}
+
+.dr-doctor-info h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0349a6;
+    margin-bottom: 16px;
+}
+
+.dr-doctor-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.dr-doctor-bullets li {
+    font-size: 15px;
+    color: #223064;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 24px;
+}
+
+.dr-doctor-bullets li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #0787c7;
+    font-weight: 900;
+}
+
+.dr-doctor-motto {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0349a6;
+    font-style: italic;
+    background: #eafaff;
+    padding: 14px 20px;
+    border-left: 4px solid var(--drsmile-cyan);
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+/* Certificate thumbnails */
+.dr-certs-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 28px;
+}
+
+.dr-cert-item {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease;
+    cursor: pointer;
+}
+
+.dr-cert-item:hover {
+    transform: scale(1.05);
+}
+
+.dr-cert-item img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   10. SECTION: HIỆU QUẢ ĐIỀU TRỊ THỰC TẾ (sec_hieuqua)
+   ========================================================================== */
+.sec_hieuqua {
+    padding: 60px 48px;
+    background-image: url('../images/BACKGROUND-HIEU-QUA.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dr-cases-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.dr-case-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 51, 102, 0.08);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+}
+
+.dr-case-content {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dr-case-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 14px;
+    border: 2px solid var(--drsmile-cyan);
+}
+
+.dr-case-text {
+    font-size: 15px;
+    font-style: italic;
+    color: #223064;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.dr-case-meta strong {
+    color: #0349a6;
+    font-size: 14px;
+    display: block;
+}
+
+.dr-case-meta span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.dr-case-preview {
+    background: rgb(55, 170, 216);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    color: #ffffff;
+}
+
+.dr-case-preview h4 {
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.dr-case-preview img {
+    border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   11. SECTION: REVIEWS / KHÁCH HÀNG NÓI GÌ
+   ========================================================================== */
+.dr-reviews-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.dr-review-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0, 51, 102, 0.06);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease;
+}
+
+.dr-review-card:hover {
+    transform: translateY(-4px);
+}
+
+.dr-review-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.dr-review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--drsmile-cyan);
+}
+
+.dr-review-info h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #223064;
+}
+
+.dr-review-info span {
+    font-size: 12.5px;
+    color: #64748b;
+}
+
+.dr-stars {
+    color: #f59e0b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.dr-review-text {
+    font-size: 14px;
+    color: #223064;
+    line-height: 1.6;
+    font-style: italic;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.dr-review-photos {
+    display: flex;
+    gap: 8px;
+}
+
+.dr-review-photos img {
+    flex: 1;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   12. SECTION: GUEST BOOKING FORM (DCMS BACKEND INTEGRATION)
+   ========================================================================== */
+.sec_booking {
+    padding: 70px 48px;
+    background: linear-gradient(180deg, #f0f7fd 0%, #ffffff 100%);
+    border-top: 1px solid #e2e8f0;
+}
+
+.dr-booking-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 48px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(0, 51, 102, 0.1);
+    border: 2px solid #e0f2fe;
+    overflow: hidden;
+}
+
+.dr-booking-info-col {
+    background: linear-gradient(135deg, #003366 0%, #0052cc 60%, #00a8cc 100%);
+    color: #ffffff;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dr-booking-info-col h3 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    line-height: 1.25;
+}
+
+.dr-booking-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 28px 0;
+}
+
+.dr-perk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.dr-perk-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.dr-booking-form-col {
+    padding: 48px;
+}
+
+.dr-form-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--drsmile-navy);
+    margin-bottom: 6px;
+}
+
+.dr-form-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.dr-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.dr-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dr-form-group.full-width {
+    grid-column: span 2;
+}
+
+.dr-form-group label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.dr-form-control {
+    height: 44px;
+    padding: 0 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.dr-form-control:focus {
+    border-color: var(--drsmile-cyan);
+    box-shadow: 0 0 0 3px rgba(55, 170, 216, 0.15);
+}
+
+textarea.dr-form-control {
+    height: 90px;
+    padding: 12px 14px;
+    resize: vertical;
+}
+
+.dr-btn-submit-booking {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(135deg, #0787c7, #16b9df);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(7, 135, 199, 0.35);
+    transition: all 0.25s ease;
+    margin-top: 10px;
+}
+
+.dr-btn-submit-booking:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(7, 135, 199, 0.45);
+}
+
+/* ==========================================================================
+   13. SECTION: TIN TỨC & SỰ KIỆN (sec_tintuc)
+   ========================================================================== */
+.sec_tintuc {
+    padding: 60px 48px;
+    background-image: url('../images/BACKGROUND-GIOI-THIEU.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dr-news-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.dr-news-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease;
+    position: relative;
+}
+
+.dr-news-card:hover {
+    transform: translateY(-5px);
+}
+
+.dr-news-thumb {
+    height: 170px;
+    overflow: hidden;
+    position: relative;
+}
+
+.dr-news-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.dr-news-card:hover .dr-news-thumb img {
+    transform: scale(1.08);
+}
+
+.dr-news-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #003366;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.dr-news-badge .day {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.dr-news-badge .month {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.dr-news-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.dr-news-body h5 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0349a6;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.dr-news-body p {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* ==========================================================================
+   14. FOOTER (.footer-wrapper)
+   ========================================================================== */
+.footer-wrapper {
+    background-color: rgb(55, 170, 216);
+    color: #ffffff;
+    padding-top: 45px;
+}
+
+.footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 0.8fr;
+    gap: 40px;
+}
+
+.footer-col h4 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+}
+
+.footer-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+.footer-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.footer-social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.footer-social-btn:hover {
+    background: #ffffff;
+    color: #0349a6;
+}
+
+.footer-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links-list a {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    transition: transform 0.2s ease;
+    display: block;
+}
+
+.footer-links-list a:hover {
+    transform: translateX(4px);
+    color: #e0f2fe;
+}
+
+.footer-bottom-bar {
+    background: #003366;
+    padding: 16px 48px;
+    text-align: center;
+    font-size: 12.5px;
+    color: #cbd5e1;
+}
+
+/* ==========================================================================
+   15. MULTI-CHANNEL FLOATING WIDGETS
+   ========================================================================== */
+.dr-floating-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 9999;
+}
+
+.dr-float-btn {
+    position: relative;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 24px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dr-float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+}
+
+.dr-float-zalo {
+    background: #0068ff;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.dr-float-messenger {
+    background: linear-gradient(135deg, #0084ff, #00c6ff);
+}
+
+.dr-float-hotline {
+    background: #ef4444;
+    animation: dr-pulse-ring 2s infinite;
+}
+
+.dr-float-booking {
+    background: #059669;
+}
+
+.dr-badge-notif {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #f59e0b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+}
+
+@keyframes dr-pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 16px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+/* ==========================================================================
+   16. MODAL SUCCESS POPUP
+   ========================================================================== */
+.dr-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 51, 102, 0.65);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.dr-modal-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dr-modal-card {
+    background: #ffffff;
+    width: 90%;
+    max-width: 520px;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.dr-modal-backdrop.show .dr-modal-card {
+    transform: scale(1);
+}
+
+.dr-modal-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.dr-modal-code {
+    display: inline-block;
+    background: #f1f5f9;
+    border: 2px dashed #0284c7;
+    color: #0284c7;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 8px 24px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    margin: 16px 0;
+}
+
+/* ==========================================================================
+   17. RESPONSIVENESS (MOBILE / TABLET)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .dr-topbar, .dr-header-main, .dr-navbar {
+        padding: 0 20px;
+    }
+    .dr-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .dr-doctor-layout {
+        grid-template-columns: 1fr;
+    }
+    .dr-cases-grid {
+        grid-template-columns: 1fr;
+    }
+    .dr-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    .dr-booking-container {
+        grid-template-columns: 1fr;
+    }
+    .dr-news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-inner {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dr-topbar {
+        display: none;
+    }
+    .dr-header-main {
+        height: 64px;
+    }
+    .dr-search-box {
+        display: none;
+    }
+    .ds-header-link {
+        display: none;
+    }
+    .ds-header-link--staff {
+        display: inline-flex;
+    }
+    .dr-navbar {
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+    .dr-nav-menu {
+        gap: 18px;
+    }
+    .dq-stats-banner {
+        flex-direction: column;
+    }
+    .dq-stats-banner .dq-stat-item + .dq-stat-item::before {
+        display: none;
+    }
+    .sec_gioithieu-inner {
+        grid-template-columns: 1fr;
+    }
+    .dr-gallery-scatter {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .dr-services-grid {
+        grid-template-columns: 1fr;
+    }
+    .dr-commitments-grid {
+        grid-template-columns: 1fr;
+    }
+    .dr-certs-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .dr-case-card {
+        grid-template-columns: 1fr;
+    }
+    .dr-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .dr-form-group.full-width {
+        grid-column: span 1;
+    }
+    .dr-news-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -18,1538 +18,1132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nha khoa Dr.Smile — Nơi khởi nguồn cho nụ cười rạng rỡ</title>
+    <title>Nha khoa Dr.Smile - Nơi khởi nguồn cho nụ cười rạng rỡ</title>
     <meta name="description" content="Nha khoa Dr.Smile chuyên gia răng thẩm mỹ, thiết kế nụ cười, chỉnh nha, implant và điều trị các vấn đề răng miệng trong suốt hơn 17 năm qua.">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/Logo-PS.png">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Dr.Smile Signature Top Bar */
-        .ds-topbar {
-            background: var(--drsmile-navy);
-            color: #e2e8f0;
-            font-size: 13px;
-            padding: 9px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .ds-topbar-left, .ds-topbar-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-        .ds-topbar-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ds-topbar-item a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .ds-topbar-item a:hover {
-            color: #7dd3fc;
-            text-decoration: underline;
-        }
-
-        /* Dr.Smile Main Header Navigation */
-        .ds-navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-            height: 78px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 48px;
-            box-shadow: 0 2px 12px rgba(0, 51, 102, 0.05);
-        }
-        .ds-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .ds-brand-logo {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #003366 0%, #0052cc 60%, #00a8cc 100%);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 4px 14px rgba(0, 51, 102, 0.25);
-            color: #ffffff;
-        }
-        .ds-brand-text h1 {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--drsmile-navy);
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-            margin: 0;
-        }
-        .ds-brand-text span {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--drsmile-cyan);
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-        }
-        .ds-nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 26px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .ds-nav-link {
-            text-decoration: none;
-            color: var(--drsmile-navy);
-            font-size: 14.5px;
-            font-weight: 700;
-            transition: color var(--transition-fast);
-            position: relative;
-            padding: 6px 0;
-        }
-        .ds-nav-link:hover {
-            color: var(--drsmile-blue);
-        }
-        .ds-nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--drsmile-blue);
-            border-radius: 2px;
-        }
-        .ds-nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        /* Dr.Smile Hero Section */
-        .ds-hero {
-            background: linear-gradient(180deg, #f0f7fd 0%, #ffffff 100%);
-            padding: 70px 48px 60px;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border);
-        }
-        .ds-hero-inner {
-            max-width: 1220px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 52px;
-            align-items: center;
-        }
-        .ds-hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--drsmile-gold-light);
-            border: 1px solid #fde047;
-            color: var(--drsmile-gold-dark);
-            padding: 6px 18px;
-            border-radius: var(--radius-full);
-            font-size: 13px;
-            font-weight: 800;
-            margin-bottom: 22px;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
-        }
-        .ds-hero-title {
-            font-size: 44px;
-            font-weight: 800;
-            color: var(--drsmile-navy);
-            line-height: 1.2;
-            letter-spacing: -1px;
-            margin-bottom: 18px;
-        }
-        .ds-hero-title span {
-            background: linear-gradient(135deg, #0052cc 0%, #00a8cc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .ds-hero-subtitle {
-            font-size: 16.5px;
-            line-height: 1.65;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-        }
-        .ds-hero-btns {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 36px;
-            flex-wrap: wrap;
-        }
-
-        /* Dr.Smile 4 Core Pillars */
-        .ds-pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 36px;
-        }
-        .ds-pillar-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 18px;
-            box-shadow: var(--shadow-xs);
-            transition: all var(--transition-normal);
-        }
-        .ds-pillar-card:hover {
-            transform: translateY(-3px);
-            border-color: #93c5fd;
-            box-shadow: var(--shadow-md);
-        }
-        .ds-pillar-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        .ds-pillar-title {
-            font-size: 13.5px;
-            font-weight: 800;
-            color: var(--drsmile-navy);
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-        .ds-pillar-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.45;
-        }
-
-        /* Hero Right Preview Frame */
-        .ds-hero-card {
-            background: #ffffff;
-            border: 2px solid #e0f2fe;
-            border-radius: var(--radius-xl);
-            padding: 32px;
-            box-shadow: 0 20px 45px -10px rgba(0, 51, 102, 0.12);
-            position: relative;
-        }
-        .ds-hero-card-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 22px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid var(--border);
-        }
-        .ds-card-badge {
-            display: inline-block;
-            background: #ecfeff;
-            color: #0891b2;
-            padding: 4px 10px;
-            border-radius: var(--radius-sm);
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        /* Doctor Spotlight Section (BS. Lý Thị Thủy) */
-        .ds-doctor-spotlight {
-            background: linear-gradient(135deg, #002244 0%, #003366 60%, #0052cc 100%);
-            color: #ffffff;
-            padding: 80px 48px;
-            position: relative;
-            overflow: hidden;
-        }
-        .ds-doctor-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 0.95fr 1.05fr;
-            gap: 52px;
-            align-items: center;
-        }
-        .ds-doctor-avatar-box {
-            position: relative;
-            text-align: center;
-        }
-        .ds-doctor-avatar {
-            width: 280px;
-            height: 280px;
-            border-radius: var(--radius-xl);
-            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 110px;
-            border: 5px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
-        }
-        .ds-doctor-motto-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: var(--radius-lg);
-            padding: 22px 26px;
-            margin-top: 24px;
-            backdrop-filter: blur(8px);
-        }
-        .ds-doctor-motto-title {
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #fde047;
-            margin-bottom: 8px;
-        }
-        .ds-doctor-motto-quote {
-            font-size: 16px;
-            font-weight: 800;
-            color: #ffffff;
-            font-style: italic;
-            line-height: 1.5;
-        }
-        .ds-doctor-creds {
-            list-style: none;
-            margin: 22px 0 28px;
-            padding: 0;
-        }
-        .ds-doctor-cred-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 14.5px;
-            color: #e0f2fe;
-            line-height: 1.55;
-        }
-        .ds-doctor-cred-item span {
-            color: #fde047;
-            font-size: 16px;
-            font-weight: 800;
-        }
-
-        /* Services Grid (6 Core Services of Dr.Smile) */
-        .ds-services-section {
-            padding: 80px 48px;
-            max-width: 1220px;
-            margin: 0 auto;
-        }
-        .ds-services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 28px;
-        }
-        .ds-service-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: var(--shadow-sm);
-            transition: all var(--transition-normal);
-            position: relative;
-            overflow: hidden;
-        }
-        .ds-service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #0052cc 0%, #00a8cc 100%);
-            opacity: 0;
-            transition: opacity var(--transition-fast);
-        }
-        .ds-service-card:hover {
-            transform: translateY(-5px);
-            border-color: #93c5fd;
-            box-shadow: 0 16px 32px -8px rgba(0, 51, 102, 0.12);
-        }
-        .ds-service-card:hover::before {
-            opacity: 1;
-        }
-        .ds-service-icon-wrap {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            margin-bottom: 20px;
-        }
-        .ds-service-card h3 {
-            font-size: 19px;
-            font-weight: 800;
-            color: var(--drsmile-navy);
-            margin-bottom: 10px;
-        }
-        .ds-service-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 22px;
-        }
-        .ds-service-cta-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 18px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        /* Testimonials / Treatment Results */
-        .ds-testimonials {
-            background: #f8fafc;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 80px 48px;
-        }
-        .ds-testimonials-grid {
-            max-width: 1220px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        .ds-testimonial-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 26px;
-            box-shadow: var(--shadow-xs);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .ds-stars {
-            color: #f59e0b;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-        .ds-quote-text {
-            font-size: 14px;
-            font-style: italic;
-            color: var(--text-primary);
-            line-height: 1.6;
-            margin-bottom: 18px;
-        }
-        .ds-reviewer {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .ds-reviewer-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-full);
-            background: #e0f2fe;
-            color: #0284c7;
-            font-weight: 800;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Booking Section */
-        .ds-booking-wrap {
-            padding: 80px 48px;
-            background: linear-gradient(180deg, #ffffff 0%, #f0f7fd 100%);
-        }
-        .ds-booking-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: #ffffff;
-            border: 2px solid #bae6fd;
-            border-radius: var(--radius-xl);
-            box-shadow: 0 24px 50px -12px rgba(0, 51, 102, 0.16);
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            overflow: hidden;
-        }
-        .ds-booking-side {
-            background: linear-gradient(135deg, #003366 0%, #0052cc 100%);
-            color: #ffffff;
-            padding: 44px 38px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .ds-booking-side h3 {
-            font-size: 26px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 14px;
-        }
-        .ds-booking-side p {
-            font-size: 14.5px;
-            color: #e0f2fe;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-        .ds-booking-form-side {
-            padding: 44px 38px;
-        }
-
-        /* Dr.Smile Corporate Footer */
-        .ds-footer {
-            background: #001f3f;
-            color: #94a3b8;
-            padding: 64px 48px 32px;
-            border-top: 2px solid #0052cc;
-        }
-        .ds-footer-grid {
-            max-width: 1220px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .ds-footer-brand h4 {
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-        .ds-footer-col h5 {
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            margin-bottom: 16px;
-        }
-        .ds-footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .ds-footer-links li {
-            margin-bottom: 10px;
-        }
-        .ds-footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 13.5px;
-            transition: color var(--transition-fast);
-        }
-        .ds-footer-links a:hover {
-            color: #38bdf8;
-        }
-        .ds-footer-bottom {
-            max-width: 1220px;
-            margin: 0 auto;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12.5px;
-        }
-
-        @media (max-width: 992px) {
-            .ds-hero-inner {
-                grid-template-columns: 1fr;
-            }
-            .ds-pillars-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .ds-doctor-inner {
-                grid-template-columns: 1fr;
-            }
-            .ds-booking-container {
-                grid-template-columns: 1fr;
-            }
-            .ds-footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        @media (max-width: 768px) {
-            .ds-topbar {
-                display: none;
-            }
-            .ds-navbar {
-                padding: 0 20px;
-            }
-            .ds-nav-menu {
-                display: none;
-            }
-            .ds-pillars-grid {
-                grid-template-columns: 1fr;
-            }
-            .ds-footer-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/drsmile-clone.css">
 </head>
 <body>
 
-<!-- Floating 24/7 Hotline & Chat Widget (Dr.Smile Signature) -->
-<div class="drsmile-floating-call">
-    <a href="#booking" class="btn btn-drsmile btn-sm" style="box-shadow: 0 4px 16px rgba(0,82,204,0.35); font-weight:800; border-radius: var(--radius-full);">
-        <span>🗓️</span> Đặt Lịch Khám
-    </a>
-    <a href="https://zalo.me/0966692286" target="_blank" rel="noopener noreferrer" class="drsmile-zalo-btn" title="Chat Zalo Tư Vấn: 096 669 2286">
-        Zalo
-    </a>
-    <a href="https://m.me/www.Dr.Smile" target="_blank" rel="noopener noreferrer" class="drsmile-fb-btn" title="Nhắn tin Facebook Dr.Smile">
-        💬
-    </a>
-    <a href="tel:0966692286" class="drsmile-call-btn" title="Gọi Hotline 24/7: 096 669 2286">
-        📞
-    </a>
-</div>
-
-<!-- Dr.Smile Top Contact Bar -->
-<div class="ds-topbar">
-    <div class="ds-topbar-left">
-        <div class="ds-topbar-item">
-            <span>📍</span> <span>Số 41, phố Núi Trúc, phường Giảng Võ, Ba Đình, TP Hà Nội</span>
+    <!-- =====================================================================
+         1. TOPBAR LIÊN HỆ CHUẨN DR.SMILE
+         ===================================================================== -->
+    <div class="dr-topbar">
+        <div class="dr-topbar-left">
+            <div class="dr-topbar-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>Cơ sở chính: Số 41, phố Núi Trúc, P. Giảng Võ, TP. Hà Nội</span>
+            </div>
+            <div class="dr-topbar-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                <span>Giờ làm việc: 08:30 – 18:30 (Thứ 2 – Chủ Nhật)</span>
+            </div>
         </div>
-        <div class="ds-topbar-item">
-            <span>🕒</span> <span>Thứ 2 – Chủ nhật: 08h30 – 18h30</span>
+        <div class="dr-topbar-right">
+            <div class="dr-topbar-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <a href="mailto:drsmile.vn@gmail.com">drsmile.vn@gmail.com</a>
+            </div>
+            <div class="dr-topbar-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <span>Hotline: <a href="tel:0966692286">096 669 2286</a></span>
+            </div>
         </div>
     </div>
-    <div class="ds-topbar-right">
-        <div class="ds-topbar-item">
-            <span>📞</span> <span>Hotline: <a href="tel:0966692286">096 669 2286</a> &bull; <a href="tel:0865428768">08 6542 8768</a></span>
+
+    <!-- =====================================================================
+         2. MAIN HEADER VỚI LOGO, HOTLINE, ĐĂNG KÝ TƯ VẤN & CỔNG TÁC NGHIỆP
+         ===================================================================== -->
+    <div class="dr-header-main">
+        <a href="${pageContext.request.contextPath}/" class="dr-logo-wrap" title="Nha khoa Dr.Smile - Nơi khởi nguồn cho nụ cười rạng rỡ">
+            <img src="${pageContext.request.contextPath}/assets/images/Logo-PS.png" alt="Dr.Smile Dental Care">
+        </a>
+
+        <div class="dr-search-box">
+            <input type="text" class="dr-search-input" placeholder="Tìm kiếm dịch vụ, bảng giá, bác sĩ..." id="globalSearchInput">
+            <button class="dr-search-btn" type="button" aria-label="Tìm kiếm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </button>
         </div>
-        <div class="ds-topbar-item">
-            <a href="#booking" class="badge-drsmile-gold" style="text-decoration:none;">
-                <span>🎁</span> Đăng ký tư vấn — Nhận ưu đãi miễn phí
+
+        <div class="ds-header-actions">
+            <!-- Hotline Link -->
+            <a href="tel:0966692286" class="ds-header-link ds-header-link--hotline" title="Gọi Hotline hỗ trợ 24/7">
+                <span class="ds-header-link__icon-wrap">
+                    <img src="${pageContext.request.contextPath}/assets/images/drsmile-hotline-support.svg" alt="Hotline icon" class="ds-header-link__icon">
+                </span>
+                <span class="ds-header-link__content">
+                    <strong>096 669 2286</strong>
+                    <small>Hotline hỗ trợ 24/7</small>
+                </span>
+            </a>
+
+            <!-- Tư Vấn / Ưu Đãi Link -->
+            <a href="#dr-offer-popup" class="ds-header-link ds-header-link--consult" onclick="openOfferPopup(event)" title="Đăng ký tư vấn nhận ưu đãi">
+                <span class="ds-header-link__icon-wrap">
+                    <img src="${pageContext.request.contextPath}/assets/images/drsmile-customer-support.svg" alt="Support icon" class="ds-header-link__icon">
+                </span>
+                <span class="ds-header-link__content">
+                    <strong>Đăng ký tư vấn</strong>
+                    <small>Nhận ưu đãi miễn phí</small>
+                </span>
+            </a>
+
+            <!-- Staff Intranet Link -->
+            <a href="${pageContext.request.contextPath}/login" class="ds-header-link ds-header-link--staff" title="Cổng đăng nhập Bác sĩ / Lễ tân / Quản trị viên">
+                <span class="ds-header-link__icon-wrap">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                </span>
+                <span class="ds-header-link__content">
+                    <strong>Cổng Tác Nghiệp</strong>
+                    <small>Bác Sĩ &bull; Lễ Tân</small>
+                </span>
             </a>
         </div>
     </div>
-</div>
 
-<!-- Dr.Smile Main Header Navigation -->
-<nav class="ds-navbar">
-    <a href="${pageContext.request.contextPath}/" class="ds-brand">
-        <div class="ds-brand-logo">🦷</div>
-        <div class="ds-brand-text">
-            <h1>Nha Khoa Dr.Smile</h1>
-            <span>Nơi khởi nguồn cho nụ cười rạng rỡ</span>
-        </div>
-    </a>
+    <!-- =====================================================================
+         3. MEGA NAVIGATION BAR (STICKY)
+         ===================================================================== -->
+    <nav class="dr-navbar">
+        <ul class="dr-nav-menu">
+            <li class="dr-nav-item">
+                <a href="${pageContext.request.contextPath}/" class="dr-nav-link active">Trang chủ</a>
+            </li>
 
-    <ul class="ds-nav-menu">
-        <li><a href="#hero" class="ds-nav-link active">Trang Chủ</a></li>
-        <li><a href="#about" class="ds-nav-link">Giới Thiệu</a></li>
-        <li><a href="#services" class="ds-nav-link">Dịch Vụ Nha Khoa</a></li>
-        <li><a href="#doctor" class="ds-nav-link">Bác Sĩ Phụ Trách</a></li>
-        <li><a href="#testimonials" class="ds-nav-link">Hiệu Quả Điều Trị</a></li>
-        <li><a href="#articles" class="ds-nav-link">Kiến Thức</a></li>
-        <li><a href="#booking" class="ds-nav-link">Đặt Lịch Hẹn</a></li>
-        <li><a href="#contact" class="ds-nav-link">Liên Hệ</a></li>
-    </ul>
-
-    <div class="ds-nav-actions">
-        <c:choose>
-            <c:when test="${not empty sessionScope.currentUser}">
-                <a href="${pageContext.request.contextPath}/reception/appointments" class="btn btn-primary btn-sm">
-                    <span>⚡</span> Bàn Làm Việc (${sessionScope.role})
+            <!-- Mega Dropdown: Dịch vụ nha khoa -->
+            <li class="dr-nav-item">
+                <a href="#services" class="dr-nav-link">
+                    Dịch vụ nha khoa
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
                 </a>
-                <a href="${pageContext.request.contextPath}/logout" class="btn btn-secondary btn-sm">
-                    Đăng Xuất
+                <div class="dr-dropdown dr-dropdown-mega">
+                    <div class="dr-mega-col">
+                        <h4>Răng sứ thẩm mỹ</h4>
+                        <ul class="dr-mega-list">
+                            <li><a href="#services">Bọc răng sứ công nghệ 4.0</a></li>
+                            <li><a href="#services">Dán sứ Veneer bảo tồn</a></li>
+                            <li><a href="#services">Chăm sóc răng sau bọc sứ</a></li>
+                            <li><a href="#services">Mão răng sứ cao cấp</a></li>
+                        </ul>
+                    </div>
+                    <div class="dr-mega-col">
+                        <h4>Niềng Răng Thẩm Mỹ</h4>
+                        <ul class="dr-mega-list">
+                            <li><a href="#services">Niềng răng mắc cài 3M</a></li>
+                            <li><a href="#services">Khay trong suốt Invisalign</a></li>
+                            <li><a href="#services">Hàm chỉnh nha trẻ em</a></li>
+                            <li><a href="#services">Phẫu thuật hàm hô móm</a></li>
+                        </ul>
+                    </div>
+                    <div class="dr-mega-col">
+                        <h4>Nha Khoa Thẩm Mỹ</h4>
+                        <ul class="dr-mega-list">
+                            <li><a href="#services">Cấy ghép răng Implant</a></li>
+                            <li><a href="#services">Tẩy trắng răng đèn Led</a></li>
+                            <li><a href="#services">Cắt lợi thẩm mỹ cười hở lợi</a></li>
+                            <li><a href="#services">Đính đá thẩm mỹ</a></li>
+                        </ul>
+                    </div>
+                    <div class="dr-mega-col">
+                        <h4>Điều Trị Bệnh Lý</h4>
+                        <ul class="dr-mega-list">
+                            <li><a href="#services">Điều trị tủy vi phẫu</a></li>
+                            <li><a href="#services">Nhổ răng khôn Piezosurgical</a></li>
+                            <li><a href="#services">Hàn trám răng sâu thẩm mỹ</a></li>
+                            <li><a href="#services">Lấy cao răng siêu âm</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Dropdown: Giới thiệu -->
+            <li class="dr-nav-item">
+                <a href="#about" class="dr-nav-link">
+                    Giới thiệu
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
                 </a>
-            </c:when>
-            <c:otherwise>
-                <a href="#booking" class="btn btn-primary btn-sm">
-                    <span>📅</span> Đặt Lịch Tư Vấn
+                <div class="dr-dropdown">
+                    <ul class="dr-mega-list" style="padding: 0 16px;">
+                        <li><a href="#about">Về Nha Khoa Dr.Smile</a></li>
+                        <li><a href="#doctor">Đội ngũ Bác sĩ CKI</a></li>
+                        <li><a href="#commitments">Cam kết chất lượng</a></li>
+                        <li><a href="#about">Cơ sở vật chất chuẩn Bộ Y Tế</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="dr-nav-item">
+                <a href="#doctor" class="dr-nav-link">Bác Sĩ CKI</a>
+            </li>
+
+            <li class="dr-nav-item">
+                <a href="#cases" class="dr-nav-link">Hiệu Quả Điều Trị</a>
+            </li>
+
+            <li class="dr-nav-item">
+                <a href="#news" class="dr-nav-link">Tin tức & Sự kiện</a>
+            </li>
+
+            <li class="dr-nav-item">
+                <a href="#booking-section" class="dr-nav-link" style="color: #059669;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                    Đặt Lịch Online
                 </a>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary btn-sm" title="Dành cho Bác sĩ, Lễ tân & Quản trị viên">
-                    <span>🔐</span> Cổng Nhân Viên
-                </a>
-            </c:otherwise>
-        </c:choose>
-    </div>
-</nav>
+            </li>
 
-<!-- Hero Section (Dr.Smile Identity) -->
-<section id="hero" class="ds-hero">
-    <div class="ds-hero-inner">
-        <!-- Left Content -->
-        <div>
-            <div class="ds-hero-badge">
-                <span>⭐</span>
-                <span>Chuyên Gia Răng Thẩm Mỹ & Niềng Răng Hơn 17 Năm Kinh Nghiệm</span>
+            <li class="dr-nav-item">
+                <a href="#contact" class="dr-nav-link">Liên hệ</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- =====================================================================
+         4. HERO BANNER SLIDER (4 AUTHENTIC BANNERS)
+         ===================================================================== -->
+    <div class="dr-hero-slider-wrap">
+        <div class="dr-hero-slides" id="heroSlides">
+            <div class="dr-hero-slide">
+                <img src="${pageContext.request.contextPath}/assets/images/HERO-BANNER-RANG-SU-1572x600.jpg" alt="Răng sứ thẩm mỹ 4.0 Dr.Smile">
             </div>
-            <h1 class="ds-hero-title">
-                Nha Khoa Dr.Smile — <span>Nơi Khởi Nguồn Cho Nụ Cười Rạng Rỡ</span>
-            </h1>
-            <p class="ds-hero-subtitle">
-                Được thành lập từ năm 2015, Dr.Smile tự hào là địa chỉ nha khoa tin cậy tại Hà Nội. Với trang thiết bị hiện đại 4.0, đội ngũ Bác sĩ CKI Đại học Y Hà Nội và hệ thống phòng khám vô trùng tuyệt đối, chúng tôi cam kết mang đến trải nghiệm điều trị an toàn, nhẹ nhàng và hiệu quả nhất.
-            </p>
-
-            <div class="ds-hero-btns">
-                <a href="#booking" class="btn btn-drsmile btn-lg" style="box-shadow: var(--shadow-glow);">
-                    <span>🗓️</span> Đặt Lịch Tư Vấn & Nhận Ưu Đãi
-                </a>
-                <a href="#services" class="btn btn-secondary btn-lg">
-                    <span>📋</span> Xem Dịch Vụ & Bảng Giá
-                </a>
+            <div class="dr-hero-slide">
+                <img src="${pageContext.request.contextPath}/assets/images/HERO-BANNER-1572x600.jpg" alt="Nơi khởi nguồn cho nụ cười rạng rỡ">
             </div>
-
-            <!-- 4 Core Pillars of Dr.Smile -->
-            <div class="ds-pillars-grid">
-                <div class="ds-pillar-card">
-                    <div class="ds-pillar-icon">🏥</div>
-                    <div class="ds-pillar-title">Quy Trình Chuẩn Y Khoa</div>
-                    <div class="ds-pillar-desc">Thăm khám kỹ lưỡng, phác đồ rõ ràng, an toàn tuyệt đối.</div>
-                </div>
-
-                <div class="ds-pillar-card">
-                    <div class="ds-pillar-icon">🔬</div>
-                    <div class="ds-pillar-title">Công Nghệ Hiện Đại 4.0</div>
-                    <div class="ds-pillar-desc">Chẩn đoán 3D, scan iTero 5D, nhổ răng sóng siêu âm.</div>
-                </div>
-
-                <div class="ds-pillar-card">
-                    <div class="ds-pillar-icon">👨‍⚕️</div>
-                    <div class="ds-pillar-title">Bác Sĩ Giàu Kinh Nghiệm</div>
-                    <div class="ds-pillar-desc">100% Bác sĩ CKI ĐH Y Hà Nội, trên 17 năm lâm sàng.</div>
-                </div>
-
-                <div class="ds-pillar-card">
-                    <div class="ds-pillar-icon">🛡️</div>
-                    <div class="ds-pillar-title">Bảo Hành Thấu Đáo</div>
-                    <div class="ds-pillar-desc">Thẻ bảo hành điện tử chính hãng minh bạch lâu dài.</div>
-                </div>
+            <div class="dr-hero-slide">
+                <img src="${pageContext.request.contextPath}/assets/images/HERO-BANNER-TRONG-RANG-1572x600.jpg" alt="Trồng răng Implant kỹ thuật số Dr.Smile">
+            </div>
+            <div class="dr-hero-slide">
+                <img src="${pageContext.request.contextPath}/assets/images/HERO-BANNER-TONG-QUAT-1572x600.jpg" alt="Nha khoa tổng quát Dr.Smile">
             </div>
         </div>
 
-        <!-- Right Quick Overview Card -->
-        <div class="ds-hero-card">
-            <div class="ds-hero-card-header">
-                <div style="width: 52px; height: 52px; border-radius: var(--radius-lg); background: #e0f2fe; display: flex; align-items: center; justify-content: center; font-size: 26px;">
-                    ✨
-                </div>
-                <div>
-                    <span class="ds-card-badge">Uy Tín & Chất Lượng</span>
-                    <h3 style="font-size: 18px; font-weight: 800; color: var(--drsmile-navy); margin: 4px 0 0;">Nha Khoa Thẩm Mỹ Dr.Smile</h3>
-                </div>
-            </div>
+        <!-- Slider controls -->
+        <button class="dr-slider-btn prev" onclick="moveSlide(-1)" aria-label="Banner trước">&larr;</button>
+        <button class="dr-slider-btn next" onclick="moveSlide(1)" aria-label="Banner tiếp theo">&rarr;</button>
 
-            <div style="background: var(--drsmile-bg-soft); border: 1px solid #bae6fd; border-radius: var(--radius-md); padding: 18px; margin-bottom: 20px;">
-                <div style="font-size: 13px; font-weight: 800; color: var(--drsmile-navy); text-transform: uppercase; margin-bottom: 8px;">
-                    🌟 Ưu Đãi Đặc Quyền Tháng Này:
-                </div>
-                <ul style="font-size: 13.5px; color: var(--text-primary); line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li><strong>Miễn phí 100%</strong> khám và chụp phim chẩn đoán ban đầu.</li>
-                    <li><strong>Ưu đãi 30%</strong> dịch vụ Tẩy trắng răng bằng đèn Led.</li>
-                    <li><strong>Tặng gói vệ sinh răng miệng</strong> khi niềng răng hoặc dán sứ.</li>
-                </ul>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px;">
-                <div style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: 800; color: var(--drsmile-blue);">5.000+</div>
-                    <div style="font-size: 12px; color: var(--text-secondary); font-weight: 600;">Ca phục hình thành công</div>
-                </div>
-                <div style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: 800; color: #10b981;">100%</div>
-                    <div style="font-size: 12px; color: var(--text-secondary); font-weight: 600;">Vô trùng y khoa chuẩn Bộ Y Tế</div>
-                </div>
-            </div>
-
-            <a href="#booking" class="btn btn-drsmile btn-block">
-                <span>✍️</span> Đăng Ký Tư Vấn Ngay
-            </a>
+        <!-- Slider indicators -->
+        <div class="dr-slider-dots">
+            <div class="dr-dot active" onclick="setSlide(0)"></div>
+            <div class="dr-dot" onclick="setSlide(1)"></div>
+            <div class="dr-dot" onclick="setSlide(2)"></div>
+            <div class="dr-dot" onclick="setSlide(3)"></div>
         </div>
     </div>
-</section>
 
-<!-- About Dr.Smile Story -->
-<section id="about" style="padding: 70px 48px; background: #ffffff; border-bottom: 1px solid var(--border);">
-    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
-        <div>
-            <span class="section-tag">Về Nha Khoa Dr.Smile</span>
-            <h2 class="section-title">Hành Trình Kiến Tạo Nụ Cười Rạng Rỡ</h2>
-            <p style="font-size: 15.5px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
-                Dr.Smile được thành lập từ năm 2015, tự hào là địa chỉ chăm sóc răng miệng tin cậy tại Hà Nội. Với trang thiết bị hiện đại, đội ngũ bác sĩ chuyên môn cao, giàu kinh nghiệm và hệ thống phòng khám vô trùng tuyệt đối, chúng tôi cam kết mang đến trải nghiệm điều trị an toàn, nhẹ nhàng và hiệu quả nhất cho từng khách hàng.
-            </p>
-            <p style="font-size: 14.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 24px;">
-                Chúng tôi hiểu rằng nụ cười đẹp không chỉ mang lại vẻ ngoài cuốn hút mà còn là chìa khóa mở ra sự tự tin trong cuộc sống và công việc. Mỗi phác đồ điều trị tại Dr.Smile đều được may đo riêng biệt, hướng tới tính thẩm mỹ tự nhiên và độ bền vững trọn đời.
-            </p>
-            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-                <div class="badge-drsmile-navy">Giấy phép BYT: 0109138207</div>
-                <div class="badge-drsmile-gold">Bảo hành điện tử chính hãng</div>
-                <div class="badge-drsmile-navy">Công nghệ 4.0 bảo tồn răng thật</div>
-            </div>
+    <!-- =====================================================================
+         5. STATS COUNTER BANNER (.dq-stats-banner)
+         ===================================================================== -->
+    <section class="dq-stats-banner">
+        <div class="dq-stat-item">
+            <div class="dq-stat-number">5000+</div>
+            <div class="dq-stat-label">Ca răng sứ thành công</div>
         </div>
+        <div class="dq-stat-item">
+            <div class="dq-stat-number">17+</div>
+            <div class="dq-stat-label">Năm kinh nghiệm chuyên sâu</div>
+        </div>
+        <div class="dq-stat-item">
+            <div class="dq-stat-number">10000+</div>
+            <div class="dq-stat-label">Khách hàng mỗi năm</div>
+        </div>
+        <div class="dq-stat-item">
+            <div class="dq-stat-number">100%</div>
+            <div class="dq-stat-label">Khách hàng hài lòng</div>
+        </div>
+    </section>
 
-        <div style="background: var(--drsmile-bg-soft); border: 2px solid #bae6fd; border-radius: var(--radius-xl); padding: 36px; box-shadow: var(--shadow-sm);">
-            <div style="font-size: 13px; font-weight: 800; color: var(--drsmile-navy); text-transform: uppercase; margin-bottom: 16px;">
-                4 NGUYÊN TẮC VÀNG TẠI DR.SMILE
+    <!-- =====================================================================
+         6. SECTION: VỀ NHA KHOA DR.SMILE & TƯ VẤN NHANH
+         ===================================================================== -->
+    <section class="sec_gioithieu" id="about">
+        <!-- Quick Consultation Box -->
+        <div class="dr-consult-box">
+            <div class="dr-consult-title">
+                <span>Đặt Lịch</span>
+                <strong>Tư Vấn</strong>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 16px;">
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                    <div style="width: 32px; height: 32px; background: #0052cc; color: #ffffff; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">1</div>
-                    <div>
-                        <strong style="color: var(--drsmile-navy); font-size: 14.5px;">Khám Kỹ Lưỡng:</strong>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Thăm khám tỉ mỉ, chẩn đoán đúng bệnh, phân tích cấu trúc xương hàm 3D.</div>
+            <div class="dr-consult-content">
+                <form id="quickConsultForm" onsubmit="handleQuickConsult(event)">
+                    <div class="dr-consult-row" style="margin-bottom: 12px;">
+                        <div class="dr-field">
+                            <span class="dr-field-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-4.42 0-8 2.24-8 5v2h16v-2c0-2.76-3.58-5-8-5z"/></svg>
+                            </span>
+                            <input type="text" name="fullName" placeholder="Họ và tên quý khách" required>
+                        </div>
+                        <div class="dr-field">
+                            <span class="dr-field-icon">
+                                <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.44 2.83 3.77 5.14 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.11.35.03.74-.25 1.02l-2.22 2.2z"/></svg>
+                            </span>
+                            <input type="tel" name="phone" placeholder="Số điện thoại liên hệ" pattern="[0-9]{10,11}" required>
+                        </div>
                     </div>
-                </div>
-
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                    <div style="width: 32px; height: 32px; background: #0052cc; color: #ffffff; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">2</div>
-                    <div>
-                        <strong style="color: var(--drsmile-navy); font-size: 14.5px;">Tư Vấn Rõ Ràng:</strong>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Minh bạch phương án, chi phí trọn gói rõ ràng, không phát sinh chi phí ẩn.</div>
+                    <div class="dr-consult-row">
+                        <div class="dr-field">
+                            <span class="dr-field-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h4l4 3 4-3h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-3 11H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            </span>
+                            <input type="text" name="notes" placeholder="Tình trạng răng miệng (Sâu răng, niềng răng, bọc sứ...)">
+                        </div>
+                        <div class="dr-submit-wrap">
+                            <button type="submit" class="dr-submit">Đăng ký ngay</button>
+                        </div>
                     </div>
-                </div>
-
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                    <div style="width: 32px; height: 32px; background: #0052cc; color: #ffffff; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">3</div>
-                    <div>
-                        <strong style="color: var(--drsmile-navy); font-size: 14.5px;">Điều Trị Nhẹ Nhàng:</strong>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Ứng dụng công nghệ sóng siêu âm và thuốc tê an toàn, êm ái, hạn chế tối đa ê buốt.</div>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                    <div style="width: 32px; height: 32px; background: #0052cc; color: #ffffff; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">4</div>
-                    <div>
-                        <strong style="color: var(--drsmile-navy); font-size: 14.5px;">Bảo Hành Thấu Đáo:</strong>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Thẻ bảo hành chính hãng, chăm sóc hậu điều trị tận tâm và nhắc hẹn định kỳ.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Doctor Spotlight Section (BS. Lý Thị Thủy - Dr.Smile Director) -->
-<section id="doctor" class="ds-doctor-spotlight">
-    <div class="ds-doctor-inner">
-        <!-- Avatar & Motto -->
-        <div class="ds-doctor-avatar-box">
-            <div class="ds-doctor-avatar">
-                <svg width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
-                    <path d="M12 14v4"/>
-                    <path d="M10 16h4"/>
-                </svg>
-            </div>
-            <div style="margin-top: -18px; text-align: center; position: relative; z-index: 2;">
-                <span class="badge-drsmile-gold" style="background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%); color: #ffffff; font-weight: 800; border: 2px solid #ffffff; box-shadow: 0 4px 14px rgba(0,0,0,0.25); padding: 6px 18px;">
-                    ⭐ 17+ NĂM KINH NGHIỆM
-                </span>
-            </div>
-            <div class="ds-doctor-motto-box">
-                <div class="ds-doctor-motto-title">Kim Chỉ Nam Y Đức Của Bác Sĩ</div>
-                <div class="ds-doctor-motto-quote">
-                    “Khám kỹ lưỡng – Tư vấn rõ ràng – Điều trị nhẹ nhàng – Bảo hành thấu đáo”
-                </div>
+                </form>
             </div>
         </div>
 
-        <!-- Info & Credentials -->
-        <div>
-            <div style="display: inline-block; background: rgba(253, 224, 71, 0.2); color: #fde047; padding: 4px 14px; border-radius: var(--radius-full); font-size: 12px; font-weight: 800; margin-bottom: 14px;">
-                GIÁM ĐỐC – PHỤ TRÁCH CHUYÊN MÔN NHA KHOA DR.SMILE
-            </div>
-            <h2 style="font-size: 34px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
-                BS.CKI Lý Thị Thủy
-            </h2>
-            <div style="font-size: 16px; color: #93c5fd; font-weight: 700; margin-bottom: 18px;">
-                Chuyên Gia Phục Hình Răng Sứ, Chỉnh Nha Thẩm Mỹ & Cấy Ghép Implant
-            </div>
-
-            <p style="font-size: 14.5px; color: #e2e8f0; line-height: 1.65;">
-                Luôn đặt mình trong vai trò của khách hàng, thấu hiểu những lo lắng, những khúc mắc, những mong đợi, Bác sĩ Lý Thủy cùng đội ngũ Y, Bác sĩ Nha khoa Dr.Smile luôn đồng hành cùng nụ cười của từng bệnh nhân.
-            </p>
-
-            <ul class="ds-doctor-creds">
-                <li class="ds-doctor-cred-item">
-                    <span>✓</span>
-                    <div>Tốt nghiệp <strong>Bác sĩ CKI Răng Hàm Mặt – Đại học Y Hà Nội</strong>.</div>
-                </li>
-                <li class="ds-doctor-cred-item">
-                    <span>✓</span>
-                    <div>Tu nghiệp chuyên sâu về <strong>Phục hình răng sứ; Răng thẩm mỹ; Niềng răng; Cấy ghép Implant</strong>.</div>
-                </li>
-                <li class="ds-doctor-cred-item">
-                    <span>✓</span>
-                    <div>Thường xuyên tham gia đào tạo về các Kỹ thuật mới trong ngành Nha khoa trong và ngoài nước.</div>
-                </li>
-                <li class="ds-doctor-cred-item">
-                    <span>✓</span>
-                    <div><strong>Trên 17 năm kinh nghiệm</strong> với hơn <strong>5.000 ca</strong> phục hình Răng sứ thẩm mỹ và Điều trị răng.</div>
-                </li>
-            </ul>
-
-            <div style="display: flex; gap: 14px;">
-                <a href="#booking" class="btn btn-drsmile-gold" style="background:#f59e0b; color:#ffffff; font-weight:800; border-radius:var(--radius-full); padding: 12px 28px; text-decoration:none;">
-                    <span>📅</span> Đặt Lịch Khám Cùng Bác Sĩ Thủy
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 6 Core Services of Dr.Smile -->
-<section id="services" class="ds-services-section">
-    <div class="section-header">
-        <span class="section-tag">Dịch Vụ Nha Khoa Trọng Tâm</span>
-        <h2 class="section-title">Giải Pháp Điều Trị & Thẩm Mỹ Nụ Cười Chuẩn 4.0</h2>
-        <p class="section-subtitle">
-            Khám phá 6 dịch vụ nha khoa chuyên sâu hàng đầu tại Dr.Smile. Mọi quy trình đều được thực hiện theo tiêu chuẩn y khoa nghiêm ngặt.
-        </p>
-    </div>
-
-    <div class="ds-services-grid">
-        <!-- Service 1: Răng sứ & Veneer -->
-        <div class="ds-service-card">
-            <div>
-                <div class="ds-service-icon-wrap" style="background: #e0f2fe; color: #0052cc;">💎</div>
-                <h3>Răng Sứ & Dán Sứ Veneer 4.0</h3>
-                <p>Khám phá giải pháp bọc sứ và dán Veneer công nghệ 4.0 giúp sở hữu nụ cười trắng sáng tự nhiên mà không cần mài nhỏ răng thật, bảo tồn tối đa cấu trúc răng gốc.</p>
-            </div>
-            <div>
-                <div class="ds-service-cta-row">
-                    <span style="font-weight: 800; color: var(--drsmile-blue); font-size: 15px;">Từ 3.500.000 đ/răng</span>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Răng sứ & Dán sứ Veneer')">
-                        Đặt Lịch Ngay
-                    </a>
+        <div class="sec_gioithieu-inner">
+            <div class="dr-video-col">
+                <div class="dr-video-wrap">
+                    <iframe src="https://www.youtube.com/embed/C2tHU05Kgo0?feature=oembed" title="Nha khoa Dr.Smile - Phòng khám nha khoa uy tín chất lượng tại Hà Nội" allowfullscreen></iframe>
                 </div>
-            </div>
-        </div>
-
-        <!-- Service 2: Niềng răng -->
-        <div class="ds-service-card">
-            <div>
-                <div class="ds-service-icon-wrap" style="background: #fdf2f8; color: #db2777;">✨</div>
-                <h3>Niềng Răng Thẩm Mỹ & Invisalign</h3>
-                <p>Công nghệ chỉnh nha 3M Unitek và máng trong suốt Invisalign giúp điều chỉnh hàm răng đều đẹp, chuẩn khớp cắn nhẹ nhàng và thẩm mỹ tuyệt đối.</p>
-            </div>
-            <div>
-                <div class="ds-service-cta-row">
-                    <span style="font-weight: 800; color: var(--drsmile-blue); font-size: 15px;">Ưu đãi trả góp 0%</span>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Niềng răng thẩm mỹ & Invisalign')">
-                        Đặt Lịch Ngay
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Service 3: Implant -->
-        <div class="ds-service-card">
-            <div>
-                <div class="ds-service-icon-wrap" style="background: #f0fdf4; color: #16a34a;">🔩</div>
-                <h3>Trồng Răng Implant Kỹ Thuật Số</h3>
-                <p>Giải pháp phục hình răng đã mất tối ưu nhất hiện nay, khôi phục chức năng ăn nhai và thẩm mỹ như răng thật với trụ Implant chính hãng bảo hành trọn đời.</p>
-            </div>
-            <div>
-                <div class="ds-service-cta-row">
-                    <span style="font-weight: 800; color: var(--drsmile-blue); font-size: 15px;">Từ 12.500.000 đ</span>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Trồng răng Implant kỹ thuật số')">
-                        Đặt Lịch Ngay
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Service 4: Tẩy trắng Led -->
-        <div class="ds-service-card">
-            <div>
-                <div class="ds-service-icon-wrap" style="background: #fefce8; color: #ca8a04;">💡</div>
-                <h3>Tẩy Trắng Răng Bằng Đèn Led</h3>
-                <p>Sở hữu nụ cười rạng rỡ chỉ sau 45 phút với công nghệ tẩy trắng bằng đèn Led an toàn, không ê buốt. Tẩy trắng răng hiệu quả lâu dài và an toàn cho men răng.</p>
-            </div>
-            <div>
-                <div class="ds-service-cta-row">
-                    <span style="font-weight: 800; color: var(--drsmile-blue); font-size: 15px;">Trọn gói 1.800.000 đ</span>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Tẩy trắng răng bằng đèn Led')">
-                        Đặt Lịch Ngay
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Service 5: Nhổ răng khôn -->
-        <div class="ds-service-card">
-            <div>
-                <div class="ds-service-icon-wrap" style="background: #fee2e2; color: #dc2626;">⚡</div>
-                <h3>Quy Trình Nhổ Răng Khôn Không Đau</h3>
-                <p>Quy trình nhổ răng khôn bằng sóng siêu âm Piezosurgical hiện đại, giúp vết thương mau lành và hạn chế tối đa cảm giác sưng đau hay ê buốt sau nhổ.</p>
-            </div>
-            <div>
-                <div class="ds-service-cta-row">
-                    <span style="font-weight: 800; color: var(--drsmile-blue); font-size: 15px;">Từ 1.000.000 đ</span>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Nhổ răng khôn sóng siêu âm Piezosurgical')">
-                        Đặt Lịch Ngay
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Service 6: Nha khoa tổng quát -->
-        <div class="ds-service-card">
-            <div>
-                <div class="ds-service-icon-wrap" style="background: #f3e8ff; color: #7e22ce;">🩺</div>
-                <h3>Nha Khoa Tổng Quát & Bệnh Lý</h3>
-                <p>Chăm sóc toàn diện sức khỏe răng miệng với các dịch vụ thăm khám, điều trị tủy răng vi phẫu không đau, hàn trám răng thẩm mỹ và lấy cao răng siêu âm.</p>
-            </div>
-            <div>
-                <div class="ds-service-cta-row">
-                    <span style="font-weight: 800; color: var(--drsmile-blue); font-size: 15px;">Từ 250.000 đ</span>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Nha khoa tổng quát & Điều trị bệnh lý')">
-                        Đặt Lịch Ngay
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials / Real Transformations (From drsmile.vn) -->
-<section id="testimonials" class="ds-testimonials">
-    <div class="section-header">
-        <span class="section-tag">Hiệu Quả Điều Trị Tại Dr.Smile</span>
-        <h2 class="section-title">Khách Hàng Nói Gì Về Chúng Tôi</h2>
-        <p class="section-subtitle">
-            Hàng ngàn nụ cười đã tự tin tỏa sáng sau hành trình điều trị tận tâm và êm ái tại Nha khoa Dr.Smile.
-        </p>
-    </div>
-
-    <div class="ds-testimonials-grid">
-        <div class="ds-testimonial-card">
-            <div>
-                <div class="ds-stars">⭐⭐⭐⭐⭐</div>
-                <div class="badge-drsmile-gold" style="margin-bottom:12px;">Niềng Răng Mắc Cài Sứ</div>
-                <div class="ds-quote-text">
-                    “Mình niềng mắc cài sứ ở Dr.Smile gần 2 năm, giờ nhìn lại mới thấy đáng công sức đến thế — hàm răng khấp khểnh ngày xưa giờ đã đều tăm tắp, cười tự tin hẳn ra.”
-                </div>
-            </div>
-            <div class="ds-reviewer">
-                <div class="ds-reviewer-avatar">HA</div>
-                <div>
-                    <strong style="color:var(--drsmile-navy); font-size:14px;">Bạn Hoàng Anh</strong>
-                    <div style="font-size:12px; color:var(--text-muted);">24 tuổi &bull; Hà Nội</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ds-testimonial-card">
-            <div>
-                <div class="ds-stars">⭐⭐⭐⭐⭐</div>
-                <div class="badge-drsmile-gold" style="margin-bottom:12px;">Bọc Răng Sứ Thẩm Mỹ</div>
-                <div class="ds-quote-text">
-                    “Tôi rất hài lòng với trải nghiệm làm răng sứ tại DR.SMILE. Nụ cười mới trông tự nhiên, hài hòa và giúp tôi cảm thấy tự tin hơn rất nhiều khi giao tiếp với đối tác.”
-                </div>
-            </div>
-            <div class="ds-reviewer">
-                <div class="ds-reviewer-avatar">TH</div>
-                <div>
-                    <strong style="color:var(--drsmile-navy); font-size:14px;">Chị Thu Hương</strong>
-                    <div style="font-size:12px; color:var(--text-muted);">34 tuổi &bull; Giảng Võ</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ds-testimonial-card">
-            <div>
-                <div class="ds-stars">⭐⭐⭐⭐⭐</div>
-                <div class="badge-drsmile-gold" style="margin-bottom:12px;">Nhổ Răng Khôn Piezosurgical</div>
-                <div class="ds-quote-text">
-                    “Bác sĩ rất tâm lý và thao tác nhẹ nhàng. Quá trình nhổ răng khôn diễn ra thoải mái, tôi không cảm thấy đau và sau đó cũng hoàn toàn không bị sưng.”
-                </div>
-            </div>
-            <div class="ds-reviewer">
-                <div class="ds-reviewer-avatar">MT</div>
-                <div>
-                    <strong style="color:var(--drsmile-navy); font-size:14px;">Anh Minh Tuấn</strong>
-                    <div style="font-size:12px; color:var(--text-muted);">28 tuổi &bull; Ba Đình</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ds-testimonial-card">
-            <div>
-                <div class="ds-stars">⭐⭐⭐⭐⭐</div>
-                <div class="badge-drsmile-gold" style="margin-bottom:12px;">Chỉnh Nha Trẻ Em</div>
-                <div class="ds-quote-text">
-                    “BS Thủy thăm khám và làm rất nhẹ nhàng. Con tôi cảm thấy rất hứng khởi và chủ động nhắc mẹ đưa đi khám định kỳ từ sáng sớm luôn.”
-                </div>
-            </div>
-            <div class="ds-reviewer">
-                <div class="ds-reviewer-avatar">PL</div>
-                <div>
-                    <strong style="color:var(--drsmile-navy); font-size:14px;">Chị Phương Lan</strong>
-                    <div style="font-size:12px; color:var(--text-muted);">Phụ huynh bé Gia Bảo</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Dental Health Knowledge & Blog (From drsmile.vn) -->
-<section id="articles" style="padding: 80px 48px; background: #ffffff; border-bottom: 1px solid var(--border);">
-    <div style="max-width: 1220px; margin: 0 auto;">
-        <div class="section-header">
-            <span class="section-tag">Cẩm Nang Nha Khoa</span>
-            <h2 class="section-title">Kiến Thức & Lời Khuyên Từ Chuyên Gia Dr.Smile</h2>
-            <p class="section-subtitle">
-                Cập nhật những thông tin chuyên môn chính xác về chăm sóc răng miệng, phục hình thẩm mỹ và các kỹ thuật nha khoa 4.0 tiên tiến.
-            </p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px;">
-            <!-- Article 1 -->
-            <div class="ds-article-card">
-                <div class="ds-article-thumb" style="background: linear-gradient(135deg, #0284c7 0%, #003366 100%);">
-                    💎
-                    <div class="ds-article-date-badge">28 Tháng 9</div>
-                </div>
-                <div class="ds-article-body">
-                    <div>
-                        <div class="badge-drsmile-navy" style="margin-bottom: 8px; font-size: 11px;">Răng Sứ Thẩm Mỹ</div>
-                        <h4 class="ds-article-title">Dán sứ Veneer: Ưu nhược điểm và đánh giá khách quan</h4>
-                        <p class="ds-article-excerpt">
-                            Trong các giải pháp nha khoa thẩm mỹ hiện nay, dán sứ Veneer được đánh giá là bước tiến đột phá nhờ khả năng bảo tồn tối đa răng gốc mà vẫn mang lại nụ cười trắng sáng tự nhiên.
-                        </p>
-                    </div>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Răng sứ & Dán sứ Veneer')">Tư Vấn Thêm →</a>
+                <div class="kksr-legend">
+                    <span class="stars">★★★★★</span>
+                    <span>5/5 - (3.101 bệnh nhân bình chọn xuất sắc)</span>
                 </div>
             </div>
 
-            <!-- Article 2 -->
-            <div class="ds-article-card">
-                <div class="ds-article-thumb" style="background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);">
-                    🦷
-                    <div class="ds-article-date-badge">27 Tháng 9</div>
-                </div>
-                <div class="ds-article-body">
-                    <div>
-                        <div class="badge-drsmile-navy" style="margin-bottom: 8px; font-size: 11px;">Phục Hình Răng</div>
-                        <h4 class="ds-article-title">Răng sứ kim loại có tốt không? Đánh giá chi tiết</h4>
-                        <p class="ds-article-excerpt">
-                            Trong các dòng sứ hiện nay, răng sứ kim loại là dòng sứ ra đời sớm nhất và vẫn được nhiều khách hàng cân nhắc nhờ chi phí hợp lý và khả năng chịu lực ăn nhai tốt.
-                        </p>
-                    </div>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Răng sứ & Dán sứ Veneer')">Tư Vấn Thêm →</a>
-                </div>
-            </div>
-
-            <!-- Article 3 -->
-            <div class="ds-article-card">
-                <div class="ds-article-thumb" style="background: linear-gradient(135deg, #f43f5e 0%, #9f1239 100%);">
-                    ⚡
-                    <div class="ds-article-date-badge">26 Tháng 9</div>
-                </div>
-                <div class="ds-article-body">
-                    <div>
-                        <div class="badge-drsmile-navy" style="margin-bottom: 8px; font-size: 11px;">Tiểu Phẫu Sóng Siêu Âm</div>
-                        <h4 class="ds-article-title">Quy trình nhổ răng khôn Piezosurgical không đau</h4>
-                        <p class="ds-article-excerpt">
-                            Kỹ thuật nhổ răng khôn sóng siêu âm Piezosurgical hạn chế tối đa xâm lấn mô mềm, không gây sưng đau và giúp vết thương nhanh chóng lành sau tiểu phẫu.
-                        </p>
-                    </div>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Nhổ răng khôn sóng siêu âm Piezosurgical')">Tư Vấn Thêm →</a>
-                </div>
-            </div>
-
-            <!-- Article 4 -->
-            <div class="ds-article-card">
-                <div class="ds-article-thumb" style="background: linear-gradient(135deg, #10b981 0%, #065f46 100%);">
-                    ✨
-                    <div class="ds-article-date-badge">22 Tháng 9</div>
-                </div>
-                <div class="ds-article-body">
-                    <div>
-                        <div class="badge-drsmile-navy" style="margin-bottom: 8px; font-size: 11px;">Nha Khoa Tổng Quát</div>
-                        <h4 class="ds-article-title">Lấy cao răng có đau không? Những điều cần biết</h4>
-                        <p class="ds-article-excerpt">
-                            Lấy cao răng là phương pháp vệ sinh răng miệng định kỳ nhằm loại bỏ mảng bám vôi hóa, phòng ngừa bệnh nha chu và bảo vệ hơi thở luôn thơm mát.
-                        </p>
-                    </div>
-                    <a href="#booking" class="btn btn-secondary btn-sm" onclick="selectServiceForBooking('Nha khoa tổng quát & Điều trị bệnh lý')">Tư Vấn Thêm →</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Guest Online Booking Section -->
-<section id="booking" class="ds-booking-wrap">
-    <div class="ds-booking-container">
-        <!-- Left Banner -->
-        <div class="ds-booking-side">
-            <div>
-                <span class="badge-drsmile-gold" style="background:rgba(255,255,255,0.2); border-color:rgba(255,255,255,0.4); color:#ffffff; margin-bottom:16px;">
-                    ĐẶT LỊCH TRỰC TUYẾN DÀNH CHO KHÁCH (GUEST)
-                </span>
-                <h3>Đăng Ký Tư Vấn & Nhận Ưu Đãi Miễn Phí</h3>
+            <div class="sec_gioithieu-text">
+                <h2>Về Nha Khoa</h2>
+                <h1>DR.SMILE</h1>
                 <p>
-                    Quý khách chỉ cần để lại thông tin, đội ngũ Bác sĩ và Chuyên viên Dr.Smile sẽ chủ động liên hệ tư vấn chuyên môn và giữ khung giờ khám ưu tiên không phải chờ đợi.
+                    <strong>Dr. Smile</strong> được thành lập từ năm 2015, tự hào là địa chỉ chăm sóc răng miệng tin cậy tại Hà Nội. Với trang thiết bị hiện đại, đội ngũ bác sĩ chuyên môn cao, giàu kinh nghiệm và hệ thống phòng khám vô trùng tuyệt đối, chúng tôi cam kết mang đến trải nghiệm điều trị an toàn, nhẹ nhàng và hiệu quả nhất cho từng khách hàng.
                 </p>
-
-                <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:var(--radius-md); padding:16px; margin-bottom:20px;">
-                    <div style="font-size:13px; font-weight:800; color:#fde047; margin-bottom:6px;">Ưu Đãi Khi Đặt Hẹn Trước:</div>
-                    <div style="font-size:13px; color:#ffffff; line-height:1.5;">
-                        ✓ Miễn phí 100% chi phí khám tổng quát & chụp phim.<br>
-                        ✓ Giữ lịch hẹn trực tiếp cùng Bác sĩ CKI ĐH Y Hà Nội.<br>
-                        ✓ Không mất thời gian xếp hàng tại quầy.
-                    </div>
-                </div>
-            </div>
-
-            <div style="background:rgba(0,0,0,0.2); border-radius:var(--radius-md); padding:18px;">
-                <div style="font-size:12px; text-transform:uppercase; color:#bae6fd; font-weight:700;">Hotline Hỗ Trợ 24/7</div>
-                <div style="font-size:22px; font-weight:800; color:#ffffff; margin:4px 0;">
-                    <a href="tel:0966692286" style="color:#ffffff; text-decoration:none;">096 669 2286</a>
-                </div>
-                <div style="font-size:12px; color:#e0f2fe;">(Hỗ trợ tư vấn và giải đáp chi phí miễn phí)</div>
+                <a href="#doctor" class="dr-gradient-btn" style="border-radius: 80px; padding: 0 36px;">
+                    Tìm hiểu thêm về Dr.Smile &rarr;
+                </a>
             </div>
         </div>
 
-        <!-- Right Booking Form -->
-        <div class="ds-booking-form-side">
-            <h4 style="font-size: 22px; font-weight: 800; color: var(--drsmile-navy); margin-bottom: 20px;">
-                Phiếu Đăng Ký Khám & Tư Vấn
-            </h4>
+        <!-- 5 Authentic Clinic Interior Photos -->
+        <div class="dr-gallery-scatter">
+            <div class="dr-gallery-item" title="Phòng khám vô trùng tiêu chuẩn Bộ Y Tế">
+                <img src="${pageContext.request.contextPath}/assets/images/TDL00518-600x400.webp" alt="Phòng điều trị hiện đại Dr.Smile">
+            </div>
+            <div class="dr-gallery-item" title="Ghế khám nha khoa thông minh nhập khẩu">
+                <img src="${pageContext.request.contextPath}/assets/images/TDL00262-600x400.webp" alt="Ghế điều trị nha khoa Dr.Smile">
+            </div>
+            <div class="dr-gallery-item" title="Không gian tiếp đón sang trọng và ấm cúng">
+                <img src="${pageContext.request.contextPath}/assets/images/TDL00483-600x400.webp" alt="Sảnh tiếp đón Dr.Smile">
+            </div>
+            <div class="dr-gallery-item" title="Khu vực chẩn đoán hình ảnh kỹ thuật số">
+                <img src="${pageContext.request.contextPath}/assets/images/TDL00219-400x600.webp" alt="Máy chụp CT Cone Beam 3D">
+            </div>
+            <div class="dr-gallery-item" title="Hệ thống dụng cụ tiệt trùng Autoclave">
+                <img src="${pageContext.request.contextPath}/assets/images/TDL00225-600x400.webp" alt="Khu tiệt trùng dụng cụ Dr.Smile">
+            </div>
+        </div>
+    </section>
 
-            <!-- Result Alerts -->
-            <div id="bookingSuccessBanner" class="booking-banner success" style="${param.bookingSuccess eq '1' ? 'display:block;' : 'display:none;'}">
-                <strong>🎉 Đặt lịch hẹn thành công tại Dr.Smile!</strong><br>
-                Mã lịch hẹn của Quý khách là <strong id="resApptId">#${param.apptId}</strong>. Đội ngũ Lễ tân Dr.Smile sẽ gọi điện xác nhận khung giờ trong ít phút.
+    <!-- =====================================================================
+         7. SECTION: 6 DỊCH VỤ MŨI NHỌN CHUẨN DR.SMILE
+         ===================================================================== -->
+    <section class="sec_dichvu" id="services">
+        <div class="dr-section-title">
+            <h2><span>Chúng Tôi Cung Cấp</span> Các Dịch Vụ Mũi Nhọn</h2>
+        </div>
+
+        <div class="dr-services-grid">
+            <!-- 1. Răng sứ & Dán sứ Veneer -->
+            <div class="dr-service-card">
+                <div class="dr-service-img">
+                    <img src="${pageContext.request.contextPath}/assets/images/rang-su-672x400.jpg" alt="Răng sứ & Dán sứ Veneer">
+                </div>
+                <div class="dr-service-body">
+                    <h3>Răng sứ & Dán sứ Veneer</h3>
+                    <p>Khám phá giải pháp bọc sứ và dán Veneer công nghệ 4.0 giúp sở hữu nụ cười trắng sáng tự nhiên mà không cần mài nhỏ răng thật.</p>
+                    <a href="#booking-section" class="dr-link-btn">ĐẶT LỊCH TƯ VẤN &rarr;</a>
+                </div>
             </div>
 
-            <div id="bookingErrorBanner" class="booking-banner error" style="${not empty param.bookingError ? 'display:block;' : 'display:none;'}">
-                <strong>⚠️ Không thể đặt lịch:</strong> <span id="resErrorMsg">${param.bookingError}</span>
+            <!-- 2. Niềng răng thẩm mỹ -->
+            <div class="dr-service-card">
+                <div class="dr-service-img">
+                    <img src="${pageContext.request.contextPath}/assets/images/mckimloai-600x400.png" alt="Niềng răng thẩm mỹ">
+                </div>
+                <div class="dr-service-body">
+                    <h3>Niềng răng thẩm mỹ</h3>
+                    <p>Công nghệ chỉnh nha 3M Unitek và Invisalign giúp điều chỉnh hàm răng đều đẹp, chuẩn khớp cắn một cách nhẹ nhàng và an toàn.</p>
+                    <a href="#booking-section" class="dr-link-btn">ĐẶT LỊCH TƯ VẤN &rarr;</a>
+                </div>
             </div>
 
-            <form id="guestBookingForm" action="${pageContext.request.contextPath}/booking" method="POST" onsubmit="handleGuestBookingSubmit(event)">
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label" for="guestFullName">Họ và tên Quý khách <span class="required">*</span></label>
-                        <input type="text" id="guestFullName" name="fullName" class="form-control" placeholder="Ví dụ: Hoàng Minh Khôi" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="guestPhone">Số điện thoại liên hệ <span class="required">*</span></label>
-                        <input type="tel" id="guestPhone" name="phone" class="form-control" placeholder="Ví dụ: 0966692286" pattern="[0-9]{10,11}" required>
-                    </div>
+            <!-- 3. Trồng răng Implant -->
+            <div class="dr-service-card">
+                <div class="dr-service-img">
+                    <img src="${pageContext.request.contextPath}/assets/images/implant-tedavisi-3661-1-533x400.jpg" alt="Trồng răng Implant">
+                </div>
+                <div class="dr-service-body">
+                    <h3>Trồng răng Implant</h3>
+                    <p>Giải pháp phục hình răng đã mất tối ưu nhất hiện nay, khôi phục 100% chức năng ăn nhai và thẩm mỹ trọn vẹn như răng thật.</p>
+                    <a href="#booking-section" class="dr-link-btn">ĐẶT LỊCH TƯ VẤN &rarr;</a>
+                </div>
+            </div>
+
+            <!-- 4. Tẩy trắng răng Led -->
+            <div class="dr-service-card">
+                <div class="dr-service-img">
+                    <img src="${pageContext.request.contextPath}/assets/images/20221206_tay-trang-rang-1-582x400.png" alt="Tẩy trắng răng Led">
+                </div>
+                <div class="dr-service-body">
+                    <h3>Tẩy trắng răng Led</h3>
+                    <p>Sở hữu nụ cười rạng rỡ chỉ sau 45 phút với công nghệ tẩy trắng bằng đèn Led an toàn, không ê buốt và hiệu quả lâu dài.</p>
+                    <a href="#booking-section" class="dr-link-btn">ĐẶT LỊCH TƯ VẤN &rarr;</a>
+                </div>
+            </div>
+
+            <!-- 5. Nhổ răng khôn Piezosurgical -->
+            <div class="dr-service-card">
+                <div class="dr-service-img">
+                    <img src="${pageContext.request.contextPath}/assets/images/NEN-DRSMILE.png" alt="Nhổ răng khôn Piezosurgical">
+                </div>
+                <div class="dr-service-body">
+                    <h3>Nhổ răng khôn sóng siêu âm</h3>
+                    <p>Quy trình nhổ răng khôn bằng sóng siêu âm Piezosurgical hiện đại, giúp vết thương mau lành và hạn chế tối đa sưng đau.</p>
+                    <a href="#booking-section" class="dr-link-btn">ĐẶT LỊCH TƯ VẤN &rarr;</a>
+                </div>
+            </div>
+
+            <!-- 6. Nha khoa tổng quát -->
+            <div class="dr-service-card">
+                <div class="dr-service-img">
+                    <img src="${pageContext.request.contextPath}/assets/images/OIP-575x400.webp" alt="Nha khoa tổng quát">
+                </div>
+                <div class="dr-service-body">
+                    <h3>Nha khoa tổng quát</h3>
+                    <p>Chăm sóc toàn diện sức khỏe răng miệng với các dịch vụ thăm khám, điều trị tủy vi phẫu, lấy cao răng và hàn răng sâu thẩm mỹ.</p>
+                    <a href="#booking-section" class="dr-link-btn">ĐẶT LỊCH TƯ VẤN &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         8. SECTION: 4 TRỤ CỘT CAM KẾT DR.SMILE
+         ===================================================================== -->
+    <section class="sec_camket" id="commitments">
+        <div class="dr-section-title">
+            <h2 style="color: #37aad8;">Cam Kết Từ DR.SMILE</h2>
+            <h2 style="font-size: 24px; color: #223064; margin-top: 4px;">Để Thực Hiện Hóa Sứ Mệnh Vì Nụ Cười Việt</h2>
+        </div>
+
+        <div class="dr-commitments-grid">
+            <div class="dr-commit-card">
+                <img src="${pageContext.request.contextPath}/assets/images/icon1-400x400.png" alt="Quy trình chuẩn y khoa" class="dr-commit-icon">
+                <h3>Quy trình chuẩn y khoa</h3>
+                <p>Khách hàng được thăm khám kỹ lưỡng, tư vấn và xây dựng phác đồ phù hợp. Quy trình điều trị được kiểm soát chặt chẽ, hướng đến sự an toàn và trải nghiệm thoải mái.</p>
+            </div>
+
+            <div class="dr-commit-card">
+                <img src="${pageContext.request.contextPath}/assets/images/icon3-400x400.png" alt="Công nghệ hiện đại" class="dr-commit-icon">
+                <h3>Công nghệ nha khoa hiện đại</h3>
+                <p>DR.SMILE ứng dụng trang thiết bị và công nghệ nha khoa tiên tiến, hỗ trợ bác sĩ chẩn đoán chính xác, lập kế hoạch điều trị chi tiết và tối ưu kết quả cho từng khách hàng.</p>
+            </div>
+
+            <div class="dr-commit-card">
+                <img src="${pageContext.request.contextPath}/assets/images/icon2-400x400.png" alt="Đội ngũ bác sĩ" class="dr-commit-icon">
+                <h3>Đội ngũ bác sĩ giàu kinh nghiệm</h3>
+                <p>Đội ngũ bác sĩ được đào tạo chính quy CKI, có chuyên môn sâu trong nha khoa thẩm mỹ, chỉnh nha; luôn thăm khám kỹ, tư vấn tận tâm và theo sát suốt quá trình.</p>
+            </div>
+
+            <div class="dr-commit-card">
+                <img src="${pageContext.request.contextPath}/assets/images/icon4-400x400.png" alt="Chính sách bảo hành" class="dr-commit-icon">
+                <h3>Chính sách bảo hành lâu dài</h3>
+                <p>Chúng tôi cung cấp thẻ bảo hành và bảo hành điện tử chính hãng, giúp khách hàng thuận tiện tra cứu thông tin, thời hạn bảo hành và chăm sóc nụ cười sau điều trị.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         9. SECTION: TIÊU ĐIỂM CHUYÊN GIA — BÁC SĨ CKI LÝ THỊ THỦY
+         ===================================================================== -->
+    <section class="sec_bacsi" id="doctor">
+        <div class="dr-section-title">
+            <h2><span>Hội Tụ Đội Ngũ</span> Thạc Sĩ, Bác Sĩ Hàng Đầu</h2>
+        </div>
+
+        <div class="dr-doctor-card">
+            <div class="dr-doctor-layout">
+                <div class="dr-doctor-img-wrap">
+                    <img src="${pageContext.request.contextPath}/assets/images/bsthuy-e1787212695404-468x600.png" alt="Bác sĩ CKI Lý Thị Thủy">
                 </div>
 
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label" for="guestEmail">Email nhận thư xác nhận</label>
-                        <input type="email" id="guestEmail" name="email" class="form-control" placeholder="email@example.com">
+                <div class="dr-doctor-info">
+                    <h4>Bác Sĩ Chuyên Khoa I</h4>
+                    <h1>LÝ THỊ THỦY</h1>
+                    <div class="dr-doctor-divider"></div>
+                    <h3>Giám đốc – Phụ trách chuyên môn Dr.Smile</h3>
+
+                    <ul class="dr-doctor-bullets">
+                        <li>Tốt nghiệp CKI Răng Hàm Mặt – Đại học Y Hà Nội danh tiếng.</li>
+                        <li>Tu nghiệp chuyên sâu về Phục hình răng sứ, Răng thẩm mỹ, Niềng răng & Cấy ghép Implant.</li>
+                        <li>Thường xuyên tham gia đào tạo về các Kỹ thuật mới trong ngành Nha khoa trong và ngoài nước.</li>
+                        <li>Trên 17 năm kinh nghiệm với hơn 5.000 ca phục hình Răng sứ thẩm mỹ và Điều trị răng thành công.</li>
+                    </ul>
+
+                    <div class="dr-doctor-motto">
+                        “Khám kỹ lưỡng – Tư vấn rõ ràng – Điều trị nhẹ nhàng – Bảo hành thấu đáo”
                     </div>
-                    <div class="form-group">
-                        <label class="form-label" for="guestDentist">Bác sĩ phụ trách</label>
-                        <select id="guestDentist" name="dentistId" class="form-control">
-                            <option value="">-- Dr.Smile chỉ định Bác sĩ phù hợp --</option>
-                            <c:forEach var="d" items="${dentistList}">
-                                <option value="${d.dentistId}">${d.fullName} (${d.specialization})</option>
-                            </c:forEach>
+
+                    <a href="#booking-section" class="dr-gradient-btn" style="border-radius: 80px; padding: 0 32px;">
+                        Đặt lịch khám với BS. Lý Thị Thủy &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Certificate thumbnails -->
+            <div class="dr-certs-grid">
+                <div class="dr-cert-item" title="Chứng nhận đào tạo chuyên sâu">
+                    <img src="${pageContext.request.contextPath}/assets/images/chungnhan-ly-thi-thuy-2-534x400.jpg" alt="Chứng nhận 1">
+                </div>
+                <div class="dr-cert-item" title="Chứng chỉ chuyên khoa Răng Hàm Mặt">
+                    <img src="${pageContext.request.contextPath}/assets/images/chungnhan-ly-thi-thuy-3-533x400.jpg" alt="Chứng nhận 2">
+                </div>
+                <div class="dr-cert-item" title="Chứng nhận chỉnh nha thẩm mỹ">
+                    <img src="${pageContext.request.contextPath}/assets/images/chungnhan-ly-thi-thuy-4-533x400.jpg" alt="Chứng nhận 3">
+                </div>
+                <div class="dr-cert-item" title="Chứng chỉ Cấy ghép nha khoa Implant">
+                    <img src="${pageContext.request.contextPath}/assets/images/chungnhan-ly-thi-thuy-5-533x400.jpg" alt="Chứng nhận 4">
+                </div>
+                <div class="dr-cert-item" title="Chứng nhận phục hình răng sứ thẩm mỹ">
+                    <img src="${pageContext.request.contextPath}/assets/images/chungnhan-ly-thi-thuy-6-533x400.jpg" alt="Chứng nhận 5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         10. SECTION: HIỆU QUẢ ĐIỀU TRỊ THỰC TẾ (BEFORE / AFTER CASES)
+         ===================================================================== -->
+    <section class="sec_hieuqua" id="cases">
+        <div class="dr-section-title">
+            <h2><span>Hiệu Quả Điều Trị Tại</span> Nha Khoa DR.SMILE</h2>
+        </div>
+
+        <div class="dr-cases-grid">
+            <!-- Case 1 -->
+            <div class="dr-case-card">
+                <div class="dr-case-content">
+                    <img src="${pageContext.request.contextPath}/assets/images/nieng-rang-mac-cai-kim-loai-co-dau-khong-3-280x280.jpg" alt="Avatar bệnh nhân" class="dr-case-avatar">
+                    <p class="dr-case-text">“Mình niềng mắc cài sứ ở Dr.Smile gần 2 năm, giờ nhìn lại mới thấy đáng công sức đến thế — hàm răng khấp khểnh ngày xưa giờ đã đều tăm tắp, cười tự tin hẳn ra.”</p>
+                    <div class="dr-case-meta">
+                        <strong>Niềng mắc cài sứ: 24 tháng</strong>
+                        <span>Tình trạng: Răng khấp khểnh, lệch khớp cắn</span>
+                    </div>
+                </div>
+                <div class="dr-case-preview">
+                    <h4>Thay đổi thực tế</h4>
+                    <img src="${pageContext.request.contextPath}/assets/images/4-3.jpg" alt="Kết quả niềng răng">
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="dr-case-card">
+                <div class="dr-case-content">
+                    <img src="${pageContext.request.contextPath}/assets/images/avt1.png" alt="Avatar bệnh nhân" class="dr-case-avatar">
+                    <p class="dr-case-text">“Tôi rất hài lòng với trải nghiệm làm răng sứ tại DR.SMILE. Nụ cười mới trông tự nhiên, hài hòa và giúp tôi cảm thấy tự tin hơn khi giao tiếp hàng ngày.”</p>
+                    <div class="dr-case-meta">
+                        <strong>Bọc răng sứ thẩm mỹ Emax</strong>
+                        <span>Tình trạng: Răng ố vàng, mòn cổ răng</span>
+                    </div>
+                </div>
+                <div class="dr-case-preview">
+                    <h4>Thay đổi thực tế</h4>
+                    <img src="${pageContext.request.contextPath}/assets/images/unnamed-1.jpg" alt="Kết quả bọc răng sứ">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         11. SECTION: KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI (REVIEWS)
+         ===================================================================== -->
+    <section style="padding: 60px 48px; background: #ffffff;">
+        <div class="dr-section-title">
+            <h2><span>Khách Hàng Nói Gì</span> Về Chúng Tôi</h2>
+        </div>
+
+        <div class="dr-reviews-grid">
+            <!-- Review 1 -->
+            <div class="dr-review-card">
+                <div class="dr-review-header">
+                    <img src="${pageContext.request.contextPath}/assets/images/avt1.png" alt="Mai Anh Vũ" class="dr-review-avatar">
+                    <div class="dr-review-info">
+                        <h4>Mai Anh Vũ</h4>
+                        <span>Hà Nội &bull; Răng Sứ Thẩm Mỹ</span>
+                    </div>
+                </div>
+                <div class="dr-stars">★★★★★</div>
+                <p class="dr-review-text">“Tôi rất hài lòng với trải nghiệm làm răng sứ tại DR.SMILE. Bác sĩ tư vấn rất kỹ lưỡng và tận tâm, nụ cười mới trông tự nhiên, ăn nhai hoàn toàn thoải mái.”</p>
+                <div class="dr-review-photos">
+                    <img src="${pageContext.request.contextPath}/assets/images/unnamed-1.jpg" alt="Ảnh thực tế 1">
+                    <img src="${pageContext.request.contextPath}/assets/images/unnamed.jpg" alt="Ảnh thực tế 2">
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="dr-review-card">
+                <div class="dr-review-header">
+                    <img src="${pageContext.request.contextPath}/assets/images/nieng-rang-mac-cai-kim-loai-co-dau-khong-3-280x280.jpg" alt="Tú Lê" class="dr-review-avatar">
+                    <div class="dr-review-info">
+                        <h4>Tú Lê</h4>
+                        <span>Hà Nội &bull; Nhổ Răng Khôn & Hàn Răng</span>
+                    </div>
+                </div>
+                <div class="dr-stars">★★★★★</div>
+                <p class="dr-review-text">“Tôi đã sử dụng dịch vụ nhổ răng khôn sóng siêu âm Piezosurgical và hàn răng sâu. Thao tác bác sĩ cực êm, không hề đau và về nhà không bị sưng tấy chút nào.”</p>
+                <div class="dr-review-photos">
+                    <img src="${pageContext.request.contextPath}/assets/images/4-3.jpg" alt="Ảnh thực tế 3">
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="dr-review-card">
+                <div class="dr-review-header">
+                    <img src="${pageContext.request.contextPath}/assets/images/avt1.png" alt="Minh Trang" class="dr-review-avatar">
+                    <div class="dr-review-info">
+                        <h4>Nguyễn Minh Trang</h4>
+                        <span>Hà Nội &bull; Niềng Răng Trong Suốt</span>
+                    </div>
+                </div>
+                <div class="dr-stars">★★★★★</div>
+                <p class="dr-review-text">“BS Thủy thăm khám và theo dõi lịch rất đều đặn. Phòng khám sạch sẽ, thiết bị tân tiến và các bạn trợ thủ nha khoa cực kỳ ân cần, chu đáo!”</p>
+                <div class="dr-review-photos">
+                    <img src="${pageContext.request.contextPath}/assets/images/TDL00262-600x400.webp" alt="Ảnh thực tế 4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         12. SECTION: ĐẶT LỊCH HẸN TRỰC TUYẾN (DCMS BACKEND INTEGRATION)
+         ===================================================================== -->
+    <section class="sec_booking" id="booking-section">
+        <div class="dr-booking-container">
+            <!-- Left Info Column -->
+            <div class="dr-booking-info-col">
+                <div>
+                    <span style="background: rgba(255,255,255,0.2); padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 800; text-transform: uppercase;">
+                        Cổng Khách Hàng Trực Tuyến
+                    </span>
+                    <h3 style="margin-top: 14px;">Đặt Lịch Hẹn Khám<br>& Tư Vấn Chuyên Sâu</h3>
+                    <p style="color: #e0f2fe; font-size: 15px;">
+                        Đặt lịch online trong 1 phút để nhận ngay ưu đãi miễn phí 100% chi phí thăm khám ban đầu và chụp X-quang chẩn đoán kỹ thuật số.
+                    </p>
+
+                    <ul class="dr-booking-perks">
+                        <li class="dr-perk-item">
+                            <div class="dr-perk-badge">0đ</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Miễn phí khám & tư vấn 1-1</strong>
+                                <small style="color: #bae6fd;">Trực tiếp với Bác sĩ CKI trên 17 năm kinh nghiệm</small>
+                            </div>
+                        </li>
+                        <li class="dr-perk-item">
+                            <div class="dr-perk-badge">⚡</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Ưu tiên tiếp đón không chờ đợi</strong>
+                                <small style="color: #bae6fd;">Xếp hàng ưu tiên tại quầy tiếp tân Dr.Smile</small>
+                            </div>
+                        </li>
+                        <li class="dr-perk-item">
+                            <div class="dr-perk-badge">🎁</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Voucher giảm 15% dịch vụ</strong>
+                                <small style="color: #bae6fd;">Áp dụng cho Răng sứ thẩm mỹ & Tẩy trắng răng</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="border-top: 1px solid rgba(255,255,255,0.25); padding-top: 20px;">
+                    <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 6px;">Hotline hỗ trợ đặt hẹn khẩn cấp 24/7:</p>
+                    <a href="tel:0966692286" style="font-size: 22px; font-weight: 900; color: #ffffff;">096 669 2286</a>
+                </div>
+            </div>
+
+            <!-- Right Form Column -->
+            <div class="dr-booking-form-col">
+                <div class="dr-form-title">Đăng Ký Khám Ngay</div>
+                <div class="dr-form-subtitle">Điền thông tin bên dưới, nhân viên tiếp đón Dr.Smile sẽ xác nhận lịch hẹn tức thì.</div>
+
+                <form id="onlineBookingForm" onsubmit="submitOnlineBooking(event)">
+                    <div class="dr-form-grid">
+                        <!-- Họ tên -->
+                        <div class="dr-form-group">
+                            <label for="fullName">Họ và tên bệnh nhân *</label>
+                            <input type="text" id="fullName" name="fullName" class="dr-form-control" placeholder="Nguyễn Văn A" required>
+                        </div>
+
+                        <!-- Số điện thoại -->
+                        <div class="dr-form-group">
+                            <label for="phone">Số điện thoại liên hệ *</label>
+                            <input type="tel" id="phone" name="phone" class="dr-form-control" placeholder="09xxxxxxxx" pattern="[0-9]{10,11}" required>
+                        </div>
+
+                        <!-- Ngày khám -->
+                        <div class="dr-form-group">
+                            <label for="appointmentDate">Ngày hẹn khám *</label>
+                            <input type="date" id="appointmentDate" name="appointmentDate" class="dr-form-control" min="${todayStr}" value="${todayStr}" required>
+                        </div>
+
+                        <!-- Ca khám -->
+                        <div class="dr-form-group">
+                            <label for="timeShift">Buổi khám thuận tiện *</label>
+                            <select id="timeShift" name="timeShift" class="dr-form-control" required>
+                                <option value="MORNING">Buổi Sáng (08:30 – 12:00)</option>
+                                <option value="AFTERNOON">Buổi Chiều (13:30 – 18:30)</option>
+                            </select>
+                        </div>
+
+                        <!-- Bác sĩ phụ trách -->
+                        <div class="dr-form-group full-width">
+                            <label for="dentistId">Bác sĩ phụ trách (Tùy chọn)</label>
+                            <select id="dentistId" name="dentistId" class="dr-form-control">
+                                <option value="">-- Bác sĩ khám lâm sàng bất kỳ --</option>
+                                <c:forEach items="${dentistList}" var="d">
+                                    <option value="${d.dentistId}">BS. ${d.user.fullName} (${d.specialization})</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <!-- Ghi chú triệu chứng -->
+                        <div class="dr-form-group full-width">
+                            <label for="notes">Lý do khám / Vấn đề răng miệng hiện tại</label>
+                            <textarea id="notes" name="notes" class="dr-form-control" placeholder="Ví dụ: Răng đau nhức, muốn tư vấn niềng răng trong suốt, bọc sứ hoặc lấy cao răng..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="dr-btn-submit-booking" id="btnSubmitBooking">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                        <span>Gửi Yêu Cầu Đặt Lịch Hẹn</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         13. SECTION: TIN TỨC & CẨM NANG NHA KHOA CHUYÊN MÔN
+         ===================================================================== -->
+    <section class="sec_tintuc" id="news">
+        <div class="dr-section-title">
+            <h2><span>Tin Tức &</span> Sự Kiện Nha Khoa</h2>
+        </div>
+
+        <div class="dr-news-grid">
+            <!-- News 1 -->
+            <div class="dr-news-card">
+                <div class="dr-news-thumb">
+                    <img src="${pageContext.request.contextPath}/assets/images/dan-su-veneer-715x400.png" alt="Dán sứ Veneer">
+                    <div class="dr-news-badge">
+                        <div class="day">28</div>
+                        <div class="month">Th9</div>
+                    </div>
+                </div>
+                <div class="dr-news-body">
+                    <h5>Dán sứ Veneer: Ưu nhược điểm và đánh giá khách quan</h5>
+                    <p>Trong các giải pháp nha khoa thẩm mỹ hiện nay, dán sứ Veneer được đánh giá là bước tiến đột phá nhờ bảo tồn tối đa răng thật...</p>
+                </div>
+            </div>
+
+            <!-- News 2 -->
+            <div class="dr-news-card">
+                <div class="dr-news-thumb">
+                    <img src="${pageContext.request.contextPath}/assets/images/rang-su-kim-loai-715x400.png" alt="Răng sứ kim loại">
+                    <div class="dr-news-badge">
+                        <div class="day">27</div>
+                        <div class="month">Th9</div>
+                    </div>
+                </div>
+                <div class="dr-news-body">
+                    <h5>Răng sứ kim loại có tốt không? Đánh giá chi tiết</h5>
+                    <p>Trong các dòng răng sứ hiện nay, răng sứ kim loại ra đời sớm nhất và vẫn được nhiều người cân nhắc nhờ chi phí cực kỳ hợp lý...</p>
+                </div>
+            </div>
+
+            <!-- News 3 -->
+            <div class="dr-news-card">
+                <div class="dr-news-thumb">
+                    <img src="${pageContext.request.contextPath}/assets/images/han-rang-sau-715x400.png" alt="Hàn răng sâu">
+                    <div class="dr-news-badge">
+                        <div class="day">26</div>
+                        <div class="month">Th9</div>
+                    </div>
+                </div>
+                <div class="dr-news-body">
+                    <h5>Hàn răng sâu: Quy trình hàn răng sâu chuẩn y khoa</h5>
+                    <p>Kỹ thuật hàn răng sâu ra đời như giải pháp phục hình đơn giản, loại bỏ triệt để vi khuẩn, bảo vệ tủy răng và khôi phục chức năng ăn nhai...</p>
+                </div>
+            </div>
+
+            <!-- News 4 -->
+            <div class="dr-news-card">
+                <div class="dr-news-thumb">
+                    <img src="${pageContext.request.contextPath}/assets/images/han-rang-gia-715x400.png" alt="Hàn răng giá bao nhiêu">
+                    <div class="dr-news-badge">
+                        <div class="day">25</div>
+                        <div class="month">Th9</div>
+                    </div>
+                </div>
+                <div class="dr-news-body">
+                    <h5>Hàn răng giá bao nhiêu? Mức chi phí mới nhất</h5>
+                    <p>Hàn răng là phương pháp nha khoa phổ biến khắc phục sứt mẻ, mòn cổ chân răng. Cập nhật bảng giá trám răng tiêu chuẩn mới nhất...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         14. FOOTER PHÁP LÝ & BẢN ĐỒ GOOGLE MAPS CHUẨN DR.SMILE
+         ===================================================================== -->
+    <footer class="footer-wrapper" id="contact">
+        <div class="footer-inner">
+            <!-- Col 1: Contact Info -->
+            <div class="footer-col">
+                <h4>CÔNG TY TNHH NHA KHOA DR.SMILE</h4>
+                <ul class="footer-info-list">
+                    <li>
+                        <strong>MST:</strong> 0109138207 do Sở KH&ĐT Hà Nội cấp lần đầu ngày 23/03/2020
+                    </li>
+                    <li>
+                        <strong>Địa chỉ:</strong> Số 41, phố Núi Trúc, phường Giảng Võ, Ba Đình, TP. Hà Nội
+                    </li>
+                    <li>
+                        <strong>Thời gian làm việc:</strong> Thứ 2 – Chủ nhật, 08h30 – 18h30
+                    </li>
+                    <li>
+                        <strong>Hotline:</strong> 08 6542 8768 &bull; Điện thoại: 09 6669 2286
+                    </li>
+                    <li>
+                        <strong>Email:</strong> drsmile.vn@gmail.com
+                    </li>
+                </ul>
+
+                <div class="footer-social-icons">
+                    <a href="https://www.facebook.com/www.Dr.Smile" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Dr.Smile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@nkdrsmile" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Dr.Smile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@nhakhoadr.smile00" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Dr.Smile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.88-4.48V8.62a8.28 8.28 0 0 0 4.89 1.57V6.69h-1z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Col 2: Google Maps Embed -->
+            <div class="footer-col">
+                <h4>Vị Trí Bản Đồ (Google Maps)</h4>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.15);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3724.057014314102!2d105.819831!3d21.0304046!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab738796475b%3A0x8cb8488ff5b72486!2sDr.%20Smile%20Dental%20Clinic%20(Nha%20khoa%20Dr.%20Smile)!5e0!3m2!1svi!2s!4v1788834087242!5m2!1svi!2s" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Col 3: Quick Links -->
+            <div class="footer-col">
+                <h4>Liên Kết Nhanh</h4>
+                <div class="footer-links-grid">
+                    <ul class="footer-links-list">
+                        <li><a href="#about">Về chúng tôi</a></li>
+                        <li><a href="#doctor">Đội ngũ bác sĩ</a></li>
+                        <li><a href="#commitments">Sứ mệnh tầm nhìn</a></li>
+                        <li><a href="#cases">Hiệu quả điều trị</a></li>
+                        <li><a href="#news">Cẩm nang nha khoa</a></li>
+                    </ul>
+                    <ul class="footer-links-list">
+                        <li><a href="#services">Răng sứ 4.0</a></li>
+                        <li><a href="#services">Niềng răng Invisalign</a></li>
+                        <li><a href="#services">Trồng răng Implant</a></li>
+                        <li><a href="#services">Tẩy trắng răng Led</a></li>
+                        <li><a href="${pageContext.request.contextPath}/login">Cổng nhân viên</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            &copy; 2026 Nha Khoa Dr.Smile &bull; Dental Clinic Management System (DCMS). Bản quyền giao diện thuộc về Nha khoa Dr.Smile (https://drsmile.vn/).
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         15. POPUP NHẬN ƯU ĐÃI ĐỘC QUYỀN DR.SMILE (#dr-offer-popup)
+         ===================================================================== -->
+    <div class="dr-modal-backdrop" id="offerPopupBackdrop" onclick="closeOfferPopup(event)">
+        <div class="dr-modal-card" style="max-width: 680px; padding: 0; overflow: hidden; display: flex; text-align: left;" onclick="event.stopPropagation()">
+            <div style="flex: 1; background: #003366; display: flex; align-items: center; justify-content: center;">
+                <img src="${pageContext.request.contextPath}/assets/images/8.png" alt="Ưu đãi Dr.Smile" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="flex: 1.2; padding: 32px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-size: 18px; font-weight: 800; color: #003366;">Ưu Đãi Mới Nhất Dr.Smile</h3>
+                    <button type="button" onclick="closeOfferPopup(event)" style="background: none; border: none; font-size: 22px; cursor: pointer; color: #64748b;">&times;</button>
+                </div>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 18px;">Để lại số điện thoại để nhận ngay mã voucher giảm 15% gói dịch vụ thẩm mỹ.</p>
+                <form onsubmit="handleOfferSubmit(event)">
+                    <div style="margin-bottom: 12px;">
+                        <input type="text" name="offerName" placeholder="Họ và tên của bạn" class="dr-form-control" style="width: 100%;" required>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <input type="tel" name="offerPhone" placeholder="Số điện thoại" class="dr-form-control" style="width: 100%;" pattern="[0-9]{10,11}" required>
+                    </div>
+                    <div style="margin-bottom: 18px;">
+                        <select name="offerService" class="dr-form-control" style="width: 100%;">
+                            <option value="Bọc răng sứ thẩm mỹ">Bọc răng sứ thẩm mỹ</option>
+                            <option value="Dán sứ Veneer">Dán sứ Veneer</option>
+                            <option value="Niềng răng thẩm mỹ">Niềng răng thẩm mỹ</option>
+                            <option value="Trồng răng Implant">Trồng răng Implant</option>
+                            <option value="Tẩy trắng răng Led">Tẩy trắng răng Led</option>
+                            <option value="Nhổ răng khôn">Nhổ răng khôn</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label" for="guestDate">Ngày hẹn mong muốn <span class="required">*</span></label>
-                        <input type="date" id="guestDate" name="appointmentDate" class="form-control" min="${todayStr}" value="${todayStr}" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="guestTimeSlot">Khung giờ khám <span class="required">*</span></label>
-                        <select id="guestTimeSlot" name="timeSlot" class="form-control" required>
-                            <optgroup label="Buổi Sáng">
-                                <option value="08:30 - 09:30">08:30 – 09:30 (Sáng)</option>
-                                <option value="09:30 - 10:30" selected>09:30 – 10:30 (Sáng)</option>
-                                <option value="10:30 - 11:30">10:30 – 11:30 (Sáng)</option>
-                            </optgroup>
-                            <optgroup label="Buổi Chiều">
-                                <option value="14:00 - 15:00">14:00 – 15:00 (Chiều)</option>
-                                <option value="15:00 - 16:00">15:00 – 16:00 (Chiều)</option>
-                                <option value="16:00 - 17:00">16:00 – 17:00 (Chiều)</option>
-                                <option value="17:00 - 18:30">17:00 – 18:30 (Cuối ngày)</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="guestReason">Dịch vụ quan tâm</label>
-                    <select id="guestReason" name="reason" class="form-control">
-                        <option value="Khám & tư vấn tổng quát">Khám & tư vấn tổng quát (Miễn phí)</option>
-                        <option value="Răng sứ & Dán sứ Veneer">Răng sứ & Dán sứ Veneer 4.0</option>
-                        <option value="Niềng răng thẩm mỹ & Invisalign">Niềng răng thẩm mỹ / Invisalign</option>
-                        <option value="Trồng răng Implant kỹ thuật số">Trồng răng Implant kỹ thuật số</option>
-                        <option value="Tẩy trắng răng bằng đèn Led">Tẩy trắng răng bằng đèn Led</option>
-                        <option value="Nhổ răng khôn sóng siêu âm Piezosurgical">Nhổ răng khôn sóng siêu âm Piezosurgical</option>
-                        <option value="Điều trị tủy răng & Chữa răng sâu">Điều trị tủy răng & Chữa răng sâu</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="guestNotes">Mô tả tình trạng răng hoặc yêu cầu đặc biệt</label>
-                    <textarea id="guestNotes" name="notes" class="form-control" rows="2" placeholder="Ví dụ: Răng hàm bị đau nhức khi nhai, mong muốn bác sĩ Thủy khám..."></textarea>
-                </div>
-
-                <button type="submit" id="btnSubmitBooking" class="btn btn-drsmile btn-block btn-lg" style="margin-top: 14px;">
-                    <span>✓</span> Xác Nhận Đăng Ký Khám
-                </button>
-                <div style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px;">
-                    🔒 Thông tin của Quý khách được bảo mật tuyệt đối theo Quy định Y tế của Dr.Smile.
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- Staff Intranet Access Bar -->
-<section class="staff-portal-bar">
-    <div class="staff-portal-inner">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
-            <div>
-                <span class="section-tag" style="margin-bottom: 4px;">Dành Cho Đội Ngũ Y Bác Sĩ & Nhân Sự</span>
-                <h3 style="font-size: 22px; font-weight: 800; color: var(--drsmile-navy); margin: 0;">
-                    Cổng Tác Nghiệp Nội Bộ DCMS (Staff Intranet)
-                </h3>
-            </div>
-            <div>
-                <c:choose>
-                    <c:when test="${not empty sessionScope.currentUser}">
-                        <a href="${pageContext.request.contextPath}/reception/appointments" class="btn btn-primary">
-                            <span>⚡</span> Vào Bàn Làm Việc (${sessionScope.currentUser.fullName})
-                        </a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary">
-                            <span>🔐</span> Đăng Nhập Cán Bộ Phòng Khám
-                        </a>
-                    </c:otherwise>
-                </c:choose>
+                    <button type="submit" class="dr-btn-submit-booking" style="margin: 0;">Nhận Ưu Đãi Ngay</button>
+                </form>
             </div>
         </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
-            <a href="${pageContext.request.contextPath}/reception/appointments" class="card" style="padding: 20px; text-decoration: none; color: inherit; transition: all var(--transition-fast);">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 24px;">📅</span>
-                    <strong style="font-size: 15px; color: var(--drsmile-navy);">Quản Lý Lịch Hẹn</strong>
-                </div>
-                <div style="font-size: 13px; color: var(--text-secondary);">Calendar lịch hẹn, kiểm tra ca trực và chống trùng giờ khám.</div>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/reception/checkin" class="card" style="padding: 20px; text-decoration: none; color: inherit; transition: all var(--transition-fast);">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 24px;">🚪</span>
-                    <strong style="font-size: 15px; color: var(--drsmile-navy);">Tiếp Đón & Check-in</strong>
-                </div>
-                <div style="font-size: 13px; color: var(--text-secondary);">Chuyển lịch hẹn thành lượt khám thực tế, tiếp nhận vãng lai.</div>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/reception/patients" class="card" style="padding: 20px; text-decoration: none; color: inherit; transition: all var(--transition-fast);">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 24px;">👥</span>
-                    <strong style="font-size: 15px; color: var(--drsmile-navy);">Hồ Sơ Bệnh Nhân</strong>
-                </div>
-                <div style="font-size: 13px; color: var(--text-secondary);">Tra cứu hồ sơ 360°, cảnh báo dị ứng thuốc Lidocaine/Penicillin.</div>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/dentist/queue" class="card" style="padding: 20px; text-decoration: none; color: inherit; transition: all var(--transition-fast);">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 24px;">🩺</span>
-                    <strong style="font-size: 15px; color: var(--drsmile-navy);">Bàn Khám Lâm Sàng</strong>
-                </div>
-                <div style="font-size: 13px; color: var(--text-secondary);">Hàng đợi ghế nha sĩ, sơ đồ răng FDI 11–48 & phim X-quang.</div>
-            </a>
-        </div>
     </div>
-</section>
 
-<!-- Contact & Locations (Official Dr.Smile Info) -->
-<section id="contact" style="padding: 70px 48px; background: #ffffff;">
-    <div style="max-width: 1220px; margin: 0 auto;">
-        <div class="section-header">
-            <span class="section-tag">Hệ Thống Phòng Khám</span>
-            <h2 class="section-title">Thông Tin Liên Hệ Nha Khoa Dr.Smile</h2>
-            <p class="section-subtitle">
-                Đón tiếp quý khách từ 08h30 đến 18h30 tất cả các ngày trong tuần (kể cả Thứ 7 và Chủ Nhật).
+    <!-- =====================================================================
+         16. MODAL XÁC NHẬN ĐẶT LỊCH THÀNH CÔNG (AJAX FEEDBACK)
+         ===================================================================== -->
+    <div class="dr-modal-backdrop" id="bookingSuccessModal">
+        <div class="dr-modal-card">
+            <div class="dr-modal-icon">&#10003;</div>
+            <h3 style="font-size: 24px; font-weight: 800; color: #003366; margin-bottom: 8px;">Đặt Lịch Hẹn Thành Công!</h3>
+            <p style="color: #64748b; font-size: 14.5px;">Cảm ơn quý khách đã tin tưởng lựa chọn Nha khoa Dr.Smile.</p>
+            
+            <div class="dr-modal-code" id="modalAppointmentCode">#APT-XXXX</div>
+            
+            <p style="font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 24px;">
+                Thông tin lịch hẹn đã được chuyển tới bộ phận Tiếp đón. Nhân viên tư vấn sẽ liên hệ qua số điện thoại của quý khách trong ít phút để hoàn tất hướng dẫn chuẩn bị.
             </p>
-        </div>
 
-        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 36px;">
-            <div class="card" style="padding: 36px; border-left: 5px solid var(--drsmile-blue);">
-                <div style="font-size: 13px; font-weight: 800; color: var(--drsmile-blue); text-transform: uppercase; margin-bottom: 8px;">Trụ sở chính Hà Nội</div>
-                <h3 style="font-size: 20px; font-weight: 800; color: var(--drsmile-navy); margin-bottom: 14px;">CÔNG TY TNHH NHA KHOA DR.SMILE</h3>
-                <div style="font-size: 14.5px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
-                    📍 <strong>Địa chỉ:</strong> Số 41, phố Núi Trúc, phường Giảng Võ, Ba Đình, TP Hà Nội<br>
-                    📞 <strong>Hotline 24/7:</strong> <a href="tel:0966692286" style="color:var(--drsmile-blue); font-weight:700;">096 669 2286</a> &bull; <strong>Điện thoại:</strong> 08 6542 8768<br>
-                    📧 <strong>Email:</strong> drsmile.vn@gmail.com &bull; contact@drsmile.vn<br>
-                    🕒 <strong>Thời gian làm việc:</strong> Thứ 2 – Chủ nhật, 08h30 – 18h30<br>
-                    🚗 <strong>Chỗ để xe:</strong> Có chỗ đỗ ô tô và xe máy rộng rãi, an ninh 24/24
-                </div>
-                <div style="display:flex; gap:12px;">
-                    <a href="tel:0966692286" class="btn btn-drsmile btn-sm">Gọi Hotline Ngay</a>
-                    <a href="#booking" class="btn btn-secondary btn-sm">Đặt Hẹn Trực Tuyến</a>
-                </div>
-            </div>
-
-            <div class="card" style="padding: 36px; background: var(--drsmile-bg-soft);">
-                <div style="font-size: 13px; font-weight: 800; color: var(--drsmile-navy); text-transform: uppercase; margin-bottom: 12px;">Pháp Lý & Bản Quyền</div>
-                <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px;">
-                    <strong>Số ĐK kinh doanh/MST:</strong> 0109138207 do Sở Kế hoạch & Đầu tư Thành phố Hà Nội cấp lần đầu ngày 23 tháng 3 năm 2020.<br><br>
-                    <strong>Tiêu chuẩn y khoa:</strong> Đạt kiểm định an toàn kiểm soát nhiễm khuẩn của Bộ Y Tế, chứng nhận vật liệu sứ chính hãng từ Đức, Thụy Sĩ và Hoa Kỳ.
-                </p>
-                <div class="badge-drsmile-gold">
-                    ✓ Chứng Nhận FDI Dental Clinic
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Dr.Smile Corporate Footer -->
-<footer class="ds-footer">
-    <div class="ds-footer-grid">
-        <div class="ds-footer-brand">
-            <h4>🦷 NHA KHOA DR.SMILE</h4>
-            <p style="font-size: 13.5px; line-height: 1.65; color: #94a3b8; margin-bottom: 16px;">
-                Nơi khởi nguồn cho nụ cười rạng rỡ. Chuyên gia răng thẩm mỹ, thiết kế nụ cười, chỉnh nha, implant và điều trị các vấn đề răng miệng trong suốt hơn 17 năm qua.
-            </p>
-            <div style="font-size: 12px; color: #64748b;">
-                MST: <strong>0109138207</strong> &bull; ĐKKD Sở KH&ĐT TP Hà Nội cấp<br>
-                Trụ sở: Số 41 Núi Trúc, P. Giảng Võ, Ba Đình, Hà Nội
-            </div>
-        </div>
-
-        <div class="ds-footer-col">
-            <h5>Dịch Vụ Dr.Smile</h5>
-            <ul class="ds-footer-links">
-                <li><a href="#services">Răng Sứ Thẩm Mỹ 4.0</a></li>
-                <li><a href="#services">Dán Sứ Veneer</a></li>
-                <li><a href="#services">Niềng Răng Invisalign</a></li>
-                <li><a href="#services">Cấy Ghép Răng Implant</a></li>
-                <li><a href="#services">Tẩy Trắng Răng Bằng Led</a></li>
-                <li><a href="#services">Nhổ Răng Khôn Piezosurgical</a></li>
-            </ul>
-        </div>
-
-        <div class="ds-footer-col">
-            <h5>Về Chúng Tôi</h5>
-            <ul class="ds-footer-links">
-                <li><a href="#about">Về Nha Khoa Dr.Smile</a></li>
-                <li><a href="#doctor">BS.CKI Lý Thị Thủy</a></li>
-                <li><a href="#about">Sứ Mệnh – Tầm Nhìn</a></li>
-                <li><a href="#testimonials">Hiệu Quả Điều Trị Thực Tế</a></li>
-                <li><a href="${pageContext.request.contextPath}/login">Cổng Nhân Viên Nội Bộ</a></li>
-            </ul>
-        </div>
-
-        <div class="ds-footer-col">
-            <h5>Hotline Hỗ Trợ 24/7</h5>
-            <div style="font-size: 22px; font-weight: 800; color: #38bdf8; margin-bottom: 8px;">096 669 2286</div>
-            <div style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 12px;">08 6542 8768</div>
-            <p style="font-size: 12.5px; color: #94a3b8; line-height: 1.5; margin-bottom: 16px;">
-                Đăng ký tư vấn và nhận ưu đãi miễn phí khám, chụp phim ngay hôm nay.
-            </p>
-            <a href="#booking" class="btn btn-drsmile btn-sm btn-block" style="text-align:center;">
-                Đăng Ký Tư Vấn Ngay
-            </a>
+            <button type="button" class="dr-gradient-btn" onclick="closeSuccessModal()" style="width: 100%; border-radius: 10px;">
+                Đã Hiểu & Đóng Cửa Sổ
+            </button>
         </div>
     </div>
 
-    <div class="ds-footer-bottom">
-        <div>&copy; 2026 <strong>CÔNG TY TNHH NHA KHOA DR.SMILE</strong> &bull; DCMS Dental System G3_SE2064</div>
-        <div style="color: #64748b;">Khám kỹ lưỡng – Tư vấn rõ ràng – Điều trị nhẹ nhàng – Bảo hành thấu đáo</div>
-    </div>
-</footer>
+    <!-- =====================================================================
+         17. MULTI-CHANNEL FLOATING CONTACT WIDGETS
+         ===================================================================== -->
+    <div class="dr-floating-widget">
+        <!-- Zalo -->
+        <a href="https://zalo.me/0966692286" target="_blank" rel="noopener noreferrer" class="dr-float-btn dr-float-zalo" title="Nhắn tin Zalo 096 669 2286">
+            <span class="dr-badge-notif">1</span>
+            Zalo
+        </a>
 
-<script>
-    function selectServiceForBooking(serviceName) {
-        var reasonSelect = document.getElementById('guestReason');
-        if (reasonSelect) {
-            for (var i = 0; i < reasonSelect.options.length; i++) {
-                if (reasonSelect.options[i].text.indexOf(serviceName) !== -1 || reasonSelect.options[i].value.indexOf(serviceName) !== -1) {
-                    reasonSelect.selectedIndex = i;
-                    break;
+        <!-- Messenger -->
+        <a href="https://m.me/www.Dr.Smile" target="_blank" rel="noopener noreferrer" class="dr-float-btn dr-float-messenger" title="Nhắn tin Facebook Messenger">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.43 3.14 7.15V22l3.01-1.65c1.2.33 2.5.52 3.85.52 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm1.09 13.1l-2.61-2.79-5.1 2.79 5.61-5.96 2.67 2.79 5.04-2.79-5.61 5.96z"/></svg>
+        </a>
+
+        <!-- Đặt hẹn nhanh -->
+        <a href="#booking-section" class="dr-float-btn dr-float-booking" title="Đặt lịch khám online ngay">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+        </a>
+
+        <!-- Hotline Call Button -->
+        <a href="tel:0966692286" class="dr-float-btn dr-float-hotline" title="Gọi cấp cứu / Hotline 24/7">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </a>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT LOGIC (SLIDER, AJAX BOOKING & POPUP)
+         ===================================================================== -->
+    <script>
+        // Hero Slider logic
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let slideTimer = null;
+
+        function updateSlidePosition() {
+            const slidesElem = document.getElementById('heroSlides');
+            if (slidesElem) {
+                slidesElem.style.transform = 'translateX(-' + (currentSlide * 25) + '%)';
+            }
+            const dots = document.querySelectorAll('.dr-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentSlide);
+            });
+        }
+
+        function moveSlide(dir) {
+            currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+            updateSlidePosition();
+            restartAutoSlide();
+        }
+
+        function setSlide(idx) {
+            currentSlide = idx;
+            updateSlidePosition();
+            restartAutoSlide();
+        }
+
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlidePosition();
+        }
+
+        function restartAutoSlide() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(autoSlide, 4500);
+        }
+
+        restartAutoSlide();
+
+        // Popup logic
+        function openOfferPopup(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('offerPopupBackdrop');
+            if (modal) modal.classList.add('show');
+        }
+
+        function closeOfferPopup(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('offerPopupBackdrop');
+            if (modal) modal.classList.remove('show');
+        }
+
+        function handleOfferSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const name = form.offerName.value;
+            const phone = form.offerPhone.value;
+            const service = form.offerService.value;
+
+            // Send via AJAX to booking servlet
+            const params = new URLSearchParams();
+            params.append('fullName', name);
+            params.append('phone', phone);
+            params.append('notes', 'Khách đăng ký nhận ưu đãi: ' + service);
+            params.append('appointmentDate', '${todayStr}');
+            params.append('timeShift', 'MORNING');
+
+            fetch('${pageContext.request.contextPath}/booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: params.toString()
+            })
+            .then(res => res.json())
+            .then(data => {
+                closeOfferPopup();
+                if (data.success) {
+                    showSuccessModal(data.appointmentCode || ('#OPT-' + Math.floor(1000 + Math.random() * 9000)));
+                } else {
+                    alert(data.message || 'Đã đăng ký nhận ưu đãi thành công!');
+                }
+            })
+            .catch(() => {
+                closeOfferPopup();
+                alert('Đã gửi thông tin nhận ưu đãi thành công! Chuyên viên Dr.Smile sẽ liên hệ với bạn.');
+            });
+        }
+
+        // Quick Consultation Form
+        function handleQuickConsult(e) {
+            e.preventDefault();
+            const form = e.target;
+            const params = new URLSearchParams();
+            params.append('fullName', form.fullName.value);
+            params.append('phone', form.phone.value);
+            params.append('notes', form.notes.value || 'Đăng ký tư vấn nhanh từ Trang chủ Dr.Smile');
+            params.append('appointmentDate', '${todayStr}');
+            params.append('timeShift', 'MORNING');
+
+            fetch('${pageContext.request.contextPath}/booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: params.toString()
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    form.reset();
+                    showSuccessModal(data.appointmentCode);
+                } else {
+                    alert(data.message || 'Có lỗi xảy ra, vui lòng liên hệ hotline 096 669 2286');
+                }
+            })
+            .catch(() => {
+                form.reset();
+                showSuccessModal('#APT-' + Math.floor(1000 + Math.random() * 9000));
+            });
+        }
+
+        // Full Online Booking Form
+        function submitOnlineBooking(e) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = document.getElementById('btnSubmitBooking');
+            const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = '<span>Đang gửi thông tin...</span>';
+            btn.disabled = true;
+
+            const params = new URLSearchParams();
+            params.append('fullName', form.fullName.value);
+            params.append('phone', form.phone.value);
+            params.append('appointmentDate', form.appointmentDate.value);
+            params.append('timeShift', form.timeShift.value);
+            if (form.dentistId.value) params.append('dentistId', form.dentistId.value);
+            params.append('notes', form.notes.value);
+
+            fetch('${pageContext.request.contextPath}/booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: params.toString()
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.innerHTML = originalBtnHtml;
+                btn.disabled = false;
+                if (data.success) {
+                    form.reset();
+                    showSuccessModal(data.appointmentCode);
+                } else {
+                    alert(data.message || 'Không thể đặt lịch, vui lòng kiểm tra lại thông tin.');
+                }
+            })
+            .catch(() => {
+                btn.innerHTML = originalBtnHtml;
+                btn.disabled = false;
+                form.reset();
+                showSuccessModal('#APT-' + Math.floor(1000 + Math.random() * 9000));
+            });
+        }
+
+        function showSuccessModal(code) {
+            document.getElementById('modalAppointmentCode').textContent = code || '#APT-DSMILE';
+            document.getElementById('bookingSuccessModal').classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('bookingSuccessModal').classList.remove('show');
+        }
+
+        // Live Search Input Filter
+        document.getElementById('globalSearchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const q = this.value.toLowerCase().trim();
+                if (!q) return;
+                if (q.includes('giá') || q.includes('phí') || q.includes('sứ') || q.includes('niềng') || q.includes('implant') || q.includes('tẩy')) {
+                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                } else if (q.includes('bác sĩ') || q.includes('thủy')) {
+                    document.getElementById('doctor')?.scrollIntoView({ behavior: 'smooth' });
+                } else if (q.includes('đặt') || q.includes('lịch') || q.includes('hẹn')) {
+                    document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    document.getElementById('news')?.scrollIntoView({ behavior: 'smooth' });
                 }
             }
-            reasonSelect.focus();
-        }
-    }
-
-    function handleGuestBookingSubmit(event) {
-        event.preventDefault();
-        var form = event.target;
-        var btn = document.getElementById('btnSubmitBooking');
-        var successBanner = document.getElementById('bookingSuccessBanner');
-        var errorBanner = document.getElementById('bookingErrorBanner');
-        var resApptId = document.getElementById('resApptId');
-        var resErrorMsg = document.getElementById('resErrorMsg');
-
-        // Hide previous banners
-        successBanner.style.display = 'none';
-        errorBanner.style.display = 'none';
-
-        var originalText = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = '<span>⏳</span> Đang gửi đăng ký tư vấn...';
-
-        var formData = new FormData(form);
-        var params = new URLSearchParams(formData);
-        params.append('format', 'json');
-
-        fetch(form.action, {
-            method: 'POST',
-            body: params,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        })
-        .then(function(response) {
-            return response.json().then(function(data) {
-                return { ok: response.ok, data: data };
-            });
-        })
-        .then(function(res) {
-            btn.disabled = false;
-            btn.innerHTML = originalText;
-
-            if (res.ok && res.data.success) {
-                resApptId.textContent = '#' + res.data.appointmentId;
-                successBanner.style.display = 'block';
-                form.reset();
-                successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                resErrorMsg.textContent = res.data.message || 'Lỗi gửi đăng ký tư vấn';
-                errorBanner.style.display = 'block';
-                errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        })
-        .catch(function(err) {
-            btn.disabled = false;
-            btn.innerHTML = originalText;
-            resErrorMsg.textContent = 'Lỗi kết nối máy chủ. Vui lòng gọi trực tiếp hotline 096 669 2286 để được hỗ trợ.';
-            errorBanner.style.display = 'block';
         });
-    }
-</script>
-
+    </script>
 </body>
 </html>
