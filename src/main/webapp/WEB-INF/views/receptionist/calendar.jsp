@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lịch Hẹn Phòng Khám Dạng Calendar — DCMS Dental Clinic</title>
+    <title>Lịch Hẹn Phòng Khám Dạng Calendar — Dr.Smile DCMS Dental Care</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <style>
         .calendar-nav-bar {
@@ -15,8 +15,8 @@
             align-items: center;
             background: white;
             padding: 16px 24px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
             margin-bottom: 24px;
             box-shadow: var(--shadow-sm);
             flex-wrap: wrap;
@@ -30,27 +30,31 @@
         }
         .day-column {
             background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
             display: flex;
             flex-direction: column;
             min-height: 540px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-xs);
+            transition: all var(--transition-normal);
+        }
+        .day-column:hover {
+            box-shadow: var(--shadow-sm);
         }
         .day-column.is-today {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25);
+            border-color: var(--drsmile-blue);
+            box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.15);
         }
         .day-header {
             padding: 12px 14px;
-            background: #f8fafc;
-            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f7fd 100%);
+            border-bottom: 1px solid var(--border);
             text-align: center;
         }
         .day-column.is-today .day-header {
-            background: #e0f2fe;
-            color: #0369a1;
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            color: var(--drsmile-navy);
         }
         .day-title {
             font-size: 13px;
@@ -62,6 +66,7 @@
             font-size: 16px;
             font-weight: 800;
             margin-top: 2px;
+            color: var(--drsmile-navy);
         }
         .day-body {
             padding: 10px;
@@ -73,27 +78,27 @@
         }
         .appt-card {
             background: white;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary);
-            border-radius: 8px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--drsmile-blue);
+            border-radius: var(--radius-sm);
             padding: 10px 12px;
             font-size: 12px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-            transition: all 0.2s ease;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--transition-normal);
         }
         .appt-card:hover {
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-md);
             transform: translateY(-2px);
         }
         .appt-card.status-Confirmed { border-left-color: #10b981; }
         .appt-card.status-Pending { border-left-color: #f59e0b; }
-        .appt-card.status-Arrived { border-left-color: #0ea5e9; }
-        .appt-card.status-Completed { border-left-color: #6366f1; }
-        .appt-card.status-Cancelled { border-left-color: #94a3b8; opacity: 0.7; }
+        .appt-card.status-Arrived { border-left-color: var(--drsmile-cyan); }
+        .appt-card.status-Completed { border-left-color: var(--drsmile-navy); }
+        .appt-card.status-Cancelled { border-left-color: #94a3b8; opacity: 0.65; }
 
         .appt-time {
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--drsmile-navy);
             margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
@@ -101,7 +106,7 @@
         }
         .appt-patient {
             font-weight: 600;
-            color: #0f172a;
+            color: var(--text-primary);
             font-size: 13px;
             margin-bottom: 2px;
         }
@@ -113,7 +118,7 @@
         .appt-actions {
             margin-top: 8px;
             padding-top: 6px;
-            border-top: 1px dashed var(--border-color);
+            border-top: 1px dashed var(--border);
             display: flex;
             justify-content: flex-end;
         }

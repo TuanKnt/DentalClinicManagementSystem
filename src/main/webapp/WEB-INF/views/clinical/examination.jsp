@@ -6,13 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khám Lâm Sàng & Sơ Đồ Răng — ${patient.fullName} — DCMS</title>
+    <title>Khám Lâm Sàng & Sơ Đồ Răng — ${patient.fullName} — Dr.Smile DCMS Dental Care</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <style>
         .exam-header-bar {
             background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
             padding: 20px 24px;
             margin-bottom: 20px;
             box-shadow: var(--shadow-sm);
@@ -31,7 +31,7 @@
             width: 52px;
             height: 52px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+            background: linear-gradient(135deg, var(--drsmile-navy) 0%, var(--drsmile-blue) 100%);
             color: white;
             display: flex;
             align-items: center;
@@ -42,7 +42,7 @@
         .exam-nav-tabs {
             display: flex;
             gap: 8px;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border);
             margin-bottom: 20px;
             background: white;
             border-radius: 10px 10px 0 0;
@@ -76,8 +76,8 @@
         /* SVG Odontogram Styles */
         .odontogram-container {
             background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
             padding: 24px;
             box-shadow: var(--shadow-sm);
             margin-bottom: 24px;
@@ -123,7 +123,7 @@
         .tooth-box.selected {
             background: #e0f2fe;
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.3);
+            box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.25);
         }
         .tooth-num {
             font-size: 12px;
@@ -143,8 +143,8 @@
             transition: fill 0.15s ease, stroke 0.15s ease;
         }
         .tooth-surface:hover {
-            fill: #bae6fd;
-            stroke: var(--primary);
+            fill: #e0f2fe;
+            stroke: var(--drsmile-navy);
         }
         .tooth-surface.has-caries { fill: #ef4444 !important; stroke: #b91c1c; }
         .tooth-surface.has-filled { fill: #3b82f6 !important; stroke: #1d4ed8; }
@@ -159,7 +159,7 @@
             flex-wrap: wrap;
             padding: 14px 18px;
             background: #f8fafc;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
             border-radius: 8px;
             margin-top: 16px;
         }
@@ -171,7 +171,7 @@
             font-size: 13px;
             font-weight: 600;
             border-radius: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
             background: white;
             cursor: pointer;
             transition: all 0.15s ease;
@@ -536,7 +536,7 @@
                                 <textarea name="assessmentNotes" rows="3" class="form-control" placeholder="Ghi nhận tiền sử dùng thuốc chống đông máu, tiền mê hoặc lưu ý đặc biệt...">${assessment.assessmentNotes}</textarea>
                             </div>
 
-                            <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+                            <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
                                 <input type="checkbox" id="medicalClearance" name="medicalClearance" value="true" ${assessment.medicalClearance ? 'checked' : ''} style="width: 18px; height: 18px;" />
                                 <label for="medicalClearance" style="font-weight: 600; font-size: 14px; color: var(--text-primary); cursor: pointer; margin: 0;">
                                     Xác nhận bệnh nhân đủ điều kiện sức khỏe để thực hiện can thiệp thủ thuật nha khoa (Medical Clearance)
@@ -644,7 +644,7 @@
                             <c:otherwise>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;">
                                     <c:forEach var="att" items="${visitAttachments}">
-                                        <div style="border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: white;">
+                                        <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: white;">
                                             <div style="height: 140px; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 44px;">
                                                 🩻
                                             </div>

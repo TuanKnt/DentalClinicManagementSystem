@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập — Hệ Thống Quản Lý Phòng Khám Nha Khoa (DCMS)</title>
+    <title>Đăng Nhập — Nha Khoa Dr.Smile | Hệ Thống DCMS</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <style>
         body {
@@ -13,22 +13,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 15% 20%, rgba(0, 82, 204, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 85% 80%, rgba(0, 168, 204, 0.08) 0%, transparent 40%),
-                        #f0f7fd;
+            background: 
+                radial-gradient(ellipse at 10% 20%, rgba(0, 51, 102, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(0, 168, 204, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 82, 204, 0.03) 0%, transparent 60%),
+                var(--bg-app);
             padding: 24px;
         }
 
         .login-wrapper {
             width: 100%;
-            max-width: 440px;
+            max-width: 450px;
         }
 
         .login-card {
             background: #ffffff;
             border-radius: var(--radius-xl);
-            border: 2px solid #e0f2fe;
-            box-shadow: 0 20px 45px -10px rgba(0, 51, 102, 0.12);
+            border: 1px solid rgba(0, 51, 102, 0.08);
+            box-shadow: 0 20px 50px -12px rgba(0, 51, 102, 0.15), 0 0 0 1px rgba(0, 51, 102, 0.03);
             padding: 40px;
             position: relative;
             overflow: hidden;
@@ -40,40 +42,55 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             background: var(--drsmile-gradient);
         }
 
         .login-brand {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
-        .login-logo {
-            width: 60px;
-            height: 60px;
+        .login-logo-wrap {
+            width: 68px;
+            height: 68px;
             background: var(--drsmile-gradient);
-            border-radius: var(--radius-lg);
+            border-radius: 16px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.25);
-            margin-bottom: 14px;
+            font-size: 32px;
+            margin-bottom: 16px;
             color: #ffffff;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0, 51, 102, 0.25);
+        }
+
+        .login-logo-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(0, 168, 204, 0.3) 0%, transparent 60%);
+            z-index: -1;
         }
 
         .login-brand h1 {
-            font-size: 22px;
+            font-size: 23px;
             font-weight: 800;
             color: var(--drsmile-navy);
-            letter-spacing: -0.4px;
-            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
         }
 
-        .login-brand p {
+        .login-brand .brand-subtitle {
             font-size: 13px;
             color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .login-brand .brand-subtitle strong {
+            color: var(--drsmile-blue);
         }
 
         .back-home-link {
@@ -84,25 +101,30 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 700;
-            margin-bottom: 18px;
-            transition: color var(--transition-fast);
+            margin-bottom: 14px;
+            transition: all var(--transition-fast);
+            padding: 4px 0;
         }
         .back-home-link:hover {
             color: var(--drsmile-navy);
-            text-decoration: underline;
+            transform: translateX(-2px);
+        }
+
+        .login-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+            margin: 24px 0;
         }
 
         .demo-roles {
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--border);
+            margin-top: 0;
         }
 
         .demo-roles-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.8px;
             color: var(--text-muted);
             margin-bottom: 10px;
             text-align: center;
@@ -115,32 +137,59 @@
         }
 
         .demo-chip {
-            padding: 8px 6px;
-            background: #f8fafc;
+            padding: 10px 6px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f7fd 100%);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             text-align: center;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: all var(--transition-normal);
         }
 
         .demo-chip:hover {
-            background: var(--primary-light);
-            border-color: #bae6fd;
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-color: #93c5fd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.1);
         }
 
         .demo-chip-role {
             font-size: 12px;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--drsmile-navy);
             display: block;
+            margin-bottom: 2px;
         }
 
         .demo-chip-user {
             font-size: 11px;
-            font-family: monospace;
-            color: var(--primary);
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+            color: var(--drsmile-cyan);
+        }
+
+        .login-footer-text {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .form-input-icon {
+            position: relative;
+        }
+        .form-input-icon .icon-left {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+        .form-input-icon .form-control {
+            padding-left: 40px;
         }
     </style>
 </head>
@@ -155,9 +204,9 @@
 
     <div class="login-card">
         <div class="login-brand">
-            <div class="login-logo">🦷</div>
+            <div class="login-logo-wrap">🦷</div>
             <h1>Nha Khoa Dr.Smile</h1>
-            <p>Cổng Tác Nghiệp Nội Bộ DCMS &bull; Bác Sĩ & Cán Bộ Phòng Khám</p>
+            <p class="brand-subtitle">Cổng Tác Nghiệp Nội Bộ <strong>DCMS</strong> &bull; Bác Sĩ & Cán Bộ Phòng Khám</p>
         </div>
 
         <c:if test="${not empty errorMessage}">
@@ -176,34 +225,42 @@
 
         <form action="${pageContext.request.contextPath}/login" method="POST">
             <div class="form-group" style="margin-bottom: 16px;">
-                <label for="username" class="form-label required">Tài Khoản / Tên Đăng Nhập</label>
-                <input type="text" 
-                       id="username" 
-                       name="username" 
-                       class="form-control" 
-                       value="${enteredUsername}" 
-                       placeholder="Nhập tên đăng nhập" 
-                       required 
-                       autofocus />
+                <label for="username" class="form-label required">Tài Khoản</label>
+                <div class="form-input-icon">
+                    <span class="icon-left">👤</span>
+                    <input type="text" 
+                           id="username" 
+                           name="username" 
+                           class="form-control" 
+                           value="${enteredUsername}" 
+                           placeholder="Nhập tên đăng nhập" 
+                           required 
+                           autofocus />
+                </div>
             </div>
 
             <div class="form-group" style="margin-bottom: 24px;">
                 <label for="password" class="form-label required">Mật Khẩu</label>
-                <input type="password" 
-                       id="password" 
-                       name="password" 
-                       class="form-control" 
-                       placeholder="Nhập mật khẩu" 
-                       required />
+                <div class="form-input-icon">
+                    <span class="icon-left">🔑</span>
+                    <input type="password" 
+                           id="password" 
+                           name="password" 
+                           class="form-control" 
+                           placeholder="Nhập mật khẩu" 
+                           required />
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-drsmile" style="width: 100%; padding: 12px; font-size: 14.5px;">
+            <button type="submit" class="btn btn-drsmile" style="width: 100%; padding: 13px; font-size: 14.5px;">
                 <span>🔐</span> Đăng Nhập Vào Hệ Thống
             </button>
         </form>
 
+        <div class="login-divider"></div>
+
         <div class="demo-roles">
-            <div class="demo-roles-title">Tài khoản demo thử nghiệm (MK: 123456)</div>
+            <div class="demo-roles-title">Tài khoản demo thử nghiệm (Mật khẩu: 123456)</div>
             <div class="demo-chips-grid">
                 <div class="demo-chip" onclick="fillAccount('letan01', '123456')" title="Nhấn để điền tài khoản Lễ tân">
                     <span class="demo-chip-role">👩‍💼 Lễ Tân</span>
@@ -221,8 +278,9 @@
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--text-muted);">
-        Nha Khoa Dr.Smile &bull; DCMS System &bull; Nhóm G3_SE2064
+    <div class="login-footer-text">
+        Nha Khoa Dr.Smile — DCMS Dental Clinic Management System<br/>
+        Nhóm G3_SE2064 &bull; SWP391
     </div>
 </div>
 
@@ -230,6 +288,12 @@
     function fillAccount(u, p) {
         document.getElementById('username').value = u;
         document.getElementById('password').value = p;
+        document.getElementById('username').style.borderColor = '#00a8cc';
+        document.getElementById('password').style.borderColor = '#00a8cc';
+        setTimeout(() => {
+            document.getElementById('username').style.borderColor = '';
+            document.getElementById('password').style.borderColor = '';
+        }, 800);
     }
 </script>
 

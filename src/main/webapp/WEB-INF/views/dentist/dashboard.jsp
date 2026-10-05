@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bàn Làm Việc Bác Sĩ Nha Khoa — DCMS Dental Clinic</title>
+    <title>Bàn Làm Việc Bác Sĩ Nha Khoa — Dr.Smile DCMS Dental Care</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
 </head>
 <body>
@@ -90,9 +90,9 @@
             <!-- Active / In-Progress Visits Alert -->
             <c:forEach var="v" items="${doctorVisits}">
                 <c:if test="${v.status eq 'InProgress'}">
-                    <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);">
+                    <div style="background: linear-gradient(135deg, #f0f7fd 0%, #e0f2fe 100%); border: 2px solid var(--drsmile-navy); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md);">
                         <div style="display: flex; align-items: center; gap: 16px;">
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--drsmile-navy); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px;">
                                 🦷
                             </div>
                             <div>
@@ -140,7 +140,7 @@
                                     <c:forEach var="v" items="${waitingVisits}" varStatus="loop">
                                         <form action="${pageContext.request.contextPath}/dentist/start-exam" method="POST" style="margin: 0;">
                                             <input type="hidden" name="visitId" value="${v.visitId}" />
-                                            <div style="background: white; border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;">
+                                            <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;">
                                                 <div>
                                                     <div style="display: flex; align-items: center; gap: 8px;">
                                                         <span style="font-weight: 700; color: var(--text-primary); font-size: 15px;">#${loop.index + 1} &bull; ${v.patientName}</span>

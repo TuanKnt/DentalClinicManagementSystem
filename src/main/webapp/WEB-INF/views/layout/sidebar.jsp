@@ -3,10 +3,10 @@
 
 <aside class="app-sidebar">
     <a href="${pageContext.request.contextPath}/" class="sidebar-brand">
-        <div class="brand-icon" style="background: var(--drsmile-gradient); color: #ffffff;">🦷</div>
+        <div class="brand-icon">🦷</div>
         <div class="brand-info">
-            <span class="brand-name" style="color: var(--drsmile-navy);">Nha Khoa Dr.Smile</span>
-            <span class="brand-badge" style="color: var(--drsmile-blue);">Hệ Thống DCMS</span>
+            <span class="brand-name">Nha Khoa Dr.Smile</span>
+            <span class="brand-badge">DCMS — Quản Lý Phòng Khám</span>
         </div>
     </a>
 
@@ -63,7 +63,7 @@
             <span class="nav-icon">📊</span>
             <span>Tổng Quan Quản Trị</span>
         </a>
-        <a href="${pageContext.request.contextPath}/logout" class="nav-item" style="color: var(--danger);">
+        <a href="${pageContext.request.contextPath}/logout" class="nav-item" style="color: rgba(239, 68, 68, 0.7);">
             <span class="nav-icon">🔒</span>
             <span>Đăng Xuất</span>
         </a>

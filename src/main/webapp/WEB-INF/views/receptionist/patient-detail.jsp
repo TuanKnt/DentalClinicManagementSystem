@@ -6,13 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hồ Sơ Bệnh Án 360° — ${patient.fullName} — DCMS</title>
+    <title>Hồ Sơ Bệnh Án 360° — ${patient.fullName} — Dr.Smile DCMS Dental Care</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <style>
         .patient-hero {
             background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
             padding: 24px;
             margin-bottom: 24px;
             box-shadow: var(--shadow-sm);
@@ -21,6 +21,15 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .patient-hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--drsmile-gradient);
         }
         .patient-hero-left {
             display: flex;
@@ -31,14 +40,14 @@
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, #0284c7 100%);
+            background: var(--drsmile-gradient);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
             font-weight: 700;
-            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 51, 102, 0.25);
         }
         .patient-meta-tags {
             display: flex;
@@ -49,11 +58,11 @@
             color: var(--text-muted);
         }
         .clinical-alert-bar {
-            background: #fffbeb;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
             border: 1px solid #fde68a;
             border-left: 5px solid #f59e0b;
             padding: 16px 20px;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             margin-bottom: 24px;
             display: flex;
             align-items: center;
@@ -65,7 +74,7 @@
         .profile-tabs {
             display: flex;
             gap: 8px;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border);
             margin-bottom: 20px;
         }
         .profile-tab-btn {
@@ -78,12 +87,15 @@
             cursor: pointer;
             border-bottom: 3px solid transparent;
             margin-bottom: -2px;
-            transition: all 0.2s ease;
+            transition: all var(--transition-normal);
             text-decoration: none;
         }
+        .profile-tab-btn:hover {
+            color: var(--drsmile-blue);
+        }
         .profile-tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+            color: var(--drsmile-navy);
+            border-bottom-color: var(--drsmile-blue);
         }
         .attachment-grid {
             display: grid;
@@ -92,25 +104,26 @@
         }
         .attachment-card {
             background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s ease;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--transition-normal);
         }
         .attachment-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-md);
+            border-color: rgba(0, 82, 204, 0.15);
         }
         .attachment-preview {
             height: 140px;
-            background: #f1f5f9;
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f7fd 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 40px;
             color: var(--text-muted);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
         }
         .attachment-info {
             padding: 12px;

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hàng Đợi Khám Bệnh Nhân — Bác Sĩ Nha Khoa — DCMS</title>
+    <title>Hàng Đợi Khám Bệnh Nhân — Dr.Smile DCMS Dental Care</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
 </head>
 <body>

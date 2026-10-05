@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng Điều Khiển Quản Trị — Dental Clinic System (DCMS)</title>
+    <title>Bảng Điều Khiển Quản Trị — Dr.Smile DCMS Dental Care</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
 </head>
 <body>
@@ -172,7 +172,7 @@
                                 <c:otherwise>
                                     <div style="display: flex; flex-direction: column; gap: 12px;">
                                         <c:forEach var="p" items="${recentPatients}">
-                                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--border-color);">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--border);">
                                                 <div>
                                                     <div style="font-weight: 600; color: var(--text-primary); font-size: 14px;">
                                                         ${p.fullName}
@@ -212,11 +212,11 @@
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
                                     <span style="color: var(--text-muted);">Phiên bản ứng dụng:</span>
-                                    <span class="badge-pill badge-Pending">v1.2.0 (BF-01 & BF-02 Complete)</span>
+                                    <span class="badge-pill badge-Pending">v1.3.0 (Dr.Smile Branded)</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
                                     <span style="color: var(--text-muted);">Môi trường máy chủ:</span>
-                                    <span class="badge-pill badge-Confirmed">Embedded Jetty 9.4 (Port 8080)</span>
+                                    <span class="badge-pill badge-Confirmed">Apache Tomcat 10.1.8 (Jakarta EE 10)</span>
                                 </div>
                             </div>
                         </div>
