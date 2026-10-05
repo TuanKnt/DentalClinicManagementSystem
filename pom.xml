@@ -22,27 +22,34 @@
     </properties>
 
     <dependencies>
-        <!-- Java Servlet API 4.0.1 (Tomcat 9 compatible / NetBeans standard) -->
+        <!-- Jakarta Servlet API 6.0 (Tomcat 10.1 compatible / NetBeans standard) -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- JavaServer Pages (JSP) API -->
+        <!-- Jakarta Server Pages (JSP) API 3.1 -->
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.3</version>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.1.1</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSTL standard tag library -->
+        <!-- Jakarta Standard Tag Library (JSTL) API 3.0 -->
         <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- GlassFish JSTL 3.0 Implementation for Jakarta EE 10 -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
         </dependency>
 
         <!-- Microsoft SQL Server JDBC Driver -->
