@@ -22,6 +22,10 @@ public class PatientDAO {
 
     private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
 
+    public List<Patient> findAll() {
+        return search(null, 0, 1000);
+    }
+
     public Patient findById(int patientId) {
         String sql = "SELECT PatientId, FullName, Dob, Gender, Phone, CitizenId, Address, " +
                      "MedicalAlerts, Allergies, EmergencyContact, CreatedAt, UpdatedAt " +

@@ -166,12 +166,13 @@ public class CheckInServlet extends HttpServlet {
     private void handleStartExam(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         String visitIdParam = request.getParameter("visitId");
+        String operatory = request.getParameter("operatory");
         try {
             int visitId = Integer.parseInt(visitIdParam);
-            visitService.startExamination(visitId);
-            response.sendRedirect(request.getContextPath() + "/dentist/queue?success=started");
+            visitService.startExamination(visitId, operatory);
+            response.sendRedirect(request.getContextPath() + "/clinical/examination?visitId=" + visitId + "&success=started");
         } catch (Exception ex) {
-            response.sendRedirect(request.getContextPath() + "/dentist/queue?error=" + ex.getMessage());
+            response.sendRedirect(request.getContextPath() + "/dentist/queue?error=" + java.net.URLEncoder.encode(ex.getMessage(), "UTF-8"));
         }
     }
 }

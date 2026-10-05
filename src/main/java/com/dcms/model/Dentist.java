@@ -73,6 +73,24 @@ public class Dentist implements Serializable {
         this.phone = phone;
     }
 
+    public String getPhoneNumber() {
+        return phone;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phone = phoneNumber;
+    }
+
+    private String email;
+
+    public String getEmail() {
+        return email != null ? email : (fullName != null ? fullName.toLowerCase().replace(" ", "") + "@dcms.vn" : "dentist@dcms.vn");
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Dentist{" +

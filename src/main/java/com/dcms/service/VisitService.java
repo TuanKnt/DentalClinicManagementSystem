@@ -113,14 +113,28 @@ public class VisitService {
     }
 
     public boolean startExamination(int visitId) {
+        return startExamination(visitId, null);
+    }
+
+    public boolean startExamination(int visitId, String operatory) {
         Visit v = visitDAO.findById(visitId);
         if (v == null) {
             throw new IllegalArgumentException("Không tìm thấy lượt khám với mã: " + visitId);
         }
-        if (!Visit.STATUS_WAITING.equalsIgnoreCase(v.getStatus())) {
-            throw new IllegalStateException("Lượt khám không ở trạng thái Waiting để bắt đầu");
+        if (!Visit.STATUS_WAITING.equalsIgnoreCase(v.getStatus()) && !Visit.STATUS_IN_PROGRESS.equalsIgnoreCase(v.getStatus())) {
+            throw new IllegalStateException("Lượt khám không ở trạng thái hợp lệ để bắt đầu khám");
+        }
+        if (operatory != null && !operatory.trim().isEmpty()) {
+            visitDAO.updateOperatory(visitId, operatory.trim());
         }
         return visitDAO.updateStatus(visitId, Visit.STATUS_IN_PROGRESS);
+    }
+
+    public boolean assignOperatory(int visitId, String operatory) {
+        if (visitId <= 0) {
+            throw new IllegalArgumentException("Mã lượt khám không hợp lệ");
+        }
+        return visitDAO.updateOperatory(visitId, operatory);
     }
 
     public boolean completeVisit(int visitId) {

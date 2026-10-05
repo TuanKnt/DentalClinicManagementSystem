@@ -38,6 +38,7 @@ public class Visit implements Serializable {
     private String medicalAlerts;
     private String allergies;
     private String dentistName;
+    private String operatory; // Dental chair / room e.g., 'Ghế 1 - P.101'
 
     public Visit() {
         this.status = STATUS_WAITING;
@@ -71,6 +72,10 @@ public class Visit implements Serializable {
     }
 
     public int getPrimaryDentistId() {
+        return primaryDentistId;
+    }
+
+    public int getDentistId() {
         return primaryDentistId;
     }
 
@@ -180,6 +185,14 @@ public class Visit implements Serializable {
 
     public void setDentistName(String dentistName) {
         this.dentistName = dentistName;
+    }
+
+    public String getOperatory() {
+        return operatory;
+    }
+
+    public void setOperatory(String operatory) {
+        this.operatory = operatory;
     }
 
     public boolean isWalkIn() {

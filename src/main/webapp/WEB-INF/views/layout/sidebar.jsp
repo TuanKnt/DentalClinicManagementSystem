@@ -12,10 +12,15 @@
 
     <div class="sidebar-menu">
         <div class="menu-category">Tiếp Đón & Lịch Hẹn</div>
+        <a href="${pageContext.request.contextPath}/reception/calendar" 
+           class="nav-item ${activeMenu == 'calendar' ? 'active' : ''}">
+            <span class="nav-icon">📆</span>
+            <span>Lịch Dạng Calendar</span>
+        </a>
         <a href="${pageContext.request.contextPath}/reception/appointments" 
            class="nav-item ${activeMenu == 'appointments' ? 'active' : ''}">
             <span class="nav-icon">📅</span>
-            <span>Lịch Hẹn Khám</span>
+            <span>Danh Sách Lịch Hẹn</span>
         </a>
         <a href="${pageContext.request.contextPath}/reception/checkin" 
            class="nav-item ${activeMenu == 'checkin' ? 'active' : ''}">
@@ -41,6 +46,11 @@
         </a>
 
         <div class="menu-category">Khu Khám Lâm Sàng</div>
+        <a href="${pageContext.request.contextPath}/dentist/dashboard" 
+           class="nav-item ${activeMenu == 'dentist_dashboard' ? 'active' : ''}">
+            <span class="nav-icon">🩺</span>
+            <span>Bàn Làm Việc Bác Sĩ</span>
+        </a>
         <a href="${pageContext.request.contextPath}/dentist/queue" 
            class="nav-item ${activeMenu == 'queue' ? 'active' : ''}">
             <span class="nav-icon">💺</span>
@@ -48,6 +58,11 @@
         </a>
 
         <div class="menu-category">Hệ Thống</div>
+        <a href="${pageContext.request.contextPath}/admin/dashboard" 
+           class="nav-item ${activeMenu == 'admin_dashboard' ? 'active' : ''}">
+            <span class="nav-icon">📊</span>
+            <span>Tổng Quan Quản Trị</span>
+        </a>
         <a href="${pageContext.request.contextPath}/logout" class="nav-item" style="color: var(--danger);">
             <span class="nav-icon">🔒</span>
             <span>Đăng Xuất</span>

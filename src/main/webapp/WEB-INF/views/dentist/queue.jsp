@@ -179,9 +179,15 @@
                                         </div>
 
                                         <div style="flex-shrink: 0; margin-left: 20px;">
-                                            <form action="${pageContext.request.contextPath}/dentist/start-exam" method="POST" style="margin: 0;">
+                                            <form action="${pageContext.request.contextPath}/dentist/start-exam" method="POST" style="display: flex; flex-direction: column; gap: 8px; margin: 0;">
                                                 <input type="hidden" name="visitId" value="${v.visitId}" />
-                                                <button type="submit" class="btn btn-success" style="padding: 12px 24px; font-size: 14px;">
+                                                <select name="operatory" class="form-control" style="padding: 6px 10px; font-size: 12px;">
+                                                    <option value="Ghế 1 - P.101">Ghế 1 - P.101</option>
+                                                    <option value="Ghế 2 - P.102">Ghế 2 - P.102</option>
+                                                    <option value="Ghế 3 - P.103">Ghế 3 - P.103</option>
+                                                    <option value="Ghế VIP - P.201">Ghế VIP - P.201</option>
+                                                </select>
+                                                <button type="submit" class="btn btn-success" style="padding: 10px 18px; font-size: 13px; font-weight: 600;">
                                                     <span>🩺</span> Mời Khám Ngay
                                                 </button>
                                             </form>

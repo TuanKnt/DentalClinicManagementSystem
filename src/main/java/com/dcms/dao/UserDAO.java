@@ -83,6 +83,33 @@ public class UserDAO {
         return null;
     }
 
+    public List<User> findAll() {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT u.UserId, u.Username, u.PasswordHash, u.FullName, u.Email, u.Phone, " +
+                     "u.RoleId, r.RoleName, u.IsActive, u.CreatedAt, u.UpdatedAt " +
+                     "FROM dbo.Users u " +
+                     "JOIN dbo.Roles r ON u.RoleId = r.RoleId " +
+                     "ORDER BY u.UserId ASC";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(mapResultSetToUser(rs));
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error in findAll users", ex);
+        } finally {
+            DBContext.close(conn, ps, rs);
+        }
+        return list;
+    }
+
     /**
      * Insert a new user into Users table.
      */

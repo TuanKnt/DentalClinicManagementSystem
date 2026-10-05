@@ -21,6 +21,7 @@ import java.io.IOException;
         "/admin/*",
         "/reception/*",
         "/dentist/*",
+        "/clinical/*",
         "/cashier/*"
 })
 public class AuthFilter implements Filter {
@@ -56,8 +57,12 @@ public class AuthFilter implements Filter {
             // Admin has superuser privileges
             isAuthorized = true;
         } else if (path.startsWith("/reception/")) {
-            isAuthorized = role.equalsIgnoreCase("Receptionist");
+            isAuthorized = role.equalsIgnoreCase("Receptionist")
+                    || (path.startsWith("/reception/calendar") && role.equalsIgnoreCase("Dentist"))
+                    || (path.startsWith("/reception/patients") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant")));
         } else if (path.startsWith("/dentist/")) {
+            isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
+        } else if (path.startsWith("/clinical/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/cashier/")) {
             isAuthorized = role.equalsIgnoreCase("Cashier");

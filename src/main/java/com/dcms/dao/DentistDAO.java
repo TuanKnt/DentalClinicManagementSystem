@@ -19,10 +19,14 @@ public class DentistDAO {
 
     private static final Logger LOGGER = Logger.getLogger(DentistDAO.class.getName());
 
+    public List<Dentist> findAll() {
+        return listAllDentists();
+    }
+
     public List<Dentist> listAllDentists() {
         List<Dentist> list = new ArrayList<>();
         String sql = "SELECT d.DentistId, d.LicenseNumber, d.Specialization, d.RoomNumber, " +
-                     "u.FullName, u.Phone " +
+                     "u.FullName, u.Phone, u.Email " +
                      "FROM dbo.Dentists d " +
                      "JOIN dbo.Users u ON d.DentistId = u.UserId " +
                      "WHERE u.IsActive = 1 " +
@@ -44,6 +48,7 @@ public class DentistDAO {
                 d.setRoomNumber(rs.getString("RoomNumber"));
                 d.setFullName(rs.getString("FullName"));
                 d.setPhone(rs.getString("Phone"));
+                d.setEmail(rs.getString("Email"));
                 list.add(d);
             }
         } catch (SQLException ex) {

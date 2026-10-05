@@ -16,6 +16,7 @@ public class Patient implements Serializable {
     private String gender; // 'Nam', 'Nữ', 'Khác'
     private String phone;
     private String citizenId;
+    private String email;
     private String address;
     private String medicalAlerts; // E.g. Hypertension, Diabetes, Hemophilia
     private String allergies;     // E.g. Lidocaine, Penicillin
@@ -56,8 +57,32 @@ public class Patient implements Serializable {
         return dob;
     }
 
+    public LocalDate getDateOfBirth() {
+        return dob;
+    }
+
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dob = dateOfBirth;
+    }
+
+    public String getPhoneNumber() {
+        return phone;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phone = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGender() {

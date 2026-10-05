@@ -176,6 +176,14 @@ public class AppointmentDAO {
         return false;
     }
 
+    public List<Appointment> findByDate(LocalDate date) {
+        return listAppointmentsByDate(date, null);
+    }
+
+    public List<Appointment> findByDateAndDentist(LocalDate date, int dentistId) {
+        return listAppointmentsByDate(date, dentistId);
+    }
+
     public List<Appointment> listAppointmentsByDate(LocalDate date, Integer dentistId) {
         List<Appointment> list = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
