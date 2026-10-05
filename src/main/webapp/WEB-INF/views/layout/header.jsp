@@ -18,7 +18,7 @@
     <div class="header-right">
         <div class="clinic-status-pill">
             <span class="pulse-dot"></span>
-            <span>Phòng Khám Hoạt Động</span>
+            <span>Dr.Smile Clinic — Đang Tiếp Đón</span>
         </div>
 
         <div class="live-clock" id="liveClockDisplay">

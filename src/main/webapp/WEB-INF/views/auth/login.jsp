@@ -13,9 +13,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 15% 20%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-                        #f8fafc;
+            background: radial-gradient(circle at 15% 20%, rgba(0, 82, 204, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 80%, rgba(0, 168, 204, 0.08) 0%, transparent 40%),
+                        #f0f7fd;
             padding: 24px;
         }
 
@@ -27,8 +27,8 @@
         .login-card {
             background: #ffffff;
             border-radius: var(--radius-xl);
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            border: 2px solid #e0f2fe;
+            box-shadow: 0 20px 45px -10px rgba(0, 51, 102, 0.12);
             padding: 40px;
             position: relative;
             overflow: hidden;
@@ -40,39 +40,56 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
+            height: 5px;
+            background: var(--drsmile-gradient);
         }
 
         .login-brand {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .login-logo {
-            width: 58px;
-            height: 58px;
-            background: var(--primary-gradient);
+            width: 60px;
+            height: 60px;
+            background: var(--drsmile-gradient);
             border-radius: var(--radius-lg);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: var(--shadow-glow);
-            margin-bottom: 16px;
+            font-size: 30px;
+            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.25);
+            margin-bottom: 14px;
+            color: #ffffff;
         }
 
         .login-brand h1 {
             font-size: 22px;
             font-weight: 800;
-            color: var(--text-primary);
+            color: var(--drsmile-navy);
             letter-spacing: -0.4px;
             margin-bottom: 6px;
         }
 
         .login-brand p {
-            font-size: 13.5px;
+            font-size: 13px;
             color: var(--text-secondary);
+        }
+
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--drsmile-blue);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            transition: color var(--transition-fast);
+        }
+        .back-home-link:hover {
+            color: var(--drsmile-navy);
+            text-decoration: underline;
         }
 
         .demo-roles {
@@ -130,11 +147,17 @@
 <body>
 
 <div class="login-wrapper">
+    <div style="margin-bottom: 12px;">
+        <a href="${pageContext.request.contextPath}/" class="back-home-link">
+            <span>←</span> Quay lại trang chủ Nha khoa Dr.Smile
+        </a>
+    </div>
+
     <div class="login-card">
         <div class="login-brand">
             <div class="login-logo">🦷</div>
-            <h1>Đăng Nhập DCMS</h1>
-            <p>Dental Clinic Management System</p>
+            <h1>Nha Khoa Dr.Smile</h1>
+            <p>Cổng Tác Nghiệp Nội Bộ DCMS &bull; Bác Sĩ & Cán Bộ Phòng Khám</p>
         </div>
 
         <c:if test="${not empty errorMessage}">
@@ -147,7 +170,7 @@
         <c:if test="${param.loggedOut eq 'true'}">
             <div class="alert-banner alert-banner-success" style="margin-bottom: 20px; padding: 10px 14px; font-size: 13px;">
                 <span class="alert-banner-icon">✅</span>
-                <div>Bạn đã đăng xuất an toàn khỏi hệ thống.</div>
+                <div>Bạn đã đăng xuất an toàn khỏi hệ thống Dr.Smile DCMS.</div>
             </div>
         </c:if>
 
@@ -174,7 +197,7 @@
                        required />
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 14.5px;">
+            <button type="submit" class="btn btn-drsmile" style="width: 100%; padding: 12px; font-size: 14.5px;">
                 <span>🔐</span> Đăng Nhập Vào Hệ Thống
             </button>
         </form>
@@ -199,7 +222,7 @@
     </div>
 
     <div style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--text-muted);">
-        Dự Án DCMS &bull; SWP Clinic System &bull; Nhóm G3_SE2064
+        Nha Khoa Dr.Smile &bull; DCMS System &bull; Nhóm G3_SE2064
     </div>
 </div>
 

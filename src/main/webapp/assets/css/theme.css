@@ -8,6 +8,18 @@
     --primary-gradient: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
     --accent: #06b6d4;
     --accent-light: #ecfeff;
+
+    /* Dr.Smile Signature Design Tokens */
+    --drsmile-navy: #003366;
+    --drsmile-navy-dark: #002244;
+    --drsmile-blue: #0052cc;
+    --drsmile-cyan: #00a8cc;
+    --drsmile-cyan-light: #e0f7fa;
+    --drsmile-gold: #d4af37;
+    --drsmile-gold-dark: #b8860b;
+    --drsmile-gold-light: #fef9c3;
+    --drsmile-gradient: linear-gradient(135deg, #003366 0%, #0052cc 60%, #00a8cc 100%);
+    --drsmile-gradient-gold: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%);
     
     /* Neutral & Surfaces */
     --bg-app: #f8fafc;
@@ -1026,4 +1038,210 @@ body {
     border: 1px solid #bae6fd;
     margin-top: 8px;
 }
+
+/* =========================================================================
+   DR.SMILE SIGNATURE COMPONENTS & WIDGETS
+   ========================================================================= */
+.badge-drsmile-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--drsmile-gold-light);
+    color: var(--drsmile-gold-dark);
+    border: 1px solid #fde047;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-drsmile-navy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e0f2fe;
+    color: var(--drsmile-navy);
+    border: 1px solid #93c5fd;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn-drsmile {
+    background: var(--drsmile-blue);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    padding: 12px 28px;
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 14px rgba(0, 82, 204, 0.28);
+}
+
+.btn-drsmile:hover {
+    background: var(--drsmile-navy);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 51, 102, 0.35);
+}
+
+.drsmile-floating-call {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.drsmile-call-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    text-decoration: none;
+    position: relative;
+    transition: transform var(--transition-fast);
+}
+
+.drsmile-call-btn:hover {
+    transform: scale(1.08);
+}
+
+.drsmile-call-btn::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    border: 2px solid #10b981;
+    animation: drsmile-pulse 2s infinite ease-out;
+}
+
+.drsmile-zalo-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #0068ff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(0, 104, 255, 0.4);
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+}
+
+.drsmile-zalo-btn:hover {
+    transform: scale(1.1);
+}
+
+.drsmile-fb-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0084ff 0%, #00c6ff 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 6px 18px rgba(0, 132, 255, 0.35);
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+}
+
+.drsmile-fb-btn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes drsmile-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* Dr.Smile Dental Knowledge Articles */
+.ds-article-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-xs);
+}
+
+.ds-article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: #93c5fd;
+}
+
+.ds-article-thumb {
+    height: 160px;
+    background: linear-gradient(135deg, #002244 0%, #0052cc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #ffffff;
+    position: relative;
+}
+
+.ds-article-date-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.ds-article-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ds-article-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--drsmile-navy);
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.ds-article-excerpt {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 14px;
+}
+
 
