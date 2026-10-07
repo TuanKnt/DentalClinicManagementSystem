@@ -1,5 +1,6 @@
 param (
-    [string]$Account = "status"
+    [string]$Account = "status",
+    [switch]$UseSSH
 )
 
 # ==============================================================================
@@ -58,7 +59,6 @@ function Show-Status {
     $currentName = git config user.name
     $currentEmail = git config user.email
     $currentRemote = git config remote.origin.url
-    $currentSshCmd = git config core.sshCommand
 
     Write-Host "`n================================================================================" -ForegroundColor Cyan
     Write-Host "         DCMS G3_SE2064 -- TRANG THAI GIT ACCOUNT (ITERATION 1 & 2)             " -ForegroundColor Cyan
@@ -66,7 +66,6 @@ function Show-Status {
     Write-Host "  * Git user.name   : " -NoNewline; Write-Host "$currentName" -ForegroundColor Yellow
     Write-Host "  * Git user.email  : " -NoNewline; Write-Host "$currentEmail" -ForegroundColor Yellow
     Write-Host "  * Remote origin   : " -NoNewline; Write-Host "$currentRemote" -ForegroundColor Green
-    Write-Host "  * SSH Command     : " -NoNewline; Write-Host "$currentSshCmd" -ForegroundColor DarkGray
     Write-Host "================================================================================" -ForegroundColor Cyan
     
     Write-Host "`nPHAN CONG 5 THANH VIEN TRONG ITERATION 1 VA ITERATION 2:`n" -ForegroundColor White
@@ -102,11 +101,19 @@ $target = $Members[$accLower]
 $sshDir = "$HOME\.ssh"
 $keyPath = "$sshDir\$($target.KeyFile)"
 
-# Cap nhat Git config local repo
+# 1. Cap nhat user.name va user.email local repo de GitHub nhan dien tac gia commit
 git config user.name "$($target.Name)"
 git config user.email "$($target.Email)"
-git config remote.origin.url "git@$($target.Host):SWP391G3/DentalClinicManagementSystem.git"
-git config core.sshCommand "ssh -i $HOME/.ssh/$($target.KeyFile) -F $HOME/.ssh/config"
+
+if ($UseSSH) {
+    git config remote.origin.url "git@$($target.Host):SWP391G3/DentalClinicManagementSystem.git"
+    git config core.sshCommand "ssh -i $HOME/.ssh/$($target.KeyFile) -F $HOME/.ssh/config"
+    $pushMode = "SSH ($($target.Host))"
+} else {
+    git config remote.origin.url "https://github.com/SWP391G3/DentalClinicManagementSystem.git"
+    git config --unset core.sshCommand 2>$null
+    $pushMode = "HTTPS (Windows Credential Manager)"
+}
 
 Write-Host "`n================================================================================" -ForegroundColor Green
 Write-Host "  [OK] DA CHUYEN THANH CONG SANG TAI KHOAN: $($accLower.ToUpper()) ($($target.Name))" -ForegroundColor Green
@@ -114,8 +121,8 @@ Write-Host "====================================================================
 Write-Host "  * Ho ten/Username : $($target.Name)" -ForegroundColor White
 Write-Host "  * Email commit    : $($target.Email)" -ForegroundColor White
 Write-Host "  * Vai tro         : $($target.Role)" -ForegroundColor Cyan
-Write-Host "  * SSH Key su dung : $keyPath" -ForegroundColor DarkGray
-Write-Host "  * Git Remote URL  : git@$($target.Host):SWP391G3/DentalClinicManagementSystem.git" -ForegroundColor DarkGray
+Write-Host "  * Che do Push     : $pushMode" -ForegroundColor Yellow
+Write-Host "  * Git Remote URL  : $(git config remote.origin.url)" -ForegroundColor DarkGray
 Write-Host "--------------------------------------------------------------------------------" -ForegroundColor Gray
 Write-Host "PHIEU GIAO VIEC (SCOPE CHUC NANG):" -ForegroundColor Yellow
 Write-Host "  [Iter 1] $($target.Iter1)" -ForegroundColor White
