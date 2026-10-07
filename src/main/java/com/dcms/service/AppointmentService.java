@@ -102,6 +102,49 @@ public class AppointmentService {
         return appointmentDAO.updateStatus(appointmentId, Appointment.STATUS_CONFIRMED);
     }
 
+    /**
+     * Moves a pending/confirmed appointment to a new slot while preserving its
+     * appointment ID and audit timestamps. Arrived/completed/cancelled visits
+     * are immutable from the scheduling screen.
+     */
+    public boolean rescheduleAppointment(int appointmentId, LocalDate newDate,
+                                         LocalTime newStart, LocalTime newEnd) {
+        Appointment appt = appointmentDAO.findById(appointmentId);
+        if (appt == null) {
+            throw new IllegalArgumentException("Không tìm thấy lịch hẹn với mã: " + appointmentId);
+        }
+        if (!appt.canBeRescheduled()) {
+            throw new IllegalStateException("Chỉ có thể đổi lịch hẹn đang Pending hoặc Confirmed");
+        }
+        if (newDate == null || newStart == null || newEnd == null) {
+            throw new IllegalArgumentException("Ngày và khung giờ mới là bắt buộc");
+        }
+        if (newDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Không thể chuyển lịch về ngày trong quá khứ");
+        }
+        if (newDate.equals(LocalDate.now()) && !newStart.isAfter(LocalTime.now())) {
+            throw new IllegalArgumentException("Khung giờ mới trong ngày hôm nay đã qua");
+        }
+        if (!newEnd.isAfter(newStart)) {
+            throw new IllegalArgumentException("Giờ kết thúc phải sau giờ bắt đầu");
+        }
+
+        int dayOfWeek = newDate.getDayOfWeek().getValue();
+        if (!scheduleDAO.isDentistWorking(appt.getDentistId(), dayOfWeek, newStart, newEnd)) {
+            throw new DentistNotAvailableException("Bác sĩ không có ca trực nhận hẹn vào khung giờ "
+                    + newStart + " - " + newEnd);
+        }
+
+        int conflicts = appointmentDAO.countConflicts(appt.getDentistId(), newDate, newStart, newEnd, appointmentId);
+        if (conflicts > 0) {
+            throw new AppointmentConflictException("Khung giờ mới đã bị trùng với lịch hẹn khác của bác sĩ");
+        }
+        if (!appointmentDAO.updateSchedule(appointmentId, newDate, newStart, newEnd)) {
+            throw new RuntimeException("Không thể cập nhật khung giờ lịch hẹn");
+        }
+        return true;
+    }
+
     public Appointment getAppointmentById(int appointmentId) {
         return appointmentDAO.findById(appointmentId);
     }
@@ -134,6 +177,10 @@ public class AppointmentService {
         }
         if (!appt.getEndTime().isAfter(appt.getStartTime())) {
             throw new IllegalArgumentException("Giờ kết thúc phải sau giờ bắt đầu");
+        }
+        if (appt.getAppointmentDate().isEqual(LocalDate.now())
+                && !appt.getEndTime().isAfter(LocalTime.now())) {
+            throw new IllegalArgumentException("Khung giờ hẹn đã ở trong quá khứ");
         }
     }
 }

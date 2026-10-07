@@ -25,7 +25,8 @@ import java.util.List;
         "/reception/appointments",
         "/reception/appointments/create",
         "/reception/appointments/cancel",
-        "/reception/appointments/confirm"
+        "/reception/appointments/confirm",
+        "/reception/appointments/reschedule"
 })
 public class AppointmentServlet extends HttpServlet {
 
@@ -68,6 +69,11 @@ public class AppointmentServlet extends HttpServlet {
 
         if ("/reception/appointments/confirm".equals(servletPath)) {
             handleConfirm(request, response);
+            return;
+        }
+
+        if ("/reception/appointments/reschedule".equals(servletPath)) {
+            handleReschedule(request, response);
             return;
         }
 
@@ -153,7 +159,8 @@ public class AppointmentServlet extends HttpServlet {
             appointmentService.cancelAppointment(appointmentId, reason);
             response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + returnDate + "&success=cancelled");
         } catch (Exception ex) {
-            response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + returnDate + "&error=" + ex.getMessage());
+            response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + returnDate + "&error="
+                    + java.net.URLEncoder.encode(ex.getMessage() != null ? ex.getMessage() : "Không thể hủy lịch", "UTF-8"));
         }
     }
 
@@ -167,7 +174,40 @@ public class AppointmentServlet extends HttpServlet {
             appointmentService.confirmAppointment(appointmentId);
             response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + returnDate + "&success=confirmed");
         } catch (Exception ex) {
-            response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + returnDate + "&error=" + ex.getMessage());
+            response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + returnDate + "&error="
+                    + java.net.URLEncoder.encode(ex.getMessage() != null ? ex.getMessage() : "Không thể xác nhận lịch", "UTF-8"));
         }
+    }
+
+    private void handleReschedule(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        String returnDate = request.getParameter("returnDate");
+        try {
+            int appointmentId = Integer.parseInt(required(request, "appointmentId"));
+            String dateValue = firstNonBlank(request.getParameter("newDate"), request.getParameter("appointmentDate"));
+            String startValue = firstNonBlank(request.getParameter("newStartTime"), request.getParameter("startTime"));
+            String endValue = firstNonBlank(request.getParameter("newEndTime"), request.getParameter("endTime"));
+            LocalDate date = LocalDate.parse(dateValue);
+            LocalTime start = LocalTime.parse(startValue);
+            LocalTime end = LocalTime.parse(endValue);
+            appointmentService.rescheduleAppointment(appointmentId, date, start, end);
+            response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + date + "&success=rescheduled");
+        } catch (Exception ex) {
+            String safeDate = (returnDate == null || returnDate.trim().isEmpty()) ? LocalDate.now().toString() : returnDate;
+            response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + safeDate
+                    + "&error=" + java.net.URLEncoder.encode(ex.getMessage() != null ? ex.getMessage() : "Không thể đổi lịch", "UTF-8"));
+        }
+    }
+
+    private String required(HttpServletRequest request, String name) {
+        String value = request.getParameter(name);
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("Thiếu trường " + name);
+        }
+        return value.trim();
+    }
+
+    private String firstNonBlank(String first, String second) {
+        return first != null && !first.trim().isEmpty() ? first.trim() : second;
     }
 }

@@ -62,7 +62,13 @@ public class GuestBookingServlet extends HttpServlet {
 
         try {
             String fullName = request.getParameter("fullName");
-            String phone = request.getParameter("phone");
+            // The public form uses phoneNumber while older clients/tests still send phone.
+            // Accept both names so a valid booking cannot be rejected simply because the
+            // browser is using the current field name.
+            String phone = request.getParameter("phoneNumber");
+            if (phone == null || phone.trim().isEmpty()) {
+                phone = request.getParameter("phone");
+            }
             String email = request.getParameter("email");
             String dentistIdParam = request.getParameter("dentistId");
             String dateParam = request.getParameter("appointmentDate");
@@ -74,8 +80,8 @@ public class GuestBookingServlet extends HttpServlet {
             if (fullName == null || fullName.trim().isEmpty()) {
                 throw new IllegalArgumentException("Họ và tên không được để trống");
             }
-            if (phone == null || !phone.trim().matches("^[0-9]{10,11}$")) {
-                throw new IllegalArgumentException("Số điện thoại không hợp lệ (yêu cầu 10-11 chữ số)");
+            if (phone == null || !phone.trim().matches("^0[35789][0-9]{8}$")) {
+                throw new IllegalArgumentException("Số điện thoại phải gồm 10 chữ số và bắt đầu bằng 03, 05, 07, 08 hoặc 09");
             }
             if (dateParam == null || dateParam.trim().isEmpty()) {
                 throw new IllegalArgumentException("Vui lòng chọn ngày khám");
@@ -92,21 +98,25 @@ public class GuestBookingServlet extends HttpServlet {
                 throw new IllegalArgumentException("Không thể đặt lịch hẹn trong quá khứ");
             }
 
-            // 2. Parse time slot (e.g. "09:00 - 10:00" or "09:00")
+            // 2. Parse time slot (e.g. "09:00 - 09:45" or "09:00").
+            // The public options represent 45-minute consultation slots.
             LocalTime startTime;
             LocalTime endTime;
             if (timeSlotParam == null || timeSlotParam.trim().isEmpty()) {
                 startTime = LocalTime.of(9, 0);
-                endTime = LocalTime.of(10, 0);
+                endTime = LocalTime.of(9, 45);
             } else {
                 String slot = timeSlotParam.trim();
                 if (slot.contains("-")) {
                     String[] parts = slot.split("-");
+                    if (parts.length != 2) {
+                        throw new IllegalArgumentException("Khung giờ hẹn không hợp lệ");
+                    }
                     startTime = LocalTime.parse(parts[0].trim());
                     endTime = LocalTime.parse(parts[1].trim());
                 } else {
                     startTime = LocalTime.parse(slot);
-                    endTime = startTime.plusHours(1);
+                    endTime = startTime.plusMinutes(45);
                 }
             }
 
@@ -117,6 +127,9 @@ public class GuestBookingServlet extends HttpServlet {
                 Patient newPatient = new Patient();
                 newPatient.setFullName(fullName.trim());
                 newPatient.setPhone(phone.trim());
+                // Gender is NOT NULL in the baseline schema. Guests do not provide
+                // demographic details, so keep the record valid with the neutral value.
+                newPatient.setGender("Khác");
                 if (email != null && !email.trim().isEmpty()) {
                     newPatient.setEmergencyContact("Email: " + email.trim());
                 }

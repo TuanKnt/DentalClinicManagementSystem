@@ -173,6 +173,11 @@ public class Appointment implements Serializable {
                !STATUS_CANCELLED.equalsIgnoreCase(this.status);
     }
 
+    public boolean canBeRescheduled() {
+        return STATUS_PENDING.equalsIgnoreCase(this.status)
+                || STATUS_CONFIRMED.equalsIgnoreCase(this.status);
+    }
+
     @Override
     public String toString() {
         return "Appointment{" +

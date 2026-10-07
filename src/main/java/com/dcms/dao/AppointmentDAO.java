@@ -155,6 +155,31 @@ public class AppointmentDAO {
         return false;
     }
 
+    /**
+     * Updates only the schedule fields. The service performs all state,
+     * working-hours and overlap checks before this method is called.
+     */
+    public boolean updateSchedule(int appointmentId, LocalDate date, LocalTime start, LocalTime end) {
+        String sql = "UPDATE dbo.Appointments SET AppointmentDate = ?, StartTime = ?, EndTime = ?, UpdatedAt = SYSDATETIME() "
+                + "WHERE AppointmentId = ? AND Status IN ('Pending', 'Confirmed')";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(date));
+            ps.setTime(2, Time.valueOf(start));
+            ps.setTime(3, Time.valueOf(end));
+            ps.setInt(4, appointmentId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error rescheduling appointment: " + appointmentId, ex);
+        } finally {
+            DBContext.close(conn, ps, null);
+        }
+        return false;
+    }
+
     public boolean cancelWithReason(int appointmentId, String reason) {
         String sql = "UPDATE dbo.Appointments SET Status = 'Cancelled', " +
                      "Notes = ISNULL(Notes + ' | ', '') + 'Lý do hủy: ' + ?, " +

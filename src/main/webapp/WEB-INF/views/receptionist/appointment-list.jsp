@@ -52,6 +52,16 @@
                     ⚠️ <strong>Đã hủy:</strong> Lịch hẹn đã được hủy theo yêu cầu của bệnh nhân/phòng khám.
                 </div>
             </c:if>
+            <c:if test="${param.success eq 'rescheduled'}">
+                <div class="alert-tag" style="background:#ecfeff;color:#0e7490;border-color:#a5f3fc;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
+                    🔄 <strong>Đã đổi lịch:</strong> Khung giờ mới đã được kiểm tra ca trực và lưu thành công.
+                </div>
+            </c:if>
+            <c:if test="${not empty param.error}">
+                <div class="alert-tag" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
+                    ⚠️ <strong>Không thể cập nhật:</strong> ${param.error}
+                </div>
+            </c:if>
 
             <!-- KPI Summary Widgets -->
             <div class="kpi-grid">
@@ -224,6 +234,14 @@
                                                         </form>
                                                     </c:if>
 
+                                                    <c:if test="${a.canBeRescheduled()}">
+                                                        <button type="button" class="btn btn-secondary btn-sm"
+                                                                onclick="openReschedule(${a.appointmentId}, '${a.appointmentDate}', '${a.startTime}', '${a.endTime}')"
+                                                                title="Đổi sang ngày hoặc khung giờ khác">
+                                                            Đổi lịch
+                                                        </button>
+                                                    </c:if>
+
                                                     <c:if test="${a.canBeCancelled()}">
                                                         <button type="button" class="btn btn-danger-subtle btn-sm" onclick="cancelAppointment(${a.appointmentId})">
                                                             Hủy
@@ -249,6 +267,37 @@
     <input type="hidden" name="returnDate" value="${selectedDate}" />
 </form>
 
+<div id="rescheduleModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="rescheduleTitle" hidden>
+    <div class="modal-card" style="max-width:460px;">
+        <div class="card-header" style="padding:0 0 14px; border-bottom:1px solid var(--border-light);">
+            <div class="card-title" id="rescheduleTitle">Đổi lịch hẹn</div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="closeReschedule()" aria-label="Đóng">×</button>
+        </div>
+        <form action="${pageContext.request.contextPath}/reception/appointments/reschedule" method="POST" style="padding-top:16px;">
+            <input type="hidden" name="appointmentId" id="rescheduleApptId" />
+            <input type="hidden" name="returnDate" value="${selectedDate}" />
+            <div class="form-group">
+                <label class="form-label" for="rescheduleDate">Ngày khám mới</label>
+                <input class="form-control" type="date" name="newDate" id="rescheduleDate" required />
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                <div class="form-group">
+                    <label class="form-label" for="rescheduleStart">Bắt đầu</label>
+                    <input class="form-control" type="time" name="newStartTime" id="rescheduleStart" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="rescheduleEnd">Kết thúc</label>
+                    <input class="form-control" type="time" name="newEndTime" id="rescheduleEnd" required />
+                </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px;">
+                <button type="button" class="btn btn-secondary" onclick="closeReschedule()">Hủy</button>
+                <button type="submit" class="btn btn-primary">Lưu khung giờ mới</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     function cancelAppointment(id) {
         var reason = prompt("Vui lòng nhập lý do hủy lịch hẹn:", "Bận việc đột xuất");
@@ -258,6 +307,24 @@
             document.getElementById('cancelForm').submit();
         }
     }
+
+    function openReschedule(id, date, start, end) {
+        document.getElementById('rescheduleApptId').value = id;
+        document.getElementById('rescheduleDate').value = date || '';
+        document.getElementById('rescheduleDate').min = new Date().toISOString().substring(0, 10);
+        document.getElementById('rescheduleStart').value = (start || '').substring(0, 5);
+        document.getElementById('rescheduleEnd').value = (end || '').substring(0, 5);
+        document.getElementById('rescheduleModal').hidden = false;
+        document.getElementById('rescheduleDate').focus();
+    }
+
+    function closeReschedule() {
+        document.getElementById('rescheduleModal').hidden = true;
+    }
+
+    document.getElementById('rescheduleModal').addEventListener('click', function (event) {
+        if (event.target === this) closeReschedule();
+    });
 </script>
 
 </body>
