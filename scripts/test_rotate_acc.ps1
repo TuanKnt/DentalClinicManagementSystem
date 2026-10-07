@@ -21,7 +21,7 @@ foreach ($acc in $testAccounts) {
     Write-Host "`n--> [TEST CASE] Xoay sang tai khoan: $($acc.Key.ToUpper()) ($($acc.ExpectedName))..." -ForegroundColor Yellow
     
     # 1. Thuc thi lenh switch
-    & .\switch_acc.ps1 $acc.Key | Out-Null
+    & "$PSScriptRoot\switch_acc.ps1" -Account $acc.Key -UseSSH | Out-Null
     
     # 2. Doc gia tri thuc te tu git config
     $actualName = (git config user.name).Trim()
@@ -67,4 +67,4 @@ $passCount = ($results | Where-Object { $_.Status -eq "PASS" }).Count
 Write-Host "KET QUA: $passCount/5 TAI KHOAN DAT CHUAN (100% PASS)`n" -ForegroundColor Green
 
 # Reset lai tai khoan mac dinh tuan
-& .\switch_acc.ps1 tuan | Out-Null
+& "$PSScriptRoot\switch_acc.ps1" -Account tuan | Out-Null

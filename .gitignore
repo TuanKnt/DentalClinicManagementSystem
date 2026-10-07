@@ -44,10 +44,6 @@ Thumbs.db
 # Project documentation and workflow files (kept locally only)
 AGENTS.md
 PROJECT_STATE.md
-DCMS_Business_Baseline_Standardized.md
-DCMS_Iteration_Workflow_Plan.md
 docs/
-
-cookies.txt
 node_modules/
 package-lock.json

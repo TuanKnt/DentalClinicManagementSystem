@@ -14,7 +14,7 @@
 ## 📌 1. Giới Thiệu Dự Án
 **Dental Clinic Management System (DCMS)** quản lý toàn bộ quy trình chăm sóc nha khoa khép kín: từ tiếp đón, quản lý hồ sơ bệnh nhân, đặt lịch hẹn, khám lâm sàng, sơ đồ răng Odontogram, chẩn đoán, lập kế hoạch điều trị, thực hiện thủ thuật, xuất hóa đơn, thanh toán đến nhắc hẹn tái khám.
 
-Dự án được xây dựng dựa trên bản đặc tả chuẩn hóa: [DCMS_Business_Baseline_Standardized.md](DCMS_Business_Baseline_Standardized.md).
+Dự án được xây dựng dựa trên bản đặc tả chuẩn hóa: [DCMS_Business_Baseline_Standardized.md](docs/DCMS_Business_Baseline_Standardized.md).
 
 ### 10 Nguyên Tắc Thép Nghiệp Vụ Cốt Lõi:
 1. **Appointment $\neq$ Visit:** Lịch hẹn chỉ là ý định đến khám. Buổi khám thực tế (`Visit`) chỉ được sinh ra khi bệnh nhân có mặt tại quầy (`Check-in`). Khách vãng lai (`Walk-in`) tạo `Visit` trực tiếp mà **không có** `Appointment`.
@@ -40,12 +40,16 @@ Dự án được xây dựng dựa trên bản đặc tả chuẩn hóa: [DCMS_
 ```
 DentalClinicManagementSystem/
 ├── pom.xml                                      # Cấu hình Maven chuẩn (NetBeans Webapp)
-├── database/
-│   └── DCMS_Init_Database_v1.0.sql             # Script SQL Server Baseline v1.0
+├── switch_acc.ps1                               # Phím tắt chuyển đổi Git Account giữa 5 thành viên
+├── database/                                    # Scripts SQL Server (Baseline v1.0, Iteration 2 Schema)
+├── docs/                                        # Hồ sơ tài liệu kỹ thuật (SRS, SDS, Database, Test, Baseline)
+│   ├── srs/                                     # Đặc tả chức năng, screen inventory & ảnh chụp màn hình
+│   └── DCMS_Business_Baseline_Standardized.md   # Đặc tả nghiệp vụ chuẩn
+├── scripts/                                     # Công cụ tự động hóa & kiểm thử Git đa tài khoản
 ├── src/main/java/com/dcms/
-│   ├── controller/                             # Servlets (Login, Logout, Patient, Appointment, CheckIn)
-│   ├── service/                                # Business Logic & Rules (Auth, Patient, Appointment, Visit)
-│   ├── dao/                                    # Data Access Objects (User, Patient, Dentist, Schedule, Appointment, Visit)
+│   ├── controller/                             # Servlets (Login, Logout, Patient, Appointment, CheckIn,...)
+│   ├── service/                                # Business Logic & Rules (Auth, Patient, Appointment, Visit,...)
+│   ├── dao/                                    # Data Access Objects (User, Patient, Dentist, Schedule,...)
 │   ├── model/                                  # POJO Entities & DTOs
 │   ├── filter/                                 # AuthFilter (RBAC kiểm soát URL)
 │   └── util/                                   # DBContext (Kết nối SQL Server an toàn)
@@ -55,12 +59,8 @@ DentalClinicManagementSystem/
 │   ├── WEB-INF/
 │   │   ├── web.xml                             # Web application descriptor
 │   │   └── views/                              # JSP views an toàn bên trong WEB-INF
-│   │       ├── auth/                           # login.jsp
-│   │       ├── receptionist/                   # patient-list, patient-form, appointment-list, appointment-form, checkin, walkin-form
-│   │       ├── dentist/                        # queue.jsp
-│   │       └── common/                         # access-denied.jsp
-│   └── index.jsp                               # Trang chào mừng
-└── src/test/java/com/dcms/service/             # BỘ TEST TỰ ĐỘNG (56 Automated Tests)
+│   └── index.jsp                               # Trang chủ công khai chuẩn Dr.Smile
+└── src/test/java/com/dcms/                     # BỘ TEST TỰ ĐỘNG (56 Automated Tests)
 ```
 
 ---
