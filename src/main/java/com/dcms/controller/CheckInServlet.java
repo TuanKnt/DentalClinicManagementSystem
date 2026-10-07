@@ -143,7 +143,8 @@ public class CheckInServlet extends HttpServlet {
             Visit visit = visitService.checkInPatient(appointmentId);
             response.sendRedirect(request.getContextPath() + "/reception/checkin?success=checkedin&visitId=" + visit.getVisitId());
         } catch (Exception ex) {
-            response.sendRedirect(request.getContextPath() + "/reception/checkin?error=" + ex.getMessage());
+            response.sendRedirect(request.getContextPath() + "/reception/checkin?error="
+                    + java.net.URLEncoder.encode(ex.getMessage() != null ? ex.getMessage() : "Không thể check-in", "UTF-8"));
         }
     }
 
@@ -169,6 +170,17 @@ public class CheckInServlet extends HttpServlet {
         String operatory = request.getParameter("operatory");
         try {
             int visitId = Integer.parseInt(visitIdParam);
+            Visit visit = visitService.getVisitById(visitId);
+            if (visit == null) {
+                throw new IllegalArgumentException("Không tìm thấy lượt khám");
+            }
+            HttpSession session = request.getSession(false);
+            User currentUser = session != null ? (User) session.getAttribute("currentUser") : null;
+            if (currentUser != null && "Dentist".equalsIgnoreCase(currentUser.getRoleName())
+                    && currentUser.getUserId() != visit.getPrimaryDentistId()) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Lượt khám không được phân công cho bác sĩ này");
+                return;
+            }
             visitService.startExamination(visitId, operatory);
             response.sendRedirect(request.getContextPath() + "/clinical/examination?visitId=" + visitId + "&success=started");
         } catch (Exception ex) {

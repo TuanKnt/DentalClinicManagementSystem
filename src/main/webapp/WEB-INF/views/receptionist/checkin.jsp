@@ -60,6 +60,12 @@
                     </div>
                 </div>
             </c:if>
+            <c:if test="${not empty param.error}">
+                <div class="alert-banner" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;">
+                    <span class="alert-banner-icon">⚠️</span>
+                    <div><strong>Không thể check-in:</strong> ${param.error}</div>
+                </div>
+            </c:if>
 
             <!-- KPI Summary Cards -->
             <div class="kpi-grid">

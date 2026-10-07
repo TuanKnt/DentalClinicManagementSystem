@@ -53,13 +53,15 @@ public class VisitService {
             );
         }
 
-        // 1. Transition Appointment status to Arrived
-        boolean updated = appointmentDAO.updateStatus(appointmentId, Appointment.STATUS_ARRIVED);
-        if (!updated) {
-            throw new RuntimeException("Không thể cập nhật trạng thái lịch hẹn sang Arrived");
+        // A retry (or two receptionists clicking at the same time) must never
+        // create two encounters for one appointment. Keep this check before
+        // changing the appointment state so a duplicate request is harmless.
+        Visit existingVisit = visitDAO.findByAppointmentId(appointmentId);
+        if (existingVisit != null) {
+            throw new IllegalStateException("Lịch hẹn này đã có lượt khám #" + existingVisit.getVisitId());
         }
 
-        // 2. Instantiate and persist new Visit in Waiting status
+        // Instantiate the Visit before entering the atomic persistence path.
         Visit visit = new Visit();
         visit.setPatientId(appt.getPatientId());
         visit.setPrimaryDentistId(appt.getDentistId());
@@ -69,8 +71,31 @@ public class VisitService {
         visit.setVisitType(Visit.TYPE_SCHEDULED);
         visit.setNotes(appt.getReason() != null ? "Lịch hẹn: " + appt.getReason() : "Tiếp đón theo lịch hẹn");
 
+        // Production VisitDAO uses one SQL transaction for both writes. A 0
+        // return keeps compatibility with older adapters/mocks and falls back
+        // to the original two-DAO flow below.
+        int atomicVisitId = visitDAO.checkInAndCreateVisit(appointmentId, visit);
+        if (atomicVisitId > 0) {
+            visit.setVisitId(atomicVisitId);
+            return visit;
+        }
+        if (atomicVisitId < 0) {
+            throw new RuntimeException("Không thể cập nhật trạng thái lịch hẹn và khởi tạo lượt khám");
+        }
+
+        // Legacy fallback: compensate if Visit creation fails after the first
+        // write. This branch is used only by older adapters.
+        boolean updated = appointmentDAO.updateStatus(appointmentId, Appointment.STATUS_ARRIVED);
+        if (!updated) {
+            throw new RuntimeException("Không thể cập nhật trạng thái lịch hẹn sang Arrived");
+        }
+
         int visitId = visitDAO.create(visit);
         if (visitId <= 0) {
+            // The two DAO calls use separate connections in the legacy data
+            // layer. Compensate the first write when the second one fails so
+            // reception does not leave an Arrived appointment without a Visit.
+            appointmentDAO.updateStatus(appointmentId, appt.getStatus());
             throw new RuntimeException("Lỗi hệ thống: Không thể khởi tạo lượt khám thực tế (Visit)");
         }
         visit.setVisitId(visitId);
@@ -142,7 +167,21 @@ public class VisitService {
         if (v == null) {
             throw new IllegalArgumentException("Không tìm thấy lượt khám với mã: " + visitId);
         }
-        return visitDAO.updateStatus(visitId, Visit.STATUS_COMPLETED);
+        if (!Visit.STATUS_IN_PROGRESS.equalsIgnoreCase(v.getStatus())) {
+            throw new IllegalStateException("Chỉ có thể hoàn tất lượt khám đang ở trạng thái InProgress");
+        }
+        boolean visitCompleted = visitDAO.updateStatus(visitId, Visit.STATUS_COMPLETED);
+        if (!visitCompleted) {
+            throw new IllegalStateException("Không thể hoàn tất lượt khám");
+        }
+        if (v.getAppointmentId() != null) {
+            boolean updatedAppointment = appointmentDAO.updateStatus(v.getAppointmentId(), Appointment.STATUS_COMPLETED);
+            if (!updatedAppointment) {
+                visitDAO.updateStatus(visitId, Visit.STATUS_IN_PROGRESS);
+                throw new IllegalStateException("Không thể cập nhật trạng thái lịch hẹn liên kết");
+            }
+        }
+        return true;
     }
 
     public Visit getVisitById(int visitId) {

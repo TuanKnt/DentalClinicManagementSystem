@@ -22,6 +22,72 @@ public class VisitDAO {
 
     private static final Logger LOGGER = Logger.getLogger(VisitDAO.class.getName());
 
+    /**
+     * Atomically marks a scheduled appointment Arrived and creates its Visit.
+     * Returns the generated VisitId, -1 on a database failure and 0 when the
+     * caller should use the legacy DAO flow (kept for mocked/older adapters).
+     */
+    public int checkInAndCreateVisit(int appointmentId, Visit visit) {
+        if (appointmentId <= 0 || visit == null) {
+            return -1;
+        }
+        String updateAppointment = "UPDATE dbo.Appointments SET Status = 'Arrived', UpdatedAt = SYSDATETIME() "
+                + "WHERE AppointmentId = ? AND Status IN ('Pending', 'Confirmed')";
+        String insertVisit = "INSERT INTO dbo.Visits (PatientId, PrimaryDentistId, AppointmentId, CheckInTime, Status, VisitType, Notes, Operatory, CreatedAt) "
+                + "VALUES (?, ?, ?, SYSDATETIME(), ?, ?, ?, ?, SYSDATETIME())";
+        Connection conn = null;
+        PreparedStatement appointmentPs = null;
+        PreparedStatement visitPs = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            conn.setAutoCommit(false);
+
+            appointmentPs = conn.prepareStatement(updateAppointment);
+            appointmentPs.setInt(1, appointmentId);
+            if (appointmentPs.executeUpdate() != 1) {
+                conn.rollback();
+                return -1;
+            }
+
+            visitPs = conn.prepareStatement(insertVisit, Statement.RETURN_GENERATED_KEYS);
+            visitPs.setInt(1, visit.getPatientId());
+            visitPs.setInt(2, visit.getPrimaryDentistId());
+            visitPs.setInt(3, appointmentId);
+            visitPs.setString(4, visit.getStatus());
+            visitPs.setString(5, visit.getVisitType());
+            visitPs.setString(6, visit.getNotes());
+            visitPs.setString(7, visit.getOperatory() != null ? visit.getOperatory() : "Ghế 1 - P.101");
+            if (visitPs.executeUpdate() != 1) {
+                conn.rollback();
+                return -1;
+            }
+            rs = visitPs.getGeneratedKeys();
+            if (!rs.next()) {
+                conn.rollback();
+                return -1;
+            }
+            int visitId = rs.getInt(1);
+            conn.commit();
+            visit.setVisitId(visitId);
+            return visitId;
+        } catch (SQLException ex) {
+            if (conn != null) {
+                try { conn.rollback(); } catch (SQLException rollbackEx) {
+                    LOGGER.log(Level.WARNING, "Could not rollback check-in transaction", rollbackEx);
+                }
+            }
+            LOGGER.log(Level.SEVERE, "Error atomically checking in appointment: " + appointmentId, ex);
+            return -1;
+        } finally {
+            if (conn != null) {
+                try { conn.setAutoCommit(true); } catch (SQLException ignored) { }
+            }
+            DBContext.close(null, visitPs, rs);
+            DBContext.close(conn, appointmentPs, null);
+        }
+    }
+
     public int create(Visit visit) {
         String sql = "INSERT INTO dbo.Visits (PatientId, PrimaryDentistId, AppointmentId, CheckInTime, Status, VisitType, Notes, Operatory, CreatedAt) " +
                      "VALUES (?, ?, ?, SYSDATETIME(), ?, ?, ?, ?, SYSDATETIME())";
@@ -66,7 +132,7 @@ public class VisitDAO {
 
     public Visit findById(int visitId) {
         String sql = "SELECT v.VisitId, v.PatientId, v.PrimaryDentistId, v.AppointmentId, v.CheckInTime, v.CheckOutTime, " +
-                     "v.Status, v.VisitType, v.Notes, v.CreatedAt, v.UpdatedAt, " +
+                     "v.Status, v.VisitType, v.Notes, v.Operatory, v.CreatedAt, v.UpdatedAt, " +
                      "p.FullName AS PatientName, p.Phone AS PatientPhone, p.MedicalAlerts, p.Allergies, " +
                      "du.FullName AS DentistName " +
                      "FROM dbo.Visits v " +
@@ -97,7 +163,7 @@ public class VisitDAO {
 
     public Visit findByAppointmentId(int appointmentId) {
         String sql = "SELECT v.VisitId, v.PatientId, v.PrimaryDentistId, v.AppointmentId, v.CheckInTime, v.CheckOutTime, " +
-                     "v.Status, v.VisitType, v.Notes, v.CreatedAt, v.UpdatedAt, " +
+                     "v.Status, v.VisitType, v.Notes, v.Operatory, v.CreatedAt, v.UpdatedAt, " +
                      "p.FullName AS PatientName, p.Phone AS PatientPhone, p.MedicalAlerts, p.Allergies, " +
                      "du.FullName AS DentistName " +
                      "FROM dbo.Visits v " +
@@ -168,7 +234,7 @@ public class VisitDAO {
         List<Visit> list = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
             "SELECT v.VisitId, v.PatientId, v.PrimaryDentistId, v.AppointmentId, v.CheckInTime, v.CheckOutTime, " +
-            "v.Status, v.VisitType, v.Notes, v.CreatedAt, v.UpdatedAt, " +
+            "v.Status, v.VisitType, v.Notes, v.Operatory, v.CreatedAt, v.UpdatedAt, " +
             "p.FullName AS PatientName, p.Phone AS PatientPhone, p.MedicalAlerts, p.Allergies, " +
             "du.FullName AS DentistName " +
             "FROM dbo.Visits v " +
