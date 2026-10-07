@@ -2,11 +2,13 @@ package com.dcms.service;
 
 import com.dcms.dao.ClinicalExaminationDAO;
 import com.dcms.dao.DentalAttachmentDAO;
+import com.dcms.dao.AppointmentDAO;
 import com.dcms.dao.PreTreatmentAssessmentDAO;
 import com.dcms.dao.ToothFindingDAO;
 import com.dcms.dao.VisitDAO;
 import com.dcms.model.ClinicalExamination;
 import com.dcms.model.DentalAttachment;
+import com.dcms.model.Appointment;
 import com.dcms.model.PreTreatmentAssessment;
 import com.dcms.model.ToothFinding;
 import com.dcms.model.Visit;
@@ -24,9 +26,10 @@ public class ClinicalService {
     private final ToothFindingDAO toothFindingDAO;
     private final ClinicalExaminationDAO examinationDAO;
     private final DentalAttachmentDAO attachmentDAO;
+    private final AppointmentDAO appointmentDAO;
 
     public ClinicalService() {
-        this(new VisitDAO(), new PreTreatmentAssessmentDAO(), new ToothFindingDAO(), new ClinicalExaminationDAO(), new DentalAttachmentDAO());
+        this(new VisitDAO(), new PreTreatmentAssessmentDAO(), new ToothFindingDAO(), new ClinicalExaminationDAO(), new DentalAttachmentDAO(), new AppointmentDAO());
     }
 
     public ClinicalService(VisitDAO visitDAO,
@@ -34,11 +37,21 @@ public class ClinicalService {
                            ToothFindingDAO toothFindingDAO,
                            ClinicalExaminationDAO examinationDAO,
                            DentalAttachmentDAO attachmentDAO) {
+        this(visitDAO, assessmentDAO, toothFindingDAO, examinationDAO, attachmentDAO, new AppointmentDAO());
+    }
+
+    public ClinicalService(VisitDAO visitDAO,
+                           PreTreatmentAssessmentDAO assessmentDAO,
+                           ToothFindingDAO toothFindingDAO,
+                           ClinicalExaminationDAO examinationDAO,
+                           DentalAttachmentDAO attachmentDAO,
+                           AppointmentDAO appointmentDAO) {
         this.visitDAO = visitDAO;
         this.assessmentDAO = assessmentDAO;
         this.toothFindingDAO = toothFindingDAO;
         this.examinationDAO = examinationDAO;
         this.attachmentDAO = attachmentDAO;
+        this.appointmentDAO = appointmentDAO;
     }
 
     // 1. Visit Status & Operatory Assignment
@@ -56,7 +69,27 @@ public class ClinicalService {
         if (visitId <= 0) {
             throw new IllegalArgumentException("Mã lượt khám không hợp lệ.");
         }
-        return visitDAO.updateStatus(visitId, Visit.STATUS_COMPLETED);
+        Visit visit = visitDAO.findById(visitId);
+        if (visit != null && Visit.STATUS_COMPLETED.equalsIgnoreCase(visit.getStatus())) {
+            return true;
+        }
+
+        boolean visitCompleted = visitDAO.updateStatus(visitId, Visit.STATUS_COMPLETED);
+        if (!visitCompleted) {
+            return false;
+        }
+        if (visit != null && visit.getAppointmentId() != null) {
+            boolean appointmentCompleted = appointmentDAO.updateStatus(
+                    visit.getAppointmentId(), Appointment.STATUS_COMPLETED);
+            if (!appointmentCompleted) {
+                // Best-effort compensation for the legacy two-DAO layer. This
+                // avoids showing an appointment as completed when its Visit
+                // could not be finalized consistently.
+                visitDAO.updateStatus(visitId, Visit.STATUS_IN_PROGRESS);
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean assignOperatory(int visitId, String operatory) {
@@ -94,8 +127,11 @@ public class ClinicalService {
         if (finding == null) {
             throw new IllegalArgumentException("Dữ liệu răng không được để trống.");
         }
-        if (finding.getToothNumber() < 11 || finding.getToothNumber() > 48) {
-            throw new IllegalArgumentException("Số hiệu răng phải theo chuẩn FDI (11 đến 48).");
+        int tooth = finding.getToothNumber();
+        int quadrant = tooth / 10;
+        int position = tooth % 10;
+        if (quadrant < 1 || quadrant > 4 || position < 1 || position > 8) {
+            throw new IllegalArgumentException("Số hiệu răng phải theo chuẩn FDI (11-18, 21-28, 31-38 hoặc 41-48).");
         }
         return toothFindingDAO.create(finding);
     }

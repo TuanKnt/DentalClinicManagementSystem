@@ -618,10 +618,10 @@
                             <span>Phim X-Quang & Hình Ảnh Trong Miệng Lượt Khám Này</span>
                         </div>
                         <!-- Upload attachment form -->
-                        <form action="${pageContext.request.contextPath}/clinical/attachments" method="POST" style="display: flex; gap: 8px; margin: 0;">
+                        <form action="${pageContext.request.contextPath}/clinical/attachments" method="POST" enctype="multipart/form-data" style="display: flex; gap: 8px; margin: 0;">
                             <input type="hidden" name="patientId" value="${patient.patientId}" />
                             <input type="hidden" name="visitId" value="${visit.visitId}" />
-                            <input type="text" name="fileName" placeholder="Tên hình ảnh (VD: X-quang chóp R36)" class="form-control" style="width: 220px; padding: 6px 10px; font-size: 12px;" required />
+                            <input type="file" name="file" accept="image/*,.pdf" class="form-control" style="width: 240px; padding: 6px 10px; font-size: 12px;" required />
                             <select name="fileType" class="form-control" style="width: 140px; padding: 6px 10px; font-size: 12px;">
                                 <option value="XRay">Phim X-Quang</option>
                                 <option value="IntraoralPhoto">Ảnh trong miệng</option>

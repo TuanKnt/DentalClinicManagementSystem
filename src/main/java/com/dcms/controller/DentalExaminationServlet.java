@@ -9,6 +9,7 @@ import com.dcms.model.ToothFinding;
 import com.dcms.model.User;
 import com.dcms.model.Visit;
 import com.dcms.service.ClinicalService;
+import com.dcms.service.VisitService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,15 +33,21 @@ import java.util.List;
 public class DentalExaminationServlet extends HttpServlet {
 
     private final ClinicalService clinicalService;
+    private final VisitService visitService;
     private final PatientDAO patientDAO;
 
     public DentalExaminationServlet() {
-        this.clinicalService = new ClinicalService();
-        this.patientDAO = new PatientDAO();
+        this(new ClinicalService(), new VisitService(), new PatientDAO());
     }
 
     public DentalExaminationServlet(ClinicalService clinicalService, PatientDAO patientDAO) {
+        this(clinicalService, new VisitService(), patientDAO);
+    }
+
+    public DentalExaminationServlet(ClinicalService clinicalService, VisitService visitService,
+                                   PatientDAO patientDAO) {
         this.clinicalService = clinicalService;
+        this.visitService = visitService;
         this.patientDAO = patientDAO;
     }
 
@@ -64,6 +71,10 @@ public class DentalExaminationServlet extends HttpServlet {
         Visit visit = clinicalService.getVisitById(visitId);
         if (visit == null) {
             response.sendRedirect(request.getContextPath() + "/dentist/queue?error=not_found");
+            return;
+        }
+
+        if (!isVisitAccessibleByCurrentUser(request, response, visit)) {
             return;
         }
 
@@ -117,6 +128,10 @@ public class DentalExaminationServlet extends HttpServlet {
             return;
         }
 
+        if (!isVisitAccessibleByCurrentUser(request, response, visit)) {
+            return;
+        }
+
         HttpSession session = request.getSession(false);
         User currentUser = (session != null) ? (User) session.getAttribute("currentUser") : null;
         int performedBy = (currentUser != null) ? currentUser.getUserId() : visit.getDentistId();
@@ -136,7 +151,7 @@ public class DentalExaminationServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/clinical/examination?visitId=" + visitId + "&success=operatory_updated");
                 return;
             } else if ("complete_visit".equals(action)) {
-                clinicalService.completeExamination(visitId);
+                visitService.completeVisit(visitId);
                 response.sendRedirect(request.getContextPath() + "/dentist/queue?success=visit_completed");
                 return;
             }
@@ -146,6 +161,21 @@ public class DentalExaminationServlet extends HttpServlet {
         }
 
         response.sendRedirect(request.getContextPath() + "/clinical/examination?visitId=" + visitId);
+    }
+
+    /** A dentist may work only on visits assigned to that dentist. Assistants
+     * retain chairside access, while the filter controls their broader role. */
+    private boolean isVisitAccessibleByCurrentUser(HttpServletRequest request,
+                                                   HttpServletResponse response,
+                                                   Visit visit) throws IOException {
+        HttpSession session = request.getSession(false);
+        User currentUser = session != null ? (User) session.getAttribute("currentUser") : null;
+        if (currentUser != null && "Dentist".equalsIgnoreCase(currentUser.getRoleName())
+                && currentUser.getUserId() != visit.getPrimaryDentistId()) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Lượt khám không được phân công cho bác sĩ này");
+            return false;
+        }
+        return true;
     }
 
     private void handleSaveVitals(HttpServletRequest request, Visit visit, int performedBy) {
