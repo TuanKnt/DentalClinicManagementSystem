@@ -6,16 +6,24 @@ import com.dcms.service.ClinicalService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 /**
  * Controller handling dental image and document attachments (X-rays, Intraoral photos, CBCT/OPG).
  */
 @WebServlet(name = "DentalAttachmentServlet", urlPatterns = {"/clinical/attachments"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 10 * 1024 * 1024,
+        maxRequestSize = 12 * 1024 * 1024)
 public class DentalAttachmentServlet extends HttpServlet {
 
     private final ClinicalService clinicalService;
@@ -59,12 +67,44 @@ public class DentalAttachmentServlet extends HttpServlet {
                     ? Integer.parseInt(visitIdParam.trim())
                     : null;
 
-            if (fileName == null || fileName.trim().isEmpty()) {
-                fileName = "Hinh_Anh_Nha_Khoa_" + System.currentTimeMillis();
+            Part upload = null;
+            try {
+                upload = request.getPart("file");
+            } catch (IllegalStateException ex) {
+                throw new IllegalArgumentException("Tệp tải lên vượt quá giới hạn 10 MB");
+            } catch (ServletException ignored) {
+                // A legacy metadata-only form may still submit url/path data.
             }
-            if (filePath == null || filePath.trim().isEmpty()) {
-                // If not provided, fallback to standard mock placeholder or uploaded image asset
-                filePath = "assets/images/dental-sample-xray.jpg";
+            if (upload != null && upload.getSize() > 0) {
+                String submittedName = Paths.get(upload.getSubmittedFileName() == null
+                        ? "attachment" : upload.getSubmittedFileName()).getFileName().toString();
+                String originalName = (fileName == null || fileName.trim().isEmpty())
+                        ? submittedName : fileName.trim();
+                String extension = "";
+                int dot = submittedName.lastIndexOf('.');
+                if (dot > 0 && dot < submittedName.length() - 1) {
+                    extension = submittedName.substring(dot).toLowerCase(java.util.Locale.ROOT);
+                }
+                if (!java.util.Set.of(".jpg", ".jpeg", ".png", ".gif", ".webp", ".pdf").contains(extension)) {
+                    throw new IllegalArgumentException("Chỉ hỗ trợ tệp JPG, PNG, GIF, WEBP hoặc PDF");
+                }
+                String storedName = UUID.randomUUID().toString().replace("-", "") + extension;
+                String realUploadRoot = getServletContext().getRealPath("/uploads/dental");
+                if (realUploadRoot == null || realUploadRoot.trim().isEmpty()) {
+                    throw new IOException("Không xác định được thư mục lưu file trên máy chủ");
+                }
+                Path uploadRoot = Paths.get(realUploadRoot).toAbsolutePath().normalize();
+                Files.createDirectories(uploadRoot);
+                upload.write(uploadRoot.resolve(storedName).toString());
+                fileName = originalName;
+                filePath = "uploads/dental/" + storedName;
+            } else {
+                if (fileName == null || fileName.trim().isEmpty()) {
+                    fileName = "Hinh_Anh_Nha_Khoa_" + System.currentTimeMillis();
+                }
+                if (filePath == null || filePath.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Vui lòng chọn file hình ảnh hoặc cung cấp đường dẫn hợp lệ");
+                }
             }
             if (fileType == null || fileType.trim().isEmpty()) {
                 fileType = DentalAttachment.TYPE_XRAY;
@@ -83,7 +123,10 @@ public class DentalAttachmentServlet extends HttpServlet {
             attachment.setNotes(notes != null ? notes.trim() : "");
             attachment.setUploadedBy(uploadedBy);
 
-            clinicalService.addAttachment(attachment);
+            int attachmentId = clinicalService.addAttachment(attachment);
+            if (attachmentId <= 0) {
+                throw new IOException("Không thể lưu thông tin file đính kèm vào cơ sở dữ liệu");
+            }
 
             if (returnUrl != null && !returnUrl.trim().isEmpty()) {
                 response.sendRedirect(request.getContextPath() + returnUrl + (returnUrl.contains("?") ? "&" : "?") + "success=attachment_added");
