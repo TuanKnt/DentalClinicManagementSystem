@@ -3,10 +3,12 @@
 
 <aside class="app-sidebar">
     <a href="${pageContext.request.contextPath}/" class="sidebar-brand">
-        <div class="brand-icon">🦷</div>
+        <div class="brand-icon">
+            <img src="${pageContext.request.contextPath}/assets/images/dcms-dental-mark.svg" alt="DCMS Dental Care" />
+        </div>
         <div class="brand-info">
-            <span class="brand-name">Nha Khoa Dr.Smile</span>
-            <span class="brand-badge">DCMS — Quản Lý Phòng Khám</span>
+            <span class="brand-name">DCMS Dental Care</span>
+            <span class="brand-badge">Dr.Smile Inspired</span>
         </div>
     </a>
 

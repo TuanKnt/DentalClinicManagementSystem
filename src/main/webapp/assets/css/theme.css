@@ -158,10 +158,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
     flex-shrink: 0;
     box-shadow: 0 4px 12px rgba(0, 168, 204, 0.35);
     position: relative;
+    overflow: hidden;
+}
+
+.brand-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .brand-icon::after {
@@ -1583,5 +1590,164 @@ textarea.form-control {
     }
     .header-search {
         width: 240px;
+    }
+}
+
+/* ========================================================================
+   DCMS DENTAL CARE POLISH
+   Small interaction and accessibility improvements shared by every screen.
+   ======================================================================== */
+:where(a, button, input, select, textarea):focus-visible {
+    outline: 3px solid rgba(0, 168, 204, 0.45);
+    outline-offset: 2px;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--drsmile-navy);
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    font-size: 20px;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-xs);
+}
+
+button,
+.btn,
+.nav-item,
+.search-item,
+.pagination a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn:disabled,
+button:disabled {
+    cursor: not-allowed;
+    opacity: .58;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus {
+    border-color: var(--drsmile-cyan);
+    box-shadow: 0 0 0 4px rgba(0, 168, 204, 0.12);
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.52);
+    backdrop-filter: blur(4px);
+}
+
+.modal-backdrop[hidden] {
+    display: none;
+}
+
+.modal-card {
+    width: min(100%, 520px);
+    padding: 22px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-xl);
+}
+
+.login-logo-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: inherit;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+    }
+
+    .app-shell.sidebar-open::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 37, 64, .42);
+        z-index: 45;
+    }
+
+    .app-sidebar {
+        display: flex;
+        width: min(86vw, 300px);
+        transform: translateX(-105%);
+        transition: transform var(--transition-smooth);
+        z-index: 60;
+    }
+
+    .app-shell.sidebar-open .app-sidebar {
+        transform: translateX(0);
+    }
+
+    .app-header {
+        padding: 0 16px;
+        gap: 12px;
+    }
+
+    .header-search {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+    }
+
+    .header-right {
+        gap: 8px;
+    }
+
+    .clinic-status-pill {
+        padding: 6px 9px;
+        font-size: 0;
+    }
+
+    .clinic-status-pill .pulse-dot {
+        width: 9px;
+        height: 9px;
+    }
+
+    .live-clock {
+        display: none;
+    }
+
+    .page-content {
+        padding: 20px 16px 32px;
+    }
+
+    .card-body {
+        padding: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }

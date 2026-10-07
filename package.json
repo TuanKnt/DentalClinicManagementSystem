@@ -1,0 +1,11 @@
+{
+  "name": "servlet-jsp-srs-screenshot-agent",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "srs:screenshots": "node .ai-srs/playwright/capture-screens.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}

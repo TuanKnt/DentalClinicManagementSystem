@@ -5,9 +5,9 @@
 
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)]()
 [![Java](https://img.shields.io/badge/Java-17-blue)]()
-[![Platform](https://img.shields.io/badge/Servlet-4.0.1-orange)]()
+[![Platform](https://img.shields.io/badge/Jakarta%20Servlet-6.0-orange)]()
 [![Database](https://img.shields.io/badge/Database-MS%20SQL%20Server-red)]()
-[![Tests](https://img.shields.io/badge/Automated%20Tests-33%20Passing-success)]()
+[![Tests](https://img.shields.io/badge/Automated%20Tests-56%20Passing-success)]()
 
 ---
 
@@ -26,9 +26,9 @@ Dự án được xây dựng dựa trên bản đặc tả chuẩn hóa: [DCMS_
 ---
 
 ## 🛠️ 2. Công Nghệ & Kiến Trúc
-- **Ngôn ngữ & Nền tảng:** Java 17, Java Servlet 4.0.1, JSP, JSTL 1.2
+- **Ngôn ngữ & Nền tảng:** Java 17, Jakarta Servlet 6.0, JSP 3.1, JSTL 3.0
 - **Mô hình kiến trúc:** Layered MVC 3 tầng (DAO - Service - Servlet Controller - JSP View)
-- **Hệ quản trị CSDL:** Microsoft SQL Server 2017+
+- **Hệ quản trị CSDL:** Microsoft SQL Server 2019+
 - **Bảo mật:** BCrypt Password Hashing (`org.mindrot:jbcrypt`), Session HttpOnly, `AuthFilter` (RBAC)
 - **Công cụ Build & Test:** Apache Maven 3.9.6, JUnit 5 (`org.junit.jupiter`), Mockito 5.11
 - **IDE hỗ trợ:** Apache NetBeans 21 / NetBeans 8.2 (Nhận diện Maven Webapp ngay khi mở)
@@ -60,7 +60,7 @@ DentalClinicManagementSystem/
 │   │       ├── dentist/                        # queue.jsp
 │   │       └── common/                         # access-denied.jsp
 │   └── index.jsp                               # Trang chào mừng
-└── src/test/java/com/dcms/service/             # BỘ TEST TỰ ĐỘNG (33 Automated Tests)
+└── src/test/java/com/dcms/service/             # BỘ TEST TỰ ĐỘNG (56 Automated Tests)
 ```
 
 ---
@@ -70,14 +70,15 @@ DentalClinicManagementSystem/
 ### Bước 1: Khởi tạo Cơ sở Dữ liệu
 1. Mở SQL Server Management Studio (SSMS).
 2. Mở file [database/DCMS_Init_Database_v1.0.sql](database/DCMS_Init_Database_v1.0.sql) và nhấn **Execute** để tạo database `DCMS_DB` cùng dữ liệu mẫu.
-3. Cập nhật mật khẩu SQL Server của bạn tại file [src/main/resources/db.properties](src/main/resources/db.properties) nếu khác `sa/123456`.
+3. Nếu dùng các màn hình lâm sàng, chạy tiếp [database/DCMS_Iteration2_Schema.sql](database/DCMS_Iteration2_Schema.sql) để tạo các bảng khám, odontogram và tệp đính kèm.
+4. Cập nhật mật khẩu SQL Server của bạn tại file [src/main/resources/db.properties](src/main/resources/db.properties) nếu khác `sa/123456`.
 
 ### Bước 2: Chạy Kiểm Thử Tự Động (Automated Testing)
 Mở terminal tại thư mục dự án và chạy:
 ```bash
 mvn test
 ```
-> Kết quả mong đợi: `Tests run: 33, Failures: 0, Errors: 0, Skipped: 0` - `BUILD SUCCESS`.
+> Kết quả mong đợi: `Tests run: 56, Failures: 0, Errors: 0, Skipped: 0` - `BUILD SUCCESS`.
 
 ### Bước 3: Mở & Chạy Dự Án Trên NetBeans
 1. Mở **Apache NetBeans**.
@@ -101,3 +102,7 @@ mvn test
 - **Nhóm:** G3 — Lớp SE2064
 - **Dự án:** Dental Clinic Management System (DCMS)
 - **Môn học:** Software Project (SWP391)
+
+For SRS generation, follow .ai-srs/prompts/generate-functional-requirements.md.
+Use Playwright to capture real system screenshots into docs/srs/images/.
+Do not invent requirements.

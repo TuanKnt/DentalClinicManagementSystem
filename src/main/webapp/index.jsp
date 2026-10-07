@@ -18,9 +18,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nha khoa Dr.Smile — Nơi khởi nguồn cho nụ cười rạng rỡ | DCMS</title>
-    <meta name="description" content="Nha khoa Dr.Smile chuyên gia răng sứ thẩm mỹ, niềng răng, implant và điều trị nha khoa kỹ thuật cao với hơn 17 năm kinh nghiệm tại Hà Nội.">
-    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/Logo-PS.png">
+    <title>DCMS Dental Care — Dr.Smile Inspired | Nơi khởi nguồn cho nụ cười rạng rỡ</title>
+    <meta name="description" content="DCMS Dental Care — Dr.Smile Inspired, chuyên gia răng sứ thẩm mỹ, niềng răng, implant và điều trị nha khoa kỹ thuật cao tại Hà Nội.">
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/assets/images/dcms-dental-mark.svg">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <style>
         :root {
@@ -992,6 +992,16 @@
             .dr-stats-row, .commitments-grid, .portal-grid-3, .service-cards-grid, .doctor-cert-grid, .news-grid { grid-template-columns: repeat(2, 1fr); }
             .doctor-hero-card, .about-story-row, .booking-page-layout, .deals-grid-4 { grid-template-columns: 1fr; }
         }
+
+        @media (max-width: 600px) {
+            .dr-header-main { padding: 14px 18px; }
+            .dr-brand-motto { display: none; }
+            .dr-brand-name { font-size: 18px; }
+            .booking-form-box, .booking-info-box { padding: 22px 18px; }
+            .booking-grid-2 { grid-template-columns: 1fr !important; }
+            .dr-stats-row, .commitments-grid, .portal-grid-3, .service-cards-grid, .doctor-cert-grid, .news-grid { grid-template-columns: 1fr; }
+            .dr-footer { padding-left: 20px; padding-right: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -1023,10 +1033,10 @@
     <!-- 2. HEADER THƯƠNG HIỆU & HÀNH ĐỘNG NHANH -->
     <header class="dr-header-main">
         <a href="#home" onclick="switchTab('home')" class="dr-brand-link">
-            <img src="${pageContext.request.contextPath}/assets/images/Logo-PS.png" alt="Nha Khoa Dr.Smile">
+            <img src="${pageContext.request.contextPath}/assets/images/dcms-dental-mark.svg" alt="DCMS Dental Care">
             <div class="dr-brand-text">
-                <span class="dr-brand-name">Nha Khoa Dr.Smile</span>
-                <span class="dr-brand-motto">Nơi khởi nguồn cho nụ cười rạng rỡ</span>
+                <span class="dr-brand-name">DCMS Dental Care</span>
+                <span class="dr-brand-motto">Dr.Smile Inspired · Nơi khởi nguồn cho nụ cười rạng rỡ</span>
             </div>
         </a>
 
@@ -1700,18 +1710,18 @@
                     </div>
 
                     <form id="onlineBookingForm" onsubmit="handleTabBooking(event)">
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                        <div class="booking-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
                             <div class="booking-input-group">
                                 <label style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Họ và tên bệnh nhân *</label>
                                 <input type="text" name="fullName" class="form-control" placeholder="Nguyễn Văn A" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
                             </div>
                             <div class="booking-input-group">
                                 <label style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Số điện thoại *</label>
-                                <input type="tel" name="phoneNumber" class="form-control" placeholder="09xxxxxxxx" pattern="[0-9]{10,11}" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
+                                <input type="tel" name="phone" class="form-control" placeholder="09xxxxxxxx" pattern="0[35789][0-9]{8}" minlength="10" maxlength="10" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
                             </div>
                         </div>
 
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                        <div class="booking-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
                             <div class="booking-input-group">
                                 <label style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Ngày hẹn khám *</label>
                                 <input type="date" name="appointmentDate" class="form-control" value="${todayStr}" min="${todayStr}" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
@@ -1724,12 +1734,12 @@
                                     <option value="11:00">11:00 – 11:45 (Trưa)</option>
                                     <option value="14:00">14:00 – 14:45 (Chiều)</option>
                                     <option value="15:30">15:30 – 16:15 (Chiều)</option>
-                                    <option value="17:00">17:00 – 17:45 (Tối)</option>
+                                    <option value="16:00">16:00 – 16:45 (Chiều)</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                        <div class="booking-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
                             <div class="booking-input-group">
                                 <label style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Bác sĩ phụ trách</label>
                                 <select name="dentistId" id="bookingDentistSelect" class="form-control" style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">

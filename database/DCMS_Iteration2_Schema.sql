@@ -43,7 +43,14 @@ BEGIN
         FindingId INT IDENTITY(1,1) PRIMARY KEY,
         PatientId INT NOT NULL,
         VisitId INT NOT NULL,
-        ToothNumber INT NOT NULL CHECK (ToothNumber BETWEEN 11 AND 48),
+        -- FDI notation is four quadrants, each with teeth 1..8. A plain
+        -- BETWEEN 11 AND 48 incorrectly accepts values such as 19 or 29.
+        ToothNumber INT NOT NULL CHECK (
+            (ToothNumber BETWEEN 11 AND 18) OR
+            (ToothNumber BETWEEN 21 AND 28) OR
+            (ToothNumber BETWEEN 31 AND 38) OR
+            (ToothNumber BETWEEN 41 AND 48)
+        ),
         Surface NVARCHAR(20) NOT NULL DEFAULT 'WholeTooth',
         Condition NVARCHAR(50) NOT NULL, -- 'Caries', 'Missing', 'Filled', 'Crown', 'RootCanal', 'Healthy'
         Notes NVARCHAR(255) NULL,
@@ -53,6 +60,20 @@ BEGIN
     );
 
     CREATE NONCLUSTERED INDEX IX_ToothFindings_Patient ON dbo.ToothFindings(PatientId, ToothNumber);
+END
+GO
+
+-- Tighten installations created from an older migration where the check was
+-- only BETWEEN 11 AND 48 (which allowed invalid values such as 19).
+IF OBJECT_ID('dbo.ToothFindings', 'U') IS NOT NULL
+   AND NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_ToothFindings_FDI')
+BEGIN
+    ALTER TABLE dbo.ToothFindings ADD CONSTRAINT CK_ToothFindings_FDI CHECK (
+        (ToothNumber BETWEEN 11 AND 18) OR
+        (ToothNumber BETWEEN 21 AND 28) OR
+        (ToothNumber BETWEEN 31 AND 38) OR
+        (ToothNumber BETWEEN 41 AND 48)
+    );
 END
 GO
 

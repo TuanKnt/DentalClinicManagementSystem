@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập — Nha Khoa Dr.Smile | Hệ Thống DCMS</title>
+    <title>Đăng nhập — DCMS Dental Care | Cổng nhân viên</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <style>
         body {
@@ -198,15 +198,17 @@
 <div class="login-wrapper">
     <div style="margin-bottom: 12px;">
         <a href="${pageContext.request.contextPath}/" class="back-home-link">
-            <span>←</span> Quay lại trang chủ Nha khoa Dr.Smile
+            <span>←</span> Quay lại trang chủ DCMS Dental Care
         </a>
     </div>
 
     <div class="login-card">
         <div class="login-brand">
-            <div class="login-logo-wrap">🦷</div>
-            <h1>Nha Khoa Dr.Smile</h1>
-            <p class="brand-subtitle">Cổng Tác Nghiệp Nội Bộ <strong>DCMS</strong> &bull; Bác Sĩ & Cán Bộ Phòng Khám</p>
+            <div class="login-logo-wrap">
+                <img src="${pageContext.request.contextPath}/assets/images/dcms-dental-mark.svg" alt="DCMS Dental Care" />
+            </div>
+            <h1>DCMS Dental Care</h1>
+            <p class="brand-subtitle">Cổng tác nghiệp nội bộ <strong>DCMS</strong> &bull; Bác sĩ &amp; cán bộ phòng khám</p>
         </div>
 
         <c:if test="${not empty errorMessage}">
@@ -219,7 +221,7 @@
         <c:if test="${param.loggedOut eq 'true'}">
             <div class="alert-banner alert-banner-success" style="margin-bottom: 20px; padding: 10px 14px; font-size: 13px;">
                 <span class="alert-banner-icon">✅</span>
-                <div>Bạn đã đăng xuất an toàn khỏi hệ thống Dr.Smile DCMS.</div>
+                <div>Bạn đã đăng xuất an toàn khỏi hệ thống DCMS Dental Care.</div>
             </div>
         </c:if>
 
@@ -279,7 +281,7 @@
     </div>
 
     <div class="login-footer-text">
-        Nha Khoa Dr.Smile — DCMS Dental Clinic Management System<br/>
+        DCMS Dental Care — Dental Clinic Management System<br/>
         Nhóm G3_SE2064 &bull; SWP391
     </div>
 </div>

@@ -1,7 +1,7 @@
 -- =========================================================================
 -- DENTAL CLINIC MANAGEMENT SYSTEM (DCMS)
 -- DATABASE INITIALIZATION SCRIPT - ITERATION 1 (BASELINE v1.0)
--- Target RDBMS: Microsoft SQL Server 2017+
+-- Target RDBMS: Microsoft SQL Server 2019+
 -- Business Baseline: DCMS_Business_Baseline_Standardized.md (BF-01)
 -- =========================================================================
 
@@ -15,6 +15,11 @@ USE DCMS_DB;
 GO
 
 -- 1. DROP EXISTING TABLES IN REVERSE ORDER (FOR CLEAN RE-INSTALL)
+-- Drop Iteration 2 dependants first so the baseline can be re-run safely.
+IF OBJECT_ID('dbo.DentalAttachments', 'U') IS NOT NULL DROP TABLE dbo.DentalAttachments;
+IF OBJECT_ID('dbo.ClinicalExaminations', 'U') IS NOT NULL DROP TABLE dbo.ClinicalExaminations;
+IF OBJECT_ID('dbo.ToothFindings', 'U') IS NOT NULL DROP TABLE dbo.ToothFindings;
+IF OBJECT_ID('dbo.PreTreatmentAssessments', 'U') IS NOT NULL DROP TABLE dbo.PreTreatmentAssessments;
 IF OBJECT_ID('dbo.Visits', 'U') IS NOT NULL DROP TABLE dbo.Visits;
 IF OBJECT_ID('dbo.Appointments', 'U') IS NOT NULL DROP TABLE dbo.Appointments;
 IF OBJECT_ID('dbo.DentistSchedules', 'U') IS NOT NULL DROP TABLE dbo.DentistSchedules;
@@ -87,8 +92,12 @@ CREATE TABLE dbo.Patients (
 );
 GO
 
-CREATE NONCLUSTERED INDEX IX_Patients_Phone ON dbo.Patients(Phone);
 CREATE NONCLUSTERED INDEX IX_Patients_CitizenId ON dbo.Patients(CitizenId);
+-- Prevent duplicate identity records while still allowing patients without a
+-- citizen ID. Phone is the public booking lookup key and must be unique too.
+CREATE UNIQUE NONCLUSTERED INDEX UX_Patients_Phone ON dbo.Patients(Phone);
+CREATE UNIQUE NONCLUSTERED INDEX UX_Patients_CitizenId ON dbo.Patients(CitizenId)
+    WHERE CitizenId IS NOT NULL;
 GO
 
 -- 7. TABLE: Appointments (Scheduled intent to visit - BF-01)
@@ -128,6 +137,7 @@ CREATE TABLE dbo.Visits (
     VisitType NVARCHAR(30) NOT NULL DEFAULT 'Scheduled' 
         CHECK (VisitType IN ('Scheduled', 'WalkIn', 'Emergency')),
     Notes NVARCHAR(MAX) NULL,
+    Operatory NVARCHAR(50) NULL DEFAULT N'Ghế 1 - P.101',
     CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt DATETIME2 NULL,
     CONSTRAINT FK_Visits_Patients FOREIGN KEY (PatientId) REFERENCES dbo.Patients(PatientId),

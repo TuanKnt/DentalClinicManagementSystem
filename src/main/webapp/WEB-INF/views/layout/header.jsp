@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <header class="app-header">
+    <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu điều hướng" aria-expanded="false">
+        <span aria-hidden="true">☰</span>
+    </button>
     <div class="header-search">
         <div class="search-input-wrapper">
             <span class="search-icon-fixed">🔍</span>
@@ -9,6 +12,7 @@
                    id="globalSearchInput" 
                    class="header-search-input" 
                    placeholder="Tìm nhanh theo SĐT, Họ tên, CCCD..." 
+                   aria-label="Tìm nhanh bệnh nhân theo số điện thoại, họ tên hoặc CCCD"
                    autocomplete="off" />
             <span class="search-shortcut">Ctrl+K</span>
         </div>
@@ -18,7 +22,7 @@
     <div class="header-right">
         <div class="clinic-status-pill">
             <span class="pulse-dot"></span>
-            <span>Dr.Smile Clinic — Đang Tiếp Đón</span>
+            <span>DCMS Dental Care — Đang tiếp đón</span>
         </div>
 
         <div class="live-clock" id="liveClockDisplay">
@@ -73,8 +77,19 @@
                                 const a = document.createElement('a');
                                 a.className = 'search-item';
                                 a.href = '${pageContext.request.contextPath}/reception/patients/edit?id=' + p.patientId;
-                                a.innerHTML = '<div><strong>' + p.fullName + '</strong> <span style="color:var(--text-muted);font-size:12px;">(' + (p.gender || '') + ')</span></div>' +
-                                              '<div style="color:var(--primary);font-family:monospace;font-weight:600;">' + p.phone + '</div>';
+                                const identity = document.createElement('div');
+                                const name = document.createElement('strong');
+                                name.textContent = p.fullName || 'Không rõ tên';
+                                identity.appendChild(name);
+                                const gender = document.createElement('span');
+                                gender.style.cssText = 'color:var(--text-muted);font-size:12px;';
+                                gender.textContent = ' (' + (p.gender || '') + ')';
+                                identity.appendChild(gender);
+                                const phone = document.createElement('div');
+                                phone.style.cssText = 'color:var(--primary);font-family:monospace;font-weight:600;';
+                                phone.textContent = p.phone || '';
+                                a.appendChild(identity);
+                                a.appendChild(phone);
                                 searchResults.appendChild(a);
                             });
                             searchResults.style.display = 'block';
@@ -90,6 +105,28 @@
         document.addEventListener('click', function(e) {
             if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
                 searchResults.style.display = 'none';
+            }
+        });
+    }
+
+    // Compact navigation on phones and tablets.
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const appShell = document.querySelector('.app-shell');
+    const appSidebar = document.querySelector('.app-sidebar');
+    if (mobileMenuToggle && appShell && appSidebar) {
+        mobileMenuToggle.addEventListener('click', function () {
+            const open = appShell.classList.toggle('sidebar-open');
+            mobileMenuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            mobileMenuToggle.setAttribute('aria-label', open ? 'Đóng menu điều hướng' : 'Mở menu điều hướng');
+        });
+        appSidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            appShell.classList.remove('sidebar-open');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }));
+        appShell.addEventListener('click', function (event) {
+            if (appShell.classList.contains('sidebar-open') && event.target === appShell) {
+                appShell.classList.remove('sidebar-open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             }
         });
     }

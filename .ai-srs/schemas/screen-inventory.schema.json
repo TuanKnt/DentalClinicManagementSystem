@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Servlet JSP Screen Inventory",
+  "type": "object",
+  "properties": {
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "subfeatures"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "subfeatures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "screens"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "screens": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "fields",
+                      "actions",
+                      "evidence",
+                      "confidence"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "route": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "http_methods": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "servlet": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "jsp": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "roles": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "fields": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "actions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "tables": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "behavior": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "evidence": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "confidence": {
+                        "enum": [
+                          "observed",
+                          "inferred",
+                          "unknown"
+                        ]
+                      },
+                      "screenshot": {
+                        "type": "boolean"
+                      },
+                      "screenshotFile": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "features"
+  ]
+}
