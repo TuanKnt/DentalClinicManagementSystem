@@ -49,3 +49,5 @@ DCMS_Iteration_Workflow_Plan.md
 docs/
 
 cookies.txt
+node_modules/
+package-lock.json
