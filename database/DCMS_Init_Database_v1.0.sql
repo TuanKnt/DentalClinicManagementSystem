@@ -37,7 +37,7 @@ CREATE TABLE dbo.Roles (
 );
 GO
 
--- 3. TABLE: Users (Staff, Dentists, Receptionists, Cashiers, Admins)
+-- 3. TABLE: Users (Staff, Dentists, Receptionists, Cashiers, Admins, Patients)
 CREATE TABLE dbo.Users (
     UserId INT IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(50) NOT NULL UNIQUE,
@@ -159,7 +159,8 @@ INSERT INTO dbo.Roles (RoleName, Description) VALUES
 (N'Receptionist', N'Nhân viên lễ tân, tiếp đón, đặt lịch'),
 (N'Dentist', N'Bác sĩ nha khoa điều trị'),
 (N'DentalAssistant', N'Trợ thủ nha khoa'),
-(N'Cashier', N'Thu ngân viện phí');
+(N'Cashier', N'Thu ngân viện phí'),
+(N'Patient', N'Bệnh nhân đặt và quản lý lịch khám cá nhân');
 GO
 
 -- Insert Default Users (Password: 123456 -> BCrypt hashed)

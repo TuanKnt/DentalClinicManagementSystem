@@ -45,5 +45,8 @@ Thumbs.db
 AGENTS.md
 PROJECT_STATE.md
 docs/
+.agents/
+.ai-sds/
+.ai-srs/
 node_modules/
 package-lock.json

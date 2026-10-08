@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Role entity representing user access level in DCMS.
- * Roles: Admin, Receptionist, Dentist, DentalAssistant, Cashier.
+ * Roles: Admin, Receptionist, Dentist, DentalAssistant, Cashier, Patient.
  */
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
