@@ -23,6 +23,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+nb-configuration.xml
 
 # Eclipse specific
 .classpath
@@ -49,4 +50,12 @@ docs/
 .ai-sds/
 .ai-srs/
 node_modules/
+package-lock.json
+
+# Local scripts and environment tools (kept locally only)
+scripts/
+switch_acc.ps1
+switch_acc.sh
+test_rotate_acc.ps1
+package.json
 package-lock.json
