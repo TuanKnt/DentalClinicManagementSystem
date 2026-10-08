@@ -27,7 +27,7 @@ public class AppointmentDAO {
 
     public int create(Appointment appt) {
         String sql = "INSERT INTO dbo.Appointments (PatientId, DentistId, AppointmentDate, StartTime, EndTime, Reason, Status, Notes, CreatedAt) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SYSDATETIME())";
+                     "VALUES (?, ?, ?, CAST(? AS TIME), CAST(? AS TIME), ?, ?, ?, SYSDATETIME())";
 
         Connection conn = null;
         PreparedStatement ps = null;
@@ -39,8 +39,8 @@ public class AppointmentDAO {
             ps.setInt(1, appt.getPatientId());
             ps.setInt(2, appt.getDentistId());
             ps.setDate(3, Date.valueOf(appt.getAppointmentDate()));
-            ps.setTime(4, Time.valueOf(appt.getStartTime()));
-            ps.setTime(5, Time.valueOf(appt.getEndTime()));
+            ps.setString(4, appt.getStartTime().toString());
+            ps.setString(5, appt.getEndTime().toString());
             ps.setString(6, appt.getReason());
             ps.setString(7, appt.getStatus());
             ps.setString(8, appt.getNotes());
@@ -101,7 +101,7 @@ public class AppointmentDAO {
         String sql = "SELECT COUNT(*) FROM dbo.Appointments " +
                      "WHERE DentistId = ? AND AppointmentDate = ? " +
                      "AND Status IN ('Pending', 'Confirmed', 'Arrived') " +
-                     "AND (StartTime < ? AND EndTime > ?) " +
+                     "AND (StartTime < CAST(? AS TIME) AND EndTime > CAST(? AS TIME)) " +
                      "AND (? IS NULL OR AppointmentId <> ?)";
 
         Connection conn = null;
@@ -113,8 +113,8 @@ public class AppointmentDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, dentistId);
             ps.setDate(2, Date.valueOf(date));
-            ps.setTime(3, Time.valueOf(end));
-            ps.setTime(4, Time.valueOf(start));
+            ps.setString(3, end.toString());
+            ps.setString(4, start.toString());
 
             if (excludeAppointmentId != null) {
                 ps.setInt(5, excludeAppointmentId);
@@ -160,7 +160,7 @@ public class AppointmentDAO {
      * working-hours and overlap checks before this method is called.
      */
     public boolean updateSchedule(int appointmentId, LocalDate date, LocalTime start, LocalTime end) {
-        String sql = "UPDATE dbo.Appointments SET AppointmentDate = ?, StartTime = ?, EndTime = ?, UpdatedAt = SYSDATETIME() "
+        String sql = "UPDATE dbo.Appointments SET AppointmentDate = ?, StartTime = CAST(? AS TIME), EndTime = CAST(? AS TIME), UpdatedAt = SYSDATETIME() "
                 + "WHERE AppointmentId = ? AND Status IN ('Pending', 'Confirmed')";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -168,8 +168,8 @@ public class AppointmentDAO {
             conn = DBContext.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(date));
-            ps.setTime(2, Time.valueOf(start));
-            ps.setTime(3, Time.valueOf(end));
+            ps.setString(2, start.toString());
+            ps.setString(3, end.toString());
             ps.setInt(4, appointmentId);
             return ps.executeUpdate() > 0;
         } catch (SQLException ex) {

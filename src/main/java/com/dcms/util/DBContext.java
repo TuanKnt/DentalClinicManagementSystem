@@ -40,7 +40,7 @@ public class DBContext {
      * @throws SQLException if connection fails
      */
     public static Connection getConnection() throws SQLException {
-        String url = props.getProperty("db.url", "jdbc:sqlserver://localhost:1434;databaseName=DCMS_DB;encrypt=true;trustServerCertificate=true");
+        String url = props.getProperty("db.url", "jdbc:sqlserver://localhost:1434;databaseName=DCMS_DB;encrypt=true;trustServerCertificate=true;sendTimeAsDatetime=false");
         String user = props.getProperty("db.user", "sa");
         String pass = props.getProperty("db.password", "123456");
         return DriverManager.getConnection(url, user, pass);

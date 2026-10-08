@@ -27,7 +27,7 @@ public class DentistScheduleDAO {
     public boolean isDentistWorking(int dentistId, int dayOfWeek, LocalTime start, LocalTime end) {
         String sql = "SELECT COUNT(*) FROM dbo.DentistSchedules " +
                      "WHERE DentistId = ? AND DayOfWeek = ? AND IsAvailable = 1 " +
-                     "AND ShiftStart <= ? AND ShiftEnd >= ?";
+                     "AND ShiftStart <= CAST(? AS TIME) AND ShiftEnd >= CAST(? AS TIME)";
 
         Connection conn = null;
         PreparedStatement ps = null;
@@ -38,8 +38,8 @@ public class DentistScheduleDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, dentistId);
             ps.setInt(2, dayOfWeek);
-            ps.setTime(3, Time.valueOf(start));
-            ps.setTime(4, Time.valueOf(end));
+            ps.setString(3, start.toString());
+            ps.setString(4, end.toString());
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -122,7 +122,7 @@ public class DentistScheduleDAO {
 
     public int createSchedule(DentistSchedule schedule) {
         String sql = "INSERT INTO dbo.DentistSchedules (DentistId, DayOfWeek, ShiftStart, ShiftEnd, IsAvailable) " +
-                     "VALUES (?, ?, ?, ?, ?)";
+                     "VALUES (?, ?, CAST(? AS TIME), CAST(? AS TIME), ?)";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -132,8 +132,8 @@ public class DentistScheduleDAO {
             ps = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, schedule.getDentistId());
             ps.setInt(2, schedule.getDayOfWeek());
-            ps.setTime(3, Time.valueOf(schedule.getShiftStart()));
-            ps.setTime(4, Time.valueOf(schedule.getShiftEnd()));
+            ps.setString(3, schedule.getShiftStart().toString());
+            ps.setString(4, schedule.getShiftEnd().toString());
             ps.setBoolean(5, schedule.isAvailable());
 
             int affected = ps.executeUpdate();
@@ -192,7 +192,7 @@ public class DentistScheduleDAO {
         StringBuilder sql = new StringBuilder(
                 "SELECT COUNT(*) FROM dbo.DentistSchedules " +
                 "WHERE DentistId = ? AND DayOfWeek = ? " +
-                "AND ShiftStart < ? AND ShiftEnd > ? "
+                "AND ShiftStart < CAST(? AS TIME) AND ShiftEnd > CAST(? AS TIME) "
         );
         if (excludeScheduleId != null && excludeScheduleId > 0) {
             sql.append("AND ScheduleId <> ?");
@@ -207,8 +207,8 @@ public class DentistScheduleDAO {
             ps = conn.prepareStatement(sql.toString());
             ps.setInt(1, dentistId);
             ps.setInt(2, dayOfWeek);
-            ps.setTime(3, Time.valueOf(end));
-            ps.setTime(4, Time.valueOf(start));
+            ps.setString(3, end.toString());
+            ps.setString(4, start.toString());
             if (excludeScheduleId != null && excludeScheduleId > 0) {
                 ps.setInt(5, excludeScheduleId);
             }
@@ -223,6 +223,60 @@ public class DentistScheduleDAO {
             DBContext.close(conn, ps, rs);
         }
         return false;
+    }
+
+    public boolean hasAnySchedule(int dentistId) {
+        String sql = "SELECT COUNT(*) FROM dbo.DentistSchedules WHERE DentistId = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, dentistId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error checking hasAnySchedule for dentist: " + dentistId, ex);
+        } finally {
+            DBContext.close(conn, ps, rs);
+        }
+        return false;
+    }
+
+    public List<DentistSchedule> listSchedulesByDentistAndDay(int dentistId, int dayOfWeek) {
+        List<DentistSchedule> list = new ArrayList<>();
+        String sql = "SELECT ds.ScheduleId, ds.DentistId, ds.DayOfWeek, ds.ShiftStart, ds.ShiftEnd, ds.IsAvailable, " +
+                     "u.FullName AS DentistName, d.Specialization, d.RoomNumber " +
+                     "FROM dbo.DentistSchedules ds " +
+                     "JOIN dbo.Dentists d ON ds.DentistId = d.DentistId " +
+                     "JOIN dbo.Users u ON d.DentistId = u.UserId " +
+                     "WHERE ds.DentistId = ? AND ds.DayOfWeek = ? AND ds.IsAvailable = 1 " +
+                     "ORDER BY ds.ShiftStart ASC";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, dentistId);
+            ps.setInt(2, dayOfWeek);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                DentistSchedule s = mapResultSetToSchedule(rs);
+                list.add(s);
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error listing schedules for dentist and day: " + dentistId + ", day: " + dayOfWeek, ex);
+        } finally {
+            DBContext.close(conn, ps, rs);
+        }
+        return list;
     }
 
     private DentistSchedule mapResultSetToSchedule(ResultSet rs) throws SQLException {

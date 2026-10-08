@@ -3,6 +3,7 @@ package com.dcms.service;
 import com.dcms.dao.AppointmentDAO;
 import com.dcms.dao.DentistScheduleDAO;
 import com.dcms.model.Appointment;
+import com.dcms.model.DentistSchedule;
 import com.dcms.service.exception.AppointmentConflictException;
 import com.dcms.service.exception.DentistNotAvailableException;
 
@@ -43,9 +44,28 @@ public class AppointmentService {
                 appt.getDentistId(), dayOfWeek, appt.getStartTime(), appt.getEndTime()
         );
         if (!isWorking) {
+            String dayName = (dayOfWeek == 7 ? "Chủ Nhật" : ("Thứ " + (dayOfWeek + 1)));
+            if (!scheduleDAO.hasAnySchedule(appt.getDentistId())) {
+                throw new DentistNotAvailableException(
+                        "Bác sĩ hiện chưa được thiết lập ca trực nào trong hệ thống. " +
+                        "Vui lòng vào menu 'Lịch Trực Bác Sĩ' để cấu hình ca trực trước khi đặt hẹn."
+                );
+            }
+            List<DentistSchedule> dayShifts = scheduleDAO.listSchedulesByDentistAndDay(appt.getDentistId(), dayOfWeek);
+            if (dayShifts == null || dayShifts.isEmpty()) {
+                throw new DentistNotAvailableException(
+                        "Bác sĩ không có lịch trực vào " + dayName + ". " +
+                        "Vui lòng chọn ngày khám khác hoặc đổi bác sĩ điều trị."
+                );
+            }
+            StringBuilder shiftsText = new StringBuilder();
+            for (DentistSchedule s : dayShifts) {
+                if (shiftsText.length() > 0) shiftsText.append(", ");
+                shiftsText.append(s.getShiftStart()).append(" - ").append(s.getShiftEnd());
+            }
             throw new DentistNotAvailableException(
                     "Bác sĩ không có ca trực nhận hẹn vào khung giờ " + appt.getStartTime() + " - " +
-                    appt.getEndTime() + " (Thứ " + (dayOfWeek == 7 ? "CN" : (dayOfWeek + 1)) + ")"
+                    appt.getEndTime() + " (" + dayName + "). Khung giờ trực của bác sĩ vào " + dayName + " là: " + shiftsText + "."
             );
         }
 
@@ -131,8 +151,9 @@ public class AppointmentService {
 
         int dayOfWeek = newDate.getDayOfWeek().getValue();
         if (!scheduleDAO.isDentistWorking(appt.getDentistId(), dayOfWeek, newStart, newEnd)) {
+            String dayName = (dayOfWeek == 7 ? "Chủ Nhật" : ("Thứ " + (dayOfWeek + 1)));
             throw new DentistNotAvailableException("Bác sĩ không có ca trực nhận hẹn vào khung giờ "
-                    + newStart + " - " + newEnd);
+                    + newStart + " - " + newEnd + " (" + dayName + ")");
         }
 
         int conflicts = appointmentDAO.countConflicts(appt.getDentistId(), newDate, newStart, newEnd, appointmentId);
