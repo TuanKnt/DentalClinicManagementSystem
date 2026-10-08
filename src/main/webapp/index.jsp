@@ -1727,14 +1727,34 @@
                                 <input type="date" name="appointmentDate" class="form-control" value="${todayStr}" min="${todayStr}" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
                             </div>
                             <div class="booking-input-group">
-                                <label style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Khung giờ mong muốn *</label>
-                                <select name="timeSlot" class="form-control" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
-                                    <option value="09:00">09:00 – 09:45 (Sáng)</option>
-                                    <option value="10:00" selected>10:00 – 10:45 (Sáng)</option>
-                                    <option value="11:00">11:00 – 11:45 (Trưa)</option>
-                                    <option value="14:00">14:00 – 14:45 (Chiều)</option>
-                                    <option value="15:30">15:30 – 16:15 (Chiều)</option>
-                                    <option value="16:00">16:00 – 16:45 (Chiều)</option>
+                                <label for="bookingTimeSlot" style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Ca khám mong muốn *</label>
+                                <small style="display:block; color:#64748b; font-size:11.5px; margin-bottom:4px;">Mỗi ca kéo dài 30 phút · 08:30 – 18:30</small>
+                                <select id="bookingTimeSlot" name="timeSlot" class="form-control" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
+                                    <optgroup label="Buổi sáng">
+                                        <option value="08:00-08:30">08:00 – 08:30</option>
+                                        <option value="08:30-09:00">08:30 – 09:00</option>
+                                        <option value="09:00-09:30">09:00 – 09:30</option>
+                                        <option value="09:30-10:00">09:30 – 10:00</option>
+                                        <option value="10:00-10:30" selected>10:00 – 10:30</option>
+                                        <option value="10:30-11:00">10:30 – 11:00</option>
+                                        <option value="11:00-11:30">11:00 – 11:30</option>
+                                        <option value="11:30-12:00">11:30 – 12:00</option>
+                                    </optgroup>
+                                    <optgroup label="Buổi chiều">
+                                        <option value="12:00-12:30">12:00 – 12:30</option>
+                                        <option value="12:30-13:00">12:30 – 13:00</option>
+                                        <option value="13:00-13:30">13:00 – 13:30</option>
+                                        <option value="13:30-14:00">13:30 – 14:00</option>
+                                        <option value="14:00-14:30">14:00 – 14:30</option>
+                                        <option value="14:30-15:00">14:30 – 15:00</option>
+                                        <option value="15:00-15:30">15:00 – 15:30</option>
+                                        <option value="15:30-16:00">15:30 – 16:00</option>
+                                        <option value="16:00-16:30">16:00 – 16:30</option>
+                                        <option value="16:30-17:00">16:30 – 17:00</option>
+                                        <option value="17:00-17:30">17:00 – 17:30</option>
+                                        <option value="17:30-18:00">17:30 – 18:00</option>
+                                        <option value="18:00-18:30">18:00 – 18:30</option>
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>

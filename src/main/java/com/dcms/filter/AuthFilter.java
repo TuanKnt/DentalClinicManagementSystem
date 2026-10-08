@@ -21,6 +21,7 @@ import java.io.IOException;
         "/admin/*",
         "/reception/*",
         "/dentist/*",
+        "/patient/*",
         "/clinical/*",
         "/cashier/*"
 })
@@ -59,12 +60,16 @@ public class AuthFilter implements Filter {
         } else if (path.startsWith("/reception/")) {
             isAuthorized = role.equalsIgnoreCase("Receptionist")
                     || (path.startsWith("/reception/calendar") && role.equalsIgnoreCase("Dentist"))
+                    || (path.startsWith("/reception/schedules") && role.equalsIgnoreCase("Dentist"))
                     || (path.startsWith("/reception/patients") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant")))
                     // Dental assistants can receive a patient at the chair,
                     // but still cannot create, cancel or manage appointments.
                     || (path.startsWith("/reception/checkin") && role.equalsIgnoreCase("DentalAssistant"));
         } else if (path.startsWith("/dentist/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
+        } else if (path.startsWith("/patient/")) {
+            // Patients can only access their own self-service booking portal.
+            isAuthorized = role.equalsIgnoreCase("Patient");
         } else if (path.startsWith("/clinical/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/cashier/")) {

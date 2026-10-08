@@ -34,6 +34,11 @@
             <span class="nav-icon">🚶</span>
             <span>Khách Vãng Lai</span>
         </a>
+        <a href="${pageContext.request.contextPath}/reception/schedules" 
+           class="nav-item ${activeMenu == 'schedules' ? 'active' : ''}">
+            <span class="nav-icon">🩺</span>
+            <span>Lịch Trực Bác Sĩ</span>
+        </a>
 
         <div class="menu-category">Bệnh Nhân & Hồ Sơ</div>
         <a href="${pageContext.request.contextPath}/reception/patients" 

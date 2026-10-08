@@ -77,13 +77,61 @@ public class DentistSchedule implements Serializable {
         isAvailable = available;
     }
 
+    private String dentistName;
+    private String specialization;
+    private String roomNumber;
+
+    public String getDentistName() {
+        return dentistName;
+    }
+
+    public void setDentistName(String dentistName) {
+        this.dentistName = dentistName;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public String getDayOfWeekName() {
+        switch (dayOfWeek) {
+            case 1: return "Thứ Hai";
+            case 2: return "Thứ Ba";
+            case 3: return "Thứ Tư";
+            case 4: return "Thứ Năm";
+            case 5: return "Thứ Sáu";
+            case 6: return "Thứ Bảy";
+            case 7: return "Chủ Nhật";
+            default: return "Thứ " + dayOfWeek;
+        }
+    }
+
+    public String getShiftTimeFormatted() {
+        if (shiftStart == null || shiftEnd == null) return "";
+        return shiftStart.toString().substring(0, 5) + " – " + shiftEnd.toString().substring(0, 5);
+    }
+
     @Override
     public String toString() {
         return "DentistSchedule{" +
-                "dentistId=" + dentistId +
+                "scheduleId=" + scheduleId +
+                ", dentistId=" + dentistId +
                 ", dayOfWeek=" + dayOfWeek +
                 ", shiftStart=" + shiftStart +
                 ", shiftEnd=" + shiftEnd +
+                ", isAvailable=" + isAvailable +
                 '}';
     }
 }

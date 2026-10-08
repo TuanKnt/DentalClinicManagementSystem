@@ -87,8 +87,14 @@
                             </div>
 
                             <!-- Doctor Selection -->
+                            <!-- Doctor Selection -->
                             <div class="form-group form-group-full">
-                                <label for="dentistId" class="form-label required">Bác Sĩ Điều Trị</label>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <label for="dentistId" class="form-label required" style="margin-bottom:0;">Bác Sĩ Điều Trị</label>
+                                    <a href="${pageContext.request.contextPath}/reception/schedules" target="_blank" style="font-size: 12px; color: var(--drsmile-blue); font-weight: 600; text-decoration: none;">
+                                        🩺 Xem lịch trực bác sĩ &rarr;
+                                    </a>
+                                </div>
                                 <select id="dentistId" name="dentistId" class="form-control" required>
                                     <option value="">-- Chọn bác sĩ phụ trách --</option>
                                     <c:forEach var="d" items="${dentists}">
@@ -110,27 +116,65 @@
                                        required />
                             </div>
 
-                            <div><!-- Empty spacer for grid alignment --></div>
-
-                            <!-- Time Slots -->
+                            <!-- Fixed Time Slot (Like Guest Booking) -->
                             <div class="form-group">
-                                <label for="startTime" class="form-label required">Giờ Bắt Đầu</label>
-                                <input type="time" 
-                                       id="startTime" 
-                                       name="startTime" 
-                                       class="form-control" 
-                                       value="${appt.startTime}" 
-                                       required />
+                                <label for="timeSlot" class="form-label required">Khung Giờ Khám (Ca Slot Cố Định)</label>
+                                <small style="display:block; color:var(--text-muted); font-size:11.5px; margin-bottom:4px;">Mỗi ca 30 phút · 08:00 – 18:30</small>
+                                <select id="timeSlot" name="timeSlot" class="form-control" required onchange="handleSlotChange(this.value)">
+                                    <option value="">-- Chọn ca khám 30 phút --</option>
+                                    <optgroup label="🌅 Buổi sáng">
+                                        <option value="08:00-08:30">08:00 – 08:30</option>
+                                        <option value="08:30-09:00">08:30 – 09:00</option>
+                                        <option value="09:00-09:30">09:00 – 09:30</option>
+                                        <option value="09:30-10:00">09:30 – 10:00</option>
+                                        <option value="10:00-10:30">10:00 – 10:30</option>
+                                        <option value="10:30-11:00">10:30 – 11:00</option>
+                                        <option value="11:00-11:30">11:00 – 11:30</option>
+                                        <option value="11:30-12:00">11:30 – 12:00</option>
+                                    </optgroup>
+                                    <optgroup label="🌇 Buổi chiều">
+                                        <option value="12:00-12:30">12:00 – 12:30</option>
+                                        <option value="12:30-13:00">12:30 – 13:00</option>
+                                        <option value="13:00-13:30">13:00 – 13:30</option>
+                                        <option value="13:30-14:00">13:30 – 14:00</option>
+                                        <option value="14:00-14:30">14:00 – 14:30</option>
+                                        <option value="14:30-15:00">14:30 – 15:00</option>
+                                        <option value="15:00-15:30">15:00 – 15:30</option>
+                                        <option value="15:30-16:00">15:30 – 16:00</option>
+                                        <option value="16:00-16:30">16:00 – 16:30</option>
+                                        <option value="16:30-17:00">16:30 – 17:00</option>
+                                        <option value="17:00-17:30">17:00 – 17:30</option>
+                                        <option value="17:30-18:00">17:30 – 18:00</option>
+                                        <option value="18:00-18:30">18:00 – 18:30</option>
+                                    </optgroup>
+                                </select>
+
+                                <!-- Hidden or synced Start and End Time inputs -->
+                                <input type="hidden" id="startTime" name="startTime" value="${appt.startTime}" />
+                                <input type="hidden" id="endTime" name="endTime" value="${appt.endTime}" />
+
+                                <div style="margin-top: 6px;">
+                                    <button type="button" class="btn btn-secondary btn-sm" id="btnToggleManual" style="font-size:11px; padding:2px 8px;" onclick="toggleManualTime()">
+                                        ⚙️ Tùy chỉnh giờ tự do...
+                                    </button>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="endTime" class="form-label required">Giờ Kết Thúc Dự Kiến</label>
-                                <input type="time" 
-                                       id="endTime" 
-                                       name="endTime" 
-                                       class="form-control" 
-                                       value="${appt.endTime}" 
-                                       required />
+                            <!-- Optional Manual Time inputs if customized -->
+                            <div id="manualTimeRow" class="form-group form-group-full" style="display:none; background:#f8fafc; padding:12px; border-radius:8px; border:1px dashed #cbd5e1;">
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                    <div>
+                                        <label for="manualStart" class="form-label" style="font-size:12px;">Giờ bắt đầu tùy chỉnh</label>
+                                        <input type="time" id="manualStart" class="form-control" onchange="syncManualStart(this.value)" />
+                                    </div>
+                                    <div>
+                                        <label for="manualEnd" class="form-label" style="font-size:12px;">Giờ kết thúc tùy chỉnh</label>
+                                        <input type="time" id="manualEnd" class="form-control" onchange="syncManualEnd(this.value)" />
+                                    </div>
+                                </div>
+                                <small style="color:var(--text-muted); font-size:11px; margin-top:4px; display:block;">
+                                    Lưu ý: Bác sĩ phải có ca trực bao gồm toàn bộ khoảng thời gian tùy chỉnh này.
+                                </small>
                             </div>
 
                             <!-- Reason -->
@@ -225,20 +269,60 @@
         }
     });
 
-    // Auto calculate EndTime = StartTime + 30m if empty
-    document.getElementById('startTime').addEventListener('change', function() {
-        var start = this.value;
-        if (start && !document.getElementById('endTime').value) {
-            var parts = start.split(':');
-            var h = parseInt(parts[0]);
-            var m = parseInt(parts[1]) + 30;
-            if (m >= 60) {
-                h += 1;
-                m -= 60;
+    function handleSlotChange(slot) {
+        if (!slot) return;
+        var parts = slot.split('-');
+        if (parts.length === 2) {
+            document.getElementById('startTime').value = parts[0].trim();
+            document.getElementById('endTime').value = parts[1].trim();
+            document.getElementById('manualStart').value = parts[0].trim();
+            document.getElementById('manualEnd').value = parts[1].trim();
+        }
+    }
+
+    function toggleManualTime() {
+        var row = document.getElementById('manualTimeRow');
+        var btn = document.getElementById('btnToggleManual');
+        if (row.style.display === 'none' || row.style.display === '') {
+            row.style.display = 'block';
+            btn.innerText = '✖ Đóng tùy chỉnh giờ';
+            var s = document.getElementById('startTime').value;
+            var e = document.getElementById('endTime').value;
+            if (s) document.getElementById('manualStart').value = s;
+            if (e) document.getElementById('manualEnd').value = e;
+        } else {
+            row.style.display = 'none';
+            btn.innerText = '⚙️ Tùy chỉnh giờ tự do...';
+        }
+    }
+
+    function syncManualStart(val) {
+        document.getElementById('startTime').value = val;
+        // clear selected slot if manual custom
+        document.getElementById('timeSlot').value = '';
+    }
+
+    function syncManualEnd(val) {
+        document.getElementById('endTime').value = val;
+        // clear selected slot if manual custom
+        document.getElementById('timeSlot').value = '';
+    }
+
+    // Auto-select slot if appt.startTime and endTime exist
+    window.addEventListener('DOMContentLoaded', function() {
+        var s = document.getElementById('startTime').value;
+        var e = document.getElementById('endTime').value;
+        if (s && e) {
+            var candidate = s.substring(0, 5) + '-' + e.substring(0, 5);
+            var select = document.getElementById('timeSlot');
+            for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === candidate) {
+                    select.selectedIndex = i;
+                    return;
+                }
             }
-            var hStr = (h < 10 ? '0' : '') + h;
-            var mStr = (m < 10 ? '0' : '') + m;
-            document.getElementById('endTime').value = hStr + ':' + mStr;
+            // If custom slot not in list, open manual row
+            toggleManualTime();
         }
     });
 </script>

@@ -134,8 +134,33 @@ public class AppointmentServlet extends HttpServlet {
             appt.setPatientId(Integer.parseInt(request.getParameter("patientId")));
             appt.setDentistId(Integer.parseInt(request.getParameter("dentistId")));
             appt.setAppointmentDate(LocalDate.parse(request.getParameter("appointmentDate")));
-            appt.setStartTime(LocalTime.parse(request.getParameter("startTime")));
-            appt.setEndTime(LocalTime.parse(request.getParameter("endTime")));
+
+            String timeSlot = request.getParameter("timeSlot");
+            String startParam = request.getParameter("startTime");
+            String endParam = request.getParameter("endTime");
+
+            LocalTime startTime;
+            LocalTime endTime;
+            if (timeSlot != null && !timeSlot.trim().isEmpty()) {
+                String slot = timeSlot.trim();
+                if (slot.contains("-")) {
+                    String[] parts = slot.split("-");
+                    startTime = LocalTime.parse(parts[0].trim());
+                    endTime = LocalTime.parse(parts[1].trim());
+                } else {
+                    startTime = LocalTime.parse(slot);
+                    endTime = startTime.plusMinutes(30);
+                }
+            } else if (startParam != null && !startParam.trim().isEmpty()
+                    && endParam != null && !endParam.trim().isEmpty()) {
+                startTime = LocalTime.parse(startParam.trim());
+                endTime = LocalTime.parse(endParam.trim());
+            } else {
+                throw new IllegalArgumentException("Vui lòng chọn khung giờ khám");
+            }
+
+            appt.setStartTime(startTime);
+            appt.setEndTime(endTime);
             appt.setReason(request.getParameter("reason"));
             appt.setNotes(request.getParameter("notes"));
 
@@ -185,11 +210,28 @@ public class AppointmentServlet extends HttpServlet {
         try {
             int appointmentId = Integer.parseInt(required(request, "appointmentId"));
             String dateValue = firstNonBlank(request.getParameter("newDate"), request.getParameter("appointmentDate"));
-            String startValue = firstNonBlank(request.getParameter("newStartTime"), request.getParameter("startTime"));
-            String endValue = firstNonBlank(request.getParameter("newEndTime"), request.getParameter("endTime"));
+
+            String timeSlot = request.getParameter("timeSlot");
+            LocalTime start;
+            LocalTime end;
+            if (timeSlot != null && !timeSlot.trim().isEmpty()) {
+                String slot = timeSlot.trim();
+                if (slot.contains("-")) {
+                    String[] parts = slot.split("-");
+                    start = LocalTime.parse(parts[0].trim());
+                    end = LocalTime.parse(parts[1].trim());
+                } else {
+                    start = LocalTime.parse(slot);
+                    end = start.plusMinutes(30);
+                }
+            } else {
+                String startValue = firstNonBlank(request.getParameter("newStartTime"), request.getParameter("startTime"));
+                String endValue = firstNonBlank(request.getParameter("newEndTime"), request.getParameter("endTime"));
+                start = LocalTime.parse(startValue);
+                end = LocalTime.parse(endValue);
+            }
+
             LocalDate date = LocalDate.parse(dateValue);
-            LocalTime start = LocalTime.parse(startValue);
-            LocalTime end = LocalTime.parse(endValue);
             appointmentService.rescheduleAppointment(appointmentId, date, start, end);
             response.sendRedirect(request.getContextPath() + "/reception/appointments?date=" + date + "&success=rescheduled");
         } catch (Exception ex) {

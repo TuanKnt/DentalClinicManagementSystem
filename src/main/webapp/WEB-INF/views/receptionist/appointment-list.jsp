@@ -280,6 +280,37 @@
                 <label class="form-label" for="rescheduleDate">Ngày khám mới</label>
                 <input class="form-control" type="date" name="newDate" id="rescheduleDate" required />
             </div>
+            <div class="form-group" style="margin-top:12px;">
+                <label class="form-label" for="rescheduleSlot">Ca khám mới (Slot 30 phút)</label>
+                <select id="rescheduleSlot" name="timeSlot" class="form-control" onchange="syncRescheduleSlot(this.value)">
+                    <option value="">-- Chọn khung giờ cố định --</option>
+                    <optgroup label="🌅 Buổi sáng">
+                        <option value="08:00-08:30">08:00 – 08:30</option>
+                        <option value="08:30-09:00">08:30 – 09:00</option>
+                        <option value="09:00-09:30">09:00 – 09:30</option>
+                        <option value="09:30-10:00">09:30 – 10:00</option>
+                        <option value="10:00-10:30">10:00 – 10:30</option>
+                        <option value="10:30-11:00">10:30 – 11:00</option>
+                        <option value="11:00-11:30">11:00 – 11:30</option>
+                        <option value="11:30-12:00">11:30 – 12:00</option>
+                    </optgroup>
+                    <optgroup label="🌇 Buổi chiều">
+                        <option value="12:00-12:30">12:00 – 12:30</option>
+                        <option value="12:30-13:00">12:30 – 13:00</option>
+                        <option value="13:00-13:30">13:00 – 13:30</option>
+                        <option value="13:30-14:00">13:30 – 14:00</option>
+                        <option value="14:00-14:30">14:00 – 14:30</option>
+                        <option value="14:30-15:00">14:30 – 15:00</option>
+                        <option value="15:00-15:30">15:00 – 15:30</option>
+                        <option value="15:30-16:00">15:30 – 16:00</option>
+                        <option value="16:00-16:30">16:00 – 16:30</option>
+                        <option value="16:30-17:00">16:30 – 17:00</option>
+                        <option value="17:00-17:30">17:00 – 17:30</option>
+                        <option value="17:30-18:00">17:30 – 18:00</option>
+                        <option value="18:00-18:30">18:00 – 18:30</option>
+                    </optgroup>
+                </select>
+            </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
                 <div class="form-group">
                     <label class="form-label" for="rescheduleStart">Bắt đầu</label>
@@ -308,12 +339,34 @@
         }
     }
 
+    function syncRescheduleSlot(val) {
+        if (!val) return;
+        var parts = val.split('-');
+        if (parts.length === 2) {
+            document.getElementById('rescheduleStart').value = parts[0].trim();
+            document.getElementById('rescheduleEnd').value = parts[1].trim();
+        }
+    }
+
     function openReschedule(id, date, start, end) {
         document.getElementById('rescheduleApptId').value = id;
         document.getElementById('rescheduleDate').value = date || '';
         document.getElementById('rescheduleDate').min = new Date().toISOString().substring(0, 10);
-        document.getElementById('rescheduleStart').value = (start || '').substring(0, 5);
-        document.getElementById('rescheduleEnd').value = (end || '').substring(0, 5);
+        var s = (start || '').substring(0, 5);
+        var e = (end || '').substring(0, 5);
+        document.getElementById('rescheduleStart').value = s;
+        document.getElementById('rescheduleEnd').value = e;
+
+        var slotVal = s + '-' + e;
+        var select = document.getElementById('rescheduleSlot');
+        select.value = '';
+        for (var i = 0; i < select.options.length; i++) {
+            if (select.options[i].value === slotVal) {
+                select.selectedIndex = i;
+                break;
+            }
+        }
+
         document.getElementById('rescheduleModal').hidden = false;
         document.getElementById('rescheduleDate').focus();
     }

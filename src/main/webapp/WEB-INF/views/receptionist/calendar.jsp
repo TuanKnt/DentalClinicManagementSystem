@@ -151,6 +151,9 @@
                     <p>Theo dõi trực quan phân bổ lịch khám theo tuần, khung giờ và bác sĩ phụ trách &bull; Tổng cộng <strong>${totalWeekAppointments}</strong> cuộc hẹn tuần này</p>
                 </div>
                 <div style="display: flex; gap: 10px;">
+                    <a href="${pageContext.request.contextPath}/reception/schedules" class="btn btn-secondary">
+                        <span>🩺</span> Quản Lý Ca Trực
+                    </a>
                     <a href="${pageContext.request.contextPath}/reception/appointments/create" class="btn btn-primary">
                         <span>➕</span> Đặt Lịch Mới
                     </a>
