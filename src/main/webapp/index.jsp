@@ -1010,22 +1010,22 @@
     <div class="dr-topbar">
         <div class="dr-topbar-left">
             <div class="dr-topbar-item">
-                <span>📍</span>
-                <span>Cơ sở chính: <strong>Số 41, phố Núi Trúc, P. Giảng Võ, Ba Đình, Hà Nội</strong></span>
+                <span class="dr-topbar-label">Cơ sở chính:</span>
+                <span><strong>Số 41, phố Núi Trúc, P. Giảng Võ, Ba Đình, Hà Nội</strong></span>
             </div>
             <div class="dr-topbar-item">
-                <span>🕒</span>
-                <span>Giờ làm việc: <strong>08:30 – 18:30</strong> (Tất cả các ngày trong tuần)</span>
+                <span class="dr-topbar-label">Giờ làm việc:</span>
+                <span><strong>08:30 – 18:30</strong> (Tất cả các ngày trong tuần)</span>
             </div>
         </div>
         <div class="dr-topbar-right">
             <div class="dr-topbar-item">
-                <span>✉️</span>
+                <span class="dr-topbar-label">Email:</span>
                 <a href="mailto:drsmile.vn@gmail.com">drsmile.vn@gmail.com</a>
             </div>
             <div class="dr-topbar-item">
-                <span>📞</span>
-                <span>Hotline: <a href="tel:0966692286">096 669 2286</a></span>
+                <span class="dr-topbar-label">Hotline:</span>
+                <span><a href="tel:0966692286">096 669 2286</a></span>
             </div>
         </div>
     </div>
@@ -1052,7 +1052,6 @@
             </button>
 
             <a href="${pageContext.request.contextPath}/login" class="dr-action-link dr-action-staff" title="Cổng tác nghiệp nhân sự">
-                <span>🔐</span>
                 <span>Cổng Tác Nghiệp DCMS &rarr;</span>
             </a>
         </div>
@@ -1062,32 +1061,25 @@
     <nav class="dr-tab-navbar">
         <div class="dr-tab-nav-list">
             <button class="dr-tab-nav-btn active" id="tabNav-home" onclick="switchTab('home')">
-                <span>🏠</span>
                 <span>Trang chủ</span>
             </button>
             <button class="dr-tab-nav-btn" id="tabNav-services" onclick="switchTab('services')">
-                <span>🦷</span>
                 <span>Dịch vụ nha khoa</span>
             </button>
             <button class="dr-tab-nav-btn" id="tabNav-about" onclick="switchTab('about')">
-                <span>ℹ️</span>
                 <span>Giới thiệu</span>
             </button>
             <button class="dr-tab-nav-btn" id="tabNav-doctors" onclick="switchTab('doctors')">
-                <span>👨‍⚕️</span>
                 <span>Đội ngũ Bác sĩ</span>
             </button>
             <button class="dr-tab-nav-btn" id="tabNav-pricing" onclick="switchTab('pricing')">
-                <span>🏷️</span>
                 <span>Bảng giá & Ưu đãi</span>
                 <span class="dr-tab-badge">Hot</span>
             </button>
             <button class="dr-tab-nav-btn" id="tabNav-news" onclick="switchTab('news')">
-                <span>📰</span>
                 <span>Tin tức & Cẩm nang</span>
             </button>
             <button class="dr-tab-nav-btn" id="tabNav-booking" onclick="switchTab('booking')">
-                <span>📅</span>
                 <span>Đặt lịch khám online</span>
             </button>
         </div>
@@ -1103,7 +1095,6 @@
             <!-- Hero Banner -->
             <div class="home-hero-banner">
                 <div class="hero-chip">
-                    <span>✨</span>
                     <span>Nha Khoa Kỹ Thuật Số Chuẩn Y Khoa — Dr.Smile Inspired</span>
                 </div>
                 <h1 class="hero-heading">
@@ -1115,13 +1106,13 @@
                 </p>
                 <div class="hero-btn-row">
                     <button onclick="switchTab('booking')" class="btn-hero-primary">
-                        <span>📅</span> Đặt Lịch Khám Ưu Tiên
+                        Đặt Lịch Khám Ưu Tiên &rarr;
                     </button>
                     <button onclick="switchTab('services')" class="btn-hero-secondary">
-                        <span>🔍</span> Khám Phá Các Dịch Vụ
+                        Khám Phá Các Dịch Vụ
                     </button>
                     <button onclick="switchTab('doctors')" class="btn-hero-secondary">
-                        <span>👨‍⚕️</span> Gặp Gỡ Bác Sĩ CKI
+                        Gặp Gỡ Bác Sĩ CKI
                     </button>
                 </div>
             </div>
@@ -1181,7 +1172,7 @@
             <!-- Cổng Tác Nghiệp Hệ Thống Nội Bộ DCMS -->
             <div class="home-portals-section">
                 <div class="home-portals-header">
-                    <h3><span>🏢</span> Cổng Tác Nghiệp Quản Trị Hệ Thống DCMS</h3>
+                    <h3>Cổng Tác Nghiệp Quản Trị Hệ Thống DCMS</h3>
                     <a href="${pageContext.request.contextPath}/login" style="font-size:13px; font-weight:700; color:var(--dr-blue); text-decoration:none;">
                         Đăng nhập phân hệ nhân sự &rarr;
                     </a>
@@ -1189,7 +1180,7 @@
                 <div class="portal-grid-3">
                     <a href="${pageContext.request.contextPath}/reception/checkin" class="portal-item-card" style="--portal-color:#0284c7;">
                         <div>
-                            <div style="font-size:24px; margin-bottom:8px;">🚪</div>
+                            <div style="font-size:12px; font-weight:700; color:#0284c7; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">Lễ Tân & Tiếp Đón</div>
                             <h4 style="margin:0 0 4px; font-size:16px; color:var(--dr-navy);">Quầy Tiếp Đón (Receptionist)</h4>
                             <p style="font-size:12.5px; color:#64748b; margin:0 0 14px; line-height:1.5;">Check-in khách đến khám, tiếp nhận vãng lai cấp cứu, theo dõi lịch hẹn toàn viện.</p>
                         </div>
@@ -1198,7 +1189,7 @@
 
                     <a href="${pageContext.request.contextPath}/dentist/dashboard" class="portal-item-card" style="--portal-color:#003366;">
                         <div>
-                            <div style="font-size:24px; margin-bottom:8px;">🩺</div>
+                            <div style="font-size:12px; font-weight:700; color:#003366; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">Ghế Khám Lâm Sàng</div>
                             <h4 style="margin:0 0 4px; font-size:16px; color:var(--dr-navy);">Bàn Làm Việc Bác Sĩ (Dentist)</h4>
                             <p style="font-size:12.5px; color:#64748b; margin:0 0 14px; line-height:1.5;">Hàng đợi ghế khám, sơ đồ răng FDI Odontogram, lưu kết quả sinh hiệu và phim X-quang.</p>
                         </div>
@@ -1207,7 +1198,7 @@
 
                     <a href="${pageContext.request.contextPath}/admin/dashboard" class="portal-item-card" style="--portal-color:#7c3aed;">
                         <div>
-                            <div style="font-size:24px; margin-bottom:8px;">⚙️</div>
+                            <div style="font-size:12px; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">Quản Trị Hệ Thống</div>
                             <h4 style="margin:0 0 4px; font-size:16px; color:var(--dr-navy);">Quản Trị Viên (Admin)</h4>
                             <p style="font-size:12.5px; color:#64748b; margin:0 0 14px; line-height:1.5;">Tổng quan hoạt động phòng khám, danh mục bác sĩ, theo dõi hạ tầng Tomcat 10.</p>
                         </div>
@@ -1229,16 +1220,16 @@
             <!-- Sub-tab Navigation (Răng sứ, Niềng răng, Thẩm mỹ, Bệnh lý) -->
             <div class="subtab-nav">
                 <button class="subtab-btn active" id="subNav-ceramic" onclick="switchSubTab('ceramic')">
-                    💎 Răng Sứ & Dán Sứ Veneer
+                    Răng Sứ & Dán Sứ Veneer
                 </button>
                 <button class="subtab-btn" id="subNav-braces" onclick="switchSubTab('braces')">
-                    ✨ Niềng Răng Thẩm Mỹ
+                    Niềng Răng Thẩm Mỹ
                 </button>
                 <button class="subtab-btn" id="subNav-implant" onclick="switchSubTab('implant')">
-                    🦷 Cấy Ghép Implant & Thẩm Mỹ
+                    Cấy Ghép Implant & Phục Hình
                 </button>
                 <button class="subtab-btn" id="subNav-general" onclick="switchSubTab('general')">
-                    🩺 Điều Trị Bệnh Lý & Nhổ Răng Khôn
+                    Điều Trị Bệnh Lý & Tiểu Phẫu
                 </button>
             </div>
 
@@ -1514,7 +1505,7 @@
                     </div>
 
                     <button onclick="prefillBooking('', '1')" class="btn-hero-primary" style="font-size:13.5px; padding:10px 20px;">
-                        <span>📅</span> Đặt Lịch Khám Trực Tiếp Với Bác Sĩ Lý Thủy
+                        Đặt Lịch Khám Trực Tiếp Với Bác Sĩ Lý Thủy &rarr;
                     </button>
                 </div>
             </div>
@@ -1776,7 +1767,7 @@
                         </div>
 
                         <button type="submit" id="btnSubmitTabBooking" class="btn-hero-primary" style="width:100%; padding:14px; justify-content:center; font-size:15px; margin-top:8px;">
-                            <span>✨</span> Xác Nhận Đăng Ký Lịch Khám
+                            Xác Nhận Đăng Ký Lịch Khám
                         </button>
                         <div id="tabBookingMsg" style="text-align:center; margin-top:10px; font-size:13px;"></div>
                     </form>
@@ -1787,19 +1778,19 @@
                     <h3 style="font-size:18px; font-weight:800; color:var(--dr-navy); margin:0 0 16px 0;">Hệ Thống Cơ Sở Nha Khoa Dr.Smile</h3>
                     
                     <div style="margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid #f1f5f9;">
-                        <strong style="color:var(--dr-navy); font-size:14.5px;">📍 Cơ sở chính (Núi Trúc):</strong>
+                        <strong style="color:var(--dr-navy); font-size:14.5px;">Cơ sở chính (Núi Trúc):</strong>
                         <p style="font-size:13px; color:#475569; margin:4px 0;">Số 41, phố Núi Trúc, phường Giảng Võ, quận Ba Đình, Hà Nội</p>
-                        <span style="font-size:12.5px; color:#0284c7;">📞 Hotline: 096 669 2286</span>
+                        <span style="font-size:12.5px; color:#0284c7; font-weight:600;">Hotline: 096 669 2286</span>
                     </div>
 
                     <div style="margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid #f1f5f9;">
-                        <strong style="color:var(--dr-navy); font-size:14.5px;">📍 Cơ sở 2 (Phố Huế):</strong>
+                        <strong style="color:var(--dr-navy); font-size:14.5px;">Cơ sở 2 (Phố Huế):</strong>
                         <p style="font-size:13px; color:#475569; margin:4px 0;">Số 124 Phố Huế, quận Hai Bà Trưng, Hà Nội</p>
-                        <span style="font-size:12.5px; color:#0284c7;">📞 Hotline: 08 6542 8768</span>
+                        <span style="font-size:12.5px; color:#0284c7; font-weight:600;">Hotline: 08 6542 8768</span>
                     </div>
 
                     <div>
-                        <strong style="color:var(--dr-navy); font-size:14.5px;">🕒 Giờ Mở Cửa Phục Vụ:</strong>
+                        <strong style="color:var(--dr-navy); font-size:14.5px;">Giờ Mở Cửa Phục Vụ:</strong>
                         <p style="font-size:13px; color:#475569; margin:4px 0;">Từ 08:30 đến 18:30 (Thứ 2 đến Chủ Nhật, kể cả ngày lễ)</p>
                         <p style="font-size:12.5px; color:#64748b; margin:0;">Email liên hệ: drsmile.vn@gmail.com &bull; MST: 0109138207</p>
                     </div>
@@ -1832,8 +1823,8 @@
     <!-- 6. MODAL XÁC NHẬN ĐẶT LỊCH THÀNH CÔNG -->
     <div id="successModal" class="modal-overlay">
         <div class="modal-card">
-            <div style="width:64px; height:64px; border-radius:50%; background:#ecfdf5; color:#059669; font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
-                ✓
+            <div style="width:64px; height:64px; border-radius:50%; background:#ecfdf5; color:#059669; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <h3 style="font-size:20px; font-weight:800; color:var(--dr-navy); margin:0 0 8px;">Đặt Lịch Hẹn Thành Công!</h3>
             <p style="font-size:13.5px; color:#475569; line-height:1.5; margin-bottom:18px;">
@@ -1937,7 +1928,7 @@
             .then(res => res.json())
             .then(data => {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>✨</span><span>Xác Nhận Đăng Ký Lịch Khám</span>';
+                submitBtn.innerHTML = '<span>Xác Nhận Đăng Ký Lịch Khám</span>';
 
                 if (data.success) {
                     document.getElementById('modalCode').innerText = '#APT-' + (data.appointmentId || 'SUCCESS');
@@ -1949,14 +1940,14 @@
                     form.reset();
                 } else {
                     msgEl.style.color = '#dc2626';
-                    msgEl.innerText = '❌ ' + (data.message || 'Lỗi khi đặt lịch. Vui lòng thử lại!');
+                    msgEl.innerText = data.message || 'Lỗi khi đặt lịch. Vui lòng thử lại!';
                 }
             })
             .catch(err => {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>✨</span><span>Xác Nhận Đăng Ký Lịch Khám</span>';
+                submitBtn.innerHTML = '<span>Xác Nhận Đăng Ký Lịch Khám</span>';
                 msgEl.style.color = '#dc2626';
-                msgEl.innerText = '❌ Lỗi kết nối máy chủ. Vui lòng gọi Hotline 096 669 2286 để được hỗ trợ.';
+                msgEl.innerText = 'Lỗi kết nối máy chủ. Vui lòng gọi Hotline 096 669 2286 để được hỗ trợ.';
             });
         }
 

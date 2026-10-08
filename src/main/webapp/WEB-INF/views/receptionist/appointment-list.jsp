@@ -28,10 +28,10 @@
                 </div>
                 <div style="display:flex; gap:10px;">
                     <a href="${pageContext.request.contextPath}/reception/checkin" class="btn btn-secondary">
-                        <span>🚪</span> Quầy Check-in
+                        Quầy Check-in
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/appointments/create" class="btn btn-primary">
-                        <span>➕</span> Đặt Lịch Hẹn Mới
+                        + Đặt Lịch Hẹn Mới
                     </a>
                 </div>
             </div>
@@ -39,34 +39,34 @@
             <!-- Toast / Success Messages -->
             <c:if test="${param.success eq 'booked'}">
                 <div class="alert-tag" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
-                    ✅ <strong>Thành công:</strong> Lịch hẹn mới đã được lưu vào hệ thống an toàn!
+                    <strong>Thành công:</strong> Lịch hẹn mới đã được lưu vào hệ thống an toàn!
                 </div>
             </c:if>
             <c:if test="${param.success eq 'confirmed'}">
                 <div class="alert-tag" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
-                    ℹ️ <strong>Đã cập nhật:</strong> Bệnh nhân đã xác nhận chắc chắn sẽ đến khám!
+                    <strong>Đã cập nhật:</strong> Bệnh nhân đã xác nhận chắc chắn sẽ đến khám!
                 </div>
             </c:if>
             <c:if test="${param.success eq 'cancelled'}">
                 <div class="alert-tag" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
-                    ⚠️ <strong>Đã hủy:</strong> Lịch hẹn đã được hủy theo yêu cầu của bệnh nhân/phòng khám.
+                    <strong>Đã hủy:</strong> Lịch hẹn đã được hủy theo yêu cầu của bệnh nhân/phòng khám.
                 </div>
             </c:if>
             <c:if test="${param.success eq 'rescheduled'}">
                 <div class="alert-tag" style="background:#ecfeff;color:#0e7490;border-color:#a5f3fc;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
-                    🔄 <strong>Đã đổi lịch:</strong> Khung giờ mới đã được kiểm tra ca trực và lưu thành công.
+                    <strong>Đã đổi lịch:</strong> Khung giờ mới đã được kiểm tra ca trực và lưu thành công.
                 </div>
             </c:if>
             <c:if test="${not empty param.error}">
                 <div class="alert-tag" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;padding:12px 18px;font-size:13.5px;margin-bottom:20px;border-radius:10px;width:100%;">
-                    ⚠️ <strong>Không thể cập nhật:</strong> ${param.error}
+                    <strong>Không thể cập nhật:</strong> ${param.error}
                 </div>
             </c:if>
 
             <!-- KPI Summary Widgets -->
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-blue">📅</div>
+                    <div class="kpi-icon-box kpi-icon-blue">APPT</div>
                     <div class="kpi-meta">
                         <h3>${empty appointmentList ? 0 : appointmentList.size()}</h3>
                         <span>Tổng lịch hẹn trong ngày</span>
@@ -83,7 +83,7 @@
                 </c:forEach>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-amber">⏳</div>
+                    <div class="kpi-icon-box kpi-icon-amber">WAIT</div>
                     <div class="kpi-meta">
                         <h3>${countPending + countConfirmed}</h3>
                         <span>Chờ bệnh nhân đến quầy</span>
@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-green">🚪</div>
+                    <div class="kpi-icon-box kpi-icon-green">CHECKIN</div>
                     <div class="kpi-meta">
                         <h3>${countArrived}</h3>
                         <span>Đã Check-in (Vào khám)</span>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-purple">🩺</div>
+                    <div class="kpi-icon-box kpi-icon-purple">DOCTOR</div>
                     <div class="kpi-meta">
                         <h3>${empty dentists ? 0 : dentists.size()}</h3>
                         <span>Bác sĩ phụ trách trực ca</span>
@@ -139,7 +139,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>📋</span> Danh Sách Lịch Hẹn Ngày: <strong style="color:var(--primary);margin-left:4px;">${selectedDate}</strong>
+                        Danh Sách Lịch Hẹn Ngày: <strong style="color:var(--primary);margin-left:4px;">${selectedDate}</strong>
                     </div>
                 </div>
 
@@ -162,12 +162,11 @@
                                     <tr>
                                         <td colspan="7">
                                             <div class="empty-state">
-                                                <span class="empty-state-icon">📭</span>
                                                 <h4>Không có lịch hẹn nào</h4>
                                                 <p>Ngày <strong>${selectedDate}</strong> hiện chưa có bệnh nhân nào đặt lịch khám.</p>
                                                 <div style="margin-top:16px;">
                                                     <a href="${pageContext.request.contextPath}/reception/appointments/create" class="btn btn-primary btn-sm">
-                                                        <span>➕</span> Đặt lịch ngay cho ngày này
+                                                        + Đặt lịch ngay cho ngày này
                                                     </a>
                                                 </div>
                                             </div>
@@ -229,7 +228,7 @@
                                                         <form action="${pageContext.request.contextPath}/reception/checkin" method="POST" style="display:inline;">
                                                             <input type="hidden" name="appointmentId" value="${a.appointmentId}" />
                                                             <button type="submit" class="btn btn-success btn-sm" title="Bệnh nhân đã có mặt -> Tạo lượt khám thực tế">
-                                                                <span>🚪</span> Check-in
+                                                                Check-in
                                                             </button>
                                                         </form>
                                                     </c:if>
@@ -284,7 +283,7 @@
                 <label class="form-label" for="rescheduleSlot">Ca khám mới (Slot 30 phút)</label>
                 <select id="rescheduleSlot" name="timeSlot" class="form-control" onchange="syncRescheduleSlot(this.value)">
                     <option value="">-- Chọn khung giờ cố định --</option>
-                    <optgroup label="🌅 Buổi sáng">
+                    <optgroup label="Buổi sáng">
                         <option value="08:00-08:30">08:00 – 08:30</option>
                         <option value="08:30-09:00">08:30 – 09:00</option>
                         <option value="09:00-09:30">09:00 – 09:30</option>
@@ -294,7 +293,7 @@
                         <option value="11:00-11:30">11:00 – 11:30</option>
                         <option value="11:30-12:00">11:30 – 12:00</option>
                     </optgroup>
-                    <optgroup label="🌇 Buổi chiều">
+                    <optgroup label="Buổi chiều">
                         <option value="12:00-12:30">12:00 – 12:30</option>
                         <option value="12:30-13:00">12:30 – 13:00</option>
                         <option value="13:00-13:30">13:00 – 13:30</option>

@@ -37,7 +37,7 @@
                 </div>
                 <div style="display: flex; gap: 10px;">
                     <a href="${pageContext.request.contextPath}/dentist/queue" class="btn btn-secondary">
-                        <span>💺</span> Xem Hàng Đợi Ghế Khám
+                        Xem Hàng Đợi Ghế Khám
                     </a>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <!-- Toast / Success Messages -->
             <c:if test="${param.success eq 'visit_completed'}">
                 <div class="alert-banner alert-banner-success">
-                    <span class="alert-banner-icon">✅</span>
+                    <span class="alert-banner-icon" style="font-weight:700;">✓</span>
                     <div>
                         <strong>Hoàn tất ca khám:</strong> Đã lưu trữ thành công kết quả khám và đóng lượt khám của bệnh nhân.
                     </div>
@@ -55,7 +55,7 @@
             <!-- Dentist KPIs Grid -->
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-blue">📅</div>
+                    <div class="kpi-icon-box kpi-icon-blue" style="font-size: 11px; font-weight: 700;">LỊCH</div>
                     <div class="kpi-meta">
                         <h3>${totalApptsCount}</h3>
                         <span>Lịch hẹn của tôi hôm nay</span>
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-amber">⏳</div>
+                    <div class="kpi-icon-box kpi-icon-amber" style="font-size: 11px; font-weight: 700;">CHỜ</div>
                     <div class="kpi-meta">
                         <h3>${waitingVisits != null ? waitingVisits.size() : 0}</h3>
                         <span>Bệnh nhân đang chờ</span>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-purple">🩺</div>
+                    <div class="kpi-icon-box kpi-icon-purple" style="font-size: 11px; font-weight: 700;">KHÁM</div>
                     <div class="kpi-meta">
                         <h3>${inProgressCount}</h3>
                         <span>Ca đang khám tại ghế</span>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-green">✅</div>
+                    <div class="kpi-icon-box kpi-icon-green" style="font-size: 11px; font-weight: 700;">XONG</div>
                     <div class="kpi-meta">
                         <h3>${completedCount}</h3>
                         <span>Đã hoàn thành hôm nay</span>
@@ -92,8 +92,8 @@
                 <c:if test="${v.status eq 'InProgress'}">
                     <div style="background: linear-gradient(135deg, #f0f7fd 0%, #e0f2fe 100%); border: 2px solid var(--drsmile-navy); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md);">
                         <div style="display: flex; align-items: center; gap: 16px;">
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--drsmile-navy); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px;">
-                                🦷
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--drsmile-navy); color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800;">
+                                LIVE
                             </div>
                             <div>
                                 <div style="display: flex; align-items: center; gap: 8px;">
@@ -107,7 +107,7 @@
                         </div>
                         <div>
                             <a href="${pageContext.request.contextPath}/clinical/examination?visitId=${v.visitId}" class="btn btn-primary" style="padding: 12px 24px; font-size: 14px; font-weight: 600;">
-                                <span>🩺</span> Mở Hồ Sơ & Sơ Đồ Răng &rarr;
+                                Mở Hồ Sơ & Sơ Đồ Răng &rarr;
                             </a>
                         </div>
                     </div>
@@ -119,7 +119,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <span>💺</span>
                             <span>Bệnh Nhân Chờ Khám Tại Ghế</span>
                         </div>
                         <span class="badge-pill badge-Pending">
@@ -130,7 +129,6 @@
                         <c:choose>
                             <c:when test="${empty waitingVisits}">
                                 <div class="empty-state" style="padding: 30px;">
-                                    <span class="empty-state-icon">☕</span>
                                     <h4>Không có bệnh nhân nào đang chờ</h4>
                                     <p>Khi quầy lễ tân check-in tiếp đón, bệnh nhân sẽ xuất hiện ngay tại đây.</p>
                                 </div>
@@ -145,19 +143,19 @@
                                                     <div style="display: flex; align-items: center; gap: 8px;">
                                                         <span style="font-weight: 700; color: var(--text-primary); font-size: 15px;">#${loop.index + 1} &bull; ${v.patientName}</span>
                                                         <span class="badge-pill ${v.visitType eq 'Emergency' ? 'badge-Cancelled' : (v.visitType eq 'Scheduled' ? 'badge-Confirmed' : 'badge-Pending')}">
-                                                            ${v.visitType eq 'Emergency' ? '🚨 Cấp cứu' : (v.visitType eq 'Scheduled' ? '📅 Có hẹn' : '🚶 Vãng lai')}
+                                                            ${v.visitType eq 'Emergency' ? 'Cấp cứu' : (v.visitType eq 'Scheduled' ? 'Có hẹn' : 'Vãng lai')}
                                                         </span>
                                                     </div>
                                                     <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
-                                                        📞 ${v.patientPhone} &bull; Check-in: <strong>${v.checkInTime.toLocalTime().toString().substring(0, 5)}</strong>
+                                                        ${v.patientPhone} &bull; Check-in: <strong>${v.checkInTime.toLocalTime().toString().substring(0, 5)}</strong>
                                                     </div>
                                                     <c:if test="${not empty v.medicalAlerts || not empty v.allergies}">
                                                         <div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">
                                                             <c:if test="${not empty v.medicalAlerts}">
-                                                                <span class="alert-tag">⚠️ ${v.medicalAlerts}</span>
+                                                                <span class="alert-tag">Cảnh báo: ${v.medicalAlerts}</span>
                                                             </c:if>
                                                             <c:if test="${not empty v.allergies}">
-                                                                <span class="alert-tag" style="background:#fef3c7; color:#b45309;">⚡ ${v.allergies}</span>
+                                                                <span class="alert-tag" style="background:#fef3c7; color:#b45309;">Dị ứng: ${v.allergies}</span>
                                                             </c:if>
                                                         </div>
                                                     </c:if>
@@ -171,7 +169,7 @@
                                                         <option value="Ghế VIP - P.201">Ghế VIP - P.201</option>
                                                     </select>
                                                     <button type="submit" class="btn btn-success" style="padding: 8px 16px; font-size: 13px; white-space: nowrap;">
-                                                        <span>🩺</span> Mời Khám
+                                                        Mời Khám
                                                     </button>
                                                 </div>
                                             </div>
@@ -187,7 +185,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <span>📅</span>
                             <span>Lịch Hẹn Của Bác Sĩ Hôm Nay</span>
                         </div>
                         <a href="${pageContext.request.contextPath}/reception/calendar" style="font-size: 13px; color: var(--primary); text-decoration: none; font-weight: 600;">

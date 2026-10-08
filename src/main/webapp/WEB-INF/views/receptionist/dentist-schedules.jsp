@@ -95,10 +95,10 @@
                 </div>
                 <div style="display: flex; gap: 10px;">
                     <a href="${pageContext.request.contextPath}/reception/calendar" class="btn btn-secondary">
-                        <span>📆</span> Lịch Dạng Calendar
+                        Lịch Dạng Calendar
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/appointments/create" class="btn btn-primary">
-                        <span>➕</span> Đặt Lịch Hẹn Mới
+                        + Đặt Lịch Hẹn Mới
                     </a>
                 </div>
             </div>
@@ -106,19 +106,19 @@
             <!-- Success Notification -->
             <c:if test="${param.success eq 'created'}">
                 <div class="alert-banner alert-banner-success">
-                    <span class="alert-banner-icon">✅</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div><strong>Thành công:</strong> Đã tạo mới ca trực cho Bác sĩ thành công! Lịch hẹn sẽ tự động áp dụng khung giờ này.</div>
                 </div>
             </c:if>
             <c:if test="${param.success eq 'deleted'}">
                 <div class="alert-banner alert-banner-info">
-                    <span class="alert-banner-icon">🗑️</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div><strong>Đã xóa:</strong> Đã gỡ bỏ ca trực khỏi hệ thống.</div>
                 </div>
             </c:if>
             <c:if test="${param.success eq 'toggled'}">
                 <div class="alert-banner alert-banner-info">
-                    <span class="alert-banner-icon">🔄</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div><strong>Cập nhật:</strong> Đã thay đổi trạng thái khả dụng của ca trực.</div>
                 </div>
             </c:if>
@@ -126,7 +126,7 @@
             <!-- Error Notification -->
             <c:if test="${not empty param.error}">
                 <div class="alert-banner alert-banner-danger">
-                    <span class="alert-banner-icon">⚠️</span>
+                    <span class="alert-banner-icon">!</span>
                     <div><strong>Lỗi thực hiện:</strong> ${param.error}</div>
                 </div>
             </c:if>
@@ -136,7 +136,7 @@
                 <div class="kpi-card">
                     <div class="kpi-header">
                         <span class="kpi-title">Tổng Số Ca Trực</span>
-                        <span class="kpi-icon">📋</span>
+                        <span class="kpi-icon">TOTAL</span>
                     </div>
                     <div class="kpi-value">${totalShifts}</div>
                     <div class="kpi-footer">Toàn bộ ca trực thiết lập trong tuần</div>
@@ -144,7 +144,7 @@
                 <div class="kpi-card">
                     <div class="kpi-header">
                         <span class="kpi-title">Đang Nhận Hẹn Khám</span>
-                        <span class="kpi-icon">✅</span>
+                        <span class="kpi-icon">ACTIVE</span>
                     </div>
                     <div class="kpi-value" style="color: #10b981;">${activeShifts}</div>
                     <div class="kpi-footer">Ca trực sẵn sàng phục vụ bệnh nhân</div>
@@ -152,7 +152,7 @@
                 <div class="kpi-card">
                     <div class="kpi-header">
                         <span class="kpi-title">Tạm Ngưng Nhận Hẹn</span>
-                        <span class="kpi-icon">⏸️</span>
+                        <span class="kpi-icon">PAUSE</span>
                     </div>
                     <div class="kpi-value" style="color: #64748b;">${inactiveShifts}</div>
                     <div class="kpi-footer">Ca trực đang tạm đóng hoặc nghỉ phép</div>
@@ -160,7 +160,7 @@
                 <div class="kpi-card">
                     <div class="kpi-header">
                         <span class="kpi-title">Bác Sĩ Hệ Thống</span>
-                        <span class="kpi-icon">👨‍⚕️</span>
+                        <span class="kpi-icon">DOC</span>
                     </div>
                     <div class="kpi-value" style="color: var(--drsmile-navy);">${dentists.size()}</div>
                     <div class="kpi-footer">Bác sĩ chuyên khoa tại cơ sở phòng khám</div>
@@ -172,7 +172,7 @@
                 <!-- FORM CARD: ADD DENTIST SCHEDULE -->
                 <div class="form-card" style="margin: 0;">
                     <div class="form-card-header">
-                        <h2>➕ Thêm Ca Trực Bác Sĩ</h2>
+                        <h2>+ Thêm Ca Trực Bác Sĩ</h2>
                         <p>Khai báo ca làm việc cố định theo thứ trong tuần</p>
                     </div>
 
@@ -185,7 +185,7 @@
                                     <option value="">-- Chọn bác sĩ --</option>
                                     <c:forEach var="d" items="${dentists}">
                                         <option value="${d.dentistId}" ${selectedDentistId == d.dentistId ? 'selected' : ''}>
-                                            👨‍⚕️ ${d.fullName} (${d.specialization})
+                                            ${d.fullName} (${d.specialization})
                                         </option>
                                     </c:forEach>
                                 </select>
@@ -210,16 +210,16 @@
                                 <label class="form-label">Khung Giờ Mẫu Nhanh (Click để chọn nhanh)</label>
                                 <div class="preset-buttons">
                                     <button type="button" class="preset-btn" onclick="applyPreset('08:00', '12:00')">
-                                        🌅 Sáng (08:00 - 12:00)
+                                        Sáng (08:00 - 12:00)
                                     </button>
                                     <button type="button" class="preset-btn" onclick="applyPreset('13:00', '17:30')">
-                                        🌇 Chiều (13:00 - 17:30)
+                                        Chiều (13:00 - 17:30)
                                     </button>
                                     <button type="button" class="preset-btn" onclick="applyPreset('13:00', '18:30')">
-                                        🌆 Tối (13:00 - 18:30)
+                                        Tối (13:00 - 18:30)
                                     </button>
                                     <button type="button" class="preset-btn" onclick="applyPreset('08:00', '18:30')">
-                                        ⭐ Cả ngày (08:00 - 18:30)
+                                        Cả ngày (08:00 - 18:30)
                                     </button>
                                 </div>
                             </div>
@@ -247,7 +247,7 @@
 
                         <div class="form-card-footer" style="padding: 16px 20px;">
                             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                                <span>💾</span> Lưu Ca Trực Bác Sĩ
+                                Lưu Ca Trực Bác Sĩ
                             </button>
                         </div>
                     </form>
@@ -272,7 +272,7 @@
                                 <option value="">Tất cả Bác sĩ</option>
                                 <c:forEach var="d" items="${dentists}">
                                     <option value="${d.dentistId}" ${selectedDentistId == d.dentistId ? 'selected' : ''}>
-                                        👨‍⚕️ ${d.fullName}
+                                        ${d.fullName}
                                     </option>
                                 </c:forEach>
                             </select>
@@ -307,7 +307,7 @@
                                             </td>
                                             <td>
                                                 <div style="font-weight: 700; color: var(--drsmile-navy);">
-                                                    👨‍⚕️ ${s.dentistName}
+                                                    ${s.dentistName}
                                                 </div>
                                                 <div style="font-size: 12px; color: var(--text-muted);">
                                                     ${s.specialization} &bull; ${s.roomNumber != null ? s.roomNumber : 'Ghế khám'}
@@ -315,12 +315,12 @@
                                             </td>
                                             <td>
                                                 <span class="day-badge day-${s.dayOfWeek}">
-                                                    📅 ${s.dayOfWeekName}
+                                                    ${s.dayOfWeekName}
                                                 </span>
                                             </td>
                                             <td>
                                                 <div style="font-weight: 700; color: #0f172a; font-family: monospace; font-size: 14px;">
-                                                    ⏱️ ${s.shiftTimeFormatted}
+                                                    ${s.shiftTimeFormatted}
                                                 </div>
                                             </td>
                                             <td>
@@ -345,7 +345,7 @@
                                                         <input type="hidden" name="available" value="${!s.available}" />
                                                         <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
                                                         <button type="submit" class="btn btn-secondary btn-sm" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
-                                                            ${s.available ? '⏸️' : '▶️'}
+                                                            ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
                                                         </button>
                                                     </form>
 
@@ -354,7 +354,7 @@
                                                         <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
                                                         <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
                                                         <button type="submit" class="btn btn-secondary btn-sm" style="color: #ef4444;" title="Xóa ca trực">
-                                                            🗑️
+                                                            Xóa
                                                         </button>
                                                     </form>
                                                 </div>

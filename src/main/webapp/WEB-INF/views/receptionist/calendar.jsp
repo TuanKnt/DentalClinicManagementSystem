@@ -152,13 +152,13 @@
                 </div>
                 <div style="display: flex; gap: 10px;">
                     <a href="${pageContext.request.contextPath}/reception/schedules" class="btn btn-secondary">
-                        <span>🩺</span> Quản Lý Ca Trực
+                        Quản Lý Ca Trực
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/appointments/create" class="btn btn-primary">
-                        <span>➕</span> Đặt Lịch Mới
+                        + Đặt Lịch Mới
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/checkin" class="btn btn-secondary">
-                        <span>🚪</span> Quầy Check-in
+                        Quầy Check-in
                     </a>
                 </div>
             </div>
@@ -242,10 +242,10 @@
                                                 ${a.patientName}
                                             </div>
                                             <div class="appt-meta">
-                                                <div>📞 ${a.patientPhone}</div>
-                                                <div>👨‍⚕️ ${a.dentistName}</div>
+                                                <div>SĐT: ${a.patientPhone}</div>
+                                                <div>BS: ${a.dentistName}</div>
                                                 <c:if test="${not empty a.reason}">
-                                                    <div style="font-style: italic; margin-top: 2px;">💬 ${a.reason}</div>
+                                                    <div style="font-style: italic; margin-top: 2px;">Lý do: ${a.reason}</div>
                                                 </c:if>
                                             </div>
 
@@ -254,7 +254,7 @@
                                                     <form action="${pageContext.request.contextPath}/reception/checkin" method="POST" style="margin: 0;">
                                                         <input type="hidden" name="appointmentId" value="${a.appointmentId}" />
                                                         <button type="submit" class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;">
-                                                            🚪 Check-in
+                                                            Check-in
                                                         </button>
                                                     </form>
                                                 </div>

@@ -45,7 +45,7 @@
             <!-- Error Notification -->
             <c:if test="${not empty errorMessage}">
                 <div class="alert-banner alert-banner-danger">
-                    <span class="alert-banner-icon">⚠️</span>
+                    <span class="alert-banner-icon">!</span>
                     <div><strong>Lỗi xử lý:</strong> ${errorMessage}</div>
                 </div>
             </c:if>
@@ -145,7 +145,7 @@
                             <!-- Medical Alerts (Health History) -->
                             <div class="form-group">
                                 <label for="medicalAlerts" class="form-label" style="color: var(--danger);">
-                                    ⚠️ Tiền Sử Bệnh Lý Nền (Nếu có)
+                                    Tiền Sử Bệnh Lý Nền (Nếu có)
                                 </label>
                                 <textarea id="medicalAlerts" 
                                           name="medicalAlerts" 
@@ -158,7 +158,7 @@
                             <!-- Allergies -->
                             <div class="form-group">
                                 <label for="allergies" class="form-label" style="color: var(--warning);">
-                                    ⚡ Tiền Sử Dị Ứng Thuốc (Nếu có)
+                                    Tiền Sử Dị Ứng Thuốc (Nếu có)
                                 </label>
                                 <textarea id="allergies" 
                                           name="allergies" 
@@ -175,7 +175,7 @@
                             Hủy Bỏ
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <span>💾</span> Lưu Hồ Sơ Bệnh Nhân
+                            Lưu Hồ Sơ Bệnh Nhân
                         </button>
                     </div>
                 </form>

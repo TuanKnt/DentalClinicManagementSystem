@@ -213,14 +213,14 @@
 
         <c:if test="${not empty errorMessage}">
             <div class="alert-banner alert-banner-danger" style="margin-bottom: 20px; padding: 10px 14px; font-size: 13px;">
-                <span class="alert-banner-icon">⚠️</span>
+                <span class="alert-banner-icon" style="font-weight:700;">!</span>
                 <div>${errorMessage}</div>
             </div>
         </c:if>
 
         <c:if test="${param.loggedOut eq 'true'}">
             <div class="alert-banner alert-banner-success" style="margin-bottom: 20px; padding: 10px 14px; font-size: 13px;">
-                <span class="alert-banner-icon">✅</span>
+                <span class="alert-banner-icon" style="font-weight:700;">✓</span>
                 <div>Bạn đã đăng xuất an toàn khỏi hệ thống DCMS Dental Care.</div>
             </div>
         </c:if>
@@ -229,7 +229,7 @@
             <div class="form-group" style="margin-bottom: 16px;">
                 <label for="username" class="form-label required">Tài Khoản</label>
                 <div class="form-input-icon">
-                    <span class="icon-left">👤</span>
+                    <svg class="icon-left" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:0.5;"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
                     <input type="text" 
                            id="username" 
                            name="username" 
@@ -244,7 +244,7 @@
             <div class="form-group" style="margin-bottom: 24px;">
                 <label for="password" class="form-label required">Mật Khẩu</label>
                 <div class="form-input-icon">
-                    <span class="icon-left">🔑</span>
+                    <svg class="icon-left" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:0.5;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     <input type="password" 
                            id="password" 
                            name="password" 
@@ -255,7 +255,7 @@
             </div>
 
             <button type="submit" class="btn btn-drsmile" style="width: 100%; padding: 13px; font-size: 14.5px;">
-                <span>🔐</span> Đăng Nhập Vào Hệ Thống
+                Đăng Nhập Vào Hệ Thống
             </button>
         </form>
 
@@ -265,15 +265,15 @@
             <div class="demo-roles-title">Tài khoản demo thử nghiệm (Mật khẩu: 123456)</div>
             <div class="demo-chips-grid">
                 <div class="demo-chip" onclick="fillAccount('letan01', '123456')" title="Nhấn để điền tài khoản Lễ tân">
-                    <span class="demo-chip-role">👩‍💼 Lễ Tân</span>
+                    <span class="demo-chip-role">Lễ Tân</span>
                     <span class="demo-chip-user">letan01</span>
                 </div>
                 <div class="demo-chip" onclick="fillAccount('bacsi_hung', '123456')" title="Nhấn để điền tài khoản Nha sĩ">
-                    <span class="demo-chip-role">👨‍⚕️ Nha Sĩ</span>
+                    <span class="demo-chip-role">Nha Sĩ</span>
                     <span class="demo-chip-user">bacsi_hung</span>
                 </div>
                 <div class="demo-chip" onclick="fillAccount('admin', '123456')" title="Nhấn để điền tài khoản Quản trị">
-                    <span class="demo-chip-role">⚙️ Quản Trị</span>
+                    <span class="demo-chip-role">Quản Trị</span>
                     <span class="demo-chip-user">admin</span>
                 </div>
             </div>

@@ -154,7 +154,7 @@
             <!-- Toast / Success Messages -->
             <c:if test="${param.success eq 'attachment_added'}">
                 <div class="alert-banner alert-banner-success">
-                    <span class="alert-banner-icon">📎</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div><strong>Thành công:</strong> Đã lưu trữ tài liệu / hình ảnh nha khoa vào hồ sơ bệnh nhân.</div>
                 </div>
             </c:if>
@@ -172,16 +172,16 @@
                             <span class="badge-pill badge-Confirmed">${patient.gender}</span>
                         </div>
                         <div class="patient-meta-tags">
-                            <span>🎂 Ngày sinh: <strong>${patient.dateOfBirth}</strong></span>
-                            <span>📞 SĐT: <code>${patient.phoneNumber}</code></span>
+                            <span>Ngày sinh: <strong>${patient.dateOfBirth}</strong></span>
+                            <span>SĐT: <code>${patient.phoneNumber}</code></span>
                             <c:if test="${not empty patient.email}">
-                                <span>✉️ ${patient.email}</span>
+                                <span>Email: ${patient.email}</span>
                             </c:if>
-                            <span>🏠 ${empty patient.address ? 'Chưa cập nhật địa chỉ' : patient.address}</span>
+                            <span>Địa chỉ: ${empty patient.address ? 'Chưa cập nhật' : patient.address}</span>
                         </div>
                         <c:if test="${not empty patient.emergencyContact}">
                             <div style="margin-top: 6px; font-size: 12px; color: var(--text-muted);">
-                                🚨 Liên hệ khẩn cấp: <strong>${patient.emergencyContact}</strong>
+                                Liên hệ khẩn cấp: <strong>${patient.emergencyContact}</strong>
                             </div>
                         </c:if>
                     </div>
@@ -189,17 +189,17 @@
 
                 <div style="display: flex; gap: 10px;">
                     <a href="${pageContext.request.contextPath}/reception/walkin?patientId=${patient.patientId}" class="btn btn-secondary">
-                        <span>🚶</span> Tiếp Nhận Khám Ngay
+                        Tiếp Nhận Khám Ngay
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/appointments/create?patientId=${patient.patientId}" class="btn btn-primary">
-                        <span>📅</span> Đặt Lịch Hẹn
+                        Đặt Lịch Hẹn
                     </a>
                 </div>
             </div>
 
             <!-- Medical Alerts Banner -->
             <div class="clinical-alert-bar">
-                <div class="clinical-alert-icon">⚠️</div>
+                <div class="clinical-alert-icon">!</div>
                 <div style="flex: 1;">
                     <div style="font-weight: 700; color: #b45309; font-size: 14px;">Cảnh Báo Lâm Sàng & Tiền Sử Bệnh Lý</div>
                     <div style="font-size: 13px; color: #92400e; margin-top: 2px;">
@@ -211,16 +211,15 @@
 
             <!-- Tabs Navigation -->
             <div class="profile-tabs">
-                <a href="#tab-visits" class="profile-tab-btn active">📋 Lịch Sử Các Đợt Khám (${empty visitHistory ? 0 : visitHistory.size()})</a>
-                <a href="#tab-odontogram" class="profile-tab-btn">🦷 Tình Trạng Sơ Đồ Răng (${empty toothFindings ? 0 : toothFindings.size()})</a>
-                <a href="#tab-attachments" class="profile-tab-btn">📷 Phim X-Quang & Hình Ảnh (${empty attachments ? 0 : attachments.size()})</a>
+                <a href="#tab-visits" class="profile-tab-btn active">Lịch Sử Các Đợt Khám (${empty visitHistory ? 0 : visitHistory.size()})</a>
+                <a href="#tab-odontogram" class="profile-tab-btn">Tình Trạng Sơ Đồ Răng (${empty toothFindings ? 0 : toothFindings.size()})</a>
+                <a href="#tab-attachments" class="profile-tab-btn">Phim X-Quang & Hình Ảnh (${empty attachments ? 0 : attachments.size()})</a>
             </div>
 
             <!-- Section 1: Visit History Timeline -->
             <div class="card" id="tab-visits" style="margin-bottom: 24px;">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>📋</span>
                         <span>Danh Sách Các Đợt Khám Bệnh Thực Tế (Visits)</span>
                     </div>
                     <span class="badge-pill badge-Confirmed">● ${empty visitHistory ? 0 : visitHistory.size()} Lượt khám</span>
@@ -271,7 +270,7 @@
                                                 <td style="max-width: 220px; font-size: 12px; color: var(--text-muted);">${v.notes}</td>
                                                 <td style="text-align: right;">
                                                     <a href="${pageContext.request.contextPath}/clinical/examination?visitId=${v.visitId}" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
-                                                        🩺 Xem Lâm Sàng &rarr;
+                                                        Xem Lâm Sàng &rarr;
                                                     </a>
                                                 </td>
                                             </tr>
@@ -288,7 +287,6 @@
             <div class="card" id="tab-odontogram" style="margin-bottom: 24px;">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>🦷</span>
                         <span>Tình Trạng Chi Tiết Các Răng (FDI Odontogram Record)</span>
                     </div>
                 </div>
@@ -341,7 +339,6 @@
             <div class="card" id="tab-attachments">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>📷</span>
                         <span>Thư Viện Phim X-Quang & Hình Ảnh Nha Khoa</span>
                     </div>
                     <div>
@@ -357,7 +354,7 @@
                                 <option value="Document">Tài liệu / Đơn</option>
                             </select>
                             <button type="submit" class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;">
-                                ➕ Thêm Phim
+                                + Thêm Phim
                             </button>
                         </form>
                     </div>
@@ -366,7 +363,6 @@
                     <c:choose>
                         <c:when test="${empty attachments}">
                             <div class="empty-state" style="padding: 30px;">
-                                <span class="empty-state-icon">🖼️</span>
                                 <h4>Chưa có hình ảnh hoặc phim X-quang đính kèm</h4>
                                 <p>Sử dụng biểu mẫu phía trên để tải lên phim cận chóp, panorama hoặc hình ảnh trong miệng của bệnh nhân.</p>
                             </div>
@@ -375,12 +371,12 @@
                             <div class="attachment-grid">
                                 <c:forEach var="att" items="${attachments}">
                                     <div class="attachment-card">
-                                        <div class="attachment-preview">
+                                        <div class="attachment-preview" style="font-size: 13px; font-weight: 700; letter-spacing: 0.5px;">
                                             <c:choose>
-                                                <c:when test="${att.fileType eq 'XRay'}">🩻</c:when>
-                                                <c:when test="${att.fileType eq 'IntraoralPhoto'}">📸</c:when>
-                                                <c:when test="${att.fileType eq 'PanoramicOPG'}">🦷</c:when>
-                                                <c:otherwise>📄</c:otherwise>
+                                                <c:when test="${att.fileType eq 'XRay'}">X-RAY</c:when>
+                                                <c:when test="${att.fileType eq 'IntraoralPhoto'}">PHOTO</c:when>
+                                                <c:when test="${att.fileType eq 'PanoramicOPG'}">PANORAMA</c:when>
+                                                <c:otherwise>DOC</c:otherwise>
                                             </c:choose>
                                         </div>
                                         <div class="attachment-info">

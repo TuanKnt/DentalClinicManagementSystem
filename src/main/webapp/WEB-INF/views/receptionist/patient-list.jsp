@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary">
-                        <span>➕</span> Đăng Ký Bệnh Nhân Mới
+                        + Đăng Ký Bệnh Nhân Mới
                     </a>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                            class="form-control" 
                            style="flex:1;" 
                            value="${keyword}" 
-                           placeholder="🔍 Nhập số điện thoại, số CCCD hoặc họ tên bệnh nhân để tìm kiếm nhanh..." />
+                           placeholder="Nhập số điện thoại, số CCCD hoặc họ tên bệnh nhân để tìm kiếm nhanh..." />
                     <button type="submit" class="btn btn-primary">
                         Tìm Kiếm
                     </button>
@@ -54,7 +54,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>👥</span> Danh Sách Bệnh Nhân
+                        Danh Sách Bệnh Nhân
                         <c:if test="${not empty keyword}">
                             <span style="font-size:13px; font-weight:normal; color:var(--text-muted); margin-left:8px;">
                                 (Kết quả tìm kiếm cho: "<strong>${keyword}</strong>")
@@ -82,12 +82,11 @@
                                     <tr>
                                         <td colspan="7">
                                             <div class="empty-state">
-                                                <span class="empty-state-icon">👤</span>
                                                 <h4>Không tìm thấy bệnh nhân nào</h4>
                                                 <p>Thử tìm kiếm với số điện thoại khác hoặc thêm mới hồ sơ bệnh nhân.</p>
                                                 <div style="margin-top:16px;">
                                                     <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary btn-sm">
-                                                        <span>➕</span> Đăng ký hồ sơ mới
+                                                        + Đăng ký hồ sơ mới
                                                     </a>
                                                 </div>
                                             </div>
@@ -128,14 +127,14 @@
                                                 <c:choose>
                                                     <c:when test="${not empty p.medicalAlerts or not empty p.allergies}">
                                                         <c:if test="${not empty p.medicalAlerts}">
-                                                            <div class="alert-tag">⚠️ Bệnh nền: ${p.medicalAlerts}</div>
+                                                            <div class="alert-tag">Bệnh nền: ${p.medicalAlerts}</div>
                                                         </c:if>
                                                         <c:if test="${not empty p.allergies}">
-                                                            <div class="alert-tag" style="background:#fff1f2; color:#be123c;">⚡ Dị ứng: ${p.allergies}</div>
+                                                            <div class="alert-tag" style="background:#fff1f2; color:#be123c;">Dị ứng: ${p.allergies}</div>
                                                         </c:if>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <span style="color:var(--text-muted); font-size:12.5px;">✓ Bình thường</span>
+                                                        <span style="color:var(--text-muted); font-size:12.5px;">Bình thường</span>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
@@ -147,10 +146,10 @@
                                             <td style="text-align: right;">
                                                 <div style="display:inline-flex; gap:6px;">
                                                     <a href="${pageContext.request.contextPath}/reception/patients/edit?id=${p.patientId}" class="btn btn-secondary btn-sm">
-                                                        ✏️ Sửa
+                                                        Sửa
                                                     </a>
                                                     <a href="${pageContext.request.contextPath}/reception/appointments/create?patientId=${p.patientId}" class="btn btn-primary btn-sm" title="Đặt lịch hẹn ngay cho bệnh nhân này">
-                                                        📅 Đặt Lịch
+                                                        Đặt Lịch
                                                     </a>
                                                 </div>
                                             </td>

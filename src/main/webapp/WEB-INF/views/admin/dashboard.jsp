@@ -37,10 +37,10 @@
                 </div>
                 <div style="display: flex; gap: 10px;">
                     <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-secondary">
-                        <span>➕</span> Thêm Bệnh Nhân
+                        + Thêm Bệnh Nhân
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/calendar" class="btn btn-primary">
-                        <span>📅</span> Xem Lịch Toàn Viện
+                        Xem Lịch Toàn Viện
                     </a>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <!-- System Metrics KPI Grid -->
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-blue">👥</div>
+                    <div class="kpi-icon-box kpi-icon-blue" style="font-size: 11px; font-weight: 700;">STAFF</div>
                     <div class="kpi-meta">
                         <h3>${totalUsers}</h3>
                         <span>Tài khoản nhân sự</span>
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-purple">🩺</div>
+                    <div class="kpi-icon-box kpi-icon-purple" style="font-size: 11px; font-weight: 700;">DOC</div>
                     <div class="kpi-meta">
                         <h3>${totalDentists}</h3>
                         <span>Bác sĩ nha khoa</span>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-green">📇</div>
+                    <div class="kpi-icon-box kpi-icon-green" style="font-size: 11px; font-weight: 700;">PAT</div>
                     <div class="kpi-meta">
                         <h3>${totalPatients}</h3>
                         <span>Hồ sơ bệnh nhân</span>
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-amber">📅</div>
+                    <div class="kpi-icon-box kpi-icon-amber" style="font-size: 11px; font-weight: 700;">APPT</div>
                     <div class="kpi-meta">
                         <h3>${todayAppointmentsCount}</h3>
                         <span>Lịch hẹn hôm nay</span>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-red">💺</div>
+                    <div class="kpi-icon-box kpi-icon-red" style="font-size: 11px; font-weight: 700;">QUEUE</div>
                     <div class="kpi-meta">
                         <h3>${waitingQueueCount}</h3>
                         <span>Chờ khám tại quầy</span>
@@ -94,7 +94,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <span>🩺</span>
                             <span>Đội Ngũ Bác Sĩ Nha Khoa Điều Trị</span>
                         </div>
                         <span class="badge-pill badge-Confirmed">● ${totalDentists} Bác sĩ trực sẵn sàng</span>
@@ -157,7 +156,6 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
-                                <span>📇</span>
                                 <span>Bệnh Nhân Đăng Ký Mới Gần Đây</span>
                             </div>
                             <a href="${pageContext.request.contextPath}/reception/patients" style="font-size: 13px; color: var(--primary); text-decoration: none; font-weight: 600;">
@@ -178,7 +176,7 @@
                                                         ${p.fullName}
                                                     </div>
                                                     <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
-                                                        📞 ${p.phoneNumber} &bull; ${p.gender} &bull; ${p.dateOfBirth}
+                                                        SĐT: ${p.phoneNumber} &bull; ${p.gender} &bull; ${p.dateOfBirth}
                                                     </div>
                                                 </div>
                                                 <a href="${pageContext.request.contextPath}/reception/patients/detail?id=${p.patientId}" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
@@ -196,7 +194,6 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
-                                <span>⚙️</span>
                                 <span>Trạng Thái Cụm Hạ Tầng & Dịch Vụ</span>
                             </div>
                         </div>

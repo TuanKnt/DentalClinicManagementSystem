@@ -35,10 +35,10 @@
                 </div>
                 <div style="display:flex; gap:10px;">
                     <a href="${pageContext.request.contextPath}/reception/appointments" class="btn btn-secondary">
-                        <span>📅</span> Danh Sách Lịch Hẹn
+                        Danh Sách Lịch Hẹn
                     </a>
                     <a href="${pageContext.request.contextPath}/reception/walkin" class="btn btn-primary">
-                        <span>🚶</span> Tiếp Nhận Khách Vãng Lai
+                        + Tiếp Nhận Khách Vãng Lai
                     </a>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <!-- Toast / Success Messages -->
             <c:if test="${param.success eq 'checkedin'}">
                 <div class="alert-banner alert-banner-success">
-                    <span class="alert-banner-icon">✅</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div>
                         <strong>Check-in thành công:</strong> Bệnh nhân đã được tiếp nhận và đưa vào hàng đợi chờ khám (Lượt khám <strong>#${param.visitId}</strong>).
                     </div>
@@ -54,7 +54,7 @@
             </c:if>
             <c:if test="${param.success eq 'walkin'}">
                 <div class="alert-banner alert-banner-success">
-                    <span class="alert-banner-icon">✅</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div>
                         <strong>Tiếp nhận vãng lai thành công:</strong> Đã tạo lượt khám mới không cần lịch hẹn trước (Lượt khám <strong>#${param.visitId}</strong>).
                     </div>
@@ -62,7 +62,7 @@
             </c:if>
             <c:if test="${not empty param.error}">
                 <div class="alert-banner" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;">
-                    <span class="alert-banner-icon">⚠️</span>
+                    <span class="alert-banner-icon">!</span>
                     <div><strong>Không thể check-in:</strong> ${param.error}</div>
                 </div>
             </c:if>
@@ -70,7 +70,7 @@
             <!-- KPI Summary Cards -->
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-blue">💺</div>
+                    <div class="kpi-icon-box kpi-icon-blue">QUEUE</div>
                     <div class="kpi-meta">
                         <h3>${empty waitingQueue ? 0 : waitingQueue.size()}</h3>
                         <span>Bệnh nhân trong hàng đợi ghế</span>
@@ -85,7 +85,7 @@
                 </c:forEach>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-amber">⏳</div>
+                    <div class="kpi-icon-box kpi-icon-amber">WAIT</div>
                     <div class="kpi-meta">
                         <h3>${pendingApptCount}</h3>
                         <span>Lịch hẹn chờ check-in hôm nay</span>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-green">🚪</div>
+                    <div class="kpi-icon-box kpi-icon-green">CHECKIN</div>
                     <div class="kpi-meta">
                         <h3>${empty todayAppointments ? 0 : (todayAppointments.size() - pendingApptCount)}</h3>
                         <span>Đã tiếp đón thành công</span>
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-purple">🩺</div>
+                    <div class="kpi-icon-box kpi-icon-purple">CHAIR</div>
                     <div class="kpi-meta">
                         <h3>${todayDate}</h3>
                         <span>Ca trực phòng khám</span>
@@ -113,7 +113,6 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>💺</span>
                         <span>Hàng Đợi Chờ Khám Tại Ghế (Active Clinic Queue)</span>
                     </div>
                     <span class="badge-pill badge-Arrived">
@@ -141,7 +140,6 @@
                                     <tr>
                                         <td colspan="8">
                                             <div class="empty-state">
-                                                <span class="empty-state-icon">💺</span>
                                                 <h4>Hàng đợi khám hiện đang trống</h4>
                                                 <p>Khi bệnh nhân đến check-in hoặc tiếp nhận vãng lai, danh sách sẽ hiển thị tại đây.</p>
                                             </div>
@@ -181,29 +179,29 @@
                                             </td>
                                             <td>
                                                 <span style="font-weight: 600; color: var(--text-primary);">
-                                                    👨‍⚕️ ${v.dentistName}
+                                                    ${v.dentistName}
                                                 </span>
                                             </td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${v.visitType eq 'Scheduled'}">
-                                                        <span class="badge-pill badge-Confirmed">📅 Có hẹn</span>
+                                                        <span class="badge-pill badge-Confirmed">Có hẹn</span>
                                                     </c:when>
                                                     <c:when test="${v.visitType eq 'Emergency'}">
-                                                        <span class="badge-pill badge-Cancelled">🚨 Cấp cứu</span>
+                                                        <span class="badge-pill badge-Cancelled">Cấp cứu</span>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <span class="badge-pill badge-Pending">🚶 Vãng lai</span>
+                                                        <span class="badge-pill badge-Pending">Vãng lai</span>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
                                             <td>
                                                 <c:if test="${not empty v.medicalAlerts}">
-                                                    <span class="alert-tag">⚠️ ${v.medicalAlerts}</span>
+                                                    <span class="alert-tag">Bệnh nền: ${v.medicalAlerts}</span>
                                                 </c:if>
                                                 <c:if test="${not empty v.allergies}">
                                                     <span class="alert-tag" style="background:#fef3c7; color:#b45309; border-color:#fde68a;">
-                                                        ⚡ Dị ứng: ${v.allergies}
+                                                        Dị ứng: ${v.allergies}
                                                     </span>
                                                 </c:if>
                                                 <c:if test="${empty v.medicalAlerts && empty v.allergies}">
@@ -212,7 +210,7 @@
                                             </td>
                                             <td>
                                                 <span class="badge-pill badge-Pending">
-                                                    ⏳ Chờ gọi khám
+                                                    Chờ gọi khám
                                                 </span>
                                             </td>
                                         </tr>
@@ -228,7 +226,6 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>📋</span>
                         <span>Lịch Hẹn Trong Ngày Đang Chờ Bệnh Nhân Đến Quầy</span>
                     </div>
                     <span style="font-size: 12.5px; color: var(--text-muted);">
@@ -255,7 +252,6 @@
                                     <tr>
                                         <td colspan="7">
                                             <div class="empty-state">
-                                                <span class="empty-state-icon">📅</span>
                                                 <h4>Không có lịch hẹn nào trong ngày hôm nay</h4>
                                                 <p>Các lịch hẹn đã đặt cho ngày ${todayDate} sẽ được hiển thị ở bảng này.</p>
                                             </div>
@@ -289,7 +285,7 @@
                                                 </code>
                                             </td>
                                             <td>
-                                                <span style="font-weight: 600;">👨‍⚕️ ${a.dentistName}</span>
+                                                <span style="font-weight: 600;">${a.dentistName}</span>
                                             </td>
                                             <td>
                                                 <span style="color: var(--text-secondary);">
@@ -299,10 +295,10 @@
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${a.status eq 'Arrived'}">
-                                                        <span class="badge-pill badge-Arrived">✓ Đã Check-in</span>
+                                                        <span class="badge-pill badge-Arrived">Đã Check-in</span>
                                                     </c:when>
                                                     <c:when test="${a.status eq 'Confirmed'}">
-                                                        <span class="badge-pill badge-Confirmed">✓ Đã xác nhận</span>
+                                                        <span class="badge-pill badge-Confirmed">Đã xác nhận</span>
                                                     </c:when>
                                                     <c:when test="${a.status eq 'Completed'}">
                                                         <span class="badge-pill badge-Completed">Hoàn thành</span>
@@ -311,7 +307,7 @@
                                                         <span class="badge-pill badge-Cancelled">Đã hủy</span>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <span class="badge-pill badge-Pending">⏳ ${a.status}</span>
+                                                        <span class="badge-pill badge-Pending">${a.status}</span>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
@@ -320,13 +316,13 @@
                                                     <form action="${pageContext.request.contextPath}/reception/checkin" method="POST" style="display:inline-block; margin:0;">
                                                         <input type="hidden" name="appointmentId" value="${a.appointmentId}" />
                                                         <button type="submit" class="btn btn-success btn-sm">
-                                                            <span>✅</span> Tiếp Đón / Check-in
+                                                            Tiếp Đón / Check-in
                                                         </button>
                                                     </form>
                                                 </c:if>
                                                 <c:if test="${a.status eq 'Arrived'}">
                                                     <span style="color: var(--success); font-size: 12.5px; font-weight: 600;">
-                                                        🩺 Đang ở ghế khám
+                                                        Đang ở ghế khám
                                                     </span>
                                                 </c:if>
                                             </td>

@@ -45,7 +45,7 @@
             <!-- Error Notification -->
             <c:if test="${not empty errorMessage}">
                 <div class="alert-banner alert-banner-danger">
-                    <span class="alert-banner-icon">⚠️</span>
+                    <span class="alert-banner-icon">!</span>
                     <div><strong>Lỗi tiếp nhận:</strong> ${errorMessage}</div>
                 </div>
             </c:if>
@@ -75,13 +75,12 @@
                                            autocomplete="off"
                                            value="${selectedPatient != null ? selectedPatient.fullName : ''}" />
                                     <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-secondary" style="flex-shrink:0;">
-                                        <span>➕</span> Tạo Hồ Sơ Mới
+                                        + Tạo Hồ Sơ Mới
                                     </a>
                                 </div>
                                 <div id="searchResults" class="search-results-floating"></div>
 
                                 <div id="selectedPatientBadge" class="selected-patient-chip" style="${selectedPatient != null ? '' : 'display:none;'}">
-                                    <span>👤</span>
                                     <span>Đã chọn: <strong id="selectedPatientName">${selectedPatient.fullName}</strong> — SĐT: <strong id="selectedPatientPhone">${selectedPatient.phone}</strong></span>
                                 </div>
                             </div>
@@ -93,7 +92,7 @@
                                     <option value="">-- Chọn bác sĩ trực ca tại phòng khám --</option>
                                     <c:forEach var="d" items="${dentists}">
                                         <option value="${d.dentistId}">
-                                            👨‍⚕️ ${d.fullName} — ${d.specialization} (${d.roomNumber != null ? d.roomNumber : 'Ghế khám'})
+                                            ${d.fullName} — ${d.specialization} (${d.roomNumber != null ? d.roomNumber : 'Ghế khám'})
                                         </option>
                                     </c:forEach>
                                 </select>
@@ -103,8 +102,8 @@
                             <div class="form-group">
                                 <label for="visitType" class="form-label required">Loại Tiếp Nhận</label>
                                 <select id="visitType" name="visitType" class="form-control">
-                                    <option value="WalkIn" selected>🚶 Khách vãng lai (Không hẹn trước)</option>
-                                    <option value="Emergency">🚨 Cấp cứu nha khoa (Ưu tiên khám ngay)</option>
+                                    <option value="WalkIn" selected>Khách vãng lai (Không hẹn trước)</option>
+                                    <option value="Emergency">Cấp cứu nha khoa (Ưu tiên khám ngay)</option>
                                 </select>
                             </div>
 
@@ -125,7 +124,7 @@
                             Hủy Bỏ
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <span>✅</span> Xác Nhận Tiếp Nhận Vào Hàng Đợi
+                            Xác Nhận Tiếp Nhận Vào Hàng Đợi
                         </button>
                     </div>
                 </form>

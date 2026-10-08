@@ -37,7 +37,7 @@
                 </div>
                 <div>
                     <a href="${pageContext.request.contextPath}/dentist/queue" class="btn btn-secondary">
-                        <span>🔄</span> Làm Mới Hàng Đợi
+                        Làm Mới Hàng Đợi
                     </a>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <!-- Toast / Success Messages -->
             <c:if test="${param.success eq 'started'}">
                 <div class="alert-banner alert-banner-success">
-                    <span class="alert-banner-icon">🩺</span>
+                    <span class="alert-banner-icon">✓</span>
                     <div>
                         <strong>Đã bắt đầu khám:</strong> Lượt khám đã được kích hoạt thành công, chuyển sang trạng thái <strong>InProgress</strong> để ghi chép chẩn đoán và chỉ định thủ thuật.
                     </div>
@@ -55,7 +55,7 @@
             <!-- KPI Summary Cards -->
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-blue">💺</div>
+                    <div class="kpi-icon-box kpi-icon-blue">CHAIR</div>
                     <div class="kpi-meta">
                         <h3>${empty waitingQueue ? 0 : waitingQueue.size()}</h3>
                         <span>Bệnh nhân chờ tại ghế</span>
@@ -74,7 +74,7 @@
                 </c:forEach>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-amber">⚠️</div>
+                    <div class="kpi-icon-box kpi-icon-amber">WARN</div>
                     <div class="kpi-meta">
                         <h3>${alertCount}</h3>
                         <span>Ca có cảnh báo bệnh lý / dị ứng</span>
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-purple">🚨</div>
+                    <div class="kpi-icon-box kpi-icon-purple">EMERG</div>
                     <div class="kpi-meta">
                         <h3>${emergencyCount}</h3>
                         <span>Ca cấp cứu ưu tiên</span>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-green">⚡</div>
+                    <div class="kpi-icon-box kpi-icon-green">READY</div>
                     <div class="kpi-meta">
                         <h3>Sẵn Sàng</h3>
                         <span>Trạng thái ghế nha khoa</span>
@@ -102,7 +102,6 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>📋</span>
                         <span>Danh Sách Chờ Khám Theo Thứ Tự Đến</span>
                     </div>
                     <span class="badge-pill badge-Arrived">
@@ -114,7 +113,6 @@
                     <c:choose>
                         <c:when test="${empty waitingQueue}">
                             <div class="empty-state">
-                                <span class="empty-state-icon">☕</span>
                                 <h4>Hiện tại không có bệnh nhân nào trong hàng đợi của bạn</h4>
                                 <p>Khi quầy lễ tân Check-in bệnh nhân hoặc tiếp nhận vãng lai, bệnh nhân sẽ lập tức xuất hiện tại đây.</p>
                             </div>
@@ -133,45 +131,43 @@
                                                     <h3>${v.patientName}</h3>
                                                     <c:choose>
                                                         <c:when test="${v.visitType eq 'Scheduled'}">
-                                                            <span class="badge-pill badge-Confirmed">📅 Có hẹn</span>
+                                                            <span class="badge-pill badge-Confirmed">Có hẹn</span>
                                                         </c:when>
                                                         <c:when test="${v.visitType eq 'Emergency'}">
-                                                            <span class="badge-pill badge-Cancelled">🚨 Cấp cứu ưu tiên</span>
+                                                            <span class="badge-pill badge-Cancelled">Cấp cứu ưu tiên</span>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <span class="badge-pill badge-Pending">🚶 Vãng lai</span>
+                                                            <span class="badge-pill badge-Pending">Vãng lai</span>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </div>
 
                                                 <div class="queue-patient-meta">
                                                     <span class="queue-meta-item">
-                                                        <span>📞</span>
+                                                        <span>SĐT:</span>
                                                         <code>${v.patientPhone}</code>
                                                     </span>
                                                     <span class="queue-meta-item">
-                                                        <span>⏱️</span>
-                                                        <span>Check-in lúc: <strong>${v.checkInTime.toLocalTime().toString().substring(0, 5)}</strong></span>
+                                                        <span>Check-in: <strong>${v.checkInTime.toLocalTime().toString().substring(0, 5)}</strong></span>
                                                     </span>
                                                     <span class="queue-meta-item">
-                                                        <span>🆔</span>
                                                         <span style="color:var(--text-muted);">Mã lượt: #${v.visitId}</span>
                                                     </span>
                                                 </div>
 
                                                 <c:if test="${not empty v.notes}">
                                                     <div class="queue-patient-notes">
-                                                        📝 <strong>Lý do / Triệu chứng:</strong> ${v.notes}
+                                                        <strong>Lý do / Triệu chứng:</strong> ${v.notes}
                                                     </div>
                                                 </c:if>
 
                                                 <div class="queue-alert-container">
                                                     <c:if test="${not empty v.medicalAlerts}">
-                                                        <span class="alert-tag">⚠️ Bệnh nền: ${v.medicalAlerts}</span>
+                                                        <span class="alert-tag">Bệnh nền: ${v.medicalAlerts}</span>
                                                     </c:if>
                                                     <c:if test="${not empty v.allergies}">
                                                         <span class="alert-tag" style="background:#fef3c7; color:#b45309; border-color:#fde68a;">
-                                                            ⚡ Dị ứng: ${v.allergies}
+                                                            Dị ứng: ${v.allergies}
                                                         </span>
                                                     </c:if>
                                                 </div>
@@ -188,7 +184,7 @@
                                                     <option value="Ghế VIP - P.201">Ghế VIP - P.201</option>
                                                 </select>
                                                 <button type="submit" class="btn btn-success" style="padding: 10px 18px; font-size: 13px; font-weight: 600;">
-                                                    <span>🩺</span> Mời Khám Ngay
+                                                    Mời Khám Ngay
                                                 </button>
                                             </form>
                                         </div>

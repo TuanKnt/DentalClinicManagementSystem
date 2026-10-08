@@ -115,7 +115,7 @@
 <body>
 
 <div class="error-card">
-    <div class="error-icon-box">🚫</div>
+    <div class="error-icon-box" style="font-size:32px; font-weight:800; color:#dc2626;">403</div>
     <div class="role-pill">Mã Lỗi: 403 Forbidden</div>
     <h1>Truy Cập Bị Từ Chối</h1>
     <p>
@@ -127,10 +127,10 @@
 
     <div class="error-actions">
         <a href="${pageContext.request.contextPath}/" class="btn btn-primary">
-            <span>🏠</span> Về Bàn Làm Việc
+            Về Bàn Làm Việc
         </a>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-secondary">
-            <span>🔒</span> Đăng Xuất
+            Đăng Xuất
         </a>
     </div>
 

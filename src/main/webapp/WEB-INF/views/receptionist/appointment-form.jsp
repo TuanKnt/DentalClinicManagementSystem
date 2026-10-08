@@ -45,7 +45,7 @@
             <!-- Error Notification -->
             <c:if test="${not empty errorMessage}">
                 <div class="alert-banner alert-banner-danger">
-                    <span class="alert-banner-icon">⚠️</span>
+                    <span class="alert-banner-icon">!</span>
                     <div><strong>Lỗi đặt lịch:</strong> ${errorMessage}</div>
                 </div>
             </c:if>
@@ -75,13 +75,12 @@
                                            autocomplete="off" 
                                            value="${selectedPatient != null ? selectedPatient.fullName : ''}" />
                                     <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-secondary" style="flex-shrink:0;">
-                                        <span>➕</span> Tạo Hồ Sơ Mới
+                                        Tạo Hồ Sơ Mới
                                     </a>
                                 </div>
                                 <div id="searchResults" class="search-results-floating"></div>
 
                                 <div id="selectedPatientBadge" class="selected-patient-chip" style="${selectedPatient != null ? '' : 'display:none;'}">
-                                    <span>👤</span>
                                     <span>Đã chọn: <strong id="selectedPatientName">${selectedPatient.fullName}</strong> — SĐT: <strong id="selectedPatientPhone">${selectedPatient.phone}</strong></span>
                                 </div>
                             </div>
@@ -92,14 +91,14 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                                     <label for="dentistId" class="form-label required" style="margin-bottom:0;">Bác Sĩ Điều Trị</label>
                                     <a href="${pageContext.request.contextPath}/reception/schedules" target="_blank" style="font-size: 12px; color: var(--drsmile-blue); font-weight: 600; text-decoration: none;">
-                                        🩺 Xem lịch trực bác sĩ &rarr;
+                                        Xem lịch trực bác sĩ &rarr;
                                     </a>
                                 </div>
                                 <select id="dentistId" name="dentistId" class="form-control" required>
                                     <option value="">-- Chọn bác sĩ phụ trách --</option>
                                     <c:forEach var="d" items="${dentists}">
                                         <option value="${d.dentistId}" ${appt.dentistId == d.dentistId ? 'selected' : ''}>
-                                            👨‍⚕️ ${d.fullName} — ${d.specialization} (${d.roomNumber != null ? d.roomNumber : 'Ghế khám'})
+                                            ${d.fullName} — ${d.specialization} (${d.roomNumber != null ? d.roomNumber : 'Ghế khám'})
                                         </option>
                                     </c:forEach>
                                 </select>
@@ -122,7 +121,7 @@
                                 <small style="display:block; color:var(--text-muted); font-size:11.5px; margin-bottom:4px;">Mỗi ca 30 phút · 08:00 – 18:30</small>
                                 <select id="timeSlot" name="timeSlot" class="form-control" required onchange="handleSlotChange(this.value)">
                                     <option value="">-- Chọn ca khám 30 phút --</option>
-                                    <optgroup label="🌅 Buổi sáng">
+                                    <optgroup label="Buổi sáng">
                                         <option value="08:00-08:30">08:00 – 08:30</option>
                                         <option value="08:30-09:00">08:30 – 09:00</option>
                                         <option value="09:00-09:30">09:00 – 09:30</option>
@@ -132,7 +131,7 @@
                                         <option value="11:00-11:30">11:00 – 11:30</option>
                                         <option value="11:30-12:00">11:30 – 12:00</option>
                                     </optgroup>
-                                    <optgroup label="🌇 Buổi chiều">
+                                    <optgroup label="Buổi chiều">
                                         <option value="12:00-12:30">12:00 – 12:30</option>
                                         <option value="12:30-13:00">12:30 – 13:00</option>
                                         <option value="13:00-13:30">13:00 – 13:30</option>
@@ -155,7 +154,7 @@
 
                                 <div style="margin-top: 6px;">
                                     <button type="button" class="btn btn-secondary btn-sm" id="btnToggleManual" style="font-size:11px; padding:2px 8px;" onclick="toggleManualTime()">
-                                        ⚙️ Tùy chỉnh giờ tự do...
+                                        Tùy chỉnh giờ tự do...
                                     </button>
                                 </div>
                             </div>
@@ -205,7 +204,7 @@
                             Hủy Bỏ
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <span>📅</span> Xác Nhận Đặt Lịch
+                            Xác Nhận Đặt Lịch
                         </button>
                     </div>
                 </form>
@@ -285,14 +284,14 @@
         var btn = document.getElementById('btnToggleManual');
         if (row.style.display === 'none' || row.style.display === '') {
             row.style.display = 'block';
-            btn.innerText = '✖ Đóng tùy chỉnh giờ';
+            btn.innerText = 'Đóng tùy chỉnh giờ';
             var s = document.getElementById('startTime').value;
             var e = document.getElementById('endTime').value;
             if (s) document.getElementById('manualStart').value = s;
             if (e) document.getElementById('manualEnd').value = e;
         } else {
             row.style.display = 'none';
-            btn.innerText = '⚙️ Tùy chỉnh giờ tự do...';
+            btn.innerText = 'Tùy chỉnh giờ tự do...';
         }
     }
 
