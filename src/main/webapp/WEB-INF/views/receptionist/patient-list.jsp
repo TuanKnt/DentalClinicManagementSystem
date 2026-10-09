@@ -18,16 +18,22 @@
         <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
         <main class="page-content">
+            <c:set var="u" value="${sessionScope.currentUser}" />
+            <c:set var="userRole" value="${not empty u.roleName ? u.roleName : (not empty sessionScope.role ? sessionScope.role : '')}" />
+            <c:set var="canCreatePatient" value="${userRole eq 'Admin' or userRole eq 'Receptionist'}" />
+
             <div class="page-header-row">
                 <div class="page-title">
                     <h1>Hồ Sơ Bệnh Nhân</h1>
                     <p>Tra cứu tiền sử bệnh lý, dị ứng thuốc và quản lý thông tin liên hệ bệnh nhân</p>
                 </div>
-                <div>
-                    <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary">
-                        + Đăng Ký Bệnh Nhân Mới
-                    </a>
-                </div>
+                <c:if test="${canCreatePatient}">
+                    <div>
+                        <a href="${pageContext.request.contextPath}/reception/patients/create" class="btn btn-primary">
+                            + Đăng Ký Bệnh Nhân Mới
+                        </a>
+                    </div>
+                </c:if>
             </div>
 
             <!-- Search Card -->

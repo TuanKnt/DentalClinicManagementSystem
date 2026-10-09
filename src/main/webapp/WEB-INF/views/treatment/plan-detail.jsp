@@ -148,12 +148,16 @@
                     <span>←</span> Quay lại danh sách phác đồ điều trị
                 </a>
 
+                <c:set var="u" value="${sessionScope.currentUser}" />
+                <c:set var="userRole" value="${not empty u.roleName ? u.roleName : (not empty sessionScope.role ? sessionScope.role : '')}" />
+                <c:set var="isClinician" value="${userRole eq 'Admin' or userRole eq 'Dentist'}" />
+
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <a href="${pageContext.request.contextPath}/treatment/plans/print-estimate?id=${plan.planId}" target="_blank" class="btn btn-secondary" style="font-weight: 700;">
                         <span>🖨</span> In Bảng Dự Toán (Quotation)
                     </a>
 
-                    <c:if test="${plan.status eq 'Draft'}">
+                    <c:if test="${isClinician and plan.status eq 'Draft'}">
                         <button type="button" class="btn btn-drsmile" onclick="openAddItemModal()">
                             <span>+ Thêm Thủ Thuật</span>
                         </button>
@@ -270,7 +274,7 @@
                                 </div>
                             </div>
 
-                            <c:if test="${plan.status eq 'Draft'}">
+                            <c:if test="${isClinician and plan.status eq 'Draft'}">
                                 <button type="button" class="btn btn-secondary" onclick="openAddItemModal()" style="font-size: 13px; font-weight: 700;">
                                     + Thêm Thủ Thuật
                                 </button>
@@ -285,11 +289,13 @@
                                         Chưa có thủ thuật nào trong kế hoạch này
                                     </div>
                                     <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-                                        Nhấn vào nút bên dưới để chọn dịch vụ nha khoa, số hiệu răng và phân bổ buổi hẹn.
+                                        ${isClinician ? 'Nhấn vào nút bên dưới để chọn dịch vụ nha khoa, số hiệu răng và phân bổ buổi hẹn.' : 'Kế hoạch chưa có thủ thuật lâm sàng nào được chỉ định.'}
                                     </p>
-                                    <button type="button" class="btn btn-drsmile" onclick="openAddItemModal()">
-                                        + Thêm Thủ Thuật Đầu Tiên
-                                    </button>
+                                    <c:if test="${isClinician and plan.status eq 'Draft'}">
+                                        <button type="button" class="btn btn-drsmile" onclick="openAddItemModal()">
+                                            + Thêm Thủ Thuật Đầu Tiên
+                                        </button>
+                                    </c:if>
                                 </div>
                             </c:when>
                             <c:otherwise>
@@ -356,7 +362,7 @@
                                                         </span>
                                                     </td>
                                                     <td style="text-align: center;">
-                                                        <c:if test="${plan.status eq 'Draft' and (item.status eq 'Proposed' or item.status eq 'Accepted')}">
+                                                        <c:if test="${isClinician and plan.status eq 'Draft' and (item.status eq 'Proposed' or item.status eq 'Accepted')}">
                                                             <form action="${pageContext.request.contextPath}/treatment/plans/item/delete" method="POST" style="margin: 0;" onsubmit="return confirm('Bạn có chắc muốn xóa thủ thuật này?');">
                                                                 <input type="hidden" name="itemId" value="${item.itemId}">
                                                                 <input type="hidden" name="planId" value="${plan.planId}">

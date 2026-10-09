@@ -208,11 +208,17 @@
                             </select>
                         </form>
 
+                        <c:set var="u" value="${sessionScope.currentUser}" />
+                        <c:set var="userRole" value="${not empty u.roleName ? u.roleName : (not empty sessionScope.role ? sessionScope.role : '')}" />
+                        <c:set var="canManageSchedules" value="${userRole eq 'Admin' or userRole eq 'Receptionist'}" />
+
                         <!-- Add Schedule Trigger Button -->
-                        <button type="button" class="btn btn-primary btn-sm" onclick="openAddScheduleModal()" style="display: inline-flex; align-items: center; gap: 4px; padding: 7px 14px; font-size: 12.5px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            + Thêm Ca
-                        </button>
+                        <c:if test="${canManageSchedules}">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="openAddScheduleModal()" style="display: inline-flex; align-items: center; gap: 4px; padding: 7px 14px; font-size: 12.5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                + Thêm Ca
+                            </button>
+                        </c:if>
                     </div>
                 </div>
 
@@ -320,26 +326,33 @@
                                                 </c:choose>
                                             </td>
                                             <td style="text-align: right;">
-                                                <div style="display: inline-flex; gap: 8px; align-items: center; justify-content: flex-end; white-space: nowrap;">
-                                                    <!-- Toggle Availability Form -->
-                                                    <form action="${pageContext.request.contextPath}/reception/schedules/toggle" method="POST" style="margin: 0; display: inline;">
-                                                        <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
-                                                        <input type="hidden" name="available" value="${!s.available}" />
-                                                        <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
-                                                        <button type="submit" class="btn-action-outline" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
-                                                            ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
-                                                        </button>
-                                                    </form>
+                                                <c:choose>
+                                                    <c:when test="${canManageSchedules}">
+                                                        <div style="display: inline-flex; gap: 8px; align-items: center; justify-content: flex-end; white-space: nowrap;">
+                                                            <!-- Toggle Availability Form -->
+                                                            <form action="${pageContext.request.contextPath}/reception/schedules/toggle" method="POST" style="margin: 0; display: inline;">
+                                                                <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
+                                                                <input type="hidden" name="available" value="${!s.available}" />
+                                                                <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
+                                                                <button type="submit" class="btn-action-outline" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
+                                                                    ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
+                                                                </button>
+                                                            </form>
 
-                                                    <!-- Delete Schedule Form -->
-                                                    <form action="${pageContext.request.contextPath}/reception/schedules/delete" method="POST" style="margin: 0; display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ca trực #${s.scheduleId} của ${s.dentistName} vào ${s.dayOfWeekName}?');">
-                                                        <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
-                                                        <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
-                                                        <button type="submit" class="btn-action-danger" title="Xóa ca trực">
-                                                            Xóa
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                            <!-- Delete Schedule Form -->
+                                                            <form action="${pageContext.request.contextPath}/reception/schedules/delete" method="POST" style="margin: 0; display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ca trực #${s.scheduleId} của ${s.dentistName} vào ${s.dayOfWeekName}?');">
+                                                                <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
+                                                                <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
+                                                                <button type="submit" class="btn-action-danger" title="Xóa ca trực">
+                                                                    Xóa
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span style="font-size: 11.5px; color: var(--text-muted); font-weight: 600;">Xem ca</span>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -360,6 +373,7 @@
 </div>
 
 <!-- MODAL DIALOG: THÊM CA TRỰC BÁC SĨ -->
+<c:if test="${canManageSchedules}">
 <div id="addScheduleModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalScheduleTitle" hidden>
     <div class="modal-card">
         <div class="modal-header">
@@ -456,6 +470,7 @@
         </form>
     </div>
 </div>
+</c:if>
 
 <!-- DCMS Universal Data Table Standard Engine -->
 <script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.1" charset="UTF-8"></script>

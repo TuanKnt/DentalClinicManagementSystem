@@ -158,12 +158,18 @@
                     </p>
                 </div>
 
-                <div style="display: flex; gap: 10px;">
-                    <a href="${pageContext.request.contextPath}/treatment/plans/create" class="btn btn-drsmile">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        <span>+ Lập Kế Hoạch Điều Trị Mới</span>
-                    </a>
-                </div>
+                <c:set var="u" value="${sessionScope.currentUser}" />
+                <c:set var="userRole" value="${not empty u.roleName ? u.roleName : (not empty sessionScope.role ? sessionScope.role : '')}" />
+                <c:set var="isClinician" value="${userRole eq 'Admin' or userRole eq 'Dentist'}" />
+
+                <c:if test="${isClinician}">
+                    <div style="display: flex; gap: 10px;">
+                        <a href="${pageContext.request.contextPath}/treatment/plans/create" class="btn btn-drsmile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span>+ Lập Kế Hoạch Điều Trị Mới</span>
+                        </a>
+                    </div>
+                </c:if>
             </div>
 
             <!-- KPI Cards Summary -->

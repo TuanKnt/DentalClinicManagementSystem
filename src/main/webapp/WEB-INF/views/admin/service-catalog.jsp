@@ -152,6 +152,10 @@
                 <span>Danh Mục Dịch Vụ & Biểu Phí Niêm Yết</span>
             </div>
 
+<c:set var="u" value="${sessionScope.currentUser}" />
+<c:set var="userRole" value="${not empty u.roleName ? u.roleName : (not empty sessionScope.role ? sessionScope.role : '')}" />
+<c:set var="isAdmin" value="${userRole eq 'Admin'}" />
+
             <!-- Page Header Row -->
             <div class="page-header-row">
                 <div class="page-title">
@@ -159,13 +163,15 @@
                     <p>Chuẩn hóa phác đồ thủ thuật, đơn giá niêm yết theo nhóm chuyên khoa lâm sàng Dr.Smile</p>
                 </div>
                 <div style="display: flex; gap: 10px;">
-                    <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-secondary">
-                        &larr; Tổng Quan Quản Trị
-                    </a>
-                    <button type="button" class="btn btn-primary" onclick="openAddModal()">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-                        Thêm Dịch Vụ Mới
-                    </button>
+                    <c:if test="${isAdmin}">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-secondary">
+                            &larr; Tổng Quan Quản Trị
+                        </a>
+                        <button type="button" class="btn btn-primary" onclick="openAddModal()">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                            Thêm Dịch Vụ Mới
+                        </button>
+                    </c:if>
                 </div>
             </div>
 
@@ -344,20 +350,27 @@
                                                     </c:choose>
                                                 </td>
                                                 <td style="text-align: center;">
-                                                    <div style="display: flex; gap: 6px; justify-content: center;">
-                                                        <button type="button" class="btn-action-outline" title="Chỉnh sửa dịch vụ"
-                                                                onclick="openEditModal(${s.serviceId}, '${s.serviceCode}', '${s.serviceName}', '${s.category}', ${s.price}, '${s.unit}', '${s.description}', ${s.active})">
-                                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                                            Sửa
-                                                        </button>
-                                                        <form action="${pageContext.request.contextPath}/admin/services/toggle" method="POST" style="margin: 0; display: inline;">
-                                                            <input type="hidden" name="serviceId" value="${s.serviceId}">
-                                                            <button type="submit" class="${s.active ? 'btn-action-danger' : 'btn-action-outline'}" 
-                                                                    title="${s.active ? 'Tạm ngưng dịch vụ' : 'Kích hoạt lại dịch vụ'}">
-                                                                ${s.active ? 'Ngưng' : 'Mở'}
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                    <c:choose>
+                                                        <c:when test="${isAdmin}">
+                                                            <div style="display: flex; gap: 6px; justify-content: center;">
+                                                                <button type="button" class="btn-action-outline" title="Chỉnh sửa dịch vụ"
+                                                                        onclick="openEditModal(${s.serviceId}, '${s.serviceCode}', '${s.serviceName}', '${s.category}', ${s.price}, '${s.unit}', '${s.description}', ${s.active})">
+                                                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                                                    Sửa
+                                                                </button>
+                                                                <form action="${pageContext.request.contextPath}/admin/services/toggle" method="POST" style="margin: 0; display: inline;">
+                                                                    <input type="hidden" name="serviceId" value="${s.serviceId}">
+                                                                    <button type="submit" class="${s.active ? 'btn-action-danger' : 'btn-action-outline'}" 
+                                                                            title="${s.active ? 'Tạm ngưng dịch vụ' : 'Kích hoạt lại dịch vụ'}">
+                                                                        ${s.active ? 'Ngưng' : 'Mở'}
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Tra cứu</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -373,8 +386,9 @@
 </div>
 
 <!-- ========================================================================= -->
-<!-- MODAL: ADD NEW DENTAL SERVICE -->
+<!-- MODALS: ADD & EDIT DENTAL SERVICE (ADMIN ONLY) -->
 <!-- ========================================================================= -->
+<c:if test="${isAdmin}">
 <div id="addServiceModal" class="dcms-modal-backdrop">
     <div class="dcms-modal-dialog">
         <form action="${pageContext.request.contextPath}/admin/services/create" method="POST">
@@ -518,10 +532,12 @@
         </form>
     </div>
 </div>
+</c:if>
 
 <!-- DCMS Universal Data Table Standard Engine -->
 <script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.1" charset="UTF-8"></script>
 
+<c:if test="${isAdmin}">
 <script>
     function openAddModal() {
         document.getElementById('addServiceModal').classList.add('open');
@@ -538,7 +554,10 @@
         document.getElementById('edit_isActive').value = active ? '1' : '0';
         document.getElementById('editServiceModal').classList.add('open');
     }
+</script>
+</c:if>
 
+<script>
     function closeModal(modalId) {
         document.getElementById(modalId).classList.remove('open');
     }
