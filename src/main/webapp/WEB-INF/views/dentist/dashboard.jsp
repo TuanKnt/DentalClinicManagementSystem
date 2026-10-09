@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bàn Làm Việc Bác Sĩ Nha Khoa — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
 </head>
 <body>
 
@@ -201,20 +201,20 @@
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
-                            <table class="data-table">
+                            <table class="table-custom">
                                 <thead>
                                     <tr>
-                                        <th>Giờ Hẹn</th>
+                                        <th style="width: 140px;">Giờ Hẹn</th>
                                         <th>Bệnh Nhân</th>
                                         <th>Dịch Vụ / Lý Do</th>
-                                        <th>Trạng Thái</th>
+                                        <th style="text-align: center; width: 130px;">Trạng Thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:choose>
                                         <c:when test="${empty todayAppointments}">
                                             <tr>
-                                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 40px;">
                                                     Không có lịch hẹn nào được phân công hôm nay.
                                                 </td>
                                             </tr>
@@ -223,15 +223,32 @@
                                             <c:forEach var="a" items="${todayAppointments}">
                                                 <tr>
                                                     <td>
-                                                        <strong style="color: var(--primary);">${a.startTime.toString().substring(0, 5)} - ${a.endTime.toString().substring(0, 5)}</strong>
+                                                        <div class="time-badge">
+                                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <circle cx="12" cy="12" r="10"></circle>
+                                                                <polyline points="12 6 12 12 16 14"></polyline>
+                                                            </svg>
+                                                            <span>${a.startTime.toString().substring(0, 5)} – ${a.endTime.toString().substring(0, 5)}</span>
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        <div style="font-weight: 600;">${a.patientName}</div>
-                                                        <div style="font-size: 12px; color: var(--text-muted);">${a.patientPhone}</div>
+                                                        <div class="patient-cell">
+                                                            <div class="patient-avatar-sm">
+                                                                ${a.patientName.substring(0, 1).toUpperCase()}
+                                                            </div>
+                                                            <div>
+                                                                <div style="font-weight: 700; color: var(--drsmile-navy); font-size: 13.5px;">${a.patientName}</div>
+                                                                <div style="margin-top: 2px;">
+                                                                    <span class="badge-code" style="font-size: 11px;">${a.patientPhone}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
-                                                    <td>${empty a.reason ? 'Khám nha tổng quát' : a.reason}</td>
                                                     <td>
-                                                        <span class="badge-pill badge-${a.status}">${a.status}</span>
+                                                        <span style="font-weight: 500;">${empty a.reason ? 'Khám nha tổng quát' : a.reason}</span>
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <span class="badge-pill badge-${a.status}">● ${a.status}</span>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

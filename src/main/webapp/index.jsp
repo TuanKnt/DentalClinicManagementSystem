@@ -25,7 +25,7 @@
     <title>DCMS Dental Care — Dr.Smile Inspired | Nơi khởi nguồn cho nụ cười rạng rỡ</title>
     <meta name="description" content="DCMS Dental Care — Dr.Smile Inspired, chuyên gia răng sứ thẩm mỹ, niềng răng, implant và điều trị nha khoa kỹ thuật cao tại Hà Nội.">
     <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/assets/images/dcms-dental-mark.svg">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/public-portal.css">
 </head>
 <body>

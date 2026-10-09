@@ -30,7 +30,7 @@
                     <div class="booking-input-group">
                         <label for="bookingTimeSlot" style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Ca khám mong muốn *</label>
                         <small style="display:block; color:#64748b; font-size:11.5px; margin-bottom:4px;">Mỗi ca kéo dài 30 phút · 08:30 – 18:30</small>
-                        <select id="bookingTimeSlot" name="timeSlot" class="form-control" required style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
+                        <select id="bookingTimeSlot" name="timeSlot" class="form-control" required style="width:100%;">
                             <optgroup label="Buổi sáng">
                                 <option value="08:00-08:30">08:00 – 08:30</option>
                                 <option value="08:30-09:00">08:30 – 09:00</option>
@@ -63,7 +63,7 @@
                 <div class="booking-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
                     <div class="booking-input-group">
                         <label style="font-size:12.5px; font-weight:700; color:#334155; margin-bottom:4px; display:block;">Bác sĩ phụ trách</label>
-                        <select name="dentistId" id="bookingDentistSelect" class="form-control" style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e1;">
+                        <select name="dentistId" id="bookingDentistSelect" class="form-control" style="width:100%;">
                             <option value="">-- Bác sĩ phù hợp nhất --</option>
                             <c:forEach var="d" items="${dentistList}">
                                 <option value="${d.dentistId}">${d.fullName} (${empty d.specialization ? 'Nha khoa tổng quát' : d.specialization})</option>

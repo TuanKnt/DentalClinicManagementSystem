@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hồ Sơ Bệnh Án 360° — ${patient.fullName} — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
     <style>
         .patient-hero {
             background: white;
@@ -226,10 +226,10 @@
                 </div>
                 <div class="card-body" style="padding: 0;">
                     <div class="table-responsive">
-                        <table class="data-table">
+                        <table class="table-custom">
                             <thead>
                                 <tr>
-                                    <th>Mã Lượt</th>
+                                    <th style="width: 90px;">Mã Lượt</th>
                                     <th>Thời Gian Tiếp Đón</th>
                                     <th>Bác Sĩ Điều Trị</th>
                                     <th>Ghế Khám / Phòng</th>
@@ -243,7 +243,7 @@
                                 <c:choose>
                                     <c:when test="${empty visitHistory}">
                                         <tr>
-                                            <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                                            <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 40px;">
                                                 Bệnh nhân chưa có lượt khám thực tế nào tại phòng khám.
                                             </td>
                                         </tr>
@@ -251,9 +251,9 @@
                                     <c:otherwise>
                                         <c:forEach var="v" items="${visitHistory}">
                                             <tr>
-                                                <td><strong>#${v.visitId}</strong></td>
+                                                <td><span class="badge-code">#${v.visitId}</span></td>
                                                 <td>${v.checkInTime.toLocalDate()} <strong>${v.checkInTime.toLocalTime().toString().substring(0, 5)}</strong></td>
-                                                <td>BS-${v.primaryDentistId}</td>
+                                                <td><span class="badge-code">BS-${v.primaryDentistId}</span></td>
                                                 <td>
                                                     <span class="badge-pill badge-Pending">
                                                         ${empty v.operatory ? 'Chưa chỉ định' : v.operatory}
@@ -265,11 +265,11 @@
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge-pill badge-${v.status}">${v.status}</span>
+                                                    <span class="badge-pill badge-${v.status}">● ${v.status}</span>
                                                 </td>
-                                                <td style="max-width: 220px; font-size: 12px; color: var(--text-muted);">${v.notes}</td>
+                                                <td style="max-width: 220px; font-size: 12.5px; color: var(--text-muted);">${v.notes}</td>
                                                 <td style="text-align: right;">
-                                                    <a href="${pageContext.request.contextPath}/clinical/examination?visitId=${v.visitId}" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                                                    <a href="${pageContext.request.contextPath}/clinical/examination?visitId=${v.visitId}" class="btn-action-outline">
                                                         Xem Lâm Sàng &rarr;
                                                     </a>
                                                 </td>
@@ -292,10 +292,10 @@
                 </div>
                 <div class="card-body" style="padding: 0;">
                     <div class="table-responsive">
-                        <table class="data-table">
+                        <table class="table-custom">
                             <thead>
                                 <tr>
-                                    <th>Số Răng (FDI)</th>
+                                    <th style="width: 120px;">Số Răng (FDI)</th>
                                     <th>Mặt Răng</th>
                                     <th>Tình Trạng Lâm Sàng</th>
                                     <th>Ghi Chú Điều Trị</th>
@@ -307,7 +307,7 @@
                                 <c:choose>
                                     <c:when test="${empty toothFindings}">
                                         <tr>
-                                            <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                                            <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 40px;">
                                                 Chưa có ghi nhận bất thường nào trên sơ đồ răng của bệnh nhân.
                                             </td>
                                         </tr>
@@ -315,15 +315,15 @@
                                     <c:otherwise>
                                         <c:forEach var="tf" items="${toothFindings}">
                                             <tr>
-                                                <td><strong style="color: var(--primary); font-size: 15px;">Răng ${tf.toothNumber}</strong></td>
-                                                <td><code>${empty tf.surface ? 'Toàn bộ thân răng' : tf.surface}</code></td>
+                                                <td><span class="badge-code" style="color: var(--drsmile-navy); font-weight: 700; font-size: 13px;">Răng ${tf.toothNumber}</span></td>
+                                                <td><span class="badge-code">${empty tf.surface ? 'Toàn bộ thân răng' : tf.surface}</span></td>
                                                 <td>
                                                     <span class="badge-pill ${tf.condition eq 'Caries' ? 'badge-Cancelled' : (tf.condition eq 'Healthy' ? 'badge-Confirmed' : 'badge-Pending')}">
                                                         ${tf.condition}
                                                     </span>
                                                 </td>
                                                 <td>${tf.notes}</td>
-                                                <td>#${tf.visitId}</td>
+                                                <td><span class="badge-code">#${tf.visitId}</span></td>
                                                 <td>${tf.createdAt}</td>
                                             </tr>
                                         </c:forEach>
