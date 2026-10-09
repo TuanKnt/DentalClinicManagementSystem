@@ -131,6 +131,16 @@
             </a>
         </c:if>
 
+        <%-- PHÂN KHU 4: THU NGÂN & VIỆN PHÍ (THU NGÂN & QUẢN TRỊ) --%>
+        <c:if test="${isAdmin or isCashier}">
+            <div class="menu-category">Thu Ngân & Viện Phí</div>
+            <a href="${pageContext.request.contextPath}/cashier/billing" 
+               class="nav-item ${activeMenu == 'cashier_billing' ? 'active' : ''}">
+                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+                <span>Bàn Thu Ngân &amp; Viện Phí</span>
+            </a>
+        </c:if>
+
         <%-- PHÂN KHU 4: HỆ THỐNG (NHÂN SỰ) --%>
         <c:if test="${not isPatient}">
             <div class="menu-category">Hệ Thống</div>

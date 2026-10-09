@@ -231,31 +231,31 @@
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=KhamTongQuat" 
                    class="cat-chip ${selectedCategory == 'KhamTongQuat' ? 'active' : ''}">
-                    <span>🩺 Khám & Chẩn Đoán</span>
+                    <span>Khám & Chẩn Đoán</span>
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=TramRang" 
                    class="cat-chip ${selectedCategory == 'TramRang' ? 'active' : ''}">
-                    <span>🦷 Trám Răng Thẩm Mỹ</span>
+                    <span>Trám Răng Thẩm Mỹ</span>
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=DieuTriTuy" 
                    class="cat-chip ${selectedCategory == 'DieuTriTuy' ? 'active' : ''}">
-                    <span>🔬 Điều Trị Tủy Vi Phẫu</span>
+                    <span>Điều Trị Tủy Vi Phẫu</span>
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=NhoRang" 
                    class="cat-chip ${selectedCategory == 'NhoRang' ? 'active' : ''}">
-                    <span>⚡ Nhổ Răng Sóng Siêu Âm</span>
+                    <span>Nhổ Răng Siêu Âm</span>
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=TayTrang" 
                    class="cat-chip ${selectedCategory == 'TayTrang' ? 'active' : ''}">
-                    <span>✨ Tẩy Trắng Răng LED</span>
+                    <span>Tẩy Trắng Răng LED</span>
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=RangSu" 
                    class="cat-chip ${selectedCategory == 'RangSu' ? 'active' : ''}">
-                    <span>💎 Răng Sứ & Dán Veneer</span>
+                    <span>Răng Sứ & Dán Veneer</span>
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/services?category=Implant" 
                    class="cat-chip ${selectedCategory == 'Implant' ? 'active' : ''}">
-                    <span>🔩 Cấy Ghép Implant</span>
+                    <span>Cấy Ghép Implant</span>
                 </a>
             </div>
 

@@ -28,4 +28,16 @@
         <url-pattern>/patient/portal</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CashierBillingServlet</servlet-name>
+        <servlet-class>com.dcms.controller.CashierBillingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CashierBillingServlet</servlet-name>
+        <url-pattern>/cashier/billing</url-pattern>
+        <url-pattern>/cashier/desk</url-pattern>
+        <url-pattern>/cashier/payment</url-pattern>
+        <url-pattern>/cashier/receipt</url-pattern>
+    </servlet-mapping>
+
 </web-app>

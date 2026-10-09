@@ -186,7 +186,7 @@
             <div class="kpi-row">
                 <div class="kpi-card-tp">
                     <div class="kpi-icon-tp" style="background: rgba(0, 51, 102, 0.08); color: var(--drsmile-navy);">
-                        📋
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
                     </div>
                     <div>
                         <div class="kpi-val-tp">${totalCount}</div>
@@ -196,7 +196,7 @@
 
                 <div class="kpi-card-tp">
                     <div class="kpi-icon-tp" style="background: rgba(245, 158, 11, 0.12); color: #b45309;">
-                        ⏳
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     </div>
                     <div>
                         <div class="kpi-val-tp">${proposedCount}</div>
@@ -206,7 +206,7 @@
 
                 <div class="kpi-card-tp">
                     <div class="kpi-icon-tp" style="background: rgba(14, 165, 233, 0.12); color: #0284c7;">
-                        🤝
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div>
                         <div class="kpi-val-tp">${acceptedCount}</div>
@@ -216,7 +216,7 @@
 
                 <div class="kpi-card-tp">
                     <div class="kpi-icon-tp" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
-                        ⚡
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     </div>
                     <div>
                         <div class="kpi-val-tp">${inProgressCount}</div>
@@ -299,7 +299,7 @@
                                 </td>
                                 <td style="text-align: center;">
                                     <a href="${pageContext.request.contextPath}/treatment/plans/detail?id=${plan.planId}" class="btn-action-view" title="Xem chi tiết và biểu phí">
-                                        <span>👁</span> Xem Chi Tiết
+                                        Xem Chi Tiết
                                     </a>
                                 </td>
                             </tr>

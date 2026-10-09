@@ -73,7 +73,7 @@ public class AuthFilter implements Filter {
         } else if (path.startsWith("/clinical/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/cashier/")) {
-            isAuthorized = role.equalsIgnoreCase("Cashier");
+            isAuthorized = role.equalsIgnoreCase("Cashier") || role.equalsIgnoreCase("Admin");
         } else if (path.startsWith("/treatment/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist")
                     || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("DentalAssistant");

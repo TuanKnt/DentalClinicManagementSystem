@@ -154,7 +154,7 @@
 
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <a href="${pageContext.request.contextPath}/treatment/plans/print-estimate?id=${plan.planId}" target="_blank" class="btn btn-secondary" style="font-weight: 700;">
-                        <span>🖨</span> In Bảng Dự Toán (Quotation)
+                        <span>In Bảng Dự Toán</span>
                     </a>
 
                     <c:if test="${isClinician and plan.status eq 'Draft'}">
@@ -164,7 +164,7 @@
                         <form action="${pageContext.request.contextPath}/treatment/plans/submit" method="POST" style="margin: 0;" onsubmit="return confirm('Xác nhận gửi kế hoạch này cho bệnh nhân tư vấn và phê duyệt?');">
                             <input type="hidden" name="planId" value="${plan.planId}">
                             <button type="submit" class="btn btn-primary" style="background: #0284c7; border-color: #0284c7;">
-                                <span>🚀 Gửi Bệnh Nhân Duyệt</span>
+                                <span>Gửi Bệnh Nhân Duyệt</span>
                             </button>
                         </form>
                     </c:if>
@@ -284,7 +284,6 @@
                         <c:choose>
                             <c:when test="${empty plan.items}">
                                 <div style="text-align: center; padding: 40px 20px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
-                                    <div style="font-size: 32px; margin-bottom: 8px;">🦷</div>
                                     <div style="font-weight: 700; color: var(--drsmile-navy); font-size: 15px; margin-bottom: 4px;">
                                         Chưa có thủ thuật nào trong kế hoạch này
                                     </div>
@@ -409,18 +408,18 @@
 
                         <c:if test="${plan.status eq 'Draft'}">
                             <button type="button" class="btn" onclick="openDiscountModal()" style="width: 100%; margin-top: 16px; background: rgba(255,255,255,0.15); color: #ffffff; border: 1px solid rgba(255,255,255,0.25); font-weight: 700;">
-                                🏷 Cập Nhật Mức Chiết Khấu
+                                Cập Nhật Mức Chiết Khấu
                             </button>
                         </c:if>
 
                         <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 12px; line-height: 1.5; opacity: 0.85;">
-                            <strong>⚡ Nguyên Tắc Nghiệp Vụ Viện Phí:</strong> Bảng báo giá này là ước tính lâm sàng. Viện phí thực tế chỉ xuất hóa đơn thu tiền cho các thủ thuật đã thực tế hoàn tất tại ghế khám (Iron Rule 3).
+                            <strong>Lưu Ý Nghiệp Vụ Viện Phí:</strong> Bảng báo giá này là ước tính lâm sàng. Viện phí thực tế chỉ xuất hóa đơn thu tiền cho các thủ thuật đã thực tế hoàn tất tại ghế khám (Iron Rule 3).
                         </div>
                     </div>
 
                     <div style="background: #ffffff; border-radius: var(--radius-lg); border: 1px solid rgba(0, 51, 102, 0.08); padding: 20px; margin-top: 20px;">
                         <div style="font-size: 13px; font-weight: 800; color: var(--drsmile-navy); margin-bottom: 6px;">
-                            🏆 Cam Kết Chất Lượng Dr.Smile
+                            Cam Kết Chất Lượng Dr.Smile
                         </div>
                         <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
                             "Khám kỹ lưỡng – Tư vấn rõ ràng – Điều trị nhẹ nhàng – Bảo hành thấu đáo". Phác đồ minh bạch, rõ ràng tới từng mặt răng.

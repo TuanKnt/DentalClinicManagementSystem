@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="guide-box">
-                    <strong>💡 Quy trình chuẩn y khoa Dr.Smile:</strong> Kế hoạch điều trị hỗ trợ kéo dài qua nhiều buổi khám (`Multi-visit`). Dự toán viện phí chỉ được tạm tính và không xuất hóa đơn thu tiền cho đến khi thủ thuật thực tế được thực hiện tại ghế.
+                    <strong>Quy trình chuẩn y khoa Dr.Smile:</strong> Kế hoạch điều trị hỗ trợ kéo dài qua nhiều buổi khám (`Multi-visit`). Dự toán viện phí chỉ được tạm tính và không xuất hóa đơn thu tiền cho đến khi thủ thuật thực tế được thực hiện tại ghế.
                 </div>
 
                 <c:if test="${not empty param.error}">

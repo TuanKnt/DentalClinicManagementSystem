@@ -166,7 +166,7 @@
         <span>←</span> Quay Lại Kế Hoạch
     </a>
     <button onclick="window.print()" class="btn btn-drsmile" style="padding: 10px 24px;">
-        <span>🖨</span> In Bảng Dự Toán (Print / PDF)
+        In Bảng Dự Toán (Print / PDF)
     </button>
 </div>
 
