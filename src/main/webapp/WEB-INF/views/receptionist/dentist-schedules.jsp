@@ -7,28 +7,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch Trực Bác Sĩ (Dentist Work Schedule) — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.1">
     <style>
-        .schedule-grid-layout {
-            display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 24px;
-            align-items: start;
-        }
-        @media (max-width: 1024px) {
-            .schedule-grid-layout {
-                grid-template-columns: 1fr;
-            }
-        }
         .preset-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
             margin-top: 6px;
-            margin-bottom: 14px;
         }
         .preset-btn {
-            background: #f1f5f9;
+            background: #f8fafc;
             border: 1px solid #cbd5e1;
             padding: 8px 10px;
             border-radius: 8px;
@@ -44,72 +32,40 @@
             border-color: #0284c7;
             color: #0369a1;
         }
-        .day-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            font-weight: 700;
-            font-size: 11.5px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-            white-space: nowrap;
-        }
-        .day-1, .day-2, .day-3, .day-4, .day-5 {
+        .preset-btn.active-preset {
             background: #e0f2fe;
+            border-color: #0284c7;
             color: #0369a1;
-            border: 1px solid #bae6fd;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
         }
-        .day-6 {
-            background: #fef3c7;
-            color: #b45309;
-            border: 1px solid #fde68a;
-        }
-        .day-7 {
-            background: #fee2e2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
-        }
-        .btn-action-outline {
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            color: #334155;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: inline-flex;
+        .search-input-wrap {
+            position: relative;
+            display: flex;
             align-items: center;
-            gap: 4px;
         }
-        .btn-action-outline:hover {
-            background: #f8fafc;
-            border-color: #94a3b8;
-            color: var(--drsmile-navy);
-            transform: translateY(-1px);
+        .search-input-wrap svg {
+            position: absolute;
+            left: 10px;
+            pointer-events: none;
+            color: #94a3b8;
         }
-        .btn-action-danger {
-            border: 1px solid #fecaca;
-            background: #fff5f5;
-            color: #dc2626;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: inline-flex;
+        .search-input-wrap input {
+            padding-left: 32px !important;
+        }
+        .toolbar-group {
+            display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
-        .btn-action-danger:hover {
-            background: #fee2e2;
-            border-color: #fca5a5;
-            color: #b91c1c;
-            transform: translateY(-1px);
+        @media (max-width: 900px) {
+            .toolbar-group {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .search-input-wrap input {
+                width: 100% !important;
+            }
         }
     </style>
 </head>
@@ -136,16 +92,18 @@
             <!-- Page Header Row -->
             <div class="page-header-row">
                 <div class="page-title">
-                    <h1>Quản Lý Lịch Trực & Ca Khám Bác Sĩ</h1>
-                    <p>Thiết lập ca trực cố định hàng tuần để hệ thống tự động kiểm tra nhận hẹn và chống trùng lịch (UC37)</p>
+                    <h1>Quản Lý Lịch Trực & Phân Ca Bác Sĩ</h1>
+                    <p>Thiết lập ca trực cố định hàng tuần theo quy chuẩn điều phối nhân sự, tự động nhận hẹn và chống trùng lịch (UC37)</p>
                 </div>
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                     <a href="${pageContext.request.contextPath}/reception/calendar" class="btn btn-secondary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         Lịch Dạng Calendar
                     </a>
-                    <a href="${pageContext.request.contextPath}/reception/appointments/create" class="btn btn-primary">
-                        + Đặt Lịch Hẹn Mới
-                    </a>
+                    <button type="button" class="btn btn-primary" onclick="openAddScheduleModal()">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        + Thêm Ca Trực Bác Sĩ
+                    </button>
                 </div>
             </div>
 
@@ -217,116 +175,39 @@
                 </div>
             </div>
 
-            <!-- Two-Column Layout: Form Add Schedule + Table List Schedules -->
-            <div class="schedule-grid-layout">
-                <!-- FORM CARD: ADD DENTIST SCHEDULE -->
-                <div class="card" style="margin: 0;">
-                    <div class="card-header" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+            <!-- FULL-WIDTH SCHEDULE CARD -->
+            <div class="card" style="margin: 0;">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                    <div>
                         <div class="card-title">
-                            <span>+ Thêm Ca Trực Bác Sĩ</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>Danh Sách Ca Trực Bác Sĩ Hàng Tuần</span>
                         </div>
-                        <p style="font-size: 12px; color: var(--text-muted); margin: 0;">Khai báo ca làm việc cố định theo thứ trong tuần</p>
+                        <p style="font-size: 12px; color: var(--text-muted); margin: 3px 0 0 0;">
+                            Tổng cộng <strong>${scheduleList.size()}</strong> ca làm việc đã thiết lập &bull; Click các tab thứ bên dưới để lọc nhanh
+                        </p>
                     </div>
 
-                    <form action="${pageContext.request.contextPath}/reception/schedules/create" method="POST">
-                        <div class="card-body" style="padding: 20px;">
-                            <!-- Doctor Selection -->
-                            <div class="form-group" style="margin-bottom: 16px;">
-                                <label for="formDentistId" class="form-label required">Bác Sĩ Phụ Trách</label>
-                                <select id="formDentistId" name="dentistId" class="form-control" required>
-                                    <option value="">-- Chọn bác sĩ --</option>
-                                    <c:forEach var="d" items="${dentists}">
-                                        <option value="${d.dentistId}" ${selectedDentistId == d.dentistId ? 'selected' : ''}>
-                                            ${d.fullName} (${d.specialization})
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-                            <!-- Day Of Week -->
-                            <div class="form-group" style="margin-bottom: 16px;">
-                                <label for="formDayOfWeek" class="form-label required">Thứ Trong Tuần</label>
-                                <select id="formDayOfWeek" name="dayOfWeek" class="form-control" required>
-                                    <option value="1">Thứ Hai</option>
-                                    <option value="2">Thứ Ba</option>
-                                    <option value="3">Thứ Tư</option>
-                                    <option value="4">Thứ Năm</option>
-                                    <option value="5">Thứ Sáu</option>
-                                    <option value="6">Thứ Bảy</option>
-                                    <option value="7">Chủ Nhật</option>
-                                </select>
-                            </div>
-
-                            <!-- Quick Preset Shifts -->
-                            <div class="form-group" style="margin-bottom: 12px;">
-                                <label class="form-label">Khung Giờ Mẫu Nhanh (Click để chọn nhanh)</label>
-                                <div class="preset-buttons">
-                                    <button type="button" class="preset-btn" onclick="applyPreset('08:00', '12:00')">
-                                        Sáng (08:00 - 12:00)
-                                    </button>
-                                    <button type="button" class="preset-btn" onclick="applyPreset('13:00', '17:30')">
-                                        Chiều (13:00 - 17:30)
-                                    </button>
-                                    <button type="button" class="preset-btn" onclick="applyPreset('13:00', '18:30')">
-                                        Tối (13:00 - 18:30)
-                                    </button>
-                                    <button type="button" class="preset-btn" onclick="applyPreset('08:00', '18:30')">
-                                        Cả ngày (08:00 - 18:30)
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Start and End Time Inputs -->
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-                                <div class="form-group">
-                                    <label for="shiftStart" class="form-label required">Bắt Đầu</label>
-                                    <input type="time" id="shiftStart" name="shiftStart" class="form-control" value="08:00" required />
-                                </div>
-                                <div class="form-group">
-                                    <label for="shiftEnd" class="form-label required">Kết Thúc</label>
-                                    <input type="time" id="shiftEnd" name="shiftEnd" class="form-control" value="17:00" required />
-                                </div>
-                            </div>
-
-                            <!-- Is Available Checkbox -->
-                            <div class="form-group" style="margin-bottom: 8px;">
-                                <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer;">
-                                    <input type="checkbox" name="isAvailable" value="true" checked style="width: 18px; height: 18px;" />
-                                    <span>Kích hoạt ca trực (Sẵn sàng nhận hẹn khám)</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div style="padding: 16px 20px; background: #f8fafc; border-top: 1px solid var(--border-light);">
-                            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                                Lưu Ca Trực Bác Sĩ
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- TABLE CARD: LIST DENTIST SCHEDULES -->
-                <div class="card" style="margin: 0;">
-                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-                        <div>
-                            <div class="card-title">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                                </svg>
-                                <span>Danh Sách Ca Trực Đang Áp Dụng</span>
-                            </div>
-                            <p style="font-size: 12px; color: var(--text-muted); margin: 3px 0 0 0;">
-                                Tổng cộng <strong>${scheduleList.size()}</strong> ca làm việc đã thiết lập trong tuần
-                            </p>
+                    <!-- Toolbar: Search + Doctor Filter + Add Schedule Button -->
+                    <div class="toolbar-group">
+                        <!-- Live Search Input -->
+                        <div class="search-input-wrap">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <input type="text" id="scheduleSearch" placeholder="Tìm tên bác sĩ, phòng..." class="form-control" style="width: 210px; padding: 7px 12px; font-size: 12.5px; border-radius: 8px;" onkeyup="filterSchedules()" />
                         </div>
 
                         <!-- Filter by Dentist -->
                         <form action="${pageContext.request.contextPath}/reception/schedules" method="GET" style="display: flex; align-items: center; gap: 8px; margin: 0;">
-                            <label style="font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin: 0;">Lọc bác sĩ:</label>
-                            <select name="dentistId" class="form-control" style="width: 200px; padding: 7px 12px; font-size: 12.5px; border-radius: 8px;" onchange="this.form.submit()">
+                            <label style="font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin: 0; white-space: nowrap;">Bác sĩ:</label>
+                            <select name="dentistId" class="form-control" style="width: 190px; padding: 7px 12px; font-size: 12.5px; border-radius: 8px;" onchange="this.form.submit()">
                                 <option value="">-- Tất cả Bác sĩ --</option>
                                 <c:forEach var="d" items="${dentists}">
                                     <option value="${d.dentistId}" ${selectedDentistId == d.dentistId ? 'selected' : ''}>
@@ -335,119 +216,360 @@
                                 </c:forEach>
                             </select>
                         </form>
-                    </div>
 
-                    <div class="table-responsive">
-                        <table class="table-custom">
-                            <thead>
-                                <tr>
-                                    <th style="width: 70px;">Mã</th>
-                                    <th>Bác Sĩ Điều Trị</th>
-                                    <th style="width: 110px;">Thứ Trực</th>
-                                    <th>Khung Giờ Ca Làm Việc</th>
-                                    <th style="width: 150px;">Trạng Thái</th>
-                                    <th style="text-align: right; width: 150px;">Thao Tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:choose>
-                                    <c:when test="${empty scheduleList}">
-                                        <tr>
-                                            <td colspan="6" style="text-align: center; padding: 50px 20px; color: var(--text-muted);">
-                                                <div style="font-size: 14px; font-weight: 600; color: var(--drsmile-navy); margin-bottom: 4px;">Chưa có ca trực nào được thiết lập</div>
-                                                <div style="font-size: 12.5px;">Hãy sử dụng form bên trái để tạo ca trực cố định hàng tuần cho bác sĩ.</div>
+                        <!-- Add Schedule Trigger Button -->
+                        <button type="button" class="btn btn-primary btn-sm" onclick="openAddScheduleModal()" style="display: inline-flex; align-items: center; gap: 4px; padding: 7px 14px; font-size: 12.5px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            + Thêm Ca
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DAY-OF-WEEK QUICK FILTER CHIPS -->
+                <div class="filter-chips-bar" id="dayFilterBar">
+                    <span class="filter-chip active" data-day="all" onclick="selectDayFilter('all')">
+                        Tất cả ngày <span class="filter-chip-count" id="count-all">${scheduleList.size()}</span>
+                    </span>
+                    <span class="filter-chip" data-day="1" onclick="selectDayFilter('1')">
+                        Thứ Hai <span class="filter-chip-count" id="count-1">0</span>
+                    </span>
+                    <span class="filter-chip" data-day="2" onclick="selectDayFilter('2')">
+                        Thứ Ba <span class="filter-chip-count" id="count-2">0</span>
+                    </span>
+                    <span class="filter-chip" data-day="3" onclick="selectDayFilter('3')">
+                        Thứ Tư <span class="filter-chip-count" id="count-3">0</span>
+                    </span>
+                    <span class="filter-chip" data-day="4" onclick="selectDayFilter('4')">
+                        Thứ Năm <span class="filter-chip-count" id="count-4">0</span>
+                    </span>
+                    <span class="filter-chip" data-day="5" onclick="selectDayFilter('5')">
+                        Thứ Sáu <span class="filter-chip-count" id="count-5">0</span>
+                    </span>
+                    <span class="filter-chip" data-day="6" onclick="selectDayFilter('6')">
+                        Thứ Bảy <span class="filter-chip-count" id="count-6">0</span>
+                    </span>
+                    <span class="filter-chip" data-day="7" onclick="selectDayFilter('7')">
+                        Chủ Nhật <span class="filter-chip-count" id="count-7">0</span>
+                    </span>
+                </div>
+
+                <!-- ROSTER TABLE -->
+                <div class="table-responsive">
+                    <table class="table-custom" id="scheduleTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">Mã Ca</th>
+                                <th style="min-width: 280px;">Bác Sĩ Điều Trị</th>
+                                <th style="width: 140px; text-align: center;">Thứ Trực</th>
+                                <th style="width: 200px;">Khung Giờ Ca Làm Việc</th>
+                                <th style="width: 170px; text-align: center;">Trạng Thái</th>
+                                <th style="text-align: right; width: 180px;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody">
+                            <c:choose>
+                                <c:when test="${empty scheduleList}">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+                                            <div style="font-size: 15px; font-weight: 700; color: var(--drsmile-navy); margin-bottom: 6px;">Chưa có ca trực nào được thiết lập</div>
+                                            <div style="font-size: 13px; margin-bottom: 16px;">Bấm nút "+ Thêm Ca Trực Bác Sĩ" để bắt đầu thiết lập lịch làm việc cố định hàng tuần.</div>
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="openAddScheduleModal()">
+                                                + Thêm Ca Trực Đầu Tiên
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="s" items="${scheduleList}">
+                                        <tr class="schedule-row" data-day="${s.dayOfWeek}" data-dentist="${s.dentistId}" data-name="${s.dentistName.toLowerCase()} ${s.specialization.toLowerCase()}">
+                                            <td style="text-align: center;">
+                                                <span class="badge-code">#${s.scheduleId}</span>
+                                            </td>
+                                            <td>
+                                                <div class="doctor-cell">
+                                                    <div class="doctor-avatar-sm">
+                                                        ${s.dentistName.substring(s.dentistName.lastIndexOf(' ') + 1, s.dentistName.lastIndexOf(' ') + 2)}
+                                                    </div>
+                                                    <div class="doctor-cell-info">
+                                                        <div class="doctor-cell-name">${s.dentistName}</div>
+                                                        <div class="doctor-cell-sub">
+                                                            <span>${s.specialization}</span> &bull; <span class="badge-room">${s.roomNumber != null ? s.roomNumber : 'Ghế khám'}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <span class="day-badge day-${s.dayOfWeek}">
+                                                    ${s.dayOfWeekName}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="time-badge">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                                    </svg>
+                                                    <span>${s.shiftTimeFormatted}</span>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <c:choose>
+                                                    <c:when test="${s.available}">
+                                                        <span class="status-pill status-pill-success">
+                                                            <span class="status-dot"></span>
+                                                            Đang nhận hẹn
+                                                        </span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="status-pill status-pill-muted">
+                                                            <span class="status-dot"></span>
+                                                            Tạm ngưng
+                                                        </span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <div style="display: inline-flex; gap: 8px; align-items: center; justify-content: flex-end; white-space: nowrap;">
+                                                    <!-- Toggle Availability Form -->
+                                                    <form action="${pageContext.request.contextPath}/reception/schedules/toggle" method="POST" style="margin: 0; display: inline;">
+                                                        <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
+                                                        <input type="hidden" name="available" value="${!s.available}" />
+                                                        <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
+                                                        <button type="submit" class="btn-action-outline" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
+                                                            ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Delete Schedule Form -->
+                                                    <form action="${pageContext.request.contextPath}/reception/schedules/delete" method="POST" style="margin: 0; display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ca trực #${s.scheduleId} của ${s.dentistName} vào ${s.dayOfWeekName}?');">
+                                                        <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
+                                                        <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
+                                                        <button type="submit" class="btn-action-danger" title="Xóa ca trực">
+                                                            Xóa
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <c:forEach var="s" items="${scheduleList}">
-                                            <tr>
-                                                <td>
-                                                    <span class="badge-code">#${s.scheduleId}</span>
-                                                </td>
-                                                <td>
-                                                    <div style="display: flex; align-items: center; gap: 12px;">
-                                                        <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #003366 0%, #007acc 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,51,102,0.15);">
-                                                            ${s.dentistName.substring(s.dentistName.lastIndexOf(' ') + 1, s.dentistName.lastIndexOf(' ') + 2)}
-                                                        </div>
-                                                        <div>
-                                                            <div style="font-weight: 700; color: var(--drsmile-navy); font-size: 13.5px;">${s.dentistName}</div>
-                                                            <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 1px;">
-                                                                ${s.specialization} &bull; <span style="color: #0284c7; font-weight: 600;">${s.roomNumber != null ? s.roomNumber : 'Ghế khám'}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="day-badge day-${s.dayOfWeek}">
-                                                        ${s.dayOfWeekName}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <div class="time-badge">
-                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                                        </svg>
-                                                        <span>${s.shiftTimeFormatted}</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${s.available}">
-                                                            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 700; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
-                                                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
-                                                                Đang nhận hẹn
-                                                            </span>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 600; background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0;">
-                                                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #94a3b8;"></span>
-                                                                Tạm ngưng
-                                                            </span>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    <div style="display: inline-flex; gap: 8px;">
-                                                        <!-- Toggle Availability Form -->
-                                                        <form action="${pageContext.request.contextPath}/reception/schedules/toggle" method="POST" style="margin: 0; display: inline;">
-                                                            <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
-                                                            <input type="hidden" name="available" value="${!s.available}" />
-                                                            <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
-                                                            <button type="submit" class="btn-action-outline" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
-                                                                ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
-                                                            </button>
-                                                        </form>
-
-                                                        <!-- Delete Schedule Form -->
-                                                        <form action="${pageContext.request.contextPath}/reception/schedules/delete" method="POST" style="margin: 0; display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ca trực #${s.scheduleId} của ${s.dentistName} vào ${s.dayOfWeekName}?');">
-                                                            <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
-                                                            <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
-                                                            <button type="submit" class="btn-action-danger" title="Xóa ca trực">
-                                                                Xóa
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                            <tr id="noResultsRow" style="display: none;">
+                                <td colspan="6" style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                                    <div style="font-size: 14px; font-weight: 600; color: var(--drsmile-navy); margin-bottom: 4px;">Không tìm thấy ca trực phù hợp</div>
+                                    <div style="font-size: 12.5px;">Thử chọn ngày khác hoặc xóa từ khóa tìm kiếm.</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
     </div>
 </div>
 
+<!-- MODAL DIALOG: THÊM CA TRỰC BÁC SĨ -->
+<div id="addScheduleModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalScheduleTitle" hidden>
+    <div class="modal-card">
+        <div class="modal-header">
+            <div class="modal-title" id="modalScheduleTitle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Khai Báo Ca Trực Bác Sĩ Mới</span>
+            </div>
+            <button type="button" class="modal-close-btn" onclick="closeAddScheduleModal()" aria-label="Đóng">&times;</button>
+        </div>
+
+        <form action="${pageContext.request.contextPath}/reception/schedules/create" method="POST">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Doctor Selection -->
+                <div class="form-group">
+                    <label for="formDentistId" class="form-label required">Bác Sĩ Phụ Trách</label>
+                    <select id="formDentistId" name="dentistId" class="form-control" required>
+                        <option value="">-- Chọn bác sĩ trực --</option>
+                        <c:forEach var="d" items="${dentists}">
+                            <option value="${d.dentistId}" ${selectedDentistId == d.dentistId ? 'selected' : ''}>
+                                ${d.fullName} (${d.specialization})
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <!-- Day Of Week -->
+                <div class="form-group">
+                    <label for="formDayOfWeek" class="form-label required">Thứ Trong Tuần</label>
+                    <select id="formDayOfWeek" name="dayOfWeek" class="form-control" required>
+                        <option value="1">Thứ Hai</option>
+                        <option value="2">Thứ Ba</option>
+                        <option value="3">Thứ Tư</option>
+                        <option value="4">Thứ Năm</option>
+                        <option value="5">Thứ Sáu</option>
+                        <option value="6">Thứ Bảy</option>
+                        <option value="7">Chủ Nhật</option>
+                    </select>
+                </div>
+
+                <!-- Quick Preset Shifts -->
+                <div class="form-group">
+                    <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Khung Giờ Mẫu Nhanh</span>
+                        <span style="font-size: 11.5px; font-weight: 500; color: #0284c7;">Click để điền giờ tự động</span>
+                    </label>
+                    <div class="preset-buttons">
+                        <button type="button" class="preset-btn" onclick="applyPreset('08:00', '12:00', this)">
+                            Sáng (08:00 - 12:00)
+                        </button>
+                        <button type="button" class="preset-btn" onclick="applyPreset('13:00', '17:30', this)">
+                            Chiều (13:00 - 17:30)
+                        </button>
+                        <button type="button" class="preset-btn" onclick="applyPreset('13:00', '18:30', this)">
+                            Tối (13:00 - 18:30)
+                        </button>
+                        <button type="button" class="preset-btn" onclick="applyPreset('08:00', '18:30', this)">
+                            Cả ngày (08:00 - 18:30)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Start and End Time Inputs -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                    <div class="form-group">
+                        <label for="shiftStart" class="form-label required">Giờ Bắt Đầu</label>
+                        <input type="time" id="shiftStart" name="shiftStart" class="form-control" value="08:00" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="shiftEnd" class="form-label required">Giờ Kết Thúc</label>
+                        <input type="time" id="shiftEnd" name="shiftEnd" class="form-control" value="17:00" required />
+                    </div>
+                </div>
+
+                <!-- Is Available Checkbox -->
+                <div style="padding: 12px 14px; background: #f8fafc; border: 1px solid var(--border-light); border-radius: 8px;">
+                    <label style="display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; margin: 0; font-size: 13px; color: var(--drsmile-navy);">
+                        <input type="checkbox" name="isAvailable" value="true" checked style="width: 18px; height: 18px; accent-color: var(--drsmile-navy);" />
+                        <span>Kích hoạt ca trực ngay (Sẵn sàng nhận hẹn khám)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeAddScheduleModal()">Hủy Bỏ</button>
+                <button type="submit" class="btn btn-primary" style="padding: 9px 22px;">
+                    Lưu Ca Trực Bác Sĩ
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
-    function applyPreset(start, end) {
+    let activeDayFilter = 'all';
+
+    function openAddScheduleModal() {
+        const modal = document.getElementById('addScheduleModal');
+        if (modal) {
+            modal.removeAttribute('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                const select = document.getElementById('formDentistId');
+                if (select) select.focus();
+            }, 100);
+        }
+    }
+
+    function closeAddScheduleModal() {
+        const modal = document.getElementById('addScheduleModal');
+        if (modal) {
+            modal.setAttribute('hidden', '');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Close on clicking backdrop
+    document.getElementById('addScheduleModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeAddScheduleModal();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAddScheduleModal();
+        }
+    });
+
+    function applyPreset(start, end, btn) {
         document.getElementById('shiftStart').value = start;
         document.getElementById('shiftEnd').value = end;
+
+        // Visual feedback
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active-preset'));
+        if (btn) btn.classList.add('active-preset');
     }
+
+    function selectDayFilter(day) {
+        activeDayFilter = day;
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            if (chip.getAttribute('data-day') === day) {
+                chip.classList.add('active');
+            } else {
+                chip.classList.remove('active');
+            }
+        });
+        filterSchedules();
+    }
+
+    function filterSchedules() {
+        const searchInput = document.getElementById('scheduleSearch');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const rows = document.querySelectorAll('.schedule-row');
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const rowDay = row.getAttribute('data-day');
+            const rowName = row.getAttribute('data-name') || '';
+
+            const matchesDay = (activeDayFilter === 'all' || rowDay === activeDayFilter);
+            const matchesSearch = (!searchTerm || rowName.includes(searchTerm));
+
+            if (matchesDay && matchesSearch) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        const noResultsRow = document.getElementById('noResultsRow');
+        if (noResultsRow) {
+            noResultsRow.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+        }
+    }
+
+    // Calculate day counts dynamically on load
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('.schedule-row');
+        const dayCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+
+        rows.forEach(row => {
+            const day = row.getAttribute('data-day');
+            if (day && dayCounts[day] !== undefined) {
+                dayCounts[day]++;
+            }
+        });
+
+        for (let d = 1; d <= 7; d++) {
+            const badge = document.getElementById('count-' + d);
+            if (badge) {
+                badge.textContent = dayCounts[d];
+            }
+        }
+    });
 </script>
 
 </body>
