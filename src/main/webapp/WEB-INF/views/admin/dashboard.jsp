@@ -116,7 +116,7 @@
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
-                            <table class="table-custom">
+                            <table class="table-custom" data-datatable="true" data-page-size="5">
                                 <thead>
                                     <tr>
                                         <th style="width: 80px;">Mã BS</th>
@@ -258,6 +258,9 @@
         </main>
     </div>
 </div>
+
+<!-- DCMS Universal Data Table Standard Engine -->
+<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.0" charset="UTF-8"></script>
 
 </body>
 </html>

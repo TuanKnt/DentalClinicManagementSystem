@@ -152,7 +152,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table-custom">
+                    <table class="table-custom" data-datatable="true" data-page-size="10">
                         <thead>
                             <tr>
                                 <th>Thời Gian</th>
@@ -161,7 +161,7 @@
                                 <th>Bác Sĩ Phụ Trách</th>
                                 <th>Lý Do Khám</th>
                                 <th>Trạng Thái</th>
-                                <th style="text-align: right;">Thao Tác Nghiệp Vụ</th>
+                                <th style="text-align: right;" data-no-sort="true">Thao Tác Nghiệp Vụ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -386,6 +386,9 @@
         if (event.target === this) closeReschedule();
     });
 </script>
+
+<!-- DCMS Universal Data Table Standard Engine -->
+<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.0" charset="UTF-8"></script>
 
 </body>
 </html>
