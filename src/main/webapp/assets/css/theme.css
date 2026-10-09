@@ -540,20 +540,26 @@ body {
    ========================================================================= */
 .kpi-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
     margin-bottom: 24px;
+}
+
+@media (max-width: 1100px) {
+    .kpi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
 }
 
 .kpi-card {
     background: var(--surface);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
-    padding: 22px;
+    padding: 18px 16px;
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
@@ -669,6 +675,25 @@ body {
 .table-responsive {
     width: 100%;
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
 }
 
 table,
@@ -994,6 +1019,128 @@ th.dt-sort-desc .dt-sort-icon {
     background: #fee2e2;
     color: #b91c1c;
     border: 1px solid #fecaca;
+}
+
+/* Status Pills with Glowing Dot */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    font-size: 11.5px;
+    font-weight: 700;
+    white-space: nowrap !important;
+}
+
+.status-dot {
+    width: 6.5px;
+    height: 6.5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-pill-success {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+}
+
+.status-pill-success .status-dot {
+    background: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+
+.status-pill-muted {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+.status-pill-muted .status-dot {
+    background: #94a3b8;
+}
+
+/* Specialty Badges */
+.badge-specialty {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+    white-space: nowrap !important;
+}
+
+.badge-room {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap !important;
+}
+
+.phone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap !important;
+}
+
+/* Dashboard Doctor Table Optimization */
+.doctor-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: auto !important;
+    border-collapse: separate !important;
+}
+
+.doctor-table th {
+    padding: 10px 8px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: var(--drsmile-navy) !important;
+    white-space: nowrap !important;
+}
+
+.doctor-table td {
+    padding: 10px 8px !important;
+    font-size: 12.5px !important;
+    vertical-align: middle !important;
+    white-space: nowrap;
+}
+
+.doctor-table .doctor-avatar-sm {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003366 0%, #007acc 100%);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
 }
 
 /* Action Buttons inside Tables */
