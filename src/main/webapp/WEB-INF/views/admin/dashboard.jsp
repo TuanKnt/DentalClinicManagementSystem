@@ -260,7 +260,7 @@
 </div>
 
 <!-- DCMS Universal Data Table Standard Engine -->
-<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.0" charset="UTF-8"></script>
+<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.1" charset="UTF-8"></script>
 
 </body>
 </html>

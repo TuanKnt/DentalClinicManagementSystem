@@ -94,7 +94,8 @@
             if (!container) {
                 container = document.createElement('div');
                 container.className = 'dt-container';
-                this.table.parentNode.insertBefore(container, this.table);
+                const tableWrap = this.table.closest('.table-responsive') || this.table;
+                tableWrap.parentNode.insertBefore(container, tableWrap);
 
                 // Create Top Toolbar
                 this.topToolbar = document.createElement('div');
@@ -176,7 +177,6 @@
                 container.appendChild(this.topToolbar);
 
                 // Move table into container
-                const tableWrap = this.table.closest('.table-responsive') || this.table;
                 container.appendChild(tableWrap);
 
                 // Create Bottom Pagination Bar
@@ -212,7 +212,7 @@
                 if (!iconSpan) {
                     iconSpan = document.createElement('span');
                     iconSpan.className = 'dt-sort-icon';
-                    iconSpan.innerHTML = '<span class="dt-sort-indicator">⇅</span>';
+                    iconSpan.innerHTML = '<span class="dt-sort-indicator">\u21C5</span>';
                     th.appendChild(iconSpan);
                 }
 
@@ -232,7 +232,7 @@
             this.table.querySelectorAll('thead th.dt-sortable').forEach(h => {
                 h.classList.remove('dt-sort-asc', 'dt-sort-desc');
                 const ind = h.querySelector('.dt-sort-indicator');
-                if (ind) ind.textContent = '⇅';
+                if (ind) ind.textContent = '\u21C5';
             });
 
             this.currentSort = { colIndex, order: newOrder };
@@ -244,7 +244,7 @@
 
             th.classList.add(newOrder === 'asc' ? 'dt-sort-asc' : 'dt-sort-desc');
             const ind = th.querySelector('.dt-sort-indicator');
-            if (ind) ind.textContent = newOrder === 'asc' ? '▲' : '▼';
+            if (ind) ind.textContent = newOrder === 'asc' ? '\u25B2' : '\u25BC';
 
             // Perform sort
             this.filteredRows.sort((rowA, rowB) => {
