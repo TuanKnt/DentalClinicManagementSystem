@@ -72,13 +72,14 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(ctx + "/reception/appointments");
                 break;
             case "Dentist":
+            case "DentalAssistant":
                 response.sendRedirect(ctx + "/dentist/queue");
                 break;
             case "Patient":
                 response.sendRedirect(ctx + "/patient/appointments");
                 break;
             case "Cashier":
-                response.sendRedirect(ctx + "/cashier/invoices");
+                response.sendRedirect(ctx + "/admin/services");
                 break;
             default:
                 response.sendRedirect(ctx + "/index.jsp");

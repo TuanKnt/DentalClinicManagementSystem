@@ -61,7 +61,7 @@ public class AuthFilter implements Filter {
             isAuthorized = role.equalsIgnoreCase("Receptionist")
                     || (path.startsWith("/reception/calendar") && role.equalsIgnoreCase("Dentist"))
                     || (path.startsWith("/reception/schedules") && role.equalsIgnoreCase("Dentist"))
-                    || (path.startsWith("/reception/patients") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant")))
+                    || (path.startsWith("/reception/patients") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant") || role.equalsIgnoreCase("Cashier")))
                     // Dental assistants can receive a patient at the chair,
                     // but still cannot create, cancel or manage appointments.
                     || (path.startsWith("/reception/checkin") && role.equalsIgnoreCase("DentalAssistant"));
@@ -79,7 +79,7 @@ public class AuthFilter implements Filter {
                     || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/admin/")) {
             isAuthorized = role.equalsIgnoreCase("Admin")
-                    || (path.startsWith("/admin/services") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist")));
+                    || (path.startsWith("/admin/services") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist") || role.equalsIgnoreCase("DentalAssistant") || role.equalsIgnoreCase("Cashier")));
         }
 
         if (!isAuthorized) {

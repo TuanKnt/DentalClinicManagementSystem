@@ -132,12 +132,12 @@
 
         .demo-chips-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
         }
 
         .demo-chip {
-            padding: 10px 6px;
+            padding: 8px 3px;
             background: linear-gradient(135deg, #f8fafc 0%, #f0f7fd 100%);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
@@ -154,18 +154,23 @@
         }
 
         .demo-chip-role {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--drsmile-navy);
             display: block;
             margin-bottom: 2px;
+            white-space: nowrap;
         }
 
         .demo-chip-user {
-            font-size: 11px;
+            font-size: 10px;
             font-family: 'Inter', monospace;
             font-weight: 600;
             color: var(--drsmile-cyan);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
         }
 
         .login-footer-text {
@@ -271,6 +276,14 @@
                 <div class="demo-chip" onclick="fillAccount('bacsi_hung', '123456')" title="Nhấn để điền tài khoản Nha sĩ">
                     <span class="demo-chip-role">Nha Sĩ</span>
                     <span class="demo-chip-user">bacsi_hung</span>
+                </div>
+                <div class="demo-chip" onclick="fillAccount('trothu01', '123456')" title="Nhấn để điền tài khoản Trợ thủ">
+                    <span class="demo-chip-role">Trợ Thủ</span>
+                    <span class="demo-chip-user">trothu01</span>
+                </div>
+                <div class="demo-chip" onclick="fillAccount('thungan01', '123456')" title="Nhấn để điền tài khoản Thu ngân">
+                    <span class="demo-chip-role">Thu Ngân</span>
+                    <span class="demo-chip-user">thungan01</span>
                 </div>
                 <div class="demo-chip" onclick="fillAccount('admin', '123456')" title="Nhấn để điền tài khoản Quản trị">
                     <span class="demo-chip-role">Quản Trị</span>
