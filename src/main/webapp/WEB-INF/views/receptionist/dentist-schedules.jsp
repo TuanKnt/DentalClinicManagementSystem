@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch Trực Bác Sĩ (Dentist Work Schedule) — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=2.2">
     <style>
         .schedule-grid-layout {
             display: grid;
@@ -47,23 +47,69 @@
         .day-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 6px;
+            justify-content: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11.5px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            white-space: nowrap;
         }
         .day-1, .day-2, .day-3, .day-4, .day-5 {
             background: #e0f2fe;
             color: #0369a1;
+            border: 1px solid #bae6fd;
         }
         .day-6 {
             background: #fef3c7;
             color: #b45309;
+            border: 1px solid #fde68a;
         }
         .day-7 {
             background: #fee2e2;
             color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+        .btn-action-outline {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #334155;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-action-outline:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            color: var(--drsmile-navy);
+            transform: translateY(-1px);
+        }
+        .btn-action-danger {
+            border: 1px solid #fecaca;
+            background: #fff5f5;
+            color: #dc2626;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-action-danger:hover {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #b91c1c;
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -174,14 +220,16 @@
             <!-- Two-Column Layout: Form Add Schedule + Table List Schedules -->
             <div class="schedule-grid-layout">
                 <!-- FORM CARD: ADD DENTIST SCHEDULE -->
-                <div class="form-card" style="margin: 0;">
-                    <div class="form-card-header">
-                        <h2>+ Thêm Ca Trực Bác Sĩ</h2>
-                        <p>Khai báo ca làm việc cố định theo thứ trong tuần</p>
+                <div class="card" style="margin: 0;">
+                    <div class="card-header" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                        <div class="card-title">
+                            <span>+ Thêm Ca Trực Bác Sĩ</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin: 0;">Khai báo ca làm việc cố định theo thứ trong tuần</p>
                     </div>
 
                     <form action="${pageContext.request.contextPath}/reception/schedules/create" method="POST">
-                        <div class="form-card-body" style="padding: 20px;">
+                        <div class="card-body" style="padding: 20px;">
                             <!-- Doctor Selection -->
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label for="formDentistId" class="form-label required">Bác Sĩ Phụ Trách</label>
@@ -241,7 +289,7 @@
                             </div>
 
                             <!-- Is Available Checkbox -->
-                            <div class="form-group" style="margin-bottom: 16px;">
+                            <div class="form-group" style="margin-bottom: 8px;">
                                 <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer;">
                                     <input type="checkbox" name="isAvailable" value="true" checked style="width: 18px; height: 18px;" />
                                     <span>Kích hoạt ca trực (Sẵn sàng nhận hẹn khám)</span>
@@ -249,7 +297,7 @@
                             </div>
                         </div>
 
-                        <div class="form-card-footer" style="padding: 16px 20px;">
+                        <div style="padding: 16px 20px; background: #f8fafc; border-top: 1px solid var(--border-light);">
                             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
                                 Lưu Ca Trực Bác Sĩ
                             </button>
@@ -258,22 +306,28 @@
                 </div>
 
                 <!-- TABLE CARD: LIST DENTIST SCHEDULES -->
-                <div class="data-table-container">
-                    <div style="padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div class="card" style="margin: 0;">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                         <div>
-                            <h2 style="font-size: 17px; font-weight: 700; color: var(--drsmile-navy); margin: 0;">
-                                Danh Sách Ca Trực Đang Áp Dụng
-                            </h2>
-                            <p style="font-size: 12.5px; color: var(--text-muted); margin: 2px 0 0 0;">
-                                Tổng cộng <strong>${scheduleList.size()}</strong> ca làm việc đã đăng ký
+                            <div class="card-title">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Danh Sách Ca Trực Đang Áp Dụng</span>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-muted); margin: 3px 0 0 0;">
+                                Tổng cộng <strong>${scheduleList.size()}</strong> ca làm việc đã thiết lập trong tuần
                             </p>
                         </div>
 
                         <!-- Filter by Dentist -->
                         <form action="${pageContext.request.contextPath}/reception/schedules" method="GET" style="display: flex; align-items: center; gap: 8px; margin: 0;">
-                            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin: 0;">Lọc theo bác sĩ:</label>
-                            <select name="dentistId" class="form-control" style="width: 220px; padding: 6px 10px; font-size: 13px;" onchange="this.form.submit()">
-                                <option value="">Tất cả Bác sĩ</option>
+                            <label style="font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin: 0;">Lọc bác sĩ:</label>
+                            <select name="dentistId" class="form-control" style="width: 200px; padding: 7px 12px; font-size: 12.5px; border-radius: 8px;" onchange="this.form.submit()">
+                                <option value="">-- Tất cả Bác sĩ --</option>
                                 <c:forEach var="d" items="${dentists}">
                                     <option value="${d.dentistId}" ${selectedDentistId == d.dentistId ? 'selected' : ''}>
                                         ${d.fullName}
@@ -283,92 +337,106 @@
                         </form>
                     </div>
 
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 60px;">Mã</th>
-                                <th>Bác Sĩ Điều Trị</th>
-                                <th style="width: 120px;">Thứ Trực</th>
-                                <th>Khung Giờ Ca Làm Việc</th>
-                                <th style="width: 140px;">Trạng Thái</th>
-                                <th style="text-align: right; width: 140px;">Thao Tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:choose>
-                                <c:when test="${empty scheduleList}">
-                                    <tr>
-                                        <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-muted);">
-                                            Chưa có ca trực nào được thiết lập. Hãy sử dụng form bên trái để thêm ca trực mới!
-                                        </td>
-                                    </tr>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:forEach var="s" items="${scheduleList}">
+                    <div class="table-responsive">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th style="width: 70px;">Mã</th>
+                                    <th>Bác Sĩ Điều Trị</th>
+                                    <th style="width: 110px;">Thứ Trực</th>
+                                    <th>Khung Giờ Ca Làm Việc</th>
+                                    <th style="width: 150px;">Trạng Thái</th>
+                                    <th style="text-align: right; width: 150px;">Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:choose>
+                                    <c:when test="${empty scheduleList}">
                                         <tr>
-                                            <td style="font-family: monospace; font-weight: 600; color: var(--text-muted);">
-                                                #${s.scheduleId}
-                                            </td>
-                                            <td>
-                                                <div style="font-weight: 700; color: var(--drsmile-navy);">
-                                                    ${s.dentistName}
-                                                </div>
-                                                <div style="font-size: 12px; color: var(--text-muted);">
-                                                    ${s.specialization} &bull; ${s.roomNumber != null ? s.roomNumber : 'Ghế khám'}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="day-badge day-${s.dayOfWeek}">
-                                                    ${s.dayOfWeekName}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <div style="font-weight: 700; color: #0f172a; font-family: monospace; font-size: 14px;">
-                                                    ${s.shiftTimeFormatted}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${s.available}">
-                                                        <span class="badge-pill badge-Confirmed">
-                                                            ● Đang nhận hẹn
-                                                        </span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="badge-pill badge-Pending">
-                                                            ○ Tạm ngưng
-                                                        </span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                            <td style="text-align: right;">
-                                                <div style="display: inline-flex; gap: 6px;">
-                                                    <!-- Toggle Availability Form -->
-                                                    <form action="${pageContext.request.contextPath}/reception/schedules/toggle" method="POST" style="margin: 0; display: inline;">
-                                                        <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
-                                                        <input type="hidden" name="available" value="${!s.available}" />
-                                                        <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
-                                                        <button type="submit" class="btn btn-secondary btn-sm" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
-                                                            ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
-                                                        </button>
-                                                    </form>
-
-                                                    <!-- Delete Schedule Form -->
-                                                    <form action="${pageContext.request.contextPath}/reception/schedules/delete" method="POST" style="margin: 0; display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ca trực #${s.scheduleId} của ${s.dentistName} vào ${s.dayOfWeekName}?');">
-                                                        <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
-                                                        <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
-                                                        <button type="submit" class="btn btn-secondary btn-sm" style="color: #ef4444;" title="Xóa ca trực">
-                                                            Xóa
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                            <td colspan="6" style="text-align: center; padding: 50px 20px; color: var(--text-muted);">
+                                                <div style="font-size: 14px; font-weight: 600; color: var(--drsmile-navy); margin-bottom: 4px;">Chưa có ca trực nào được thiết lập</div>
+                                                <div style="font-size: 12.5px;">Hãy sử dụng form bên trái để tạo ca trực cố định hàng tuần cho bác sĩ.</div>
                                             </td>
                                         </tr>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
-                        </tbody>
-                    </table>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="s" items="${scheduleList}">
+                                            <tr>
+                                                <td>
+                                                    <span class="badge-code">#${s.scheduleId}</span>
+                                                </td>
+                                                <td>
+                                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                                        <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #003366 0%, #007acc 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,51,102,0.15);">
+                                                            ${s.dentistName.substring(s.dentistName.lastIndexOf(' ') + 1, s.dentistName.lastIndexOf(' ') + 2)}
+                                                        </div>
+                                                        <div>
+                                                            <div style="font-weight: 700; color: var(--drsmile-navy); font-size: 13.5px;">${s.dentistName}</div>
+                                                            <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 1px;">
+                                                                ${s.specialization} &bull; <span style="color: #0284c7; font-weight: 600;">${s.roomNumber != null ? s.roomNumber : 'Ghế khám'}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="day-badge day-${s.dayOfWeek}">
+                                                        ${s.dayOfWeekName}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <div class="time-badge">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                                        </svg>
+                                                        <span>${s.shiftTimeFormatted}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${s.available}">
+                                                            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 700; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+                                                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+                                                                Đang nhận hẹn
+                                                            </span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 600; background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0;">
+                                                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #94a3b8;"></span>
+                                                                Tạm ngưng
+                                                            </span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    <div style="display: inline-flex; gap: 8px;">
+                                                        <!-- Toggle Availability Form -->
+                                                        <form action="${pageContext.request.contextPath}/reception/schedules/toggle" method="POST" style="margin: 0; display: inline;">
+                                                            <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
+                                                            <input type="hidden" name="available" value="${!s.available}" />
+                                                            <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
+                                                            <button type="submit" class="btn-action-outline" title="${s.available ? 'Tạm ngưng nhận hẹn' : 'Kích hoạt ca trực'}">
+                                                                ${s.available ? 'Tạm ngưng' : 'Kích hoạt'}
+                                                            </button>
+                                                        </form>
+
+                                                        <!-- Delete Schedule Form -->
+                                                        <form action="${pageContext.request.contextPath}/reception/schedules/delete" method="POST" style="margin: 0; display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ca trực #${s.scheduleId} của ${s.dentistName} vào ${s.dayOfWeekName}?');">
+                                                            <input type="hidden" name="scheduleId" value="${s.scheduleId}" />
+                                                            <input type="hidden" name="returnDentistId" value="${selectedDentistId}" />
+                                                            <button type="submit" class="btn-action-danger" title="Xóa ca trực">
+                                                                Xóa
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
