@@ -595,11 +595,16 @@ body {
 .kpi-icon-box svg {
     width: 22px;
     height: 22px;
-    stroke: currentColor;
-    stroke-width: 2;
-    fill: none;
+    stroke: currentColor !important;
+    stroke-width: 2 !important;
+    fill: none !important;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.kpi-icon-box svg * {
+    fill: none !important;
+    stroke: currentColor !important;
 }
 
 .kpi-icon-blue { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); color: #0369a1; }
