@@ -235,7 +235,7 @@
                                     <c:forEach var="a" items="${dayAppts}">
                                         <div class="appt-card status-${a.status}">
                                             <div class="appt-time">
-                                                <span>⏱️ ${a.startTime.toString().substring(0, 5)} - ${a.endTime.toString().substring(0, 5)}</span>
+                                                <span>${a.startTime.toString().substring(0, 5)} - ${a.endTime.toString().substring(0, 5)}</span>
                                                 <span class="badge-pill badge-${a.status}" style="font-size: 9px; padding: 2px 6px;">${a.status}</span>
                                             </div>
                                             <div class="appt-patient">

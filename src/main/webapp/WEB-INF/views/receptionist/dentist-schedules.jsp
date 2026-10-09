@@ -134,36 +134,40 @@
             <!-- Stats Overview Row -->
             <div class="kpi-grid" style="margin-bottom: 24px;">
                 <div class="kpi-card">
-                    <div class="kpi-header">
-                        <span class="kpi-title">Tổng Số Ca Trực</span>
-                        <span class="kpi-icon">TOTAL</span>
+                    <div class="kpi-icon-box kpi-icon-blue">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     </div>
-                    <div class="kpi-value">${totalShifts}</div>
-                    <div class="kpi-footer">Toàn bộ ca trực thiết lập trong tuần</div>
+                    <div class="kpi-meta">
+                        <h3>${totalShifts}</h3>
+                        <span>Tổng số ca trực trong tuần</span>
+                    </div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-header">
-                        <span class="kpi-title">Đang Nhận Hẹn Khám</span>
-                        <span class="kpi-icon">ACTIVE</span>
+                    <div class="kpi-icon-box kpi-icon-green">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                     </div>
-                    <div class="kpi-value" style="color: #10b981;">${activeShifts}</div>
-                    <div class="kpi-footer">Ca trực sẵn sàng phục vụ bệnh nhân</div>
+                    <div class="kpi-meta">
+                        <h3>${activeShifts}</h3>
+                        <span>Đang nhận hẹn khám (Active)</span>
+                    </div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-header">
-                        <span class="kpi-title">Tạm Ngưng Nhận Hẹn</span>
-                        <span class="kpi-icon">PAUSE</span>
+                    <div class="kpi-icon-box kpi-icon-amber">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="10" y1="15" x2="10" y2="9"></line><line x1="14" y1="15" x2="14" y2="9"></line></svg>
                     </div>
-                    <div class="kpi-value" style="color: #64748b;">${inactiveShifts}</div>
-                    <div class="kpi-footer">Ca trực đang tạm đóng hoặc nghỉ phép</div>
+                    <div class="kpi-meta">
+                        <h3>${inactiveShifts}</h3>
+                        <span>Tạm ngưng nhận hẹn (Pause)</span>
+                    </div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-header">
-                        <span class="kpi-title">Bác Sĩ Hệ Thống</span>
-                        <span class="kpi-icon">DOC</span>
+                    <div class="kpi-icon-box kpi-icon-purple">
+                        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
                     </div>
-                    <div class="kpi-value" style="color: var(--drsmile-navy);">${dentists.size()}</div>
-                    <div class="kpi-footer">Bác sĩ chuyên khoa tại cơ sở phòng khám</div>
+                    <div class="kpi-meta">
+                        <h3>${dentists.size()}</h3>
+                        <span>Bác sĩ chuyên khoa tại cơ sở</span>
+                    </div>
                 </div>
             </div>
 

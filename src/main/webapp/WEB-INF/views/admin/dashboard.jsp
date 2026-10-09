@@ -48,7 +48,9 @@
             <!-- System Metrics KPI Grid -->
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-blue" style="font-size: 11px; font-weight: 700;">STAFF</div>
+                    <div class="kpi-icon-box kpi-icon-blue">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
                     <div class="kpi-meta">
                         <h3>${totalUsers}</h3>
                         <span>Tài khoản nhân sự</span>
@@ -56,7 +58,9 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-purple" style="font-size: 11px; font-weight: 700;">DOC</div>
+                    <div class="kpi-icon-box kpi-icon-purple">
+                        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
+                    </div>
                     <div class="kpi-meta">
                         <h3>${totalDentists}</h3>
                         <span>Bác sĩ nha khoa</span>
@@ -64,7 +68,9 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-green" style="font-size: 11px; font-weight: 700;">PAT</div>
+                    <div class="kpi-icon-box kpi-icon-green">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
                     <div class="kpi-meta">
                         <h3>${totalPatients}</h3>
                         <span>Hồ sơ bệnh nhân</span>
@@ -72,7 +78,9 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-amber" style="font-size: 11px; font-weight: 700;">APPT</div>
+                    <div class="kpi-icon-box kpi-icon-amber">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
                     <div class="kpi-meta">
                         <h3>${todayAppointmentsCount}</h3>
                         <span>Lịch hẹn hôm nay</span>
@@ -80,7 +88,9 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-icon-box kpi-icon-red" style="font-size: 11px; font-weight: 700;">QUEUE</div>
+                    <div class="kpi-icon-box kpi-icon-red">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
                     <div class="kpi-meta">
                         <h3>${waitingQueueCount}</h3>
                         <span>Chờ khám tại quầy</span>
