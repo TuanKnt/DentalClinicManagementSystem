@@ -21,6 +21,10 @@ public class DentalServiceDAO {
 
     private static final Logger LOGGER = Logger.getLogger(DentalServiceDAO.class.getName());
 
+    public List<DentalService> findAllActive() {
+        return findAll(true);
+    }
+
     public List<DentalService> findAll(boolean onlyActive) {
         List<DentalService> list = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT ServiceId, ServiceCode, ServiceName, Category, Price, Unit, Description, IsActive, CreatedAt, UpdatedAt FROM dbo.DentalServices ");

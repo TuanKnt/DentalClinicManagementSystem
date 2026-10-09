@@ -50,4 +50,17 @@
         <url-pattern>/treatment/consent/print</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProcedurePerformedServlet</servlet-name>
+        <servlet-class>com.dcms.controller.ProcedurePerformedServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcedurePerformedServlet</servlet-name>
+        <url-pattern>/clinical/procedures</url-pattern>
+        <url-pattern>/clinical/procedure/record</url-pattern>
+        <url-pattern>/clinical/procedure/complete</url-pattern>
+        <url-pattern>/clinical/material/add</url-pattern>
+        <url-pattern>/clinical/material/delete</url-pattern>
+    </servlet-mapping>
+
 </web-app>

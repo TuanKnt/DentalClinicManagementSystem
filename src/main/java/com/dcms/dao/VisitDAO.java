@@ -130,6 +130,10 @@ public class VisitDAO {
         return -1;
     }
 
+    public Visit getVisitById(int visitId) {
+        return findById(visitId);
+    }
+
     public Visit findById(int visitId) {
         String sql = "SELECT v.VisitId, v.PatientId, v.PrimaryDentistId, v.AppointmentId, v.CheckInTime, v.CheckOutTime, " +
                      "v.Status, v.VisitType, v.Notes, v.Operatory, v.CreatedAt, v.UpdatedAt, " +

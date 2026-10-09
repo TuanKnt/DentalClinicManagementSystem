@@ -194,6 +194,9 @@
                                                 <button type="submit" class="btn btn-success" style="padding: 10px 18px; font-size: 13px; font-weight: 600;">
                                                     Mời Khám Ngay
                                                 </button>
+                                                <a href="${pageContext.request.contextPath}/clinical/procedures?visitId=${v.visitId}" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; font-weight: 600; text-align: center; text-decoration: none;">
+                                                    Thủ Thuật Tại Ghế
+                                                </a>
                                             </form>
                                         </div>
                                     </div>
