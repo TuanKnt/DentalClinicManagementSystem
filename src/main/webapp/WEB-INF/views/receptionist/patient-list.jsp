@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table-custom">
+                    <table class="table-custom" data-datatable="true" data-page-size="10">
                         <thead>
                             <tr>
                                 <th>Mã BN</th>
@@ -73,7 +73,7 @@
                                 <th>Giới Tính / Ngày Sinh</th>
                                 <th>Cảnh Báo Bệnh Lý & Dị Ứng</th>
                                 <th>Địa Chỉ</th>
-                                <th style="text-align: right;">Thao Tác</th>
+                                <th style="text-align: right;" data-no-sort="true">Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -179,6 +179,9 @@
         </main>
     </div>
 </div>
+
+<!-- DCMS Universal Data Table Standard Engine -->
+<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.0" charset="UTF-8"></script>
 
 </body>
 </html>

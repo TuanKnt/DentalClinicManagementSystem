@@ -193,17 +193,8 @@
                         </p>
                     </div>
 
-                    <!-- Toolbar: Search + Doctor Filter + Add Schedule Button -->
+                    <!-- Toolbar: Doctor Filter + Add Schedule Button -->
                     <div class="toolbar-group">
-                        <!-- Live Search Input -->
-                        <div class="search-input-wrap">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                            <input type="text" id="scheduleSearch" placeholder="Tìm tên bác sĩ, phòng..." class="form-control" style="width: 210px; padding: 7px 12px; font-size: 12.5px; border-radius: 8px;" onkeyup="filterSchedules()" />
-                        </div>
-
                         <!-- Filter by Dentist -->
                         <form action="${pageContext.request.contextPath}/reception/schedules" method="GET" style="display: flex; align-items: center; gap: 8px; margin: 0;">
                             <label style="font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin: 0; white-space: nowrap;">Bác sĩ:</label>
@@ -263,7 +254,7 @@
                                 <th style="width: 140px; text-align: center;">Thứ Trực</th>
                                 <th style="width: 200px;">Khung Giờ Ca Làm Việc</th>
                                 <th style="width: 170px; text-align: center;">Trạng Thái</th>
-                                <th style="text-align: right; width: 180px;">Thao Tác</th>
+                                <th style="text-align: right; width: 180px;" data-no-sort="true">Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody id="scheduleTableBody">
@@ -521,37 +512,17 @@
                 chip.classList.remove('active');
             }
         });
-        filterSchedules();
-    }
-
-    function filterSchedules() {
-        const searchInput = document.getElementById('scheduleSearch');
-        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-        const rows = document.querySelectorAll('.schedule-row');
-        let visibleCount = 0;
-
-        rows.forEach(row => {
-            const rowDay = row.getAttribute('data-day');
-            const rowName = row.getAttribute('data-name') || '';
-
-            const matchesDay = (activeDayFilter === 'all' || rowDay === activeDayFilter);
-            const matchesSearch = (!searchTerm || rowName.includes(searchTerm));
-
-            if (matchesDay && matchesSearch) {
-                row.style.display = '';
-                visibleCount++;
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        const noResultsRow = document.getElementById('noResultsRow');
-        if (noResultsRow) {
-            noResultsRow.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+        if (scheduleDt) {
+            scheduleDt.setCustomFilter(row => {
+                const rowDay = row.getAttribute('data-day');
+                return activeDayFilter === 'all' || rowDay === activeDayFilter;
+            });
         }
     }
 
-    // Calculate day counts dynamically on load
+    let scheduleDt = null;
+
+    // Calculate day counts dynamically on load and initialize DcmsDataTable
     document.addEventListener('DOMContentLoaded', function() {
         const rows = document.querySelectorAll('.schedule-row');
         const dayCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
@@ -569,8 +540,21 @@
                 badge.textContent = dayCounts[d];
             }
         }
+
+        // Initialize Universal DCMS Data Table Standard
+        scheduleDt = new DcmsDataTable('#scheduleTable', {
+            pageSize: 10,
+            searchPlaceholder: 'Tìm nhanh tên bác sĩ, chuyên khoa, phòng khám...',
+            customFilterFn: function(row) {
+                const rowDay = row.getAttribute('data-day');
+                return activeDayFilter === 'all' || rowDay === activeDayFilter;
+            }
+        });
     });
 </script>
+
+<!-- DCMS Universal Data Table Standard Engine -->
+<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.0" charset="UTF-8"></script>
 
 </body>
 </html>

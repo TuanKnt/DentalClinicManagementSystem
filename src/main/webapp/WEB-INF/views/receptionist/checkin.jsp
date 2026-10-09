@@ -129,7 +129,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table-custom">
+                    <table class="table-custom" data-datatable="true" data-page-size="10">
                         <thead>
                             <tr>
                                 <th style="width: 60px;">STT</th>
@@ -242,7 +242,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table-custom">
+                    <table class="table-custom" data-datatable="true" data-page-size="10">
                         <thead>
                             <tr>
                                 <th>Khung Giờ</th>
@@ -251,7 +251,7 @@
                                 <th>Bác Sĩ Phụ Trách</th>
                                 <th>Lý Do Khám</th>
                                 <th>Trạng Thái Lịch</th>
-                                <th style="text-align: right;">Thao Tác Tiếp Đón</th>
+                                <th style="text-align: right;" data-no-sort="true">Thao Tác Tiếp Đón</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -345,6 +345,9 @@
         </main>
     </div>
 </div>
+
+<!-- DCMS Universal Data Table Standard Engine -->
+<script src="${pageContext.request.contextPath}/assets/js/dcms-datatable.js?v=2.0" charset="UTF-8"></script>
 
 </body>
 </html>
