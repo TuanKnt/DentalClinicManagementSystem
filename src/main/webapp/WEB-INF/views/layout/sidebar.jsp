@@ -70,6 +70,11 @@
             <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></span>
             <span>Tổng Quan Quản Trị</span>
         </a>
+        <a href="${pageContext.request.contextPath}/admin/services" 
+           class="nav-item ${activeMenu == 'services' ? 'active' : ''}">
+            <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <span>Danh Mục & Biểu Phí</span>
+        </a>
         <a href="${pageContext.request.contextPath}/logout" class="nav-item" style="color: rgba(239, 68, 68, 0.7);">
             <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></span>
             <span>Đăng Xuất</span>

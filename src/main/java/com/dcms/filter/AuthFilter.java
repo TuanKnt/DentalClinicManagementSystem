@@ -74,6 +74,9 @@ public class AuthFilter implements Filter {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/cashier/")) {
             isAuthorized = role.equalsIgnoreCase("Cashier");
+        } else if (path.startsWith("/admin/")) {
+            isAuthorized = role.equalsIgnoreCase("Admin")
+                    || (path.startsWith("/admin/services") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist")));
         }
 
         if (!isAuthorized) {
