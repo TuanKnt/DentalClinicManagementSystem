@@ -40,4 +40,14 @@
         <url-pattern>/cashier/receipt</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>TreatmentConsentServlet</servlet-name>
+        <servlet-class>com.dcms.controller.TreatmentConsentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TreatmentConsentServlet</servlet-name>
+        <url-pattern>/treatment/consent</url-pattern>
+        <url-pattern>/treatment/consent/print</url-pattern>
+    </servlet-mapping>
+
 </web-app>

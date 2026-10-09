@@ -168,6 +168,18 @@
                             </button>
                         </form>
                     </c:if>
+
+                    <c:if test="${plan.status eq 'Proposed' or plan.status eq 'Draft'}">
+                        <button type="button" class="btn btn-drsmile" onclick="openConsentModal()" style="font-weight: 700;">
+                            <span>Xác Nhận Cam Kết (Consent)</span>
+                        </button>
+                    </c:if>
+
+                    <c:if test="${plan.status eq 'Accepted' or plan.status eq 'PartiallyAccepted'}">
+                        <a href="${pageContext.request.contextPath}/treatment/consent/print?id=${plan.planId}" target="_blank" class="btn btn-primary" style="background: #0284c7; border-color: #0284c7; font-weight: 700;">
+                            <span>In Bản Cam Kết (Consent)</span>
+                        </a>
+                    </c:if>
                 </div>
             </div>
 
@@ -182,9 +194,17 @@
                             <c:when test="${param.msg eq 'item_deleted'}">Đã xóa thủ thuật khỏi kế hoạch điều trị.</c:when>
                             <c:when test="${param.msg eq 'discount_updated'}">Đã cập nhật mức chiết khấu và tính lại dự toán chi phí.</c:when>
                             <c:when test="${param.msg eq 'submitted'}">Kế hoạch đã được chuyển sang trạng thái "Chờ bệnh nhân duyệt" (Proposed).</c:when>
+                            <c:when test="${param.msg eq 'consent_recorded'}">Đã ghi nhận biên bản cam kết điều trị &amp; đồng thuận của bệnh nhân thành công (UC22)!</c:when>
                             <c:otherwise>Thao tác thành công.</c:otherwise>
                         </c:choose>
                     </div>
+                </div>
+            </c:if>
+
+            <c:if test="${not empty param.warn}">
+                <div class="alert-banner alert-banner-warning" style="margin-bottom: 20px; padding: 12px 16px; background: #fffbeb; border: 1px solid #fef3c7; color: #92400e;">
+                    <span class="alert-banner-icon">!</span>
+                    <div>${param.warn}</div>
                 </div>
             </c:if>
 
@@ -257,6 +277,38 @@
                                 <div class="meta-field-label" style="color: #475569;">Lộ Trình / Ghi Chú Kế Hoạch</div>
                                 <div style="font-size: 13.5px; color: #1e293b; line-height: 1.5;">
                                     ${plan.notes}
+                                </div>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty plan.patientConsentDate or not empty plan.consentNotes or plan.status eq 'Accepted' or plan.status eq 'PartiallyAccepted'}">
+                            <div style="background: #f0fdf4; border-radius: 8px; padding: 14px 18px; border: 1px solid #bbf7d0; margin-top: 14px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                            <polyline points="9 12 11 14 15 10"></polyline>
+                                        </svg>
+                                        <span style="font-weight: 800; color: #166534; font-size: 13.5px; text-transform: uppercase;">
+                                            Biên Bản Đồng Thuận &amp; Cam Kết Điều Trị (UC22)
+                                        </span>
+                                    </div>
+                                    <span class="status-pill status-pill-success" style="font-size: 11.5px;">
+                                        ${plan.statusDisplayName}
+                                    </span>
+                                </div>
+                                <div style="font-size: 12.5px; color: #15803d; margin-bottom: 4px;">
+                                    <strong>Thời gian ký xác nhận:</strong> ${plan.patientConsentDate != null ? plan.patientConsentDate : 'Đã ghi nhận trong hồ sơ'}
+                                </div>
+                                <c:if test="${not empty plan.consentNotes}">
+                                    <div style="font-size: 13px; color: #166534; line-height: 1.5; font-style: italic; background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; border: 1px dashed #86efac; margin-top: 6px;">
+                                        "${plan.consentNotes}"
+                                    </div>
+                                </c:if>
+                                <div style="margin-top: 10px; display: flex; gap: 8px;">
+                                    <a href="${pageContext.request.contextPath}/treatment/consent/print?id=${plan.planId}" target="_blank" class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px; font-weight: 700; color: #166534; border-color: #86efac; background: #ffffff; text-decoration: none;">
+                                        In Biên Bản Cam Kết
+                                    </a>
                                 </div>
                             </div>
                         </c:if>
@@ -539,6 +591,110 @@
     </div>
 </div>
 
+<!-- Modal: Xác Nhận Cam Kết & Đồng Thuận Điều Trị (UC22) -->
+<div id="consentModal" class="modal-overlay">
+    <div class="modal-dialog-custom" style="max-width: 580px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid #e2e8f0;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--drsmile-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <h3 style="font-size: 17px; font-weight: 800; color: var(--drsmile-navy); margin: 0;">
+                    Cam Kết Điều Trị &amp; Đồng Thuận Bệnh Nhân (UC22)
+                </h3>
+            </div>
+            <button type="button" onclick="closeConsentModal()" style="background: none; border: none; font-size: 22px; cursor: pointer; color: #94a3b8;">&times;</button>
+        </div>
+
+        <form action="${pageContext.request.contextPath}/treatment/consent" method="POST" style="padding: 24px;">
+            <input type="hidden" name="planId" value="${plan.planId}">
+
+            <div class="form-group" style="margin-bottom: 18px;">
+                <label class="form-label required">Quyết Định Đồng Thuận Của Bệnh Nhân</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 6px;">
+                    <label style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px; border: 2px solid #0284c7; background: #f0f9ff; border-radius: 8px; cursor: pointer; text-align: center;">
+                        <input type="radio" name="consentType" value="Accepted" checked style="accent-color: #0284c7;">
+                        <span style="font-weight: 700; color: #0284c7; font-size: 13px;">Đồng Ý Toàn Bộ</span>
+                        <span style="font-size: 11px; color: #64748b;">Chấp thuận 100% phác đồ</span>
+                    </label>
+
+                    <label style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; text-align: center;">
+                        <input type="radio" name="consentType" value="PartiallyAccepted" style="accent-color: #f59e0b;">
+                        <span style="font-weight: 700; color: #b45309; font-size: 13px;">Đồng Ý Một Phần</span>
+                        <span style="font-size: 11px; color: #64748b;">Làm các buổi ưu tiên</span>
+                    </label>
+
+                    <label style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; text-align: center;">
+                        <input type="radio" name="consentType" value="Declined" style="accent-color: #ef4444;">
+                        <span style="font-weight: 700; color: #b91c1c; font-size: 13px;">Từ Chối</span>
+                        <span style="font-size: 11px; color: #64748b;">Chưa điều trị</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label for="consentNotes" class="form-label">Nội Dung Thỏa Thuận &amp; Cam Kết Y Tế</label>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary" style="font-size: 11px; padding: 3px 8px;"
+                            onclick="setConsentTemplate('Bệnh nhân đã được giải thích rõ về chẩn đoán, lợi ích, rủi ro và chi phí; tự nguyện đồng ý thực hiện theo phác đồ chỉ định.')">
+                        Mẫu: Đồng ý tiêu chuẩn
+                    </button>
+                    <button type="button" class="btn btn-secondary" style="font-size: 11px; padding: 3px 8px;"
+                            onclick="setConsentTemplate('Bệnh nhân cam kết tuân thủ lộ trình điều trị đa buổi và thỏa thuận thanh toán từng đợt theo thủ thuật hoàn tất tại ghế.')">
+                        Mẫu: Thỏa thuận nhiều buổi
+                    </button>
+                    <button type="button" class="btn btn-secondary" style="font-size: 11px; padding: 3px 8px;"
+                            onclick="setConsentTemplate('Bệnh nhân có tiền sử bệnh lý tim mạch, cam kết tuân thủ phác đồ và chỉ dẫn dùng thuốc kháng sinh của bác sĩ.')">
+                        Mẫu: Bệnh nhân tim mạch/dị ứng
+                    </button>
+                </div>
+                <textarea id="consentNotes" name="consentNotes" class="form-control" rows="3"
+                          placeholder="Nhập ghi chú cam kết đặc biệt của bệnh nhân hoặc người giám hộ...">${plan.consentNotes}</textarea>
+            </div>
+
+            <!-- Tích hợp xếp lịch hẹn buổi điều trị tiếp theo (Thai - Appointment & Scheduling Module) -->
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 18px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0; font-weight: 700; color: var(--drsmile-navy); font-size: 13px;">
+                    <input type="checkbox" id="scheduleNext" name="scheduleNext" onchange="toggleNextApptFields(this)" style="accent-color: #0284c7;">
+                    Đặt lịch hẹn cho buổi điều trị tiếp theo ngay bây giờ
+                </label>
+
+                <div id="nextApptFields" style="display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+                    <div>
+                        <label for="nextAppointmentDate" class="form-label" style="font-size: 12px;">Ngày Hẹn Khám</label>
+                        <input type="date" id="nextAppointmentDate" name="nextAppointmentDate" class="form-control" style="font-size: 13px;" />
+                    </div>
+                    <div>
+                        <label for="nextAppointmentTime" class="form-label" style="font-size: 12px;">Khung Giờ</label>
+                        <select id="nextAppointmentTime" name="nextAppointmentTime" class="form-control" style="font-size: 13px;">
+                            <option value="08:30">08:30 - Sáng</option>
+                            <option value="09:15">09:15 - Sáng</option>
+                            <option value="10:00">10:00 - Sáng</option>
+                            <option value="10:45">10:45 - Sáng</option>
+                            <option value="14:00" selected>14:00 - Chiều</option>
+                            <option value="14:45">14:45 - Chiều</option>
+                            <option value="15:30">15:30 - Chiều</option>
+                            <option value="16:15">16:15 - Chiều</option>
+                            <option value="17:00">17:00 - Chiều</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" class="btn btn-secondary" onclick="closeConsentModal()">Đóng</button>
+                <button type="submit" class="btn btn-drsmile" style="font-weight: 700;">
+                    Lưu Cam Kết Điều Trị
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     function openAddItemModal() {
         document.getElementById('addItemModal').classList.add('show');
@@ -551,6 +707,31 @@
     }
     function closeDiscountModal() {
         document.getElementById('discountModal').classList.remove('show');
+    }
+    function openConsentModal() {
+        document.getElementById('consentModal').classList.add('show');
+    }
+    function closeConsentModal() {
+        document.getElementById('consentModal').classList.remove('show');
+    }
+
+    function setConsentTemplate(text) {
+        document.getElementById('consentNotes').value = text;
+    }
+
+    function toggleNextApptFields(checkbox) {
+        const fields = document.getElementById('nextApptFields');
+        if (checkbox.checked) {
+            fields.style.display = 'grid';
+            // Default tomorrow
+            if (!document.getElementById('nextAppointmentDate').value) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                document.getElementById('nextAppointmentDate').value = tomorrow.toISOString().split('T')[0];
+            }
+        } else {
+            fields.style.display = 'none';
+        }
     }
 
     function handleServiceChange(selectEl) {
@@ -566,6 +747,7 @@
         if (e.key === 'Escape') {
             closeAddItemModal();
             closeDiscountModal();
+            closeConsentModal();
         }
     });
 </script>

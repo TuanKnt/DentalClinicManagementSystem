@@ -429,6 +429,61 @@ public class TreatmentPlanDAO {
         }
     }
 
+    /**
+     * Record patient acceptance/consent with timestamp and notes (UC22).
+     */
+    public boolean recordConsent(int planId, String status, String consentNotes, LocalDateTime consentDate) {
+        String sql = "UPDATE dbo.TreatmentPlans SET Status = ?, PatientConsentDate = ?, " +
+                     "ConsentNotes = ?, UpdatedAt = SYSDATETIME() WHERE PlanId = ?";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, status);
+            if (consentDate != null) {
+                ps.setTimestamp(2, Timestamp.valueOf(consentDate));
+            } else {
+                ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            }
+            ps.setString(3, consentNotes);
+            ps.setInt(4, planId);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error recording patient consent for planId: " + planId, ex);
+            return false;
+        } finally {
+            DBContext.close(conn, ps, null);
+        }
+    }
+
+    /**
+     * Update status of all items in a treatment plan (e.g. to Accepted or Declined upon consent).
+     */
+    public boolean updateItemsStatusByPlanId(int planId, String newStatus) {
+        String sql = "UPDATE dbo.TreatmentPlanItems SET Status = ? WHERE PlanId = ? AND Status != 'Cancelled'";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newStatus);
+            ps.setInt(2, planId);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error updating item status for planId: " + planId, ex);
+            return false;
+        } finally {
+            DBContext.close(conn, ps, null);
+        }
+    }
+
     private TreatmentPlan mapResultSetToPlan(ResultSet rs) throws SQLException {
         TreatmentPlan plan = new TreatmentPlan();
         plan.setPlanId(rs.getInt("PlanId"));

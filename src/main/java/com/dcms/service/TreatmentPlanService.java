@@ -7,6 +7,7 @@ import com.dcms.model.TreatmentPlan;
 import com.dcms.model.TreatmentPlanItem;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -193,6 +194,58 @@ public class TreatmentPlanService {
         }
         planDAO.updateStatus(planId, "Proposed", "Kế hoạch đã được bác sĩ hoàn thiện và gửi bệnh nhân tư vấn.");
         plan.setStatus("Proposed");
+        return plan;
+    }
+
+    /**
+     * Record Patient Acceptance / Informed Consent for a Treatment Plan (UC22).
+     * Supports:
+     * - 'Accepted': Patient agrees to complete treatment plan.
+     * - 'PartiallyAccepted': Patient accepts specific initial stages/priority items.
+     * - 'Declined': Patient declines the recommended clinical treatment.
+     */
+    public TreatmentPlan recordPatientConsent(int planId, String consentType, String consentNotes, LocalDateTime consentDate) {
+        if (planId <= 0) {
+            throw new IllegalArgumentException("Mã kế hoạch điều trị không hợp lệ.");
+        }
+        TreatmentPlan plan = planDAO.findById(planId);
+        if (plan == null) {
+            throw new IllegalArgumentException("Kế hoạch điều trị #" + planId + " không tồn tại.");
+        }
+
+        if ("Completed".equalsIgnoreCase(plan.getStatus()) || "Cancelled".equalsIgnoreCase(plan.getStatus())) {
+            throw new IllegalStateException("Không thể ghi nhận cam kết cho kế hoạch điều trị đã hoàn thành hoặc đã hủy.");
+        }
+
+        if (consentType == null || consentType.trim().isEmpty()) {
+            throw new IllegalArgumentException("Vui lòng chọn loại chấp thuận điều trị (Accepted, PartiallyAccepted, Declined).");
+        }
+
+        String normalizedType = consentType.trim();
+        if (!"Accepted".equalsIgnoreCase(normalizedType) &&
+            !"PartiallyAccepted".equalsIgnoreCase(normalizedType) &&
+            !"Declined".equalsIgnoreCase(normalizedType)) {
+            throw new IllegalArgumentException("Loại chấp thuận điều trị '" + consentType + "' không hợp lệ. Chỉ chấp nhận: Accepted, PartiallyAccepted, Declined.");
+        }
+
+        LocalDateTime effectiveDate = (consentDate != null) ? consentDate : LocalDateTime.now();
+        String notes = (consentNotes != null && !consentNotes.trim().isEmpty()) ? consentNotes.trim() : null;
+
+        boolean updated = planDAO.recordConsent(planId, normalizedType, notes, effectiveDate);
+        if (!updated) {
+            throw new RuntimeException("Lỗi hệ thống khi lưu biên bản cam kết điều trị vào cơ sở dữ liệu.");
+        }
+
+        // Synchronize item status
+        if ("Accepted".equalsIgnoreCase(normalizedType)) {
+            planDAO.updateItemsStatusByPlanId(planId, "Accepted");
+        } else if ("Declined".equalsIgnoreCase(normalizedType)) {
+            planDAO.updateItemsStatusByPlanId(planId, "Declined");
+        }
+
+        plan.setStatus(normalizedType);
+        plan.setPatientConsentDate(effectiveDate);
+        plan.setConsentNotes(notes);
         return plan;
     }
 
