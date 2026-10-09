@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập — DCMS Dental Care | Cổng nhân viên</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
     <style>
         body {
             min-height: 100vh;

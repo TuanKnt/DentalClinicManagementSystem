@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Truy Cập Bị Từ Chối (403) — Nha Khoa Dr.Smile DCMS</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
     <style>
         body {
             background: 

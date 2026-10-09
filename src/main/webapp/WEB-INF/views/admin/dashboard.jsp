@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng Điều Khiển Quản Trị — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
 </head>
 <body>
 
@@ -101,30 +101,36 @@
             <!-- Two-Column Layout -->
             <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;">
                 <!-- Column 1: Dentist Staff & Roster -->
-                <div class="card">
+                <div class="card" style="margin-bottom: 0;">
                     <div class="card-header">
                         <div class="card-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
                             <span>Đội Ngũ Bác Sĩ Nha Khoa Điều Trị</span>
                         </div>
                         <span class="badge-pill badge-Confirmed">● ${totalDentists} Bác sĩ trực sẵn sàng</span>
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
-                            <table class="data-table">
+                            <table class="table-custom">
                                 <thead>
                                     <tr>
-                                        <th>Mã BS</th>
-                                        <th>Bác Sĩ</th>
+                                        <th style="width: 80px;">Mã BS</th>
+                                        <th>Bác Sĩ Điều Trị</th>
                                         <th>Chuyên Môn</th>
                                         <th>Số Điện Thoại</th>
-                                        <th>Trạng Thái</th>
+                                        <th style="text-align: center; width: 130px;">Trạng Thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:choose>
                                         <c:when test="${empty dentists}">
                                             <tr>
-                                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px;">
                                                     Chưa có dữ liệu bác sĩ nha khoa.
                                                 </td>
                                             </tr>
@@ -132,23 +138,42 @@
                                         <c:otherwise>
                                             <c:forEach var="d" items="${dentists}">
                                                 <tr>
-                                                    <td><strong>BS-${d.dentistId}</strong></td>
                                                     <td>
-                                                        <div style="font-weight: 600; color: var(--text-primary);">
-                                                            ${d.fullName}
-                                                        </div>
-                                                        <div style="font-size: 12px; color: var(--text-muted);">
-                                                            ${d.email}
+                                                        <span class="badge-code">BS-${d.dentistId}</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="doctor-cell">
+                                                            <div class="doctor-avatar-sm">
+                                                                ${d.fullName.substring(d.fullName.lastIndexOf(' ') + 1, d.fullName.lastIndexOf(' ') + 2)}
+                                                            </div>
+                                                            <div>
+                                                                <div style="font-weight: 700; color: var(--drsmile-navy); font-size: 13.5px;">
+                                                                    ${d.fullName}
+                                                                </div>
+                                                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 1px;">
+                                                                    ${d.email}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span class="badge-pill badge-Pending">
+                                                        <span style="display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;">
                                                             ${empty d.specialization ? 'Nha khoa tổng quát' : d.specialization}
                                                         </span>
                                                     </td>
-                                                    <td><code>${d.phoneNumber}</code></td>
                                                     <td>
-                                                        <span class="badge-pill badge-Confirmed">Hoạt động</span>
+                                                        <div class="phone-badge">
+                                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                                            </svg>
+                                                            <span>${d.phoneNumber}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 700; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+                                                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+                                                            Hoạt động
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

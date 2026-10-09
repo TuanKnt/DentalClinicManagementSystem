@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khám Lâm Sàng & Sơ Đồ Răng — ${patient.fullName} — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
     <style>
         .exam-header-bar {
             background: white;
@@ -438,22 +438,22 @@
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
-                            <table class="data-table" id="findingsTable">
+                            <table class="table-custom data-table" id="findingsTable">
                                 <thead>
                                     <tr>
-                                        <th>Răng (FDI)</th>
+                                        <th style="width: 120px;">Răng (FDI)</th>
                                         <th>Mặt Răng</th>
                                         <th>Bệnh Lý / Tình Trạng</th>
                                         <th>Ghi Chú</th>
                                         <th>Lượt Khám</th>
-                                        <th style="text-align: right;">Thao Tác</th>
+                                        <th style="text-align: right; width: 100px;">Thao Tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:choose>
                                         <c:when test="${empty toothFindings}">
                                             <tr id="emptyFindingsRow">
-                                                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">
+                                                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 40px;">
                                                     Chưa có phát hiện bất thường nào được lưu cho bệnh nhân.
                                                 </td>
                                             </tr>
@@ -461,17 +461,17 @@
                                         <c:otherwise>
                                             <c:forEach var="tf" items="${toothFindings}">
                                                 <tr id="finding-row-${tf.findingId}">
-                                                    <td><strong style="color: var(--primary);">Răng ${tf.toothNumber}</strong></td>
-                                                    <td><code>${empty tf.surface ? 'Thân răng' : tf.surface}</code></td>
+                                                    <td><span class="badge-code" style="color: var(--drsmile-navy); font-weight: 700; font-size: 13px;">Răng ${tf.toothNumber}</span></td>
+                                                    <td><span class="badge-code">${empty tf.surface ? 'Thân răng' : tf.surface}</span></td>
                                                     <td>
                                                         <span class="badge-pill ${tf.condition eq 'Caries' ? 'badge-Cancelled' : (tf.condition eq 'Healthy' ? 'badge-Confirmed' : 'badge-Pending')}">
                                                             ${tf.condition}
                                                         </span>
                                                     </td>
                                                     <td>${tf.notes}</td>
-                                                    <td>#${tf.visitId}</td>
+                                                    <td><span class="badge-code">#${tf.visitId}</span></td>
                                                     <td style="text-align: right;">
-                                                        <button type="button" class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px; color: var(--danger);" onclick="deleteFindingAjax(${tf.findingId})">
+                                                        <button type="button" class="btn-action-danger" onclick="deleteFindingAjax(${tf.findingId})">
                                                             Xóa
                                                         </button>
                                                     </td>

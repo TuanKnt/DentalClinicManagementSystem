@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Lịch Hẹn — Dr.Smile DCMS Dental Care</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css?v=3.0">
 </head>
 <body>
 

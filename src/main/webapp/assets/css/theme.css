@@ -630,7 +630,7 @@ body {
 }
 
 /* =========================================================================
-   CARD CONTAINERS & DATA TABLES
+   UNIVERSAL DATA TABLES & CARDS — DR.SMILE BRANDED
    ========================================================================= */
 .card,
 .data-table-container {
@@ -640,9 +640,6 @@ body {
     box-shadow: var(--shadow-sm);
     margin-bottom: 24px;
     overflow: hidden;
-}
-
-.data-table-container {
     width: 100%;
 }
 
@@ -668,56 +665,79 @@ body {
     padding: 24px;
 }
 
-/* Data Tables — Premium Style */
+/* Universal Table Styles: Guarantees 100% consistent table rendering */
 .table-responsive {
     width: 100%;
     overflow-x: auto;
 }
 
+table,
+.table,
 .table-custom,
-.data-table {
+.data-table,
+.pricing-table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
     text-align: left;
     font-size: 13.5px;
 }
 
+table th,
+.table th,
 .table-custom th,
-.data-table th {
-    background: linear-gradient(135deg, #f0f7fd 0%, #f8fafc 100%);
-    padding: 13px 18px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: var(--drsmile-navy);
-    border-bottom: 2px solid rgba(0, 51, 102, 0.08);
+.data-table th,
+.pricing-table th {
+    background: linear-gradient(135deg, #f0f7fd 0%, #f8fafc 100%) !important;
+    padding: 13px 18px !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.6px !important;
+    color: var(--drsmile-navy) !important;
+    border-bottom: 2px solid rgba(0, 51, 102, 0.09) !important;
+    border-top: none !important;
+    white-space: nowrap;
 }
 
+table td,
+.table td,
 .table-custom td,
-.data-table td {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border-light);
-    vertical-align: middle;
-    color: var(--text-primary);
+.data-table td,
+.pricing-table td {
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    border-top: none !important;
+    vertical-align: middle !important;
+    color: var(--text-primary) !important;
+    background-color: transparent;
 }
 
+table tbody tr,
+.table tbody tr,
 .table-custom tbody tr,
-.data-table tbody tr {
-    transition: all var(--transition-fast);
+.data-table tbody tr,
+.pricing-table tbody tr {
+    transition: background var(--transition-fast);
 }
 
+table tbody tr:hover,
+.table tbody tr:hover,
 .table-custom tbody tr:hover,
-.data-table tbody tr:hover {
-    background: linear-gradient(135deg, rgba(0, 82, 204, 0.03) 0%, rgba(0, 168, 204, 0.02) 100%);
+.data-table tbody tr:hover,
+.pricing-table tbody tr:hover {
+    background: linear-gradient(135deg, rgba(0, 82, 204, 0.035) 0%, rgba(0, 168, 204, 0.02) 100%) !important;
 }
 
+table tbody tr:last-child td,
+.table tbody tr:last-child td,
 .table-custom tbody tr:last-child td,
-.data-table tbody tr:last-child td {
-    border-bottom: none;
+.data-table tbody tr:last-child td,
+.pricing-table tbody tr:last-child td {
+    border-bottom: none !important;
 }
 
+/* Badges & Cell Components */
 .badge-code {
     background: #f1f5f9;
     color: #475569;
@@ -742,27 +762,131 @@ body {
     color: #0f172a;
     font-family: monospace;
     font-size: 13px;
+    white-space: nowrap;
+}
+
+.phone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: monospace;
+    font-weight: 700;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    white-space: nowrap;
+}
+
+/* Day Badges */
+.day-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    white-space: nowrap;
+}
+
+.day-1, .day-2, .day-3, .day-4, .day-5 {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+.day-6 {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.day-7 {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* Action Buttons inside Tables */
+.btn-action-outline {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+}
+
+.btn-action-outline:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: var(--drsmile-navy);
+    transform: translateY(-1px);
+}
+
+.btn-action-danger {
+    border: 1px solid #fecaca;
+    background: #fff5f5;
+    color: #dc2626;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+}
+
+.btn-action-danger:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+    transform: translateY(-1px);
 }
 
 /* User Avatar In Table */
+.doctor-cell,
 .patient-cell {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+.doctor-avatar-sm,
 .patient-avatar-sm {
     width: 36px;
     height: 36px;
     border-radius: var(--radius-full);
-    background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
-    color: var(--drsmile-navy);
+    background: linear-gradient(135deg, #003366 0%, #007acc 100%);
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     font-size: 13px;
     flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 51, 102, 0.15);
+}
+
+.patient-avatar-sm {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+    color: var(--drsmile-navy);
+    box-shadow: none;
 }
 
 /* Status Badges */
@@ -954,14 +1078,45 @@ body {
     box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.10);
 }
 
-select.form-control {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23475569'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'%3e%3c/path%3e%3c/svg%3e");
-    background-position: right 10px center;
-    background-repeat: no-repeat;
-    background-size: 18px;
-    padding-right: 36px;
+select,
+select.form-control,
+.form-select,
+.select-custom {
+    width: 100%;
+    padding: 10px 38px 10px 14px !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid #cbd5e1 !important;
+    background-color: #ffffff !important;
+    font-size: 13.5px !important;
+    font-family: inherit !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    outline: none !important;
+    cursor: pointer !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230052cc'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'%3e%3c/path%3e%3c/svg%3e") !important;
+    background-position: right 12px center !important;
+    background-repeat: no-repeat !important;
+    background-size: 16px !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    transition: all var(--transition-normal) !important;
+}
+
+select:hover,
+select.form-control:hover,
+.form-select:hover {
+    border-color: #94a3b8 !important;
+    background-color: #f8fafc !important;
+}
+
+select:focus,
+select.form-control:focus,
+.form-select:focus {
+    border-color: var(--drsmile-blue) !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.15) !important;
 }
 
 textarea.form-control {
