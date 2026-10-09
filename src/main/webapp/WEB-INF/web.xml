@@ -63,4 +63,18 @@
         <url-pattern>/clinical/material/delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PrescriptionServlet</servlet-name>
+        <servlet-class>com.dcms.controller.PrescriptionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PrescriptionServlet</servlet-name>
+        <url-pattern>/prescription/form</url-pattern>
+        <url-pattern>/prescription/save</url-pattern>
+        <url-pattern>/prescription/view</url-pattern>
+        <url-pattern>/prescription/print</url-pattern>
+        <url-pattern>/prescription/list</url-pattern>
+        <url-pattern>/prescription/cancel</url-pattern>
+    </servlet-mapping>
+
 </web-app>

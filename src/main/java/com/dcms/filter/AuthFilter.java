@@ -23,6 +23,7 @@ import java.io.IOException;
         "/dentist/*",
         "/patient/*",
         "/clinical/*",
+        "/prescription/*",
         "/cashier/*"
 })
 public class AuthFilter implements Filter {
@@ -77,6 +78,9 @@ public class AuthFilter implements Filter {
         } else if (path.startsWith("/treatment/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist")
                     || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("DentalAssistant");
+        } else if (path.startsWith("/prescription/")) {
+            isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant")
+                    || role.equalsIgnoreCase("Receptionist") || role.equalsIgnoreCase("Admin");
         } else if (path.startsWith("/admin/")) {
             isAuthorized = role.equalsIgnoreCase("Admin")
                     || (path.startsWith("/admin/services") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist") || role.equalsIgnoreCase("DentalAssistant") || role.equalsIgnoreCase("Cashier") || role.equalsIgnoreCase("Patient")));
