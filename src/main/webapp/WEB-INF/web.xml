@@ -18,4 +18,14 @@
         </cookie-config>
     </session-config>
 
+    <servlet>
+        <servlet-name>PatientPortalServlet</servlet-name>
+        <servlet-class>com.dcms.controller.PatientPortalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientPortalServlet</servlet-name>
+        <url-pattern>/patient/appointments</url-pattern>
+        <url-pattern>/patient/portal</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -171,7 +171,8 @@ INSERT INTO dbo.Users (Username, PasswordHash, FullName, Email, Phone, RoleId, I
 ('bacsi_hung', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'BS. Trần Mạnh Hùng', 'hungtm@dcms.vn', '0901000003', 3, 1),
 ('bacsi_lan', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'BS. Lê Mai Lan', 'lanlm@dcms.vn', '0901000004', 3, 1),
 ('thungan01', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Phạm Thu Ngân', 'thungan@dcms.vn', '0901000005', 5, 1),
-('trothu01', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Lê Thị Mai (Trợ thủ)', 'mailt@dcms.vn', '0901000006', 4, 1);
+('trothu01', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Lê Thị Mai (Trợ thủ)', 'mailt@dcms.vn', '0901000006', 4, 1),
+('benhnhan01', '$2a$10$WetW.pp9un3bEg0egrnwR.aYd3dtTm91gs0TAxeHj7pstRZASkhrK', N'Hoàng Văn Nam', 'namhv@gmail.com', '0988111222', 6, 1);
 GO
 
 -- Insert Dentist Details

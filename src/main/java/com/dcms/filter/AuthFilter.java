@@ -68,8 +68,8 @@ public class AuthFilter implements Filter {
         } else if (path.startsWith("/dentist/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/patient/")) {
-            // Patients can only access their own self-service booking portal.
-            isAuthorized = role.equalsIgnoreCase("Patient");
+            // Patients can only access their own self-service portal (Admin can inspect).
+            isAuthorized = role.equalsIgnoreCase("Patient") || role.equalsIgnoreCase("Admin");
         } else if (path.startsWith("/clinical/")) {
             isAuthorized = role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/cashier/")) {
@@ -79,7 +79,7 @@ public class AuthFilter implements Filter {
                     || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("DentalAssistant");
         } else if (path.startsWith("/admin/")) {
             isAuthorized = role.equalsIgnoreCase("Admin")
-                    || (path.startsWith("/admin/services") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist") || role.equalsIgnoreCase("DentalAssistant") || role.equalsIgnoreCase("Cashier")));
+                    || (path.startsWith("/admin/services") && (role.equalsIgnoreCase("Dentist") || role.equalsIgnoreCase("Receptionist") || role.equalsIgnoreCase("DentalAssistant") || role.equalsIgnoreCase("Cashier") || role.equalsIgnoreCase("Patient")));
         }
 
         if (!isAuthorized) {

@@ -132,8 +132,8 @@
 
         .demo-chips-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
         }
 
         .demo-chip {
@@ -284,6 +284,10 @@
                 <div class="demo-chip" onclick="fillAccount('thungan01', '123456')" title="Nhấn để điền tài khoản Thu ngân">
                     <span class="demo-chip-role">Thu Ngân</span>
                     <span class="demo-chip-user">thungan01</span>
+                </div>
+                <div class="demo-chip" onclick="fillAccount('benhnhan01', '123456')" title="Nhấn để điền tài khoản Bệnh nhân">
+                    <span class="demo-chip-role">Bệnh Nhân</span>
+                    <span class="demo-chip-user">benhnhan01</span>
                 </div>
                 <div class="demo-chip" onclick="fillAccount('admin', '123456')" title="Nhấn để điền tài khoản Quản trị">
                     <span class="demo-chip-role">Quản Trị</span>

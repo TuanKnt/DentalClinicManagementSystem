@@ -250,6 +250,36 @@ public class AppointmentDAO {
         return list;
     }
 
+    public List<Appointment> findByPatientId(int patientId) {
+        List<Appointment> list = new ArrayList<>();
+        String sql = "SELECT a.AppointmentId, a.PatientId, a.DentistId, a.AppointmentDate, a.StartTime, a.EndTime, " +
+                     "a.Reason, a.Status, a.Notes, a.CreatedAt, a.UpdatedAt, " +
+                     "p.FullName AS PatientName, p.Phone AS PatientPhone, du.FullName AS DentistName " +
+                     "FROM dbo.Appointments a " +
+                     "JOIN dbo.Patients p ON a.PatientId = p.PatientId " +
+                     "JOIN dbo.Dentists d ON a.DentistId = d.DentistId " +
+                     "JOIN dbo.Users du ON d.DentistId = du.UserId " +
+                     "WHERE a.PatientId = ? " +
+                     "ORDER BY a.AppointmentDate DESC, a.StartTime DESC";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, patientId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(mapResultSetToAppointment(rs));
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error finding appointments for patient: " + patientId, ex);
+        } finally {
+            DBContext.close(conn, ps, rs);
+        }
+        return list;
+    }
+
     private Appointment mapResultSetToAppointment(ResultSet rs) throws SQLException {
         Appointment a = new Appointment();
         a.setAppointmentId(rs.getInt("AppointmentId"));

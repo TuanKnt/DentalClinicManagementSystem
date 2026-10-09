@@ -8,6 +8,7 @@
 <c:set var="isDentist" value="${userRole eq 'Dentist'}" />
 <c:set var="isAssistant" value="${userRole eq 'DentalAssistant'}" />
 <c:set var="isCashier" value="${userRole eq 'Cashier'}" />
+<c:set var="isPatient" value="${userRole eq 'Patient'}" />
 
 <aside class="app-sidebar">
     <a href="${pageContext.request.contextPath}/" class="sidebar-brand">
@@ -21,7 +22,26 @@
     </a>
 
     <div class="sidebar-menu">
-        <%-- PHÂN KHU 1: TIẾP ĐÓN & LỊCH HẸN --%>
+        <%-- PHÂN KHU BỆNH NHÂN: DÀNH RIÊNG CHO ACTOR PATIENT --%>
+        <c:if test="${isPatient}">
+            <div class="menu-category">Cổng Bệnh Nhân</div>
+            <a href="${pageContext.request.contextPath}/patient/appointments" 
+               class="nav-item ${activeMenu == 'patient_appointments' ? 'active' : ''}">
+                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+                <span>Lịch Hẹn Của Tôi</span>
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/services" 
+               class="nav-item ${activeMenu == 'services' ? 'active' : ''}">
+                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                <span>Bảng Giá &amp; Dịch Vụ</span>
+            </a>
+            <a href="${pageContext.request.contextPath}/#booking" class="nav-item">
+                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                <span>+ Đặt Lịch Khám Mới</span>
+            </a>
+        </c:if>
+
+        <%-- PHÂN KHU 1: TIẾP ĐÓN & LỊCH HẸN (NHÂN SỰ PHÒNG KHÁM) --%>
         <c:if test="${isAdmin or isReceptionist or isDentist or isAssistant}">
             <div class="menu-category">Tiếp Đón & Lịch Hẹn</div>
             
@@ -66,23 +86,25 @@
             </c:if>
         </c:if>
 
-        <%-- PHÂN KHU 2: BỆNH NHÂN & HỒ SƠ --%>
-        <div class="menu-category">Bệnh Nhân & Hồ Sơ</div>
-        <a href="${pageContext.request.contextPath}/reception/patients" 
-           class="nav-item ${activeMenu == 'patients' ? 'active' : ''}">
-            <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-            <span>Hồ Sơ Bệnh Nhân</span>
-        </a>
-
-        <c:if test="${isAdmin or isReceptionist}">
-            <a href="${pageContext.request.contextPath}/reception/patients/create" 
-               class="nav-item ${activeMenu == 'patient_create' ? 'active' : ''}">
-                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-                <span>Thêm Bệnh Nhân Mới</span>
+        <%-- PHÂN KHU 2: BỆNH NHÂN & HỒ SƠ (NHÂN SỰ PHÒNG KHÁM) --%>
+        <c:if test="${not isPatient}">
+            <div class="menu-category">Bệnh Nhân & Hồ Sơ</div>
+            <a href="${pageContext.request.contextPath}/reception/patients" 
+               class="nav-item ${activeMenu == 'patients' ? 'active' : ''}">
+                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span>Hồ Sơ Bệnh Nhân</span>
             </a>
+
+            <c:if test="${isAdmin or isReceptionist}">
+                <a href="${pageContext.request.contextPath}/reception/patients/create" 
+                   class="nav-item ${activeMenu == 'patient_create' ? 'active' : ''}">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                    <span>Thêm Bệnh Nhân Mới</span>
+                </a>
+            </c:if>
         </c:if>
 
-        <%-- PHÂN KHU 3: KHU KHÁM LÂM SÀNG --%>
+        <%-- PHÂN KHU 3: KHU KHÁM LÂM SÀNG (BÁC SĨ & TRỢ THỦ & LỄ TÂN) --%>
         <c:if test="${isAdmin or isDentist or isAssistant or isReceptionist}">
             <div class="menu-category">Khu Khám Lâm Sàng</div>
 
@@ -109,22 +131,24 @@
             </a>
         </c:if>
 
-        <%-- PHÂN KHU 4: HỆ THỐNG --%>
-        <div class="menu-category">Hệ Thống</div>
+        <%-- PHÂN KHU 4: HỆ THỐNG (NHÂN SỰ) --%>
+        <c:if test="${not isPatient}">
+            <div class="menu-category">Hệ Thống</div>
 
-        <c:if test="${isAdmin}">
-            <a href="${pageContext.request.contextPath}/admin/dashboard" 
-               class="nav-item ${activeMenu == 'admin_dashboard' ? 'active' : ''}">
-                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></span>
-                <span>Tổng Quan Quản Trị</span>
+            <c:if test="${isAdmin}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard" 
+                   class="nav-item ${activeMenu == 'admin_dashboard' ? 'active' : ''}">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></span>
+                    <span>Tổng Quan Quản Trị</span>
+                </a>
+            </c:if>
+
+            <a href="${pageContext.request.contextPath}/admin/services" 
+               class="nav-item ${activeMenu == 'services' ? 'active' : ''}">
+                <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                <span>Danh Mục &amp; Biểu Phí</span>
             </a>
         </c:if>
-
-        <a href="${pageContext.request.contextPath}/admin/services" 
-           class="nav-item ${activeMenu == 'services' ? 'active' : ''}">
-            <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-            <span>Danh Mục & Biểu Phí</span>
-        </a>
 
         <a href="${pageContext.request.contextPath}/logout" class="nav-item" style="color: rgba(239, 68, 68, 0.7);">
             <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></span>
